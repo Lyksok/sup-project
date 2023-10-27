@@ -1,0 +1,38 @@
+{
+    "azerty": {
+        "move_forward": "z",
+        "move_backward": "s",
+        "move_left": "q",
+        "move_right": "d",
+        "jump": "space",
+        "crouch": "lshift",
+        "reload": "r",
+        "shoot": "left_mouse_button",
+        "aim": "right_mouse_button",
+        "switch_weapon": "tab",
+        "use_item": "e",
+        "chat": "t",
+        "scoreboard": "tab",
+        "pause": "escape",
+        "weapon1": "mouse_scroll_down",
+        "weapon2": "mouse_scroll_up"
+    },
+    "qwerty": {
+        "move_forward": "w",
+        "move_backward": "s",
+        "move_left": "a",
+        "move_right": "d",
+        "jump": "space",
+        "crouch": "left_control",
+        "reload": "r",
+        "shoot": "left_mouse_button",
+        "aim": "right_mouse_button",
+        "switch_weapon": "tab",
+        "use_item": "e",
+        "chat": "t",
+        "scoreboard": "tab",
+        "pause": "escape",
+        "weapon1": "mouse_scroll_down",
+        "weapon2": "mouse_scroll_up"
+    }
+}
