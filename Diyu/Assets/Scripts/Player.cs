@@ -11,6 +11,8 @@ public class Player : NetworkBehaviour
     [SerializeField] private Camera playerCamera;
     [SerializeField] private float movementSpeed = 5.0f;
 
+    [SerializeField] private Vector3 cameraOffset = new Vector3(0f, 2f, -5f);
+
     private void Start()
     {
         playerCamera = GetComponentInChildren<Camera>();
@@ -63,9 +65,20 @@ public class Player : NetworkBehaviour
         }
     }
 
+    void UpdateCameraPosition()
+    {
+        // Appliquer l'offset de la caméra par rapport au joueur sans changer sa rotation
+        playerCamera.transform.position = playerBody.position + cameraOffset;
+    }
+
     void Update()
     {
         HandleMovement();
         Aim();
+
+        if (isLocalPlayer)
+        {
+            UpdateCameraPosition();
+        }
     }
 }

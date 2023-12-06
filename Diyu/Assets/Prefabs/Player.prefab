@@ -451,6 +451,7 @@ MonoBehaviour:
   characterController: {fileID: 4377404551080687558}
   playerCamera: {fileID: 6244310630718350310}
   movementSpeed: 10
+  cameraOffset: {x: -17, y: 23, z: 0}
 --- !u!114 &6110752776035611895
 MonoBehaviour:
   m_ObjectHideFlags: 0
