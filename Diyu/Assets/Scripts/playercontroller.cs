@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class playercontroller : MonoBehaviour
+public class playercontroller : NetworkBehaviour
 {
     [SerializeField]
     private bool isdashing = true;
@@ -43,12 +44,15 @@ public class playercontroller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mainCamera = Camera.main;
+        mainCamera = GetComponentInParent<Camera>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!isLocalPlayer)
+            return;
+
         //this draws ray from the front
         var ray = new Ray(Cam.transform.position, Targ.transform.forward);
         Debug.DrawRay(Cam.transform.position, Targ.transform.forward * 100.0f, Color.red);
