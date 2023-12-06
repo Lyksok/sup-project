@@ -17,7 +17,7 @@ public class CameraFollow : MonoBehaviour
         //initial offset the diff between cam and target's position
         initalOffset = transform.position - targetObject.position;
     }
-
+        
     //could put this in fixed update for + perfs but smoother in update
     void Update()
     {
