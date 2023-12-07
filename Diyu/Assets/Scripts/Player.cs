@@ -21,9 +21,12 @@ public class Player : NetworkBehaviour
 
     private void Start()
     {
-        playerCamera = GetComponentInChildren<Camera>();
-
-        initalOffset = transform.position - playerBody.position;
+        if (!isLocalPlayer)
+        {
+            playerCamera.gameObject.SetActive(false);
+            playerCamera = GetComponentInChildren<Camera>();
+            initalOffset = transform.position - playerBody.position;
+        }
     }
 
     void HandleMovement()
