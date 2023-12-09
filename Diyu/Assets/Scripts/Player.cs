@@ -24,9 +24,10 @@ public class Player : NetworkBehaviour
         if (!isLocalPlayer)
         {
             playerCamera.gameObject.SetActive(false);
-            playerCamera = GetComponentInChildren<Camera>();
-            initalOffset = transform.position - playerBody.position;
         }
+
+        playerCamera = GetComponentInChildren<Camera>();
+        initalOffset = transform.position - playerBody.position;
     }
 
     void HandleMovement()
@@ -88,12 +89,12 @@ public class Player : NetworkBehaviour
 
     void Update()
     {
-        if (isLocalPlayer)
-        {
-            HandleMovement();
-            Aim();
-            UpdateCameraPosition();
-            DrawRays();
-        }
+        if (!isLocalPlayer) return;
+        
+        HandleMovement();
+        Aim();
+        UpdateCameraPosition();
+        DrawRays();
+        
     }
 }
