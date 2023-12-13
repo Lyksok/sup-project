@@ -32,6 +32,9 @@ public class Player : NetworkBehaviour
 
     void HandleMovement()
     {
+
+        if(!isLocalPlayer) { return; }
+
         float x = Input.GetAxis("Vertical");
         float z = Input.GetAxis("Horizontal");
 
@@ -89,12 +92,20 @@ public class Player : NetworkBehaviour
 
     void Update()
     {
-        if (!isLocalPlayer) return;
-        
+
         HandleMovement();
-        Aim();
-        UpdateCameraPosition();
-        DrawRays();
+
+        if(isLocalPlayer && Input.GetKeyDown(KeyCode.X))
+        {
+            Debug.Log("Hello world");
+        }
+
+        if (isLocalPlayer)
+        {
+            Aim();
+            UpdateCameraPosition();
+            DrawRays();
+        }
         
     }
 }
