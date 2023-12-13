@@ -25,11 +25,16 @@ public class Player : NetworkBehaviour
         {
             playerCamera.gameObject.SetActive(false);
         }
+        else
+        {
+            rigidBody.isKinematic = false;
+        }
 
         playerCamera = GetComponentInChildren<Camera>();
         initalOffset = transform.position - playerBody.position;
     }
 
+    /*
     void HandleMovement()
     {
 
@@ -43,6 +48,19 @@ public class Player : NetworkBehaviour
 
         rigidBody.MovePosition(transform.position + moveBy.normalized * movementSpeed * Time.fixedDeltaTime);
     }
+    */
+
+    void HandleMovement()
+    {
+        if (!isOwned) { return; }
+
+        float x = Input.GetAxis("Vertical");
+        float z = Input.GetAxis("Horizontal");
+
+        Vector3 moveBy = transform.forward * x + transform.right * z;
+        rigidBody.velocity = moveBy.normalized * movementSpeed;
+    }
+
 
     private (bool success, Vector3 position) GetMousePosition()
     {
