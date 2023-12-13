@@ -58,7 +58,16 @@ public class Player : NetworkBehaviour
         float z = Input.GetAxis("Horizontal");
 
         Vector3 moveBy = transform.forward * x + transform.right * z;
-        rigidBody.velocity = moveBy.normalized * movementSpeed;
+
+        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
+        {
+            Debug.Log("Stopping");
+            rigidBody.velocity = Vector3.zero;
+        }
+        else
+        {
+            rigidBody.MovePosition(transform.position + moveBy.normalized * movementSpeed * Time.deltaTime);
+        }
     }
 
 
