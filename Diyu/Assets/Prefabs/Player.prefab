@@ -245,7 +245,7 @@ MonoBehaviour:
   rigidBody: {fileID: 7865792555262457556}
   playerCamera: {fileID: 2762704734607064654}
   targetRay: {fileID: 8259263096180131798}
-  movementSpeed: 30
+  movementSpeed: 20
 --- !u!114 &2119006551845927080
 MonoBehaviour:
   m_ObjectHideFlags: 0

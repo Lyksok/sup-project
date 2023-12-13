@@ -122,7 +122,7 @@ public class Player : NetworkBehaviour
 
         HandleMovement();
 
-        if(isLocalPlayer && Input.GetKeyDown(KeyCode.X))
+        if (isLocalPlayer && Input.GetKeyDown(KeyCode.X))
         {
             Debug.Log("Hello world");
         }
@@ -133,6 +133,6 @@ public class Player : NetworkBehaviour
             UpdateCameraPosition();
             DrawRays();
         }
-        
+
     }
 }
