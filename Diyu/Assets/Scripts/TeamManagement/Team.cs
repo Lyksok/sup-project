@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Team : MonoBehaviour
+public class Team
 {
     // basic attributes declaration
     private int _teamId;
@@ -16,23 +16,40 @@ public class Team : MonoBehaviour
     public List<Player> Members { get; private set; }
 
     // check if player is in team
-    public isInTeam(Player player)
+    public bool isInTeam(Player player)
     {
         return _teamMembers.Contains(player);
     }
 
     // add or remove player from team
-    public addPlayer(Player player)
+    // return false if player is already in team or cannot be added
+    public bool addPlayer(Player player)
     {
-        _teamMembers.Add(player);
+        if (_teamMembers.Contains(player))
+        {
+            return false;
+        }
+        else
+        {
+            _teamMembers.Add(player);
+            return true;
+        }
     }
-    public removePlayer(Player player)
+    public bool removePlayer(Player player)
     {
-        _teamMembers.Remove(player);
+        if (_teamMembers.Contains(player))
+        {
+            _teamMembers.Remove(player);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     // constructor for team class object
-    public void Team(Color color, int id, string name)
+    public Team(Color color, int id, string name)
     {
         _teamId = id;
         _teamName = name;
