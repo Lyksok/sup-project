@@ -5,20 +5,17 @@ using Mirror;
 
 public class Player : NetworkBehaviour
 {
+    // General Unity serial fields
     [SerializeField] private Transform playerBody;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private Camera playerCamera;
     [SerializeField] private Transform targetRay;
-
     [SerializeField] private float movementSpeed = 5.0f;
-
     private Vector3 initalOffset;
-
     private Vector3 cameraPosition;
 
-    //[SerializeField] private Vector3 cameraOffset = new Vector3(0f, 2f, -5f);
-
+    // This method is called when the local player object is set up
     private void Start()
     {
         if (!isLocalPlayer)
@@ -50,8 +47,10 @@ public class Player : NetworkBehaviour
     }
     */
 
+    // Method to handle player movement
     void HandleMovement()
     {
+        // check if the player is owned by the local player
         if (!isOwned) { return; }
 
         float x = Input.GetAxis("Vertical");
@@ -59,6 +58,7 @@ public class Player : NetworkBehaviour
 
         Vector3 moveBy = transform.forward * x + transform.right * z;
 
+        // If the player is not moving, stop the player else let the player move in the direction of the input x and z
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {
             Debug.Log("Stopping");
@@ -70,7 +70,7 @@ public class Player : NetworkBehaviour
         }
     }
 
-
+    // Method to handle player aiming
     private (bool success, Vector3 position) GetMousePosition()
     {
         //this ray gives mouse position 
@@ -88,6 +88,7 @@ public class Player : NetworkBehaviour
         }
     }
 
+    // Method to handle player aiming
     private void Aim()
     {
         var (success, position) = GetMousePosition();
@@ -103,6 +104,7 @@ public class Player : NetworkBehaviour
         }
     }
 
+    // method to update the camera position
     void UpdateCameraPosition()
     {
         //makes cam follow target
@@ -110,6 +112,7 @@ public class Player : NetworkBehaviour
         transform.position = cameraPosition;
     }
 
+    // debug method to draw rays
     void DrawRays()
     {
         //this draws ray from the front
@@ -117,22 +120,17 @@ public class Player : NetworkBehaviour
         Debug.DrawRay(playerCamera.transform.position, targetRay.transform.forward * 100.0f, Color.red);
     }
 
+    // Update is called once per frame with a fixed delta time
     void Update()
     {
-
         HandleMovement();
 
-        if (isLocalPlayer && Input.GetKeyDown(KeyCode.X))
-        {
-            Debug.Log("Hello world");
-        }
-
+        // check if the player is owned by the local player
         if (isLocalPlayer)
         {
             Aim();
             UpdateCameraPosition();
             DrawRays();
         }
-
     }
 }
