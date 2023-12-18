@@ -8,7 +8,7 @@ public class IdManager
     public IdManager()
     {
         _teamIdCounter = 0;
-        _playerIdsByTeam = 0
+        _playerIdsByTeam = 0;
     }
 
     // get next team and player id
