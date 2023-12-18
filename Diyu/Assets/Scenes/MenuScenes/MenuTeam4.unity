@@ -259,7 +259,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 77992045}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a731ef0323547d241be1b244617fee77, type: 3}
+  m_Script: {fileID: 11500000, guid: 08c5d66ba7c098e4d8f34688982325af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &164925469
@@ -882,8 +882,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 77992047}
-        m_TargetAssemblyTypeName: TeamMenu2, Assembly-CSharp
-        m_MethodName: Play
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: Play4T
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
