@@ -66,7 +66,7 @@ public class Player : NetworkBehaviour
         }
         else
         {
-            rigidBody.MovePosition(transform.position + moveBy.normalized * movementSpeed * Time.deltaTime);
+            rigidBody.MovePosition(transform.position + moveBy.normalized * movementSpeed * Time.fixedDeltaTime);
         }
     }
 
