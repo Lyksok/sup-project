@@ -7,37 +7,16 @@ public class MenuManager : MonoBehaviour
 {
     public void Play2T()
     {
-        SceneManager.LoadScene("MapScene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Play4T()
     {
-        SceneManager.LoadScene("MapScene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-
-    public void TeamSelection()
-    {
-        SceneManager.LoadScene("MenuTeam2");
-    }
-
-    public void Back()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
-
     public void Quit()
     {
         Application.Quit();
         Debug.Log("Player has use the back button");
-    }
-
-    public void Join()
-    {
-        SceneManager.LoadScene("JoinMenu");
-    }
-
-    public void Host()
-    {
-        SceneManager.LoadScene("HostMenu");
     }
 }
