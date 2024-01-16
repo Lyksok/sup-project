@@ -76,9 +76,7 @@ public class MenuManager : MonoBehaviour
     {
         if (IsIpCorrect())
         {
-
             incorrectInputText.gameObject.SetActive(false);
-
         }
         else
         {
