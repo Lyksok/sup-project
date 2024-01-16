@@ -26,7 +26,7 @@ public class Team
     // return false if player is already in team or cannot be added
     public bool addPlayer(Player player)
     {
-        if (_teamMembers.Contains(player))
+        if (_teamMembers.Contains(player) || player.Team != null)
         {
             return false;
         }
@@ -41,6 +41,7 @@ public class Team
         if (_teamMembers.Contains(player))
         {
             _teamMembers.Remove(player);
+            player.ResetTeam();
             return true;
         }
         else
@@ -54,6 +55,6 @@ public class Team
     {
         _teamId = id;
         _teamName = name;
-        _teamPublicColor = color;
+        _teamColor = color;
     }
 }
