@@ -8,11 +8,17 @@ using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
+    /*
+    This class is responsible for managing the menu scene.
+    It contains methods that are called by the buttons in the scene.
+    */
     [SerializeField] private TMP_InputField joinInput;
     [SerializeField] private TMP_Text incorrectInputText;
 
+    // Verify if the input is a valid IP address
 
-    public void JoinGame()
+
+    public bool IsIpCorrect()
     {
         string inputText = joinInput.text;
         bool valid = true;
@@ -61,7 +67,14 @@ public class MenuManager : MonoBehaviour
             }
         }
 
-        if (valid)
+        return valid;
+    }
+
+    // Check if ip correct and then join the game
+
+    public void JoinGame()
+    {
+        if (IsIpCorrect())
         {
 
             incorrectInputText.gameObject.SetActive(false);
@@ -72,6 +85,7 @@ public class MenuManager : MonoBehaviour
             incorrectInputText.gameObject.SetActive(true);
         }
     }
+
     public void Play2T()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
