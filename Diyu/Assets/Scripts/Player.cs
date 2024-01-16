@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class Player : NetworkBehaviour
+public class Player : Entity
 {
     // General Unity serial fields
     [SerializeField] private Transform playerBody;
@@ -14,6 +14,13 @@ public class Player : NetworkBehaviour
     [SerializeField] private float movementSpeed = 5.0f;
     private Vector3 initalOffset;
     private Vector3 cameraPosition;
+
+
+    // Initialize player object from entity class
+    public Player(int health, Team team = null) : base(health, team)
+    {
+        // empty constructor
+    }
 
     // This method is called when the local player object is set up
     private void Start()
