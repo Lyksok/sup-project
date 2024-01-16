@@ -308,7 +308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8259263096180131798}
   m_Layer: 0
-  m_Name: TargetRay
+  m_Name: TargetDirection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
