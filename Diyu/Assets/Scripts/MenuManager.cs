@@ -12,15 +12,36 @@ public class MenuManager : MonoBehaviour
     This class is responsible for managing the menu scene.
     It contains methods that are called by the buttons in the scene.
     */
-    [SerializeField] private TMP_InputField joinInput;
+
+    // Initialize login menu variables
+    [SerializeField] private GameObject loginMenu;
+    [SerializeField] private TMP_InputField nameInput;
+
+    // Initialize main menu variables
+    [SerializeField] private GameObject mainMenu;
+
+    // Initialize join game menu variables
+    [SerializeField] private TMP_InputField ipInput;
     [SerializeField] private TMP_Text incorrectInputText;
 
+
+    // Change menu to main menu when player enters his username
+    public void EnterName()
+    {
+        if (nameInput.text != "")
+        {
+            loginMenu.SetActive(false);
+            mainMenu.SetActive(true);
+            // TODO : create a player object with the name
+        }
+        // TODO : add else statement to display error message
+    }
+
+
     // Verify if the input is a valid IP address
-
-
     public bool IsIpCorrect()
     {
-        string inputText = joinInput.text;
+        string inputText = ipInput.text;
         bool valid = true;
 
         foreach (char c in inputText)
@@ -71,7 +92,6 @@ public class MenuManager : MonoBehaviour
     }
 
     // Check if ip correct and then join the game
-
     public void JoinGame()
     {
         if (IsIpCorrect())
