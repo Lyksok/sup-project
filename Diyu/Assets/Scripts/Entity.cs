@@ -15,6 +15,9 @@ public class Entity : NetworkBehaviour
     private int _health;
     public int Health { get; private set; }
 
+    private string _type;
+    public string Type { get; private set; }
+
     // Class methods to set entity health and team
     public void SetHealth(int health)
     {
@@ -31,9 +34,10 @@ public class Entity : NetworkBehaviour
         _team = null;
     }
 
-    public Entity(int health, Team team = null)
+    public Entity(int health, string type, Team team = null)
     {
         _team = team;
         _health = health;
+        _type = type;
     }
 }
