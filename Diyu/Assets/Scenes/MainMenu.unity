@@ -627,6 +627,8 @@ MonoBehaviour:
   mainMenu: {fileID: 1434824241}
   ipInput: {fileID: 830823280}
   incorrectInputText: {fileID: 1141131146}
+  playerPrefab: {fileID: 7019611672530680678, guid: ff8dabda665dcda47bd1abae8e8ae02c,
+    type: 3}
 --- !u!1 &88312674
 GameObject:
   m_ObjectHideFlags: 0
@@ -9124,7 +9126,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 799227724}
+      - m_Target: {fileID: 1434824241}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6

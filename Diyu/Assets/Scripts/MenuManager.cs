@@ -24,6 +24,12 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TMP_InputField ipInput;
     [SerializeField] private TMP_Text incorrectInputText;
 
+    // Initialize all gameobject prefabs
+    [SerializeField] private GameObject playerPrefab;
+
+    // Initialize IdManager object
+    private IdManager idManager = new IdManager();
+
 
     // Change menu to main menu when player enters his username
     public void EnterName()
@@ -32,7 +38,10 @@ public class MenuManager : MonoBehaviour
         {
             loginMenu.SetActive(false);
             mainMenu.SetActive(true);
-            // TODO : create a player object with the name
+            // Instantiate player prefab
+            GameObject player = Instantiate(playerPrefab);
+            player.GetComponent<Player>().SetName(nameInput.text);
+            player.GetComponent<Player>().SetId(idManager.GetNextPlayerId());
         }
         // TODO : add else statement to display error message
     }

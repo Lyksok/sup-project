@@ -15,9 +15,27 @@ public class Player : Entity
     private Vector3 initalOffset;
     private Vector3 cameraPosition;
 
+    // Initialize player variables
+    private string _name;
+    public string Name { get; private set; }
+
+    private int _playerId;
+    public int Id { get; private set; }
+
+    // Method to set player name
+    public void SetName(string name)
+    {
+        _name = name;
+    }
+
+    // Method to set player id
+    public void SetId(int id)
+    {
+        _playerId = id;
+    }
 
     // Initialize player object from entity class
-    public Player(int health, Team team = null) : base(health, team)
+    public Player(int health, string type, Team team = null) : base(health, type, team)
     {
         // empty constructor
     }
