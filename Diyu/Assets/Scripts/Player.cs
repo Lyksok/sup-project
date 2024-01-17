@@ -35,7 +35,7 @@ public class Player : Entity
     }
 
     // Initialize player object from entity class
-    public Player(int health, string type, Team team = null) : base(health, type, team)
+    public Player() : base(100, "player")
     {
         // empty constructor
     }
