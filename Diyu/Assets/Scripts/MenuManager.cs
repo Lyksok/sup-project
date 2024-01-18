@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Net;
 using UnityEngine.UI;
 using TMPro;
+using Mirror;
 
 public class MenuManager : MonoBehaviour
 {
@@ -39,9 +38,11 @@ public class MenuManager : MonoBehaviour
             loginMenu.SetActive(false);
             mainMenu.SetActive(true);
             // Instantiate player prefab
-            GameObject player = Instantiate(playerPrefab);
-            player.GetComponent<Player>().SetName(nameInput.text);
-            player.GetComponent<Player>().SetId(idManager.GetNextPlayerId());
+            GameObject newPlayer = Instantiate(playerPrefab);
+            newPlayer.GetComponent<PlayerUI>().SetName(nameInput.text);
+            newPlayer.GetComponent<PlayerUI>().SetId(idManager.GetNextPlayerId());
+
+            NetworkServer.Spawn(newPlayer);
         }
         // TODO : add else statement to display error message
     }
