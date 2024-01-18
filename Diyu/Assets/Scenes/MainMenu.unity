@@ -627,7 +627,7 @@ MonoBehaviour:
   mainMenu: {fileID: 1434824241}
   ipInput: {fileID: 830823280}
   incorrectInputText: {fileID: 1141131146}
-  playerPrefab: {fileID: 7019611672530680678, guid: ff8dabda665dcda47bd1abae8e8ae02c,
+  playerPrefab: {fileID: 7223399437616459144, guid: 07725695d071abf41aa11e475ff9ff84,
     type: 3}
 --- !u!1 &88312674
 GameObject:
