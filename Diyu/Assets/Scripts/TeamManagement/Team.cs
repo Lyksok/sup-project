@@ -33,6 +33,7 @@ public class Team
         else
         {
             _teamMembers.Add(playerIdentity);
+            playerIdentity.SetTeam(this);
             return true;
         }
     }
