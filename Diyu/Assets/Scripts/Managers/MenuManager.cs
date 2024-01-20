@@ -33,8 +33,9 @@ public class MenuManager : MonoBehaviour
     // Change menu to main menu when player enters his username
     public void EnterName()
     {
-        if (nameInput.text != "")
+        if (nameInput.text != "" && nameInput.text.Length <= 15)
         {
+
             loginMenu.SetActive(false);
             mainMenu.SetActive(true);
             // Instantiate player prefab
