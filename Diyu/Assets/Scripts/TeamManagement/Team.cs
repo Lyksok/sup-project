@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Team
 {
+    /*
+    A team is a group of players that are playing together.
+    It has an id, a color, a name and a list of players.
+    It contains all the methods to manage the team.
+    It also manages entities' team variable.
+    */
     // basic attributes declaration
     private int _teamId;
     public int Id { get; private set; }
