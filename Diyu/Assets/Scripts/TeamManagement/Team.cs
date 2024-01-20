@@ -13,35 +13,35 @@ public class Team
     // team color
     private Color _teamColor;
     public Color TeamColor { get; private set; }
-    private List<Player> _teamMembers = new List<Player>();
-    public List<Player> Members { get; private set; }
+    private List<PlayerIdentity> _teamMembers = new List<PlayerIdentity>();
+    public List<PlayerIdentity> Members { get; private set; }
 
     // check if player is in team
-    public bool isInTeam(Player player)
+    public bool isInTeam(PlayerIdentity playerIdentity)
     {
-        return _teamMembers.Contains(player);
+        return _teamMembers.Contains(playerIdentity);
     }
 
     // add or remove player from team
     // return false if player is already in team or cannot be added
-    public bool addPlayer(Player player)
+    public bool addPlayer(PlayerIdentity playerIdentity)
     {
-        if (_teamMembers.Contains(player) || player.Entity.Team != null)
+        if (_teamMembers.Contains(playerIdentity) || playerIdentity.Team != null)
         {
             return false;
         }
         else
         {
-            _teamMembers.Add(player);
+            _teamMembers.Add(playerIdentity);
             return true;
         }
     }
-    public bool removePlayer(Player player)
+    public bool removePlayer(PlayerIdentity playerIdentity)
     {
-        if (_teamMembers.Contains(player))
+        if (_teamMembers.Contains(playerIdentity))
         {
-            _teamMembers.Remove(player);
-            player.Entity.ResetTeam();
+            _teamMembers.Remove(playerIdentity);
+            playerIdentity.ResetTeam();
             return true;
         }
         else
