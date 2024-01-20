@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class Player : Entity
+public class PlayerMovement : NetworkBehaviour
 {
     // General Unity serial fields
     [SerializeField] private Transform playerBody;
@@ -15,34 +15,12 @@ public class Player : Entity
     private Vector3 initalOffset;
     private Vector3 cameraPosition;
 
-    // Initialize player variables
-    private string _name;
-    public string Name { get; private set; }
-
-    private int _playerId;
-    public int Id { get; private set; }
-
-    // Method to set player name
-    public void SetName(string name)
-    {
-        _name = name;
-    }
-
-    // Method to set player id
-    public void SetId(int id)
-    {
-        _playerId = id;
-    }
-
-    // Initialize player object from entity class
-    public Player() : base(100, "player")
-    {
-        // empty constructor
-    }
 
     // This method is called when the local player object is set up
     private void Start()
     {
+
+        // check if the player is owned by the local player
         if (!isLocalPlayer)
         {
             playerCamera.gameObject.SetActive(false);
