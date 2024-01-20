@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class Entity : NetworkBehaviour
+public class Entity
 {
     /*
     An entity is a game object that has some 
@@ -34,10 +34,4 @@ public class Entity : NetworkBehaviour
         _team = null;
     }
 
-    public Entity(int health, string type, Team team = null)
-    {
-        _team = team;
-        _health = health;
-        _type = type;
-    }
 }
