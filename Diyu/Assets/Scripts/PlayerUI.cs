@@ -1,7 +1,8 @@
 using UnityEngine;
 using TMPro;
+using Mirror;
 
-public class PlayerUI : MonoBehaviour
+public class PlayerUI : NetworkBehaviour
 {
     /*
     This class is responsible for managing the player UI.
