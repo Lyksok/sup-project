@@ -129,9 +129,19 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
     public void Quit()
     {
+#if UNITY_STANDALONE
+        // Quitter seulement en mode standalone (build)
         Application.Quit();
+#endif
+
+#if UNITY_EDITOR
+        // Si vous êtes dans l'éditeur Unity, arrêtez le mode Play
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
         Debug.Log("Player has use the back button");
+
     }
 }
