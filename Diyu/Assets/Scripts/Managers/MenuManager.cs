@@ -120,6 +120,7 @@ public class MenuManager : MonoBehaviour
     // Temporary method to start the game as host
     public void TempHostGame()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         networkManager.StartHost();
     }
 
