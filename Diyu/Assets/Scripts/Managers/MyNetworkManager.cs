@@ -1,7 +1,7 @@
 using UnityEngine;
 using Mirror;
 
-public class NetManager : NetworkManager
+public class MyNetworkManager : NetworkManager
 {
     public override void OnStartClient()
     {
