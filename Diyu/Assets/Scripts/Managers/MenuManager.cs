@@ -28,6 +28,7 @@ public class MenuManager : MonoBehaviour
 
     // Initialize IdManager object
     private IdManager idManager = new IdManager();
+    public NetworkManager networkManager;
 
 
     // Change menu to main menu when player enters his username
@@ -107,7 +108,7 @@ public class MenuManager : MonoBehaviour
     {
         if (IsIpCorrect())
         {
-            incorrectInputText.gameObject.SetActive(false);
+            
         }
         else
         {
