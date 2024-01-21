@@ -117,6 +117,12 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    // Temporary method to start the game as host
+    public void TempHostGame()
+    {
+        networkManager.StartHost();
+    }
+
     public void Play2T()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
