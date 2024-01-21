@@ -108,7 +108,8 @@ public class MenuManager : MonoBehaviour
     {
         if (IsIpCorrect())
         {
-            
+            networkManager.networkAddress = ipInput.text;
+            networkManager.StartClient();
         }
         else
         {
