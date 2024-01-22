@@ -25,6 +25,8 @@ public class Entity
     {
         _health = health;
     }
+
+    // Set entity type
     public void SetTeam(Team team)
     {
         _team = team;
