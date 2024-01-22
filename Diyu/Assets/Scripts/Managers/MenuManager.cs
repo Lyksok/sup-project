@@ -65,6 +65,9 @@ public class MenuManager : MonoBehaviour
     // Verify if the input is a valid IP address
     public bool IsIpCorrect()
     {
+        // Debug log input text
+        Debug.Log("Checking ip for: " + ipInput.text);
+
         string inputText = ipInput.text;
         bool valid = true;
 
@@ -75,6 +78,11 @@ public class MenuManager : MonoBehaviour
                 valid = false;
                 break;
             }
+        }
+        // Check if not localhost
+        if (inputText == "localhost")
+        {
+            return true;
         }
         if (valid)
         {
@@ -115,12 +123,17 @@ public class MenuManager : MonoBehaviour
         return valid;
     }
 
+    // Set ip on input change
+    public void SetIp(string ip)
+    {
+        networkManager.networkAddress = ip;
+    }
+
     // Check if ip correct and then join the game
     public void JoinGame()
     {
         if (IsIpCorrect())
         {
-            networkManager.networkAddress = ipInput.text;
             networkManager.StartClient();
         }
         else
