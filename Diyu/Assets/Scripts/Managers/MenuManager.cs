@@ -12,12 +12,14 @@ public class MenuManager : MonoBehaviour
     It contains methods that are called by the buttons in the scene.
     */
 
-    // Initialize login menu variables
-    [SerializeField] private GameObject loginMenu;
+    // Initialize login menu attributs
     [SerializeField] private TMP_InputField nameInput;
 
-    // Initialize main menu variables
+    // Initialize all menus as variables
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject joinMenu;
+    [SerializeField] private GameObject tempJoinMenu;
+    [SerializeField] private GameObject hostMenu;
 
     // Initialize join game menu variables
     [SerializeField] private TMP_InputField ipInput;
@@ -31,13 +33,23 @@ public class MenuManager : MonoBehaviour
     public NetworkManager networkManager;
 
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        // Insures that only main menu is active at the start
+        mainMenu.SetActive(true);
+        joinMenu.SetActive(false);
+        tempJoinMenu.SetActive(false);
+        hostMenu.SetActive(false);
+    }
+
     // Change menu to main menu when player enters his username
     public void EnterName()
     {
         if (nameInput.text != "" && nameInput.text.Length <= 15)
         {
 
-            loginMenu.SetActive(false);
+            joinMenu.SetActive(false);
             mainMenu.SetActive(true);
             // Instantiate player prefab
             GameObject newPlayer = Instantiate(playerPrefab);
@@ -121,6 +133,13 @@ public class MenuManager : MonoBehaviour
     public void TempHostGame()
     {
         networkManager.StartHost();
+    }
+
+    // Method to start a server on localhost
+    public void StartServerOnlocalhost()
+    {
+        networkManager.networkAddress = "localhost";
+        networkManager.StartServer();
     }
 
     public void Play2T()
