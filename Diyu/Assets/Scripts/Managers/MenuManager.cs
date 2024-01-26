@@ -28,8 +28,9 @@ public class MenuManager : MonoBehaviour
     // Initialize all gameobject prefabs
     [SerializeField] private GameObject playerPrefab;
 
-    // Initialize IdManager object
-    private IdManager idManager = new IdManager();
+    // Initialize id manager
+    [SerializeField] private IdManager idManager;
+   
     public NetworkManager networkManager;
 
 
@@ -54,7 +55,7 @@ public class MenuManager : MonoBehaviour
             // Instantiate player prefab
             GameObject newPlayer = Instantiate(playerPrefab);
             newPlayer.GetComponent<PlayerUI>().SetName(nameInput.text);
-            newPlayer.GetComponent<PlayerUI>().SetId(idManager.GetNextPlayerId());
+            newPlayer.GetComponent<PlayerUI>().SetId(idManager.GetComponent<IdManager>().GetNextPlayerId());
 
             NetworkServer.Spawn(newPlayer);
         }

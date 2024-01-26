@@ -1,4 +1,6 @@
-public class IdManager
+using UnityEngine;
+
+public class IdManager : MonoBehaviour
 {
     // declare variables
     private int _teamIdCounter;

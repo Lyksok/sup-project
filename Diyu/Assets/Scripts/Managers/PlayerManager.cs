@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     // Player Identity list
-    public List<PlayerIdentity> playerIdentityList = new List<PlayerIdentity>();
+    public List<PlayerInfo> playerIdentityList = new List<PlayerInfo>();
 
 }
 

@@ -17,38 +17,39 @@ public class Team
     public string Name { get; private set; }
 
     // team color
-    private Material _teamColor;
-    public Material TeamColor { get; private set; }
-    private List<PlayerIdentity> _teamMembers = new List<PlayerIdentity>();
-    public List<PlayerIdentity> Members { get; private set; }
+    private Material _teamMaterial;
+    public Material TeamMaterial { get; private set; }
+    private List<PlayerInfo> _teamMembers = new List<PlayerInfo>();
+    public List<PlayerInfo> Members { get; private set; }
 
     // check if player is in team
-    public bool isInTeam(PlayerIdentity playerIdentity)
+    public bool isInTeam(PlayerInfo playerInfo)
     {
-        return _teamMembers.Contains(playerIdentity);
+        return _teamMembers.Contains(playerInfo);
     }
 
     // add or remove player from team
     // return false if player is already in team or cannot be added
-    public bool addPlayer(PlayerIdentity playerIdentity)
+    public bool addPlayer(PlayerInfo playerInfo)
     {
-        if (_teamMembers.Contains(playerIdentity) || playerIdentity.Team != null)
+        if (_teamMembers.Contains(playerInfo) || playerInfo.Team != null)
         {
             return false;
         }
         else
         {
-            _teamMembers.Add(playerIdentity);
-            playerIdentity.SetTeam(this);
+            _teamMembers.Add(playerInfo);
+            playerInfo.SetTeam(this);
+            playerInfo.SetTeamMaterial(_teamMaterial);
             return true;
         }
     }
-    public bool removePlayer(PlayerIdentity playerIdentity)
+    public bool removePlayer(PlayerInfo playerInfo)
     {
-        if (_teamMembers.Contains(playerIdentity))
+        if (_teamMembers.Contains(playerInfo))
         {
-            _teamMembers.Remove(playerIdentity);
-            playerIdentity.ResetTeam();
+            _teamMembers.Remove(playerInfo);
+            playerInfo.ResetTeam();
             return true;
         }
         else
@@ -58,10 +59,10 @@ public class Team
     }
 
     // constructor for team class object
-    public Team(Material colorMaterial, int id, string name)
+    public Team(Material colorMaterial, int id, string name = "")
     {
         _teamId = id;
         _teamName = name;
-        _teamColor = colorMaterial;
+        _teamMaterial = colorMaterial;
     }
 }

@@ -7,8 +7,7 @@ public abstract class Entity
     while storing the type of the game object
     */
 
-    private Team _team = null;
-    public Team Team { get; private set; }
+    
     private int _health;
     public int Health { get; private set; }
 
@@ -19,18 +18,6 @@ public abstract class Entity
     public void SetHealth(int health)
     {
         _health = health;
-    }
-
-    // Set entity type
-    public void SetTeam(Team team)
-    {
-        _team = team;
-    }
-
-    // Set empty team 
-    public void ResetTeam()
-    {
-        _team = null;
     }
 
     public abstract void Die();
