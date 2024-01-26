@@ -1,4 +1,4 @@
-public class Entity
+public abstract class Entity
 {
     /*
     An entity is a game object that has some 
@@ -32,5 +32,7 @@ public class Entity
     {
         _team = null;
     }
+
+    public abstract void Die();
 
 }
