@@ -4,6 +4,7 @@ public class PlayerInfo : MonoBehaviour
 {
 
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject teamManager;
 
 
     // declare variables
@@ -25,6 +26,18 @@ public class PlayerInfo : MonoBehaviour
     public void SetTeam(Team team)
     {
         _team = team;
+    }
+
+    public void SetTeamById(int teamId)
+    {
+        teamManager.GetComponent<TeamManager>().Teams.ForEach(team =>
+        {
+            if (team.Id == teamId)
+            {
+                _team = team;
+                return;
+            }
+        });
     }
 
     // Set empty team 

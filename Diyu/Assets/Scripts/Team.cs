@@ -46,10 +46,12 @@ public class Team
     }
     public bool removePlayer(PlayerInfo playerInfo)
     {
+        // Set player's team to default team
         if (_teamMembers.Contains(playerInfo))
         {
             _teamMembers.Remove(playerInfo);
             playerInfo.ResetTeam();
+            playerInfo.SetTeamById(0);
             return true;
         }
         else

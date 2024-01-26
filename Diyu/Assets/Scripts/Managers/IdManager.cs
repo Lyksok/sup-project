@@ -9,7 +9,7 @@ public class IdManager : MonoBehaviour
     // constructor for IdManager class object
     public IdManager()
     {
-        _teamIdCounter = 0;
+        _teamIdCounter = 1;
         _playerIdCounter = 0;
     }
 
