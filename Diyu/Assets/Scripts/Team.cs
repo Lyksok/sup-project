@@ -17,8 +17,8 @@ public class Team
     public string Name { get; private set; }
 
     // team color
-    private Color _teamColor;
-    public Color TeamColor { get; private set; }
+    private Material _teamColor;
+    public Material TeamColor { get; private set; }
     private List<PlayerIdentity> _teamMembers = new List<PlayerIdentity>();
     public List<PlayerIdentity> Members { get; private set; }
 
@@ -58,10 +58,10 @@ public class Team
     }
 
     // constructor for team class object
-    public Team(Color color, int id, string name)
+    public Team(Material colorMaterial, int id, string name)
     {
         _teamId = id;
         _teamName = name;
-        _teamColor = color;
+        _teamColor = colorMaterial;
     }
 }

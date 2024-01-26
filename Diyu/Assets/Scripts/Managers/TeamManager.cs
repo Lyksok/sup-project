@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class TeamManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Material red;
+    [SerializeField] private Material blue;
+    [SerializeField] private Material green;
+    [SerializeField] private Material yellow;
 
-    // Update is called once per frame
-    void Update()
+    private List<Team> teams = new List<Team>();
+    public List<Team> Teams { get; private set; }
+
+    // Start is called before the first frame update
+    public void Start()
     {
-        
     }
 }
