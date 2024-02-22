@@ -35,8 +35,8 @@ public class Team
         else
         {
             Members.Add(player);
-            player.Identity.SetTeam(this);
-            player.Identity.SetTeamMaterial(TeamMaterial);
+            player.Team.SetTeam(this);
+            player.Team.SetTeamMaterial(TeamMaterial);
             return true;
         }
     }
@@ -46,8 +46,8 @@ public class Team
         if (Members.Contains(player))
         {
             Members.Remove(player);
-            player.Identity.ResetTeam();
-            player.Identity.SetTeamById(0);
+            player.Team.ResetTeam();
+            player.Team.SetTeamById(0);
             return true;
         }
         else
