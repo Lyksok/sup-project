@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class PlayerMovement : NetworkBehaviour
+public class PlayerBody : NetworkBehaviour
 {
     // General Unity serial fields
     [SerializeField] private Transform playerBody;

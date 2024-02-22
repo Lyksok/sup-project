@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Mirror;
-
 public class Entity
 {
     /*
@@ -12,28 +7,17 @@ public class Entity
     while storing the type of the game object
     */
 
-    private Team _team = null;
-    public Team Team { get; private set; }
-    private int _health;
-    public int Health { get; private set; }
-
-    private string _type;
-    public string Type { get; private set; }
-
-    // Class methods to set entity health and team
-    public void SetHealth(int health)
+    public Entity(TypesEnum type, int health)
     {
-        _health = health;
-    }
-    public void SetTeam(Team team)
-    {
-        _team = team;
+        Type = type;
+        Health = health;
+        MaxHealth = health;
     }
 
-    // Set empty team 
-    public void ResetTeam()
-    {
-        _team = null;
-    }
+    public int Health { get; set; }
+
+    public int MaxHealth { get; set; }
+
+    public TypesEnum Type { get; }
 
 }
