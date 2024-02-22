@@ -1,4 +1,4 @@
-public abstract class Entity
+public class Entity
 {
     /*
     An entity is a game object that has some 
@@ -7,19 +7,17 @@ public abstract class Entity
     while storing the type of the game object
     */
 
-    
-    private int _health;
-    public int Health { get; private set; }
-
-    private string _type;
-    public string Type { get; private set; }
-
-    // Class methods to set entity health and team
-    public void SetHealth(int health)
+    public Entity(TypesEnum type, int health)
     {
-        _health = health;
+        Type = type;
+        Health = health;
+        MaxHealth = health;
     }
 
-    public abstract void Die();
+    public int Health { get; set; }
+
+    public int MaxHealth { get; set; }
+
+    public TypesEnum Type { get; }
 
 }

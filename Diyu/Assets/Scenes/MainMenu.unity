@@ -4546,6 +4546,7 @@ MonoBehaviour:
   green: {fileID: 2100000, guid: c046cd886f940d242895f884299cd5b9, type: 2}
   yellow: {fileID: 2100000, guid: da5908e1302d6674abdbfbff60185fd6, type: 2}
   idManager: {fileID: 1787879630}
+  _defaultMaterial: {fileID: 0}
 --- !u!4 &780303290
 Transform:
   m_ObjectHideFlags: 0
@@ -5644,11 +5645,12 @@ MonoBehaviour:
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 7019611672530680678, guid: ff8dabda665dcda47bd1abae8e8ae02c,
+  playerPrefab: {fileID: 3048579589173904145, guid: ff8dabda665dcda47bd1abae8e8ae02c,
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 7019611672530680678, guid: ff8dabda665dcda47bd1abae8e8ae02c, type: 3}
   snapshotSettings:
     bufferTimeMultiplier: 2
     bufferLimit: 32
@@ -8786,7 +8788,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699b8f6a45ce2414db88259656525adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIdentityList: []
 --- !u!1 &1605272690
 GameObject:
   m_ObjectHideFlags: 0

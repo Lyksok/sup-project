@@ -11,60 +11,63 @@ public class Team
     It also manages entities' team variable.
     */
     // basic attributes declaration
-    private int _teamId;
-    public int Id { get; private set; }
-    private string _teamName;
-    public string Name { get; private set; }
+    public int Id { get;  set; } // Set in constructor
+    public string Name { get; set; } // Set in constructor
 
     // team color
-    private Material _teamMaterial;
-    public Material TeamMaterial { get; private set; }
-    private List<PlayerInfo> _teamMembers = new List<PlayerInfo>();
-    public List<PlayerInfo> Members { get; private set; }
+    public Material TeamMaterial { get;  set; } // Set in constructor
+    public List<Player> Members { get;  set; } // Initialized in constructor
 
     // check if player is in team
-    public bool isInTeam(PlayerInfo playerInfo)
+    public bool isInTeam(Player playerInfo)
     {
-        return _teamMembers.Contains(playerInfo);
+        return Members.Contains(playerInfo);
     }
 
     // add or remove player from team
     // return false if player is already in team or cannot be added
-    public bool addPlayer(PlayerInfo playerInfo)
+    public bool AddPlayer(Player player)
     {
-        if (_teamMembers.Contains(playerInfo) || playerInfo.Team != null)
+        if (Members.Contains(player) || player.Team != null)
         {
             return false;
         }
         else
         {
-            _teamMembers.Add(playerInfo);
-            playerInfo.SetTeam(this);
-            playerInfo.SetTeamMaterial(_teamMaterial);
+            Members.Add(player);
+            player.Identity.SetTeam(this);
+            player.Identity.SetTeamMaterial(TeamMaterial);
             return true;
         }
     }
-    public bool removePlayer(PlayerInfo playerInfo)
+    public bool RemovePlayer(Player player)
     {
         // Set player's team to default team
-        if (_teamMembers.Contains(playerInfo))
+        if (Members.Contains(player))
         {
-            _teamMembers.Remove(playerInfo);
-            playerInfo.ResetTeam();
-            playerInfo.SetTeamById(0);
+            Members.Remove(player);
+            player.Identity.ResetTeam();
+            player.Identity.SetTeamById(0);
             return true;
         }
         else
         {
             return false;
         }
+    }
+
+    public bool SetTeamName(string newName)
+    {
+        Name = newName;
+        return true;
     }
 
     // constructor for team class object
     public Team(Material colorMaterial, int id, string name = "")
     {
-        _teamId = id;
-        _teamName = name;
-        _teamMaterial = colorMaterial;
+        Id = id;
+        Name = name;
+        TeamMaterial = colorMaterial;
+        Members = new List<Player>();
     }
 }
