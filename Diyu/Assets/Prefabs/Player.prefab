@@ -246,7 +246,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4040434146630069775}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6373c59a4f1856941a089923f443cd1b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ce33d60fd707d54b9b9d439261e810b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 0
@@ -259,7 +259,7 @@ MonoBehaviour:
   rigidBody: {fileID: 153633486548145625}
   playerCamera: {fileID: 5904602175786578948}
   targetRay: {fileID: 7436825154981202508}
-  movementSpeed: 10
+  movementSpeed: 5
 --- !u!114 &4593035817733457870
 MonoBehaviour:
   m_ObjectHideFlags: 0
