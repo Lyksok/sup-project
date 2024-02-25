@@ -1,4 +1,8 @@
-public class Entity
+using System;
+using System.Collections;
+using UnityEngine;
+
+public abstract class Entity : MonoBehaviour
 {
     /*
     An entity is a game object that has some 
@@ -14,10 +18,40 @@ public class Entity
         MaxHealth = health;
     }
 
-    public int Health { get; set; }
+    public float Health { get; set; }
 
-    public int MaxHealth { get; set; }
+    public float MaxHealth { get; set; }
 
     public TypesEnum Type { get; }
 
+    public event Action<Entity> onChanged = null;
+    public event Action onEmpty = null;
+
+    public void AddHealth(float value)
+    {
+        if (IsDead() && value < 0)
+        {
+            return;
+        }
+        Health += value;
+
+        if (value < 0)
+        {
+            //emit damage particle
+        }
+        if (value > 0)
+        {
+            //emit healing particle
+        }
+
+        onChanged?.Invoke(this);
+    }
+
+    public bool IsDead()
+    {
+        return Mathf.Approximately(Health, 0.0f);
+    }
+
+    public abstract void Die();
+    //this behaviour will change depending on wanted interactions
 }

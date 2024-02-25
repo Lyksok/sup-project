@@ -12,4 +12,10 @@ public class EntityIdentity : Entity
     {
         return Health <= 0;
     }
+
+    public override void Die()
+    {
+        //this returns nothing as of now
+        return;
+    }
 }
