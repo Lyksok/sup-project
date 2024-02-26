@@ -147,6 +147,10 @@ public class MenuManager : MonoBehaviour
     public void TempHostGame()
     {
         networkManager.StartHost();
+
+        // Get player object and disable the player body
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponentInChildren<PlayerBody>().gameObject.SetActive(false);
     }
 
     // Method to start a server on localhost
