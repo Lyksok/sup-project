@@ -7,6 +7,7 @@ public class LobbySceneManager : MonoBehaviour
     /*
      LobbySceneManager is responsible for managing the lobby scene.
      It contains methods that are called by the buttons in the scene.
+
      */
 
     public GameObject waitingScreen;
