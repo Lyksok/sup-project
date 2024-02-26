@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class LobbySceneManager : MonoBehaviour
 {
+    /*
+     LobbySceneManager is responsible for managing the lobby scene.
+     */
 
     public GameObject waitingScreen;
 
