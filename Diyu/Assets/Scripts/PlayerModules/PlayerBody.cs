@@ -13,17 +13,17 @@ public class PlayerBody : NetworkBehaviour
     private Vector3 initalOffset;
     private Vector3 cameraPosition;
 
-    [SerializeField] private float ShootCD = 5.0f;
+    [SerializeField] private float ShootCD = 0.5f;
     [SerializeField] private float CurrShoot = 0.0f;
     [SerializeField] private Firespell Firespell;
 
     [SerializeField]
-    private Entity life = null;
+    private Life life = null;
 
     // This method is called when the local player object is set up
     private void Start()
     {
-        Entity Health = GetComponent<Entity>();
+        Life life = GetComponent<Life>();
         CurrShoot = 0.0f;
         // check if the player is owned by the local player
         if (!isLocalPlayer)

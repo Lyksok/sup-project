@@ -14,7 +14,7 @@ public class Firespell : MonoBehaviour
     private Transform SpawnTransform = null;
 
     [SerializeField]
-    private float FireSpeed = 5.0f;
+    private float FireSpeed = 50.0f;
 
     private void Update()
     {

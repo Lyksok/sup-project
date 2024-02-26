@@ -16,19 +16,19 @@ public class Fireball : MonoBehaviour
             //rien
         }
 
-        if (collider.gameObject.tag == "Wall")
+        if (collider.gameObject.tag == "Walls")
         {
             Destroy(gameObject);
         }
 
-        Entity Entity = collider.gameObject.GetComponent<Entity>();
+        Life life = collider.gameObject.GetComponent<Life>();
 
-        if (Entity.Health != null)
+        if (life != null)
         {
-            Entity.AddHealth(damage);
+            life.ChangeHP(damage);
         }
 
-        if (!rb && !Entity)
+        if (!rb && !life)
             return;
 
         Destroy(gameObject);
