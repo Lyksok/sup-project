@@ -4,27 +4,27 @@ using UnityEngine.SceneManagement;
 
 public class LobbySceneManager : MonoBehaviour
 {
-    // On start find network manager and set all menus to false exept waiting screen
+
     public GameObject waitingScreen;
 
-    public NetworkManager networkManager;
+    public GameObject networkManager;
+
+    // On start find network manager and set all menus to false exept waiting screen
+
 
     public void Start()
     {
         waitingScreen.SetActive(true);
 
         // Get the network manager
-        GameObject tmp = GameObject.FindGameObjectWithTag("NetworkManager");
-        if (tmp != null)
-        {
-            networkManager = tmp.GetComponent<NetworkManager>();
-        }
+        networkManager = GameObject.Find("NetworkManager");
+        // Debug.Log(networkManager.name);
     }
 
     // Method to exit the waiting screen (exit the lobby)
     public void ExitWaitingScreen()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
 
         // TODO : Add code to disconnect from the Lobby (idk if it disconnects automatically)
     }
@@ -33,6 +33,6 @@ public class LobbySceneManager : MonoBehaviour
     // Temporary method to start the game as host (for testing)
     public void TempHostGame()
     {
-        networkManager.StartHost();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
