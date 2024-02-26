@@ -8,12 +8,12 @@ public class Life : MonoBehaviour
     private float maxHP = 10.0f;
 
     [SerializeField]
-    private float currentHp = 0.0f;
+    private float currentHp = 10.0f;
 
     public event Action<Life> onChanged = null;
     public event Action onEmpty = null;
 
-     private void Start()
+    private void Start()
     {
         ResetLife();
     }

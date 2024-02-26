@@ -20,6 +20,9 @@ public class AIController : MonoBehaviour
     [SerializeField]
     public SightZone sightZone = null;
 
+    [SerializeField]
+    private Life life = null;
+
     void Start()
     {
         AttackCD += Time.deltaTime;
@@ -28,6 +31,7 @@ public class AIController : MonoBehaviour
         sightZone = GetComponentInParent<SightZone>();
         sightZone.onStay += OnEnemySpotted;
         sightZone.onExit += OnEnemyLeft;
+        life.onEmpty += Die;
     }
 
     private void OnEnemySpotted(GameObject enemy)
@@ -45,5 +49,19 @@ public class AIController : MonoBehaviour
     {
         //when player not in sightzone -> return to spawn
         ai.SetDestination(spawn.transform.position);
+    }
+
+    private void Die()
+    {
+        StartCoroutine(DestroAIRoutine());
+    }
+
+    IEnumerator DestroAIRoutine()
+    {
+        yield return new WaitForSeconds(0.0f);
+
+        //Instantiate(DeathParticlePrefab, transform.position, Quaternion.identity);
+
+        Destroy(gameObject);
     }
 }
