@@ -13,11 +13,18 @@ public class PlayerBody : NetworkBehaviour
     private Vector3 initalOffset;
     private Vector3 cameraPosition;
 
+    [SerializeField] private float ShootCD = 0.5f;
+    [SerializeField] private float CurrShoot = 0.0f;
+    [SerializeField] private Firespell Firespell;
+
+    [SerializeField]
+    private Life life = null;
 
     // This method is called when the local player object is set up
     private void Start()
     {
-
+        Life life = GetComponent<Life>();
+        CurrShoot = 0.0f;
         // check if the player is owned by the local player
         if (!isLocalPlayer)
         {
@@ -62,7 +69,7 @@ public class PlayerBody : NetworkBehaviour
         // If the player is not moving, stop the player else let the player move in the direction of the input x and z
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {
-            Debug.Log("Stopping");
+            //Debug.Log("Stopping");
             rigidBody.velocity = Vector3.zero;
         }
         else
@@ -129,9 +136,24 @@ public class PlayerBody : NetworkBehaviour
         // check if the player is owned by the local player
         if (isLocalPlayer)
         {
+            CurrShoot = CurrShoot + Time.deltaTime;
             Aim();
             UpdateCameraPosition();
             DrawRays();
+            Fireball();
+        }
+    }
+
+    void Fireball()
+    {
+        if (Input.GetMouseButton(0) && CurrShoot >= ShootCD)
+        {
+            if (life.IsDead())
+                return;
+            {
+                Firespell.Fire();
+                CurrShoot = 0.0f;
+            }
         }
     }
 }
