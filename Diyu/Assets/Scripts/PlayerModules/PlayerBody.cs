@@ -69,7 +69,7 @@ public class PlayerBody : NetworkBehaviour
         // If the player is not moving, stop the player else let the player move in the direction of the input x and z
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {
-            Debug.Log("Stopping");
+            //Debug.Log("Stopping");
             rigidBody.velocity = Vector3.zero;
         }
         else
