@@ -317,6 +317,56 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 360937430309650953, guid: 20f115f9bd487664a8cb3bec26ed3461,
+        type: 3}
+      propertyPath: m_EnableGPUInstancing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184805363100360578, guid: 20f115f9bd487664a8cb3bec26ed3461,
+        type: 3}
+      propertyPath: autoRandomSeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184805363100360578, guid: 20f115f9bd487664a8cb3bec26ed3461,
+        type: 3}
+      propertyPath: simulationSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184805363100360578, guid: 20f115f9bd487664a8cb3bec26ed3461,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184805363100360578, guid: 20f115f9bd487664a8cb3bec26ed3461,
+        type: 3}
+      propertyPath: emitterVelocityMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184805363100360578, guid: 20f115f9bd487664a8cb3bec26ed3461,
+        type: 3}
+      propertyPath: ShapeModule.arc.mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184805363100360578, guid: 20f115f9bd487664a8cb3bec26ed3461,
+        type: 3}
+      propertyPath: ShapeModule.alignToDirection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184805363100360578, guid: 20f115f9bd487664a8cb3bec26ed3461,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184805363100360578, guid: 20f115f9bd487664a8cb3bec26ed3461,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184805363100360578, guid: 20f115f9bd487664a8cb3bec26ed3461,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2321439908136946269, guid: 20f115f9bd487664a8cb3bec26ed3461,
         type: 3}
       propertyPath: m_Name
