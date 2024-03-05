@@ -144,11 +144,6 @@ public class PlayerBody : NetworkBehaviour
         }
     }
 
-    void Die()
-    {
-        Destroy(gameObject);
-    }
-
     void Fireball()
     {
         if (Input.GetMouseButton(0) && CurrShoot >= ShootCD)
@@ -160,5 +155,10 @@ public class PlayerBody : NetworkBehaviour
                 CurrShoot = 0.0f;
             }
         }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }
