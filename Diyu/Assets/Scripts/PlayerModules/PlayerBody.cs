@@ -34,7 +34,7 @@ public class PlayerBody : NetworkBehaviour
         {
             rigidBody.isKinematic = false;
         }
-
+        life.onEmpty += Die;
         playerCamera = GetComponentInChildren<Camera>();
         initalOffset = transform.position - playerBody.position;
     }
@@ -155,5 +155,10 @@ public class PlayerBody : NetworkBehaviour
                 CurrShoot = 0.0f;
             }
         }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }

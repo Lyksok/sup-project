@@ -5,7 +5,7 @@ using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
 
-public class AIController : MonoBehaviour
+public class AiCqcController : MonoBehaviour
 {
     //where ai will return without target
     [SerializeField]
@@ -13,6 +13,9 @@ public class AIController : MonoBehaviour
 
     [SerializeField]
     private float AttackCD = 1.0f;
+
+    [SerializeField]
+    private float TimeBetweenAttacks = 0.0f;
 
     [SerializeField]
     private NavMeshAgent ai = null;
@@ -23,9 +26,13 @@ public class AIController : MonoBehaviour
     [SerializeField]
     private Life life = null;
 
+    void FixedUpdate()
+    {
+        TimeBetweenAttacks += Time.deltaTime;
+    }
+
     void Start()
     {
-        AttackCD += Time.deltaTime;
         ai = GetComponent<NavMeshAgent>();
         //had to put it in parent to make the sightzone still
         sightZone = GetComponentInParent<SightZone>();
@@ -38,11 +45,13 @@ public class AIController : MonoBehaviour
     {
         //ai follows player until it leaves
         ai.SetDestination(enemy.transform.position);
-
+        Life life = enemy.gameObject.GetComponent<Life>();
         float distanceWithEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-        if (distanceWithEnemy <= 2 && AttackCD >= 1.0f)
+        if (distanceWithEnemy <= 3 && TimeBetweenAttacks >= AttackCD)
         {
-
+            Debug.LogError("ATTAAAAAAAAAAAAAAAACK");
+            life.ChangeHP(-1.0f);
+            TimeBetweenAttacks = 0.0f;
         }
     }
     private void OnEnemyLeft(GameObject enemy)
