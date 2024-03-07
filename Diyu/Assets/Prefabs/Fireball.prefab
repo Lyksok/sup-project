@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diecounter: 0
-  limit: 3
+  limit: 1.5
   damage: -1
   ded: {fileID: 1061216277372453865, guid: 15a5dcd585b9a9048b46bb2851e9564b, type: 3}
 --- !u!54 &252012538564813242
