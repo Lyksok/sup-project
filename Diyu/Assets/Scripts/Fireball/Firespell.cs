@@ -29,6 +29,8 @@ public class Firespell : MonoBehaviour
 
         rb.AddForce(FireSpeed * SpawnTransform.forward, ForceMode.VelocityChange);
 
-        ParticleSystem particleSystem = Instantiate(Firelaunch, SpawnTransform.position, SpawnTransform.rotation);
+
+
+        Firelaunch.Play();
     }
 }

@@ -10,6 +10,9 @@ public class Life : MonoBehaviour
     [SerializeField]
     private float currentHp = 10.0f;
 
+    [SerializeField]
+    private ParticleSystem damage = null;
+
     public event Action<Life> onChanged = null;
     public event Action onEmpty = null;
 
@@ -23,6 +26,15 @@ public class Life : MonoBehaviour
         if (IsDead() && hpDifference < 0)
         {
             return;
+        }
+
+        if (hpDifference < 0)
+        {
+            ParticleSystem particleSystem = Instantiate(damage, transform.position, transform.rotation);
+        }
+        if (hpDifference > 0)
+        {
+
         }
 
         currentHp += hpDifference; 

@@ -8,14 +8,23 @@ public class Fireball : MonoBehaviour
     private float diecounter = 0.0f;
 
     [SerializeField]
-    private float limit = 3.0f;
+    private float limit = 1.5f;
 
     [SerializeField]
     private float damage = -1.0f;
 
+    [SerializeField]
+    private ParticleSystem ded = null;
+
+    void Start()
+    {
+
+    }
+
     void Update()
     {
         diecounter += Time.deltaTime;
+        Die();
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -28,6 +37,7 @@ public class Fireball : MonoBehaviour
 
         if (collider.gameObject.tag == "Walls")
         {
+            ParticleSystem particleSystem = Instantiate(ded, transform.position, transform.rotation);
             Destroy(gameObject);
         }
 
@@ -48,6 +58,8 @@ public class Fireball : MonoBehaviour
     {
         if (diecounter >= limit)
         {
+            Debug.LogError("fireball is dead");
+            ParticleSystem particleSystem = Instantiate(ded, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }

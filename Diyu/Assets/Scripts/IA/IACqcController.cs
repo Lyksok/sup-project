@@ -10,6 +10,9 @@ public class AiCqcController : MonoBehaviour
     //where ai will return without target
     [SerializeField]
     private Transform spawn = null;
+        
+    [SerializeField]
+    private ParticleSystem ded = null;
 
     [SerializeField]
     private float AttackCD = 1.0f;
@@ -68,7 +71,7 @@ public class AiCqcController : MonoBehaviour
     IEnumerator DestroAIRoutine()
     {
         yield return new WaitForSeconds(0.0f);
-
+        ParticleSystem particleSystem = Instantiate(ded, transform.position, transform.rotation);
         //Instantiate(DeathParticlePrefab, transform.position, Quaternion.identity);
 
         Destroy(gameObject);
