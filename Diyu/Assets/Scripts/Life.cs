@@ -5,10 +5,10 @@ using UnityEngine;
 public class Life : MonoBehaviour
 {
     [SerializeField]
-    private float maxHP = 10.0f;
+    public float maxHP = 10.0f;
 
     [SerializeField]
-    private float currentHp = 10.0f;
+    public float currentHp = 10.0f;
 
     [SerializeField]
     private ParticleSystem damage = null;

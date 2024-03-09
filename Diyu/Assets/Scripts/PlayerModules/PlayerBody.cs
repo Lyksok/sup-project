@@ -116,8 +116,8 @@ public class PlayerBody : NetworkBehaviour
     void UpdateCameraPosition()
     {
         //makes cam follow target
-        cameraPosition = playerBody.position + initalOffset;
-        transform.position = cameraPosition;
+        //cameraPosition = playerBody.position + initalOffset;
+        //transform.position = cameraPosition;
     }
 
     // debug method to draw rays
