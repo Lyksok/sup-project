@@ -66,7 +66,7 @@ public class AiRangedController : MonoBehaviour
     private void OnEnemySpotted(GameObject enemy)
     {
         float distanceWithEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-        if (distanceWithEnemy <= 10)
+        if (distanceWithEnemy <= 17)
         {
             if (CanSeeObject(enemy))
             {
