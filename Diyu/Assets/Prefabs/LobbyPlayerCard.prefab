@@ -398,7 +398,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9185745868940032868}
-  - component: {fileID: 3905675062618437450}
   m_Layer: 0
   m_Name: LobbyPlayerCard
   m_TagString: Untagged
@@ -426,22 +425,6 @@ RectTransform:
   m_AnchoredPosition: {x: 443.80002, y: 0.2000122}
   m_SizeDelta: {x: 887.60004, y: 0.4000244}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3905675062618437450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5811921172339675544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3572527b1c4aee44ea795a0771c2b951, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waitingForPlayerPanel: {fileID: 4451010973431350531}
-  playerDataPanel: {fileID: 3889706028599913375}
-  playerDisplayNameText: {fileID: 3308223882005368603}
-  isReadyToggle: {fileID: 5469173746254805730}
 --- !u!1 &6497317718023170201
 GameObject:
   m_ObjectHideFlags: 0
