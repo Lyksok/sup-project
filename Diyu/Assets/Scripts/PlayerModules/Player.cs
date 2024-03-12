@@ -24,4 +24,10 @@ public class Player : NetworkBehaviour
     {
         
     }
+
+    // Hide or show the player body
+    public void SetBodyVisibility(bool visible)
+    {
+        Body.SetActive(visible);
+    }
 }
