@@ -9,7 +9,7 @@ public class Player : NetworkBehaviour
 
     // Declare the player modules
     public GameObject Body;
-    public EntityIdentity Identity = new EntityIdentity(TypesEnum.Player,100); // Parameters: type, health/maxHealth
+    //public EntityIdentity Identity = new EntityIdentity(TypesEnum.Player,100); // Parameters: type, health/maxHealth
     public PlayerTeam Team = new PlayerTeam();
 
 
