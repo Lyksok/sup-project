@@ -13,6 +13,10 @@ public class Life : MonoBehaviour
     [SerializeField]
     private ParticleSystem damage = null;
 
+    [SerializeField]
+    public float attackSpeed = 3;
+    public float attackDamage = -1.0f;
+    
     public event Action<Life> onChanged = null;
     public event Action onEmpty = null;
 

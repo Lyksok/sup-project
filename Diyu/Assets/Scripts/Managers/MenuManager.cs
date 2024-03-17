@@ -186,3 +186,11 @@ public class MenuManager : MonoBehaviour
 
     }
 }
+
+public class OpenDevConsoleScript : MonoBehaviour
+{
+    void Start()
+    {
+        Debug.developerConsoleVisible = true;
+    }
+}

@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 using Mirror;
 
@@ -15,8 +16,11 @@ public class PlayerBody : NetworkBehaviour
 
     [SerializeField] private float ShootCD = 0.5f;
     [SerializeField] private float CurrShoot = 0.0f;
-    [SerializeField] private Firespell Firespell;
+    //[SerializeField] private Firespell Firespell;
+    [SerializeField] private AutoFramework AutoAttack;
 
+    //[SerializeField] private MeleeAuto Scythe;
+    
     [SerializeField]
     private Life life = null;
 
@@ -116,8 +120,8 @@ public class PlayerBody : NetworkBehaviour
     void UpdateCameraPosition()
     {
         //makes cam follow target
-        //cameraPosition = playerBody.position + initalOffset;
-        //transform.position = cameraPosition;
+        cameraPosition = playerBody.position + initalOffset;
+        transform.position = cameraPosition;
     }
 
     // debug method to draw rays
@@ -138,24 +142,48 @@ public class PlayerBody : NetworkBehaviour
         {
             CurrShoot = CurrShoot + Time.deltaTime;
             Aim();
-            UpdateCameraPosition();
+            Attack();
+            //UpdateCameraPosition();
             DrawRays();
-            Fireball();
         }
     }
 
-    void Fireball()
+    void Attack()
     {
-        if (Input.GetMouseButton(0) && CurrShoot >= ShootCD)
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (life.IsDead())
-                return;
+            Debug.LogError(CurrShoot);
+            Debug.LogError(ShootCD);
+            if (CurrShoot >= ShootCD)
             {
-                Firespell.Fire();
-                CurrShoot = 0.0f;
+                if (life.IsDead())
+                {
+                    return;
+                }
+                else
+                {
+                    Debug.LogError("Successful");
+                    AutoAttack.Attack();
+                    CurrShoot = 0.0f;
+                }
             }
         }
     }
+
+    /*void ScytheAttack()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (life.IsDead())
+            {
+                return;
+            }
+            else
+            {
+                Scythe.Attack();
+            }
+        }
+    }*/
 
     void Die()
     {
