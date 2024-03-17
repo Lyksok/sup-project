@@ -4851,7 +4851,7 @@ GameObject:
   - component: {fileID: 5790184468835508578}
   - component: {fileID: 9096076529354678750}
   m_Layer: 0
-  m_Name: Flame
+  m_Name: Flame particules
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
