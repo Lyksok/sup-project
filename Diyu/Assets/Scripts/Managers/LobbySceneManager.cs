@@ -17,16 +17,19 @@ public class LobbySceneManager : MonoBehaviour
 
     public void Start()
     {
-
         // Get the network manager
         networkManager = GameObject.FindWithTag("NetworkManager");
         // Debug.Log(networkManager.name);
     }
 
     // Method to exit the waiting screen (exit the lobby)
-    public void ExitLobby(Player player)
+    public void ExitLobby()
     {
-        
+        // Stop the client
+        networkManager.gameObject.GetComponent<MyNetworkRoomManager>().StopClient();
+
+        // Load offline scene
+        SceneManager.LoadScene(networkManager.gameObject.GetComponent<MyNetworkRoomManager>().offlineScene);
     }
 
     // TEMPORARY
