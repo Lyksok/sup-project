@@ -12,13 +12,11 @@ public class Player : NetworkBehaviour
     //public EntityIdentity Identity = new EntityIdentity(TypesEnum.Player,100); // Parameters: type, health/maxHealth
     public PlayerTeam Team = new PlayerTeam();
 
-    public GameObject PlayerUI;
-
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerUI.gameObject.GetComponent<MyNetworkRoomPlayer>().SetIndex(GetInstanceID());
+
     }
 
     // Update is called once per frame
