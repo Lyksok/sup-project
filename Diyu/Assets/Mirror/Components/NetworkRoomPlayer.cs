@@ -11,21 +11,6 @@ namespace Mirror
     [HelpURL("https://mirror-networking.gitbook.io/docs/components/network-room-player")]
     public class NetworkRoomPlayer : NetworkBehaviour
     {
-        /// <summary>
-        /// Changed by Jans
-        /// </summary>
-        public void SetIndex(int index)
-        {
-            this.index = index;
-        }
-
-        /// <summary>
-        /// Changed by Jans
-        /// </summary>
-        public int GetIndex()
-        {
-            return index;
-        }
 
         /// <summary>
         /// This flag controls whether the default UI is shown for the room player.
@@ -57,7 +42,7 @@ namespace Mirror
         /// <summary>
         /// Do not use Start - Override OnStartHost / OnStartClient instead!
         /// </summary>
-        public virtual void Start()
+        public void Start()
         {
             if (NetworkManager.singleton is NetworkRoomManager room)
             {

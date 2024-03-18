@@ -149,9 +149,9 @@ public class MenuManager : MonoBehaviour
         networkManager.StartHost();
 
         // Get player object and disable the player body
-        GameObject player = GameObject.Find("Player");
+        // GameObject player = GameObject.Find("Player");
 
-        Debug.Log(player.name + " hey");
+        // Debug.Log(player.name + " hey");
 
         // player.GetComponent<Player>().SetBodyVisibility(false);
     }
