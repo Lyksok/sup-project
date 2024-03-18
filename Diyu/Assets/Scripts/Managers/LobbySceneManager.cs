@@ -29,7 +29,8 @@ public class LobbySceneManager : MonoBehaviour
         networkManager.gameObject.GetComponent<MyNetworkRoomManager>().StopClient();
 
         // Load offline scene
-        SceneManager.LoadScene(networkManager.gameObject.GetComponent<MyNetworkRoomManager>().offlineScene);
+    
+        //SceneManager.LoadScene(networkManager.gameObject.GetComponent<MyNetworkRoomManager>().offlineScene);
     }
 
     // TEMPORARY
