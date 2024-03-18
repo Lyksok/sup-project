@@ -163,8 +163,13 @@
       },
       "url": "https://packages.unity.com"
     },
+<<<<<<< HEAD
+    "com.unity.toolchain.macos-arm64-linux-x86_64": {
+      "version": "2.0.0",
+=======
     "com.unity.toolchain.linux-x86_64": {
       "version": "2.0.6",
+>>>>>>> main
       "depth": 0,
       "source": "registry",
       "dependencies": {
