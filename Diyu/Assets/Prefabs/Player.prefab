@@ -515,6 +515,9 @@ GameObject:
   - component: {fileID: 4593035817733457870}
   - component: {fileID: 4186728293990571267}
   - component: {fileID: 2699889499073220079}
+  - component: {fileID: 6434272201137583369}
+  - component: {fileID: 2854298321926771820}
+  - component: {fileID: 4253755970556762617}
   m_Layer: 0
   m_Name: PlayerBody
   m_TagString: Untagged
@@ -738,6 +741,51 @@ MonoBehaviour:
   cv: {fileID: 148503663139991950}
   HP: {fileID: 5136793877117613060}
   playerHP: {fileID: 4186728293990571267}
+--- !u!114 &6434272201137583369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4040434146630069775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc0d1198fd82b145a9e933245f60833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability: {fileID: 11400000, guid: f6fde30d9cda3c244ae382c8c3b77132, type: 2}
+  body: {fileID: 5127029614599107680}
+  key: 49
+--- !u!114 &2854298321926771820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4040434146630069775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc0d1198fd82b145a9e933245f60833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability: {fileID: 11400000, guid: 42e23a67392c88a49ad727939fb3c303, type: 2}
+  body: {fileID: 5127029614599107680}
+  key: 50
+--- !u!114 &4253755970556762617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4040434146630069775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc0d1198fd82b145a9e933245f60833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability: {fileID: 11400000, guid: 986e0b937f3ec334daf40e020e78774f, type: 2}
+  body: {fileID: 5127029614599107680}
+  key: 51
 --- !u!1 &4543556990016609770
 GameObject:
   m_ObjectHideFlags: 0
