@@ -12,6 +12,22 @@ namespace Mirror
     public class NetworkRoomPlayer : NetworkBehaviour
     {
         /// <summary>
+        /// Changed by Jans
+        /// </summary>
+        public void SetIndex(int index)
+        {
+            this.index = index;
+        }
+
+        /// <summary>
+        /// Changed by Jans
+        /// </summary>
+        public int GetIndex()
+        {
+            return index;
+        }
+
+        /// <summary>
         /// This flag controls whether the default UI is shown for the room player.
         /// <para>As this UI is rendered using the old GUI system, it is only recommended for testing purposes.</para>
         /// </summary>
