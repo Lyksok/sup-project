@@ -9,6 +9,7 @@ public class AbilityHeal : AbilityFramework
     public override void Activate(PlayerBody parent)
     {
         parent.life.ChangeHP(healForce);
+
     }
 
     public override void End(PlayerBody parent)
