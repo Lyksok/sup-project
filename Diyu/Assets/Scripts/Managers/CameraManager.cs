@@ -8,7 +8,7 @@ public class CameraManager : MonoBehaviour
 
     public CinemachineVirtualCamera CmVirtualCamera;
     public Camera mainCamera;
-
+    public GameObject body;
     private bool vCam = true;
     // Creates a toggle for camera lock (like in LoL) on the "Y" key
     // Update is called once per frame
@@ -50,6 +50,10 @@ public class CameraManager : MonoBehaviour
             {
                 mainCamera.transform.position -= Vector3.left * (Time.deltaTime * 25);
             }
+        }
+        else
+        {
+            mainCamera.transform.position = body.transform.position;
         }
     }
 }

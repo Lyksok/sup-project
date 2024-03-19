@@ -46,6 +46,7 @@ public class Fireball : MonoBehaviour
         if (life != null)
         {
             life.ChangeHP(damage);
+            Destroy(gameObject);
         }
 
         if (!rb && !life)

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Diyu/Assets/Scripts/Abilities/AbilityDash.cs.meta
+guid: c4aa596614e761449b5127fd9c708d8a
+========
+guid: e62cdb7d0992db9489c67da937f0fa9d
+>>>>>>>> main:Diyu/Assets/Scripts/Networking/MyNetworkRoomPlayer.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

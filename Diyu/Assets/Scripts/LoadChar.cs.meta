@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Diyu/Assets/Scripts/LoadChar.cs.meta
+guid: 69d1408117509d7488489cbda6031f3e
+========
+guid: 250fbafbbffee9f4cbb0398836fabb84
+>>>>>>>> main:Diyu/Assets/Scripts/Networking/MyNetworkRoomManager.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
