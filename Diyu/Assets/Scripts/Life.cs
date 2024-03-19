@@ -44,6 +44,10 @@ public class Life : MonoBehaviour
             onEmpty?.Invoke();
             currentHp = 0.0f;
         }
+        if (currentHp > maxHP)
+        {
+            currentHp = maxHP;
+        }
 
         onChanged?.Invoke(this);
     }
