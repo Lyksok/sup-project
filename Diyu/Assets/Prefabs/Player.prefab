@@ -240,7 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3907c6f3e8c614f959e1776b71e737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  performMeleeAuto: 0
   Sphere: {fileID: 4850013336144705211}
   Body: {fileID: 5127029614599107680}
 --- !u!1 &1784300719278563935
@@ -413,6 +412,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7481068694643768237}
+  - {fileID: 9062080596739331540}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6421520825865010194
@@ -518,6 +518,7 @@ GameObject:
   - component: {fileID: 6434272201137583369}
   - component: {fileID: 2854298321926771820}
   - component: {fileID: 4253755970556762617}
+  - component: {fileID: 3730006862520227663}
   m_Layer: 0
   m_Name: PlayerBody
   m_TagString: Untagged
@@ -540,10 +541,9 @@ Transform:
   m_Children:
   - {fileID: 7436825154981202508}
   - {fileID: 1696310734994277512}
-  - {fileID: 8429168373097826961}
   - {fileID: 1593607771704431042}
-  - {fileID: 9062080596739331540}
   - {fileID: 6169978568307232112}
+  - {fileID: 8429168373097826961}
   m_Father: {fileID: 5035384548726880377}
   m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 0}
 --- !u!33 &5241195280740722264
@@ -666,9 +666,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   rigidBody: {fileID: 153633486548145625}
-  playerCamera: {fileID: 0}
+  playerCamera: {fileID: 5904602175786578948}
   targetRay: {fileID: 7436825154981202508}
   movementSpeed: 5
+  launcher: {fileID: 1347626886891388975}
   ShootCD: 0.5
   CurrShoot: 0
   AutoAttack: {fileID: 155175530467800763}
@@ -723,8 +724,6 @@ MonoBehaviour:
   maxHP: 10
   currentHp: 10
   damage: {fileID: 1061216277372453865, guid: a22bf0c5433ed8c49bceb52b6baf250f, type: 3}
-  attackSpeed: 3
-  attackDamage: 1
 --- !u!114 &2699889499073220079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,6 +785,21 @@ MonoBehaviour:
   ability: {fileID: 11400000, guid: 986e0b937f3ec334daf40e020e78774f, type: 2}
   body: {fileID: 5127029614599107680}
   key: 51
+--- !u!114 &3730006862520227663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4040434146630069775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc0d1198fd82b145a9e933245f60833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability: {fileID: 11400000, guid: 7e2130086e4c8a746b8d53c53f9ae840, type: 2}
+  body: {fileID: 5127029614599107680}
+  key: 52
 --- !u!1 &4543556990016609770
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,13 +910,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4546385729680236679}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268346, y: -0, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 9.899495, z: -10}
+  m_LocalRotation: {x: 0.27059802, y: 0.6532815, z: -0.27059805, w: 0.65328145}
+  m_LocalPosition: {x: -6.7208586, y: 6.839806, z: 5.489311}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7481068694643768237}
-  m_LocalEulerAnglesHint: {x: 45, y: 90, z: 0}
+  m_Father: {fileID: 5035384548726880377}
+  m_LocalEulerAnglesHint: {x: 67.144, y: 90, z: 0}
 --- !u!20 &5904602175786578948
 Camera:
   m_ObjectHideFlags: 0

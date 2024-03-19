@@ -14,12 +14,10 @@ public class PlayerBody : NetworkBehaviour
     private Vector3 initalOffset;
     private Vector3 cameraPosition;
 
+    [SerializeField] public GameObject launcher;
     [SerializeField] private float ShootCD = 0.5f;
     [SerializeField] private float CurrShoot = 0.0f;
-    //[SerializeField] private Firespell Firespell;
     [SerializeField] private AutoFramework AutoAttack;
-
-    //[SerializeField] private MeleeAuto Scythe;
     
     [SerializeField]
     public Life life = null;
@@ -39,7 +37,7 @@ public class PlayerBody : NetworkBehaviour
             rigidBody.isKinematic = false;
         }
         life.onEmpty += Die;
-        playerCamera = GetComponentInChildren<Camera>();
+        //playerCamera = GetComponentInChildren<Camera>();
         initalOffset = transform.position - playerBody.position;
     }
 
@@ -155,8 +153,6 @@ public class PlayerBody : NetworkBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Debug.LogError(CurrShoot);
-            Debug.LogError(ShootCD);
             if (CurrShoot >= ShootCD)
             {
                 if (life.IsDead())
@@ -165,28 +161,12 @@ public class PlayerBody : NetworkBehaviour
                 }
                 else
                 {
-                    Debug.LogError("Successful");
                     AutoAttack.Attack();
                     CurrShoot = 0.0f;
                 }
             }
         }
     }
-
-    /*void ScytheAttack()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (life.IsDead())
-            {
-                return;
-            }
-            else
-            {
-                Scythe.Attack();
-            }
-        }
-    }*/
 
     void Die()
     {

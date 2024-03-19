@@ -12,11 +12,6 @@ public class Life : MonoBehaviour
 
     [SerializeField]
     private ParticleSystem damage = null;
-
-    [SerializeField]
-    public float attackSpeed = 3;
-    public float attackDamage = -1.0f;
-    
     public event Action<Life> onChanged = null;
     public event Action onEmpty = null;
 
@@ -47,6 +42,11 @@ public class Life : MonoBehaviour
         {
             onEmpty?.Invoke();
             currentHp = 0.0f;
+        }
+        
+        if (currentHp > maxHP)
+        {
+            currentHp = maxHP;
         }
 
         onChanged?.Invoke(this);

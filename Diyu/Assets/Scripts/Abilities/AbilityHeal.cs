@@ -8,7 +8,6 @@ public class AbilityHeal : AbilityFramework
     public float healForce;
     public override void Activate(PlayerBody parent)
     {
-        Debug.LogError("Healing");
         parent.life.ChangeHP(healForce);
     }
 

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//Ability Framework, attach to PlayerBody then attach an Ability to this to use it.
 public class AbilityHolder : MonoBehaviour
 {
     public AbilityFramework ability;
@@ -27,7 +29,6 @@ public class AbilityHolder : MonoBehaviour
             case AbilityState.READY:
                 if (Input.GetKeyDown(key))
                 {
-                    Debug.LogError("Activated");
                     ability.Activate(body);
                     state = AbilityState.ACTIVE;
                     activeTime = ability.activeTime;
@@ -36,6 +37,7 @@ public class AbilityHolder : MonoBehaviour
             case AbilityState.ACTIVE:
                 if (activeTime > 0)
                 {
+                    ability.ActiveEffect(body);
                     activeTime -= Time.deltaTime;
                 }
                 else

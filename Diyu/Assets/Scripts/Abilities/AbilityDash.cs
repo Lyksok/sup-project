@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using UnityEngine;
+using UnityEngine.UI;
 
+
+//Dashes towards mouse position
 [CreateAssetMenu]
 public class AbilityDash : AbilityFramework
 {
     public float dashVelocity;
-    [SerializeField]
-    private Transform SpawnTransform = null;
-    private Vector3 dash = Vector3.forward;
+    private Vector3 dash = Vector3.zero;
+    
     public override void Activate(PlayerBody parent)
     {
-        Debug.LogError("Dashing");
         Rigidbody rb = parent.rigidBody;
         dash = parent.Aim();
-        Debug.LogError($"{dash}, {dashVelocity}");
         rb.AddForce(dash.normalized * dashVelocity, ForceMode.VelocityChange);
     }
 
