@@ -12,7 +12,6 @@ public class Life : MonoBehaviour
 
     [SerializeField]
     private ParticleSystem damage = null;
-
     public event Action<Life> onChanged = null;
     public event Action onEmpty = null;
 
@@ -21,7 +20,7 @@ public class Life : MonoBehaviour
         ResetLife();
     }
 
-    public void ChangeHP (float hpDifference)
+    public void ChangeHP(float hpDifference)
     {
         if (IsDead() && hpDifference < 0)
         {
@@ -37,7 +36,7 @@ public class Life : MonoBehaviour
 
         }
 
-        currentHp += hpDifference; 
+        currentHp += hpDifference;
 
         if (currentHp <= 0.0f)
         {
