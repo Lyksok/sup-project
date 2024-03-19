@@ -32,6 +32,8 @@ public class AiRangedController : MonoBehaviour
     [SerializeField]
     private Transform eyeTransform = null;
 
+    [SerializeField]
+    public GameObject Greenkey = null;
     void FixedUpdate()
     {
         timeBetweenShots += Time.deltaTime;
@@ -82,12 +84,15 @@ public class AiRangedController : MonoBehaviour
                     }
                 }
             }
-            if (distanceWithEnemy > 10) 
+            if (distanceWithEnemy > 10)
             {
                 //ai follows player until it leaves
                 ai.SetDestination(enemy.transform.position);
             }
         }
+        else
+            ai.SetDestination(spawn.transform.position);
+
     }
     private void OnEnemyLeft(GameObject enemy)
     {
@@ -106,7 +111,7 @@ public class AiRangedController : MonoBehaviour
         yield return new WaitForSeconds(0.0f);
 
         //Instantiate(DeathParticlePrefab, transform.position, Quaternion.identity);
-
+        Instantiate(Greenkey, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

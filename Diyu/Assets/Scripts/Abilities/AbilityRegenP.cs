@@ -20,8 +20,9 @@ public class AbilityRegenP : AbilityFramework
     {
         if (nextTick < Time.time)
         {
-            parent.life.ChangeHP(regenForce);
-            nextTick = Time.time + regenTick;
+            //parent.life.ChangeHP(regenForce);
+            //nextTick = Time.time + regenTick;
+            //en commentaire car sinn les particules de heal sont permanentes sur le joueur, de plus le joueur à une compétence de regen
         }
     }
 }

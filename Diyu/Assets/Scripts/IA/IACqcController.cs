@@ -10,7 +10,7 @@ public class AiCqcController : MonoBehaviour
     //where ai will return without target
     [SerializeField]
     private Transform spawn = null;
-        
+
     [SerializeField]
     private ParticleSystem ded = null;
 
@@ -28,6 +28,9 @@ public class AiCqcController : MonoBehaviour
 
     [SerializeField]
     private Life life = null;
+
+    [SerializeField]
+    public GameObject Redkey = null;
 
     void FixedUpdate()
     {
@@ -60,7 +63,7 @@ public class AiCqcController : MonoBehaviour
     }
     private void OnEnemySpotted(GameObject enemy)
     {
-        if ( CanSeeObject(enemy))
+        if (CanSeeObject(enemy))
         {
             //ai follows player until it leaves
             ai.SetDestination(enemy.transform.position);
@@ -73,6 +76,9 @@ public class AiCqcController : MonoBehaviour
                 TimeBetweenAttacks = 0.0f;
             }
         }
+        else
+            ai.SetDestination(spawn.transform.position);
+
     }
     private void OnEnemyLeft(GameObject enemy)
     {
@@ -83,6 +89,7 @@ public class AiCqcController : MonoBehaviour
 
     private void Die()
     {
+        Debug.Log("matteofdp");
         StartCoroutine(DestroAIRoutine());
     }
 
@@ -91,7 +98,7 @@ public class AiCqcController : MonoBehaviour
         yield return new WaitForSeconds(0.0f);
         ParticleSystem particleSystem = Instantiate(ded, transform.position, transform.rotation);
         //Instantiate(DeathParticlePrefab, transform.position, Quaternion.identity);
-
+        Instantiate(Redkey, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

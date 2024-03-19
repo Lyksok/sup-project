@@ -12,6 +12,8 @@ public class Life : MonoBehaviour
 
     [SerializeField]
     private ParticleSystem damage = null;
+    [SerializeField]
+    private ParticleSystem heal = null;
     public event Action<Life> onChanged = null;
     public event Action onEmpty = null;
 
@@ -33,7 +35,7 @@ public class Life : MonoBehaviour
         }
         if (hpDifference > 0)
         {
-
+            heal.Play();
         }
 
         currentHp += hpDifference;

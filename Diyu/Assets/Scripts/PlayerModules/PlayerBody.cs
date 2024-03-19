@@ -28,7 +28,7 @@ public class PlayerBody : NetworkBehaviour
     // This method is called when the local player object is set up
     private void Start()
     {
-        transform.position += new Vector3(0, 0.75f, 0);
+        transform.position += new Vector3(0, 6.65f, 0);
         life = GetComponent<Life>();
         CurrShoot = 0.0f;
         // check if the player is owned by the local player
