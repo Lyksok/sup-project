@@ -82,7 +82,7 @@ public class AiRangedController : MonoBehaviour
                     }
                 }
             }
-            if (distanceWithEnemy > 10)
+            if (distanceWithEnemy > 10) 
             {
                 //ai follows player until it leaves
                 ai.SetDestination(enemy.transform.position);
@@ -93,6 +93,7 @@ public class AiRangedController : MonoBehaviour
     {
         //when player not in sightzone -> return to spawn
         ai.SetDestination(spawn.transform.position);
+        life.ChangeHP(10000.0f);
     }
 
     private void Die()
