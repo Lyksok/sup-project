@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 350140200896311322}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268346, y: -0, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 0, z: -9.999999}
+  m_LocalPosition: {x: -0.00000023841858, y: 0, z: -9.999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -360,7 +360,7 @@ Transform:
   m_GameObject: {fileID: 3048579589173904145}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.29, y: 7.160194, z: -5.78}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -400,7 +400,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   Body: {fileID: 4040434146630069775}
-  PlayerUI: {fileID: 0}
 --- !u!1 &3855993779944618573
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +483,7 @@ Transform:
   m_GameObject: {fileID: 4040434146630069775}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: 3.2791414, y: -3.160194, z: 5.4893103}
+  m_LocalPosition: {x: 0, y: 4.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -617,7 +616,7 @@ MonoBehaviour:
   rigidBody: {fileID: 153633486548145625}
   playerCamera: {fileID: 5904602175786578948}
   targetRay: {fileID: 7436825154981202508}
-  movementSpeed: 5
+  movementSpeed: 7
   ShootCD: 0.5
   CurrShoot: 0
   Firespell: {fileID: 1959593807894579993}
@@ -798,7 +797,7 @@ Transform:
   m_GameObject: {fileID: 4546385729680236679}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268346, y: -0, z: -0.000000014901161, w: 0.9238796}
-  m_LocalPosition: {x: -0.0000014305115, y: 9.899495, z: -9.999999}
+  m_LocalPosition: {x: -0.0000012814999, y: 9.899495, z: -9.999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
