@@ -77,7 +77,7 @@ public class AiRangedController : MonoBehaviour
                     Debug.LogError("Close");
                     if (timeBetweenShots >= shootCD)
                     {
-                        firespell.Fire();
+                        firespell.Attack();
                         timeBetweenShots = 0.0f;
                     }
                 }
