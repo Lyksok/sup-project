@@ -19,6 +19,8 @@ public class PlayerBody : NetworkBehaviour
 
     [SerializeField]
     private Life life = null;
+    [SerializeField] public bool GetRedKey = false;
+    [SerializeField] public bool GetGreenKey = false;
 
     // This method is called when the local player object is set up
     private void Start()
