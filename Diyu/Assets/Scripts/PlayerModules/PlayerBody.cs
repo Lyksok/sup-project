@@ -13,7 +13,7 @@ public class PlayerBody : NetworkBehaviour
     [SerializeField] private float movementSpeed = 5.0f;
     private Vector3 initalOffset;
     private Vector3 cameraPosition;
-
+    [SerializeField] private Firespell Firespell;
     [SerializeField] public GameObject launcher;
     [SerializeField] private float ShootCD = 0.5f;
     [SerializeField] private float CurrShoot = 0.0f;
@@ -28,6 +28,7 @@ public class PlayerBody : NetworkBehaviour
     // This method is called when the local player object is set up
     private void Start()
     {
+        transform.position += new Vector3(0, 0.75f, 0);
         life = GetComponent<Life>();
         CurrShoot = 0.0f;
         // check if the player is owned by the local player
@@ -178,7 +179,7 @@ public class PlayerBody : NetworkBehaviour
             if (life.IsDead())
                 return;
             {
-                Firespell.Fire();
+                Firespell.Attack();
                 CurrShoot = 0.0f;
             }
         }
