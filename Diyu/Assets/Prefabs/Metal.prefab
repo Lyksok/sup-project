@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 434163669114785978}
   - component: {fileID: 4664170198524361064}
   - component: {fileID: 6529756579818332842}
+  - component: {fileID: 4952147454412774598}
   m_Layer: 3
   m_Name: Metal
   m_TagString: Walls
@@ -107,6 +108,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4952147454412774598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4309270174321319265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8311f86294ce4dcea05ef504b13ba9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Vie: 3
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  metal: {fileID: 0}
+  sketuve: {fileID: 0}
 --- !u!1 &7424699922221845712
 GameObject:
   m_ObjectHideFlags: 0
