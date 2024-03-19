@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Diyu/Assets/Scripts/CharDB.cs.meta
+guid: 155b9f061d6a6624db55dd4aa143688f
+========
+guid: b5a6f0ed7b803454cb5708a22fb2513c
+>>>>>>>> main:Diyu/Assets/Scripts/Managers/LobbySceneManager.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

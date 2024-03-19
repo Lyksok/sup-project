@@ -7,7 +7,6 @@ public class TeamManager : MonoBehaviour
     [SerializeField] private Material blue;
     [SerializeField] private Material green;
     [SerializeField] private Material yellow;
-    [SerializeField] private GameObject idManager;
     [SerializeField] public Material _defaultMaterial;
     
 
@@ -17,15 +16,14 @@ public class TeamManager : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        IdManager myIdManager = idManager.GetComponent<IdManager>();
         
         // create teams and set them unique ids and materials
-        Team redTeam = new Team(red, myIdManager.GetNextTeamId());
-        Team blueTeam = new Team(blue, myIdManager.GetNextTeamId());
-        Team greenTeam = new Team(green, myIdManager.GetNextTeamId());
-        Team yellowTeam = new Team(yellow, myIdManager.GetNextTeamId());
+        Team redTeam = new Team(red, (int) TeamIdEnum.Red);
+        Team blueTeam = new Team(blue, (int) TeamIdEnum.Blue);
+        Team greenTeam = new Team(green, (int) TeamIdEnum.Green);
+        Team yellowTeam = new Team(yellow, (int) TeamIdEnum.Yellow);
 
         // Default team
-        Team defaultTeam = new Team(_defaultMaterial, 0);
+        Team defaultTeam = new Team(_defaultMaterial, (int)TeamIdEnum.Default);
     }
 }

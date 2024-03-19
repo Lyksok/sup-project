@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    public GameObject body;
     public Canvas cv;
     public Slider HP;
     public Life playerHP;
@@ -24,7 +25,10 @@ public class HealthBar : MonoBehaviour
         {
             HP.gameObject.SetActive(false);
         }
-        //marche pas
-        //cv.transform.rotation = _camera.transform.rotation;
+
+        if (body != null)
+        {
+            cv.transform.position = body.transform.position;
+        }
     }
 }

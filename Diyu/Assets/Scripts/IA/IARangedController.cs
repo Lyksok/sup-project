@@ -65,31 +65,35 @@ public class AiRangedController : MonoBehaviour
 
     private void OnEnemySpotted(GameObject enemy)
     {
-        float distanceWithEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-        if (distanceWithEnemy <= 10)
+        if (CanSeeObject(enemy))
         {
-            if (CanSeeObject(enemy))
+            float distanceWithEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distanceWithEnemy <= 10)
             {
-                transform.LookAt(enemy.transform);
-                ai.SetDestination(transform.position);
-                Debug.LogError("Close");
-                if (timeBetweenShots >= shootCD)
+                if (CanSeeObject(enemy))
                 {
-                    firespell.Fire();
-                    timeBetweenShots = 0.0f;
+                    transform.LookAt(enemy.transform);
+                    ai.SetDestination(transform.position);
+                    Debug.LogError("Close");
+                    if (timeBetweenShots >= shootCD)
+                    {
+                        firespell.Attack();
+                        timeBetweenShots = 0.0f;
+                    }
                 }
             }
-        }
-        if (distanceWithEnemy > 10)
-        {
-            //ai follows player until it leaves
-            ai.SetDestination(enemy.transform.position);
+            if (distanceWithEnemy > 10) 
+            {
+                //ai follows player until it leaves
+                ai.SetDestination(enemy.transform.position);
+            }
         }
     }
     private void OnEnemyLeft(GameObject enemy)
     {
         //when player not in sightzone -> return to spawn
         ai.SetDestination(spawn.transform.position);
+        life.ChangeHP(10000.0f);
     }
 
     private void Die()

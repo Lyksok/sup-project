@@ -16,12 +16,18 @@ public class Player : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    // Hide or show the player body
+    public void SetBodyVisibility(bool visible)
+    {
+        Body.SetActive(visible);
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Firespell : MonoBehaviour
+public class Firespell : AutoFramework
 {
     [SerializeField]
     private GameObject Fireballprefab = null;
@@ -21,7 +21,7 @@ public class Firespell : MonoBehaviour
 
     }
 
-    public void Fire()
+    public override void Attack()
     {
         GameObject NewFireball = Instantiate(Fireballprefab, SpawnTransform.position, Quaternion.identity);
 
