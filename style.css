@@ -16,6 +16,7 @@ body {
 nav {
   width: 100%;
   margin: 0 auto;
+  padding-bottom: 50px;
   background-color: rgb(30, 30, 30);
   color: rgb(150, 150, 150);
   position: sticky;
