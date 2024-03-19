@@ -20,14 +20,15 @@ public class PlayerBody : NetworkBehaviour
     [SerializeField] private AutoFramework AutoAttack;
 
     [SerializeField]
-    private Life life = null;
+    public Life life = null;
     [SerializeField] public bool GetRedKey = false;
     [SerializeField] public bool GetGreenKey = false;
+
 
     // This method is called when the local player object is set up
     private void Start()
     {
-        Life life = GetComponent<Life>();
+        life = GetComponent<Life>();
         CurrShoot = 0.0f;
         // check if the player is owned by the local player
         if (!isLocalPlayer)
