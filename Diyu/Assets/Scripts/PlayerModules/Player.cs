@@ -11,7 +11,7 @@ public class Player : NetworkBehaviour
     public GameObject Body;
     //public EntityIdentity Identity = new EntityIdentity(TypesEnum.Player,100); // Parameters: type, health/maxHealth
     public PlayerTeam Team = new PlayerTeam();
-
+    
 
     // Start is called before the first frame update
     void Start()

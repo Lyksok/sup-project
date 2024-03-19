@@ -18,9 +18,11 @@ public class PlayerBody : NetworkBehaviour
     [SerializeField] private float ShootCD = 0.5f;
     [SerializeField] private float CurrShoot = 0.0f;
     [SerializeField] private AutoFramework AutoAttack;
-    
+
     [SerializeField]
-    public Life life = null;
+    private Life life = null;
+    [SerializeField] public bool GetRedKey = false;
+    [SerializeField] public bool GetGreenKey = false;
 
     // This method is called when the local player object is set up
     private void Start()
