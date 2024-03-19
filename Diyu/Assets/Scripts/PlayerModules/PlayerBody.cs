@@ -146,6 +146,7 @@ public class PlayerBody : NetworkBehaviour
         {
             CurrShoot = CurrShoot + Time.deltaTime;
             Aim();
+            Fireball();
             Attack();
             //UpdateCameraPosition();
             DrawRays();
@@ -170,7 +171,18 @@ public class PlayerBody : NetworkBehaviour
             }
         }
     }
-
+    void Fireball()
+    {
+        if (Input.GetMouseButton(1) && CurrShoot >= ShootCD)
+        {
+            if (life.IsDead())
+                return;
+            {
+                Firespell.Fire();
+                CurrShoot = 0.0f;
+            }
+        }
+    }
     void Die()
     {
         Destroy(gameObject);
