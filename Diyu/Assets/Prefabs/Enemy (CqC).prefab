@@ -107,7 +107,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 509825076806408060}
-  - {fileID: 4564215384722479641}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -1.323, y: 0.375, z: 0.255}
 --- !u!114 &7459768930548400471
@@ -181,6 +180,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3738878361700119076}
+  - {fileID: 4564215384722479641}
   m_Father: {fileID: 2123858580446492052}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5981564529805244732
@@ -337,8 +337,6 @@ MonoBehaviour:
   maxHP: 10
   currentHp: 10
   damage: {fileID: 1061216277372453865, guid: a22bf0c5433ed8c49bceb52b6baf250f, type: 3}
-  attackSpeed: 3
-  attackDamage: -1
 --- !u!114 &8395967360678821266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +349,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c8941726b695648b2d0a1568c080e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 2614339480972811726}
   cv: {fileID: 2410600911403725422}
   HP: {fileID: 8725407547156507964}
   playerHP: {fileID: 8065742471002041969}
@@ -458,15 +455,15 @@ RectTransform:
   m_GameObject: {fileID: 7179247119840499558}
   m_LocalRotation: {x: -0, y: -0, z: -1.05501385e-10, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0003956551, y: 0.00039565508, z: 0.00039565508}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7054074537546923145}
-  m_Father: {fileID: 2123858580446492052}
+  m_Father: {fileID: 509825076806408060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.023000002}
+  m_AnchoredPosition: {x: -0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2410600911403725422

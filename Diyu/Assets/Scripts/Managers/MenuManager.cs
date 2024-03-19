@@ -16,8 +16,10 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TMP_InputField nameInput;
 
     // Initialize all menus as variables
-    public GameObject mainMenu;
-    public GameObject joinMenu;
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject joinMenu;
+    [SerializeField] private GameObject tempJoinMenu;
+    [SerializeField] private GameObject hostMenu;
 
     // Initialize join game menu variables
     [SerializeField] private TMP_InputField ipInput;
@@ -38,11 +40,35 @@ public class MenuManager : MonoBehaviour
         // Insures that only main menu is active at the start
         mainMenu.SetActive(true);
         joinMenu.SetActive(false);
+        tempJoinMenu.SetActive(false);
+        hostMenu.SetActive(false);
     }
+
+    // Change menu to main menu when player enters his username
+    public void EnterName()
+    {
+        if (nameInput.text != "" && nameInput.text.Length <= 15)
+        {
+
+            joinMenu.SetActive(false);
+            mainMenu.SetActive(true);
+            // Instantiate player prefab
+            GameObject newPlayer = Instantiate(playerPrefab);
+            newPlayer.GetComponent<PlayerUI>().SetName(nameInput.text);
+            newPlayer.GetComponent<PlayerUI>().SetId(idManager.GetComponent<IdManager>().GetNextPlayerId());
+
+            NetworkServer.Spawn(newPlayer);
+        }
+        // TODO : add else statement to display error message
+    }
+
 
     // Verify if the input is a valid IP address
     public bool IsIpCorrect()
     {
+        // Debug log input text
+        Debug.Log("Checking ip for: " + ipInput.text);
+
         string inputText = ipInput.text;
         bool valid = true;
 
@@ -54,17 +80,24 @@ public class MenuManager : MonoBehaviour
                 break;
             }
         }
+        // Check if not localhost
         if (inputText == "localhost")
+        {
             return true;
+        }
         if (valid)
         {
             if (inputText.Length < 7)
+            {
                 valid = false;
+            }
             else
             {
                 string[] splitText = inputText.Split('.');
                 if (splitText.Length != 4)
+                {
                     valid = false;
+                }
                 else
                 {
                     foreach (string s in splitText)
@@ -87,6 +120,7 @@ public class MenuManager : MonoBehaviour
                 }
             }
         }
+
         return valid;
     }
 
@@ -122,6 +156,21 @@ public class MenuManager : MonoBehaviour
         networkManager.StartServer();
     }
 
+    public void Play2T()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void Play4T()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void PlayFFA()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     public void Quit()
     {
 #if UNITY_STANDALONE
@@ -135,13 +184,5 @@ public class MenuManager : MonoBehaviour
 #endif
         Debug.Log("Player has use the back button");
 
-    }
-}
-
-public class OpenDevConsoleScript : MonoBehaviour
-{
-    void Start()
-    {
-        Debug.developerConsoleVisible = true;
     }
 }

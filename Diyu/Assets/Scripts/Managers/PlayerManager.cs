@@ -10,9 +10,6 @@ public class PlayerManager : MonoBehaviour
     regarding their team, health, and other attributes.
      */
 
-    // Player list
-    public Dictionary<int,Player> playerList = new Dictionary<int,Player>();
-
     // Add player to the main list
     public void AddPlayer(Player player)
     {
@@ -31,7 +28,8 @@ public class PlayerManager : MonoBehaviour
         }  
     }
 
-    
+    // Player list
+    public Dictionary<int,Player> playerList = new Dictionary<int,Player>();
 
 }
 
