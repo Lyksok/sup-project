@@ -10,10 +10,13 @@ public class CameraManager : MonoBehaviour
     public Camera mainCamera;
     public GameObject body;
     private bool vCam = true;
+
+    public PlayerBody pb;
     // Creates a toggle for camera lock (like in LoL) on the "Y" key
     // Update is called once per frame
     void Update()
     {
+        if (!pb.isOwned) { return; }
         if (Input.GetKeyDown(KeyCode.Y))
         {
             vCam = !vCam;

@@ -23,6 +23,7 @@ public class AbilityHolder : MonoBehaviour
     
     void Update()
     {
+        if (!body.isOwned) { return; }
         ability.Passive(body);
         switch (state)
         {

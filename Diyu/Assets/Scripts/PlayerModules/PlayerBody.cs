@@ -156,6 +156,7 @@ public class PlayerBody : NetworkBehaviour
 
     void Attack()
     {
+        if (!isOwned) { return; }
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (CurrShoot >= ShootCD)

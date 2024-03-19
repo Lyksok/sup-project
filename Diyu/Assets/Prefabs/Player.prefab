@@ -1023,6 +1023,7 @@ MonoBehaviour:
   CmVirtualCamera: {fileID: 2153264078392037123}
   mainCamera: {fileID: 5904602175786578948}
   body: {fileID: 4543556990016609770}
+  pb: {fileID: 5127029614599107680}
 --- !u!1 &4791647504558659662
 GameObject:
   m_ObjectHideFlags: 0
