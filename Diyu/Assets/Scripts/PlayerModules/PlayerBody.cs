@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 using Mirror;
 
@@ -6,19 +7,20 @@ public class PlayerBody : NetworkBehaviour
     // General Unity serial fields
     [SerializeField] private Transform playerBody;
     [SerializeField] private LayerMask groundMask;
-    [SerializeField] private Rigidbody rigidBody;
+    [SerializeField] public Rigidbody rigidBody;
     [SerializeField] private Camera playerCamera;
     [SerializeField] private Transform targetRay;
     [SerializeField] private float movementSpeed = 5.0f;
     private Vector3 initalOffset;
     private Vector3 cameraPosition;
 
+    [SerializeField] public GameObject launcher;
     [SerializeField] private float ShootCD = 0.5f;
     [SerializeField] private float CurrShoot = 0.0f;
-    [SerializeField] private Firespell Firespell;
-
+    [SerializeField] private AutoFramework AutoAttack;
+    
     [SerializeField]
-    private Life life = null;
+    public Life life = null;
 
     // This method is called when the local player object is set up
     private void Start()
@@ -35,7 +37,7 @@ public class PlayerBody : NetworkBehaviour
             rigidBody.isKinematic = false;
         }
         life.onEmpty += Die;
-        playerCamera = GetComponentInChildren<Camera>();
+        //playerCamera = GetComponentInChildren<Camera>();
         initalOffset = transform.position - playerBody.position;
     }
 
@@ -97,7 +99,7 @@ public class PlayerBody : NetworkBehaviour
     }
 
     // Method to handle player aiming
-    private void Aim()
+    public Vector3 Aim()
     {
         var (success, position) = GetMousePosition();
         if (success)
@@ -109,15 +111,18 @@ public class PlayerBody : NetworkBehaviour
 
             //cake the transform of player look in the direction.
             targetRay.forward = direction;
+            return direction;
         }
+
+        return Vector3.zero;
     }
 
     // method to update the camera position
     void UpdateCameraPosition()
     {
         //makes cam follow target
-        //cameraPosition = playerBody.position + initalOffset;
-        //transform.position = cameraPosition;
+        cameraPosition = playerBody.position + initalOffset;
+        transform.position = cameraPosition;
     }
 
     // debug method to draw rays
@@ -138,21 +143,27 @@ public class PlayerBody : NetworkBehaviour
         {
             CurrShoot = CurrShoot + Time.deltaTime;
             Aim();
-            UpdateCameraPosition();
+            Attack();
+            //UpdateCameraPosition();
             DrawRays();
-            Fireball();
         }
     }
 
-    void Fireball()
+    void Attack()
     {
-        if (Input.GetMouseButton(0) && CurrShoot >= ShootCD)
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (life.IsDead())
-                return;
+            if (CurrShoot >= ShootCD)
             {
-                Firespell.Fire();
-                CurrShoot = 0.0f;
+                if (life.IsDead())
+                {
+                    return;
+                }
+                else
+                {
+                    AutoAttack.Attack();
+                    CurrShoot = 0.0f;
+                }
             }
         }
     }
