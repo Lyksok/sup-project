@@ -43,9 +43,6 @@ public class MenuManager : MonoBehaviour
     // Verify if the input is a valid IP address
     public bool IsIpCorrect()
     {
-        // Debug log input text
-        Debug.Log("Checking ip for: " + ipInput.text);
-
         string inputText = ipInput.text;
         bool valid = true;
 
@@ -57,24 +54,17 @@ public class MenuManager : MonoBehaviour
                 break;
             }
         }
-        // Check if not localhost
         if (inputText == "localhost")
-        {
             return true;
-        }
         if (valid)
         {
             if (inputText.Length < 7)
-            {
                 valid = false;
-            }
             else
             {
                 string[] splitText = inputText.Split('.');
                 if (splitText.Length != 4)
-                {
                     valid = false;
-                }
                 else
                 {
                     foreach (string s in splitText)
@@ -97,7 +87,6 @@ public class MenuManager : MonoBehaviour
                 }
             }
         }
-
         return valid;
     }
 
