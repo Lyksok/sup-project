@@ -12,7 +12,7 @@ public class MyNetworkRoomPlayer : NetworkRoomPlayer
 
     public override void OnStopClient()
     {   
-        SceneManager.LoadScene(this.GetComponent<MyNetworkRoomManager>().offlineScene);
+        Debug.Log("Client stopped on lobby");
     }
 
 }
