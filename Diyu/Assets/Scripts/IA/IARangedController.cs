@@ -30,13 +30,36 @@ public class AiRangedController : MonoBehaviour
     private float timeBetweenShots = 0.0f;
 
     [SerializeField]
+    private float HealTime = 0.0f;
+
+    [SerializeField]
     private Transform eyeTransform = null;
 
     [SerializeField]
     public GameObject Greenkey = null;
+
+    [SerializeField]
+    public bool Spotted = false;
+
+    [SerializeField]
+    public bool AtSpawn = true;
+
     void FixedUpdate()
     {
         timeBetweenShots += Time.deltaTime;
+        float distanceWithSpawn = Vector3.Distance(transform.position, spawn.transform.position);
+        if (!Spotted)
+        {
+            HealTime += Time.deltaTime;
+            if (distanceWithSpawn < 3)
+            {
+                AtSpawn = true;
+            }
+        }
+        else
+        {
+            AtSpawn = false;
+        }
     }
 
     void Start()
@@ -69,6 +92,7 @@ public class AiRangedController : MonoBehaviour
     {
         if (CanSeeObject(enemy))
         {
+            Spotted = true;
             float distanceWithEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             if (distanceWithEnemy <= 10)
             {
@@ -91,14 +115,29 @@ public class AiRangedController : MonoBehaviour
             }
         }
         else
+        {
             ai.SetDestination(spawn.transform.position);
-
+            if (!CanSeeObject(enemy))
+            {
+                Spotted = false;
+                if (HealTime >= 0.5)
+                {
+                    life.ChangeHP(1.0f);
+                    HealTime = 0;
+                }
+            }
+        }
     }
     private void OnEnemyLeft(GameObject enemy)
     {
         //when player not in sightzone -> return to spawn
         ai.SetDestination(spawn.transform.position);
-        life.ChangeHP(10000.0f);
+        Spotted = false;
+        if (HealTime >= 0.5)
+        {
+            life.ChangeHP(1.0f);
+            HealTime = 0;
+        }
     }
 
     private void Die()

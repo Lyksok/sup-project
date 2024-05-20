@@ -21,6 +21,9 @@ public class AiCqcController : MonoBehaviour
     private float TimeBetweenAttacks = 0.0f;
 
     [SerializeField]
+    private float HealTime = 0.0f;
+
+    [SerializeField]
     private NavMeshAgent ai = null;
     //sphere collider with trigger on
     [SerializeField]
@@ -32,9 +35,29 @@ public class AiCqcController : MonoBehaviour
     [SerializeField]
     public GameObject Redkey = null;
 
+    [SerializeField]
+    public bool Spotted = false;
+
+    [SerializeField]
+    public bool AtSpawn = true;
+
     void FixedUpdate()
     {
+
         TimeBetweenAttacks += Time.deltaTime;
+        float distanceWithSpawn = Vector3.Distance(transform.position, spawn.transform.position);
+        if (!Spotted)
+        {
+            HealTime += Time.deltaTime;
+            if (distanceWithSpawn < 3)
+            {
+                AtSpawn = true;
+            }
+        }
+        else
+        {
+            AtSpawn = false;
+        }
     }
 
     void Start()
@@ -58,38 +81,54 @@ public class AiCqcController : MonoBehaviour
         else if (Physics.Raycast(transform.position, (go.transform.position + new Vector3(0.0f, 1.0f, 0.0f)) - transform.position, out hit))
         {
             return hit.collider.gameObject == go;
-        }
+        };
         return false;
     }
     private void OnEnemySpotted(GameObject enemy)
     {
         if (CanSeeObject(enemy))
         {
+            Spotted = true;
             //ai follows player until it leaves
             ai.SetDestination(enemy.transform.position);
             Life life = enemy.gameObject.GetComponent<Life>();
             float distanceWithEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             if (distanceWithEnemy <= 3 && TimeBetweenAttacks >= AttackCD)
             {
-                Debug.LogError("ATTAAAAAAAAAAAAAAAACK");
                 life.ChangeHP(-1.0f);
                 TimeBetweenAttacks = 0.0f;
             }
         }
         else
+        {
             ai.SetDestination(spawn.transform.position);
+            if (!CanSeeObject(enemy))
+            {
+                Spotted = false;
+                if (HealTime >= 0.5)
+                {
+                    life.ChangeHP(1.0f);
+                    HealTime = 0;
+                }
+            }
+        }
 
     }
     private void OnEnemyLeft(GameObject enemy)
     {
         //when player not in sightzone -> return to spawn
         ai.SetDestination(spawn.transform.position);
-        life.ChangeHP(10000.0f);
+        Spotted = false;
+        if (HealTime >= 0.5)
+        {
+            life.ChangeHP(1.0f);
+            HealTime = 0;
+        }
     }
 
     private void Die()
     {
-        Debug.Log("matteofdp");
+        Debug.Log("matteo");
         StartCoroutine(DestroAIRoutine());
     }
 
