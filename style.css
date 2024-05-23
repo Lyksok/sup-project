@@ -21,6 +21,7 @@ nav {
   color: rgb(150, 150, 150);
   position: sticky;
   top: 0px;
+  user-select: none;
 }
 
 nav ul {
