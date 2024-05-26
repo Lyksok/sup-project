@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fireball : MonoBehaviour
+public class Fireball_bak : MonoBehaviour
 {
     [SerializeField]
     private float diecounter = 0.0f;

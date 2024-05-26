@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,9 +12,16 @@ public class CameraManager : MonoBehaviour
     public GameObject body;
     private bool vCam = true;
 
-    public PlayerBody pb;
+    private NewPlayer pb;
     // Creates a toggle for camera lock (like in LoL) on the "Y" key
     // Update is called once per frame
+
+    private void Start()
+    {
+        // Find the player's script
+        pb = body.GetComponent<NewPlayer>();
+    }
+
     void Update()
     {
         if (!pb.isOwned) { return; }

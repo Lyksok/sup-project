@@ -1,6 +1,9 @@
 using Cinemachine;
+using kcp2k;
 using UnityEngine;
 using Mirror;
+using UnityEngine.Serialization;
+using Weapons;
 
 public class PlayerBody : NetworkBehaviour
 {
@@ -13,11 +16,8 @@ public class PlayerBody : NetworkBehaviour
     [SerializeField] private float movementSpeed = 5.0f;
     private Vector3 initalOffset;
     private Vector3 cameraPosition;
-    [SerializeField] private Firespell Firespell;
+    
     [SerializeField] public GameObject launcher;
-    [SerializeField] private float ShootCD = 0.5f;
-    [SerializeField] private float CurrShoot = 0.0f;
-    [SerializeField] private AutoFramework AutoAttack;
 
     [SerializeField]
     public Life life = null;
@@ -30,7 +30,6 @@ public class PlayerBody : NetworkBehaviour
     {
         transform.position += new Vector3(0, 6.65f, 0);
         life = GetComponent<Life>();
-        CurrShoot = 0.0f;
         // check if the player is owned by the local player
         if (!isLocalPlayer)
         {
@@ -45,24 +44,8 @@ public class PlayerBody : NetworkBehaviour
         initalOffset = transform.position - playerBody.position;
     }
 
-    /*
-    void HandleMovement()
-    {
-
-        if(!isLocalPlayer) { return; }
-
-        float x = Input.GetAxis("Vertical");
-        float z = Input.GetAxis("Horizontal");
-
-        //we normalize movements by dircube so player can rotate without the "forward" changing
-        Vector3 moveBy = transform.forward * x + transform.right * z;
-
-        rigidBody.MovePosition(transform.position + moveBy.normalized * movementSpeed * Time.fixedDeltaTime);
-    }
-    */
-
     // Method to handle player movement
-    void HandleMovement()
+    private void HandleMovement()
     {
         // check if the player is owned by the local player
         if (!isOwned) { return; }
@@ -80,7 +63,7 @@ public class PlayerBody : NetworkBehaviour
         }
         else
         {
-            rigidBody.MovePosition(transform.position + moveBy.normalized * movementSpeed * Time.fixedDeltaTime);
+            rigidBody.MovePosition(transform.position + moveBy.normalized * (movementSpeed * Time.fixedDeltaTime));
         }
     }
 
@@ -106,6 +89,7 @@ public class PlayerBody : NetworkBehaviour
     public Vector3 Aim()
     {
         var (success, position) = GetMousePosition();
+        Debug.LogError(success);
         if (success)
         {
             //calculate the direction
@@ -145,16 +129,22 @@ public class PlayerBody : NetworkBehaviour
         // check if the player is owned by the local player
         if (isLocalPlayer)
         {
-            CurrShoot = CurrShoot + Time.deltaTime;
             Aim();
-            Fireball();
-            Attack();
+            // Fireball();
+            HandleAttacks();
             //UpdateCameraPosition();
             DrawRays();
         }
     }
+    
+    private void HandleAttacks()
+    {
+        if (!isLocalPlayer) return;
+        
+        
+    }
 
-    void Attack()
+    /*void Attack()
     {
         if (!isOwned) { return; }
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -172,8 +162,8 @@ public class PlayerBody : NetworkBehaviour
                 }
             }
         }
-    }
-    void Fireball()
+    }*/
+    /*void Fireball()
     {
         if (Input.GetMouseButton(1) && CurrShoot >= ShootCD)
         {
@@ -184,9 +174,24 @@ public class PlayerBody : NetworkBehaviour
                 CurrShoot = 0.0f;
             }
         }
-    }
+    }*/
     void Die()
     {
         Destroy(gameObject);
     }
+    
+    /*[Command]
+    void CmdShootRay()
+    {
+        RpcFireWeapon();
+    }
+
+    [ClientRpc]
+    void RpcFireWeapon()
+    {
+        //bulletAudio.Play(); muzzleflash  etc
+        GameObject bullet = Instantiate(activeWeapon.weaponBullet, activeWeapon.weaponFirePosition.position, activeWeapon.weaponFirePosition.rotation);
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * activeWeapon.weaponSpeed;
+        Destroy(bullet, activeWeapon.weaponLife);
+    }*/
 }
