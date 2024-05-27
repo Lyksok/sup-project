@@ -9,7 +9,7 @@ public class CameraManager : MonoBehaviour
 
     public CinemachineVirtualCamera CmVirtualCamera;
     public Camera mainCamera;
-    public GameObject body;
+    public GameObject defaultPosition;
     private bool vCam = true;
 
     private NewPlayer pb;
@@ -19,7 +19,7 @@ public class CameraManager : MonoBehaviour
     private void Start()
     {
         // Find the player's script
-        pb = body.GetComponent<NewPlayer>();
+        pb = defaultPosition.GetComponent<NewPlayer>();
     }
 
     void Update()
@@ -64,7 +64,7 @@ public class CameraManager : MonoBehaviour
         }
         else
         {
-            mainCamera.transform.position = body.transform.position;
+            mainCamera.transform.position = defaultPosition.transform.position;
         }
     }
 }

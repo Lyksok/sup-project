@@ -133,7 +133,7 @@ public class MenuManager : MonoBehaviour
         // Si vous êtes dans l'éditeur Unity, arrêtez le mode Play
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
-        Debug.Log("Player has use the back button");
+        Debug.Log("Player has used the back button");
 
     }
 }
