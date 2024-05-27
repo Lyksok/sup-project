@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 2123858580446492052}
   - component: {fileID: 7459768930548400471}
   - component: {fileID: 5605834176113144131}
+  - component: {fileID: 2094069130369432634}
   m_Layer: 0
   m_Name: Enemy (CqC)
   m_TagString: Untagged
@@ -143,6 +144,27 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &2094069130369432634
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631489571816230520}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: b6462d091f282b24abbde0e77ab2cd14, type: 3}
+  m_Controller: {fileID: 9100000, guid: 799985cf345cfbf4b81ebecf5bfe73b0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2614339480972811726
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,6 +182,7 @@ GameObject:
   - component: {fileID: 3578648260769206983}
   - component: {fileID: 8065742471002041969}
   - component: {fileID: 8395967360678821266}
+  - component: {fileID: 5754544604685764946}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -272,10 +295,14 @@ MonoBehaviour:
   ded: {fileID: 1061216277372453865, guid: 7cebae751ce5de14188a39d6eda0281f, type: 3}
   AttackCD: 1
   TimeBetweenAttacks: 0
+  HealTime: 0
   ai: {fileID: 185573786923827128}
   sightZone: {fileID: 7459768930548400471}
   life: {fileID: 8065742471002041969}
   Redkey: {fileID: 5750424093614981986, guid: a6e404c3579a4448ca9e163effb046f4, type: 3}
+  Spotted: 0
+  AtSpawn: 1
+  animator: {fileID: 5754544604685764946}
 --- !u!195 &185573786923827128
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -357,6 +384,27 @@ MonoBehaviour:
   cv: {fileID: 2410600911403725422}
   HP: {fileID: 8725407547156507964}
   playerHP: {fileID: 8065742471002041969}
+--- !u!95 &5754544604685764946
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614339480972811726}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 799985cf345cfbf4b81ebecf5bfe73b0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5465871436173828055
 GameObject:
   m_ObjectHideFlags: 0

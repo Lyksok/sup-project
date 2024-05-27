@@ -40,6 +40,7 @@ public class AiCqcController : MonoBehaviour
 
     [SerializeField]
     public bool AtSpawn = true;
+    public Animator animator;
 
     void FixedUpdate()
     {
@@ -62,12 +63,32 @@ public class AiCqcController : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         ai = GetComponent<NavMeshAgent>();
         //had to put it in parent to make the sightzone still
         sightZone = GetComponentInParent<SightZone>();
         sightZone.onStay += OnEnemySpotted;
         sightZone.onExit += OnEnemyLeft;
         life.onEmpty += Die;
+    }
+
+    void Update()
+    {
+
+
+
+        if (AtSpawn)
+        {
+            animator.SetBool("IsRunning", false);
+        }
+        if (Spotted)
+        {
+            Debug.Log("running");
+            animator.SetBool("IsRunning", true);
+        }
+        
+        
+        
     }
 
     private bool CanSeeObject(GameObject go)
@@ -84,7 +105,7 @@ public class AiCqcController : MonoBehaviour
         };
         return false;
     }
-    private void OnEnemySpotted(GameObject enemy)
+    void OnEnemySpotted(GameObject enemy)
     {
         if (CanSeeObject(enemy))
         {
@@ -95,8 +116,16 @@ public class AiCqcController : MonoBehaviour
             float distanceWithEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             if (distanceWithEnemy <= 3 && TimeBetweenAttacks >= AttackCD)
             {
+                
+                animator.SetBool("IsRunning", false);
+                Debug.Log("attack");
+                animator.SetBool("IsAttacking", true);
                 life.ChangeHP(-1.0f);
                 TimeBetweenAttacks = 0.0f;
+            }
+            else
+            { 
+                animator.SetBool("IsAttacking", false);
             }
         }
         else
