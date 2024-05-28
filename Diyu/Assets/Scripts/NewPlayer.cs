@@ -7,6 +7,7 @@ using Weapons;
 public class NewPlayer : NetworkBehaviour
 {
     [Header("Weapons")] 
+    // public GameObject weaponHolder;
     public GameObject primaryWeapon;
     public KeyCode primaryWeaponAttackKey = KeyCode.Mouse0;
     public GameObject secondaryWeapon;
@@ -16,6 +17,7 @@ public class NewPlayer : NetworkBehaviour
 
     [Header("Player characteristics")] 
     public Rigidbody playerRigidbody;
+    public GameObject targetDirection;
 
     public Camera playerCamera;
     public float movementSpeed = 5f;
@@ -46,7 +48,7 @@ public class NewPlayer : NetworkBehaviour
     {
         if (Input.GetKeyDown(primaryWeaponAttackKey))
         {
-            primaryWeapon.GetComponent<Weapon>().CmdAttack(transform);
+            primaryWeapon.GetComponent<Weapon>().CmdAttack(targetDirection.transform);
         }
     }
     private void HandleMovement()
@@ -74,11 +76,22 @@ public class NewPlayer : NetworkBehaviour
     private void Aim()
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, 100))
+        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, layerMask))
         {
-            Debug.DrawLine(ray.origin, hit.point);
-            Vector3 lookRotation = new Vector3(hit.point.x, transform.position.y, hit.point.z);
-            transform.LookAt(lookRotation);
+            Debug.DrawLine(ray.origin, hitInfo.point);
+            Vector3 lookRotation = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
+            targetDirection.transform.LookAt(lookRotation);
         }
+    }
+
+    private Vector3? AimAt()
+    {
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, layerMask))
+        {
+            Debug.DrawLine(ray.origin, hitInfo.point);
+            return new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
+        }
+        return null;
     }
 }

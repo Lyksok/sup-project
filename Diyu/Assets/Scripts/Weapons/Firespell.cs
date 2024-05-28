@@ -11,7 +11,10 @@ namespace Weapons
         [Command]
         public override void CmdAttack(Transform source)
         {
-            throw new NotImplementedException();
+            if (!isLocalPlayer)
+                return;
+            GameObject newProjectile = Instantiate(projectile, source.position, source.rotation);
+            RpcAttack(source);
         }
         [ClientRpc]
         public override void RpcAttack(Transform source)

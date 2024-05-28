@@ -11,6 +11,7 @@ public class CameraManager : MonoBehaviour
     public Camera mainCamera;
     public GameObject defaultPosition;
     private bool vCam = true;
+    public GameObject playerBody;
 
     private NewPlayer pb;
     // Creates a toggle for camera lock (like in LoL) on the "Y" key
@@ -19,7 +20,7 @@ public class CameraManager : MonoBehaviour
     private void Start()
     {
         // Find the player's script
-        pb = defaultPosition.GetComponent<NewPlayer>();
+        pb = playerBody.GetComponent<NewPlayer>();
     }
 
     void Update()
