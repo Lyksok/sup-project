@@ -5,10 +5,12 @@ using UnityEngine.Serialization;
 
 namespace Weapons
 {
-    public abstract class Shooter : Weapon
+    public abstract class RangedWeapon : Weapon
     {
-        [Header("Shooter ammo")]
-        public GameObject projectile;
+        //[Header("Shooter ammo")]
+        //public GameObject projectile;
+        
+        public GameObject anchor;
         public abstract int? Ammo { get; } // Number of ammunition, null=> unlimited
     }
 }

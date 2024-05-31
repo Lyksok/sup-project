@@ -616,7 +616,7 @@ MonoBehaviour:
   ai: {fileID: 4328755863323983932}
   sightZone: {fileID: 3850983709455505996}
   life: {fileID: 6013508418181315388}
-  firespell: {fileID: 8878068784740136643}
+  firespellBak: {fileID: 8878068784740136643}
   shootCD: 1
   timeBetweenShots: 0
   eyeTransform: {fileID: 4013629792826185625}
@@ -651,9 +651,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 4871122703176543567}
+  model: {fileID: 1304365331045092151}
   cv: {fileID: 3064180644709696783}
-  HP: {fileID: 243560540981541329}
-  playerHP: {fileID: 6013508418181315388}
+  hp: {fileID: 0}
 --- !u!1 &8660462215132666153
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,6 +921,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56bc6f9e03a1dec4e8e239a106470669, type: 3}
+--- !u!1 &1304365331045092151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 56bc6f9e03a1dec4e8e239a106470669,
+    type: 3}
+  m_PrefabInstance: {fileID: 2223476988776691302}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1824478979159445901 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 56bc6f9e03a1dec4e8e239a106470669,

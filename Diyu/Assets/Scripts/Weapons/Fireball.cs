@@ -10,7 +10,7 @@ namespace Weapons
         protected override float Damage => 1f;
 
         protected override float Cooldown => 0.5f;
-        
+
         [Command]
         public override void CmdAttack(Transform source)
         {
@@ -18,11 +18,11 @@ namespace Weapons
             NetworkServer.Spawn(newProjectile);
             RpcAttack(source);
         }
-        
+
         [ClientRpc]
         public override void RpcAttack(Transform source)
         {
-            
+
         }
 
 
@@ -47,9 +47,71 @@ namespace Weapons
 
             if (!rb && !life)
                 return;
-            
+
             Destroy(gameObject);
         }
     }
 }
 */
+
+using Entities;
+using UnityEngine;
+
+namespace Weapons
+{
+    public class Fireball : Entity
+    {
+        [SerializeField]
+        private float lifespan = 0.0f;
+
+        [SerializeField]
+        private float limit = 1.5f;
+
+        [SerializeField]
+        public float damage { get; set; }
+
+        [SerializeField]
+        public ParticleSystem ded;
+
+        void Start()
+        {
+
+        }
+
+        void Update()
+        {
+            lifespan += Time.deltaTime;
+            if (lifespan >= limit)
+            {
+                ParticleSystem particleSystem = Instantiate(ded, transform.position, transform.rotation);
+                OnDeath();
+            }
+        }
+
+        private void OnTriggerEnter(Collider collider)
+        {
+            Rigidbody rb = collider.GetComponent<Rigidbody>();
+            if (rb)
+            {
+                //rien
+            }
+
+            if (collider.gameObject.CompareTag("Walls"))
+            {
+                ParticleSystem particleSystem = Instantiate(ded, transform.position, transform.rotation);
+                OnDeath();
+            }
+
+            Entity target = collider.gameObject.GetComponent<Entity>();
+            
+            if (target != null)
+            {
+                target.TakeDamage(damage,DamageType.MAGICAL);
+                OnDeath();
+            }
+            if (!rb && !target)
+                return;
+            OnDeath();
+        }
+    }
+}
