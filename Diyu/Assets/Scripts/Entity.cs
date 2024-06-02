@@ -15,9 +15,9 @@ namespace Entities
         public ResourceManager resources; //handles projectile spawning
         
         [Header("Weapons")] 
-        public Weapon primaryWeapon;
+        protected Weapon primaryWeapon;
         public KeyCode primaryWeaponAttackKey = KeyCode.Mouse0;
-        public Weapon secondaryWeapon;
+        protected Weapon secondaryWeapon;
         public KeyCode secondaryWeaponAttackKey = KeyCode.Mouse1;
 
         [Header("Abilities")] 
@@ -147,7 +147,7 @@ namespace Entities
             weapon.Tick(Time.deltaTime);
             if (Input.GetKeyDown(key))
             {
-                weapon.Attack();
+                weapon.CmdAttack();
             }
         }
 

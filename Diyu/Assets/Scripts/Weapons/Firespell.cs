@@ -78,20 +78,25 @@ namespace Weapons
         }
         
         [Command]
-        public override void Attack()
+        public override void CmdAttack()
         {
             if (CanAttack)
             {
                 CurrentCooldown = Cooldown;
-                var position = anchor.transform.position;
-                GameObject newFireball = Object.Instantiate(_fireball, position, Quaternion.identity);
-                newFireball.GetComponent<Fireball>().damage = (baseDamage + damagePercent * User.abilityPower);
-                Rigidbody rb = newFireball.GetComponent<Rigidbody>();
-
-                rb.AddForce(FireSpeed * anchor.transform.forward, ForceMode.VelocityChange);
-                _firelaunch.transform.position = position;
-                _firelaunch.Play();
+                AttackRpc();
             }
+        }
+        [ClientRpc]
+        public override void AttackRpc()
+        {
+            var position = anchor.transform.position;
+            GameObject newFireball = Object.Instantiate(_fireball, position, Quaternion.identity);
+            newFireball.GetComponent<Fireball>().damage = (baseDamage + damagePercent * User.abilityPower);
+            Rigidbody rb = newFireball.GetComponent<Rigidbody>();
+
+            rb.AddForce(FireSpeed * anchor.transform.forward, ForceMode.VelocityChange);
+            _firelaunch.transform.position = position;
+            _firelaunch.Play();
         }
         /*[Command]
         public override void CmdAttack(Transform source)

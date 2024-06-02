@@ -20,7 +20,7 @@ public class NewPlayer : Entity
     [SyncVar] public Vector3 pos;
     [SyncVar] public Quaternion rot;
 
-    private void Start()
+    public override void OnStartLocalPlayer()
     {
         //playerRigidbody = transform.GetComponent<Rigidbody>();
         layerMask = LayerMask.GetMask("groundMask");

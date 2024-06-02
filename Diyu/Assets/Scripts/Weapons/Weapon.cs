@@ -59,7 +59,9 @@ namespace Weapons
         protected float Cooldown { get; set; } //base cooldown
         public bool CanAttack => CurrentCooldown <= 0;
 
-        public abstract void Attack();
+        public abstract void CmdAttack();
+
+        public abstract void AttackRpc();
 
         //public abstract void CmdAttack(Transform source); tf is that ?
         //public abstract void RpcAttack(Transform source);
