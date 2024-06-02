@@ -1,34 +1,36 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Entities;
+using Mirror;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public GameObject body;
+    public Entity body;
+    public GameObject model; 
     public Canvas cv;
-    public Slider HP;
-    public Life playerHP;
-    private Camera _camera;
+    public Slider hp; 
+    private bool _isBodyNotNull;
 
+    //[Command]
     private void Start()
     {
-        _camera = Camera.main;
+        _isBodyNotNull = body != null;
     }
 
+    //[Command]
     private void Update()
     {
-        HP.value = playerHP.currentHp;
-        HP.maxValue = playerHP.maxHP;
-        if (playerHP.IsDead())
-        {
-            HP.gameObject.SetActive(false);
-        }
+        hp.value = body.health;
+        hp.maxValue = body.maxHealth;
 
-        if (body != null)
+        if (_isBodyNotNull)
         {
-            cv.transform.position = body.transform.position;
+            var transform1 = cv.transform;
+            transform1.position = new Vector3(model.transform.position.x,transform1.position.y,model.transform.position.z);
         }
     }
 }
