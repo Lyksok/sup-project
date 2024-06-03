@@ -22,9 +22,9 @@ public class NewPlayer : Entity
     [SyncVar] public Vector3 pos;
     [SyncVar] public Quaternion rot;
 
-    public override void OnStartLocalPlayer()
+   
+    private void Start()
     {
-        //playerRigidbody = transform.GetComponent<Rigidbody>();
         layerMask = LayerMask.GetMask("groundMask");
         buffList = new List<Buff>();
         debuffList = new List<Buff>();
@@ -35,10 +35,7 @@ public class NewPlayer : Entity
         maxHealth = 100;
         pos = body.transform.position;
         rot = model.transform.rotation;
-    }
-
-    private void Start()
-    {
+        
         if (!isLocalPlayer)
         {
             playerCamera.gameObject.SetActive(false);
@@ -63,21 +60,7 @@ public class NewPlayer : Entity
             //SrvMovement();
         }
     }
-
-    [Command(requiresAuthority = false)]
-    private void SrvMovement(Vector3 movement)
-    {
-        playerRigidbody.MovePosition(movement);
-    }
     
-    [Command(requiresAuthority = false)]
-    private void SrvStopMovement()
-    {
-        playerRigidbody.velocity = Vector3.zero;
-    }
-    
-    // ReSharper disable Unity.PerformanceAnalysis
-    //[Command(requiresAuthority = false)]
     private void HandleMovement()
     {
         // check if the player is owned by the local player
@@ -92,23 +75,20 @@ public class NewPlayer : Entity
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {
             //Debug.Log("Stopping");
-            SrvStopMovement();
             playerRigidbody.velocity = Vector3.zero;
         }
         else
         {
             var position = body.transform.position;
-            SrvMovement(position + moveBy.normalized * ((movementSpeed * Time.fixedDeltaTime) * moveSpeed));
             playerRigidbody.MovePosition(position + moveBy.normalized * ((movementSpeed * Time.fixedDeltaTime) * moveSpeed));
         }
     }
     
-    //[Command(requiresAuthority = false)]
     private void Aim()
     {
         if (!isOwned) { return; }
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, 100))
+        if (Physics.Raycast(ray, out RaycastHit hit, 100, layerMask))
         {
             Debug.DrawLine(ray.origin, hit.point);
             Vector3 lookRotation = new Vector3(hit.point.x, model.transform.position.y, hit.point.z);
