@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Abilities;
 using Buffs;
+using Cinemachine;
 using Entities;
 using Mirror;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class NewPlayer : Entity
     public GameObject body;  //part of the player that moves
     public GameObject model;  //part of the player that turns
     public Camera playerCamera;
+    public CinemachineVirtualCamera playerVirtualCamera;
     public float movementSpeed = 5f;
     private LayerMask layerMask;
     [SyncVar] public Vector3 pos;
@@ -33,6 +35,14 @@ public class NewPlayer : Entity
         maxHealth = 100;
         pos = body.transform.position;
         rot = model.transform.rotation;
+    }
+
+    private void Start()
+    {
+        if (!isLocalPlayer)
+        {
+            playerCamera.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame

@@ -1213,6 +1213,7 @@ MonoBehaviour:
   body: {fileID: 6970888086019410702}
   model: {fileID: 3095895027194075405}
   playerCamera: {fileID: 9072318821021083656}
+  playerVirtualCamera: {fileID: 6635885000260050420}
   movementSpeed: 5
   pos: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0, w: 0}
