@@ -83,13 +83,14 @@ namespace Weapons
             lifespan += Time.deltaTime;
             if (lifespan >= limit)
             {
-                ParticleSystem particleSystem = Instantiate(ded, transform.position, transform.rotation);
+                //ParticleSystem particleSystem = Instantiate(ded, transform.position, transform.rotation);
                 OnDeath();
             }
         }
 
         private void OnTriggerEnter(Collider collider)
         {
+            Debug.LogError(collider.gameObject.name);
             Rigidbody rb = collider.GetComponent<Rigidbody>();
             if (rb)
             {
@@ -98,19 +99,19 @@ namespace Weapons
 
             if (collider.gameObject.CompareTag("Walls"))
             {
-                ParticleSystem particleSystem = Instantiate(ded, transform.position, transform.rotation);
+                //ParticleSystem particleSystem = Instantiate(ded, transform.position, transform.rotation);
                 OnDeath();
             }
 
-            Entity target = collider.gameObject.GetComponent<Entity>();
-            
+            Entity target = collider.gameObject.GetComponentInParent<Entity>();
+            Debug.LogError(target != null);
             if (target != null)
             {
                 target.TakeDamage(damage,DamageType.MAGICAL);
                 OnDeath();
             }
-            if (!rb && !target)
-                return;
+            //if (!rb && !target)
+                //return;
             OnDeath();
         }
     }

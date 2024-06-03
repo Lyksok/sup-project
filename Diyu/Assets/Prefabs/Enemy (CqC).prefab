@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 2123858580446492052}
   - component: {fileID: 7459768930548400471}
   - component: {fileID: 5605834176113144131}
+  - component: {fileID: 1985481385969990664}
   m_Layer: 0
   m_Name: Enemy (CqC)
   m_TagString: Untagged
@@ -143,6 +144,23 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1985481385969990664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631489571816230520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 3272926161
+  serverOnly: 0
+  visible: 0
+  hasSpawned: 0
 --- !u!1 &2614339480972811726
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,13 +286,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 254e40027d14b3549bda9a43df77c2a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  resources: {fileID: 0}
+  primaryWeaponAttackKey: 323
+  secondaryWeaponAttackKey: 324
+  anchor: {fileID: 0}
+  health: 0
+  maxHealth: 0
+  attackDamage: 0
+  abilityPower: 0
+  armor: 0
+  magicResist: 0
+  moveSpeed: 0
+  attackSpeed: 0
+  healingPower: 0
+  cooldownReduction: 0
+  tenacity: 0
+  lifesteal: 0
+  canMove: 0
+  canAttack: 0
+  canCast: 0
   spawn: {fileID: 2123858580446492052}
   ded: {fileID: 1061216277372453865, guid: 7cebae751ce5de14188a39d6eda0281f, type: 3}
   AttackCD: 1
   TimeBetweenAttacks: 0
   ai: {fileID: 185573786923827128}
   sightZone: {fileID: 7459768930548400471}
-  life: {fileID: 8065742471002041969}
   Redkey: {fileID: 5750424093614981986, guid: a6e404c3579a4448ca9e163effb046f4, type: 3}
 --- !u!195 &185573786923827128
 NavMeshAgent:
@@ -332,7 +371,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2614339480972811726}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89e56390d23125740b66ef43a6f10ca5, type: 3}
   m_Name: 
@@ -353,10 +392,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c8941726b695648b2d0a1568c080e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 2614339480972811726}
+  body: {fileID: 3794433109923058998}
+  model: {fileID: 2614339480972811726}
   cv: {fileID: 2410600911403725422}
-  HP: {fileID: 8725407547156507964}
-  playerHP: {fileID: 8065742471002041969}
+  hp: {fileID: 8725407547156507964}
 --- !u!1 &5465871436173828055
 GameObject:
   m_ObjectHideFlags: 0

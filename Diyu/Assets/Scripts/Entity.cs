@@ -156,6 +156,7 @@ namespace Entities
             Destroy(gameObject);
         }
         
+        [Command(requiresAuthority = false)]
         public void TakeDamage(float damage, DamageType damageType)
         {
             if (damage < 0)
