@@ -23,16 +23,17 @@ public class GreenDoor : MonoBehaviour
     }
     void Open(GameObject player)
     {
-        PlayerBody pb = player.gameObject.GetComponent<PlayerBody>();
-        if (pb.GetGreenKey && Input.GetKeyDown(KeyCode.E))
-        {
-            
-            door_.transform.Translate(-1 * transform.up * speed * Time.deltaTime);
-            key = true;
-            caca = true;
-            pb.GetGreenKey = false;
-            Debug.Log("test");
-        }
+        // PlayerBody pb = player.gameObject.GetComponent<NewPlayer>();
+        // if (pb.GetGreenKey && Input.GetKeyDown(KeyCode.E))
+        // {
+        //     
+        //     door_.transform.Translate(-1 * transform.up * speed * Time.deltaTime);
+        //     key = true;
+        //     caca = true;
+        //     pb.GetGreenKey = false;
+        //     Debug.Log("test");
+        // }
+        // TODO : à refaire
     }
 
     // Update is called once per frame
