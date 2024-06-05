@@ -30,6 +30,7 @@ public class NewPlayer : Entity
         debuffList = new List<Buff>();
         abilityList[0] = new AbilityRegen_1(Rarities.COMMON, this);
         abilityList[1] = new AbilityHeal_2(Rarities.LEGENDARY, this);
+        abilityList[2] = new AbilityExplosion_3(Rarities.LEGENDARY, this);
         primaryWeapon = new Firespell(Rarities.RARE,this);
         health = 20;
         maxHealth = 100;
@@ -57,6 +58,7 @@ public class NewPlayer : Entity
             HandleAttack(primaryWeapon,primaryWeaponAttackKey);
             HandleAbility(abilityList[0],KeyCode.Alpha1);
             HandleAbility(abilityList[1],KeyCode.Alpha2);
+            HandleAbility(abilityList[2],KeyCode.Alpha3);
             //SrvMovement();
         }
     }

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 using System;
+using Entities;
 using Random = UnityEngine.Random;
 
-public class AiCqcController : MonoBehaviour
+public class AiCqcController : Entity
 {
     //where ai will return without target
     [SerializeField]
@@ -27,9 +28,6 @@ public class AiCqcController : MonoBehaviour
     public SightZone sightZone = null;
 
     [SerializeField]
-    private Life life = null;
-
-    [SerializeField]
     public GameObject Redkey = null;
 
     void FixedUpdate()
@@ -44,7 +42,12 @@ public class AiCqcController : MonoBehaviour
         sightZone = GetComponentInParent<SightZone>();
         sightZone.onStay += OnEnemySpotted;
         sightZone.onExit += OnEnemyLeft;
-        life.onEmpty += Die;
+        health = 50;
+    }
+
+    private void Update()
+    {
+        if (health <= 0) { Die();}
     }
 
     private bool CanSeeObject(GameObject go)
@@ -84,12 +87,12 @@ public class AiCqcController : MonoBehaviour
     {
         //when player not in sightzone -> return to spawn
         ai.SetDestination(spawn.transform.position);
-        life.ChangeHP(10000.0f);
+        Heal(1000);
     }
 
     private void Die()
     {
-        Debug.Log("matteofdp");
+        //Debug.Log("matteofdp");
         StartCoroutine(DestroAIRoutine());
     }
 
@@ -99,6 +102,6 @@ public class AiCqcController : MonoBehaviour
         ParticleSystem particleSystem = Instantiate(ded, transform.position, transform.rotation);
         //Instantiate(DeathParticlePrefab, transform.position, Quaternion.identity);
         Instantiate(Redkey, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        OnDeath();
     }
 }

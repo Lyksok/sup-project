@@ -30,7 +30,8 @@ public class HealthBar : MonoBehaviour
         if (_isBodyNotNull)
         {
             var transform1 = cv.transform;
-            transform1.position = new Vector3(model.transform.position.x,transform1.position.y,model.transform.position.z);
+            var position = model.transform.position;
+            transform1.position = new Vector3(position.x,transform1.position.y,position.z);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Abilities
         public Entity Target;
         public bool inUse = false;
         protected Rarities Rarity; //Rarity of the ability, changes stats
-        protected float CurrentCooldown { get; set; } = 0; //Current cooldown, if >= Cooldown the ability can be used, is set to 0 when used
+        protected float CurrentCooldown { get; set; } = 0; //Current cooldown, if >= Cooldown the ability can be used, is set to 0 when used (c'est l'inverse en fait lol)
         protected float CurrentDuration { get; set; } = 0; //Current Duration, if == 0 the ability ends
         protected float Cooldown { get; set; } //Base cooldown of the ability
         protected States State;
