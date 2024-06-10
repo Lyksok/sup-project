@@ -8,10 +8,10 @@ namespace Abilities
         public float HealAmount; //Health healed each tick
         public float Delay; //Time in seconds between each tick
         public override int id { get => 1; }
-        public Buff regenBuff;
         
         public AbilityRegen_1(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
+            Name = "Regeneration";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -40,16 +40,22 @@ namespace Abilities
                     break;
             }
 
+            Rarity = rarity;
             State = States.PASSIVE;
             Target = target;
-            BuffRegen buff = new BuffRegen(HealAmount, Delay, null, false, 1, Target);
+            BuffRegen buff = new BuffRegen(HealAmount, Delay, null, 1, Target);
             Target.AddBuff(buff);
+        }
+
+        public override void OnEnd()
+        {
+            Target.RemoveBuff(new BuffRegen(HealAmount, Delay, null, 1, Target));
         }
 
         public override void PassiveEffect()
         {
-            BuffRegen buff = new BuffRegen(HealAmount, Delay, null, false, 1, Target);
-            Target.AddBuff(buff);
+            //BuffRegen buff = new BuffRegen(HealAmount, Delay, null, 1, Target);
+            //Target.AddBuff(buff);
         }
 
         public override void ActiveEffect()
@@ -91,6 +97,8 @@ namespace Abilities
                     Delay = 1;
                     break;
             }
+            Rarity = rarity;
+            Target.AddBuff(new BuffRegen(HealAmount, Delay, null, 1, Target));
         }
     }
 }

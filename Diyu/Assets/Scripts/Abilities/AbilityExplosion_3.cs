@@ -18,6 +18,7 @@ namespace Abilities
         
         public AbilityExplosion_3(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
+            Name = "Explosion";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -41,7 +42,7 @@ namespace Abilities
                     Cooldown = 12;
                     break;
             }
-
+            Rarity = rarity;
             State = States.READY;
             Target = target;
             _explosion = Target.resources.projectileList[1];
@@ -62,6 +63,8 @@ namespace Abilities
             
             return Vector3.one;
         }
+        
+        public override void OnEnd(){}
         
         public override void PassiveEffect()
         {
@@ -120,6 +123,7 @@ namespace Abilities
                     Cooldown = 12;
                     break;
             }
+            Rarity = rarity;
         }
     }
 }
