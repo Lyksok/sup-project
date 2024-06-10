@@ -33,12 +33,13 @@ namespace Entities
         public void AddBuff(Buff buff)
         {
             bool isnew = true;
-            foreach (var b in buffList)
+            for (int i = 0; i < buffList.Count; i++)
             {
-                if (b.Id == buff.Id && !b.Stackable)
+                if (buffList[i].Id == buff.Id && isnew)
                 {
                     isnew = false;
-                    b.Refresh(buff);
+                    //b.Refresh(buff);
+                    buffList[i] = buff;
                 }
             }
 
@@ -57,7 +58,10 @@ namespace Entities
                 if (buffList[i].Id == buff.Id)
                 {
                     buffList.RemoveAt(i);
-                    i = debuffList.Count + 1;
+                }
+                else
+                {
+                    i++;
                 }
             }
         }
@@ -67,7 +71,7 @@ namespace Entities
             bool isnew = true;
             foreach (var b in debuffList)
             {
-                if (b.Id == buff.Id && !b.Stackable)
+                if (b.Id == buff.Id)
                 {
                     isnew = false;
                     b.Refresh(buff);
@@ -89,7 +93,10 @@ namespace Entities
                 if (debuffList[i].Id == buff.Id)
                 {
                     debuffList.RemoveAt(i);
-                    i = debuffList.Count + 1;
+                }
+                else
+                {
+                    i++;
                 }
             }
         }
@@ -99,9 +106,9 @@ namespace Entities
             foreach (var b in buffList)
             {
                 b.Effect();
+                b.Tick(Time.deltaTime);
                 if (!b.permanent)
                 {
-                    b.Tick(Time.deltaTime);
                     if (b.Duration <= 0)
                     {
                         b.OnEnd();

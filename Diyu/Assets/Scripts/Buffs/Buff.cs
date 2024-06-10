@@ -1,6 +1,7 @@
 ﻿using System;
 using Entities;
 using Mirror;
+using UnityEngine;
 
 namespace Buffs
 {
@@ -11,10 +12,8 @@ namespace Buffs
         public string Desc;
 
         public int Id;
-
+        public float timer;
         public Entity Target;
-
-        public bool Stackable; //True if the debuff can be applied multiple times to the target
         public float? Duration { get; set; } = 0; //Time left on the buff, null if permanent
 
         protected float BaseDuration { get; }
@@ -34,12 +33,17 @@ namespace Buffs
         public abstract void Refresh(Buff buff);
 
         
-        [Command]
+        //[Command]
         public void Tick(float delta)
         {
             if (!permanent)
             {
                 Duration -= delta;
+            }
+
+            if (timer > 0)
+            {
+                timer -= delta;
             }
         }
     }
