@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Firespell : AutoFramework
+public class Firespell_bak : AutoFramework
 {
     [SerializeField]
     private GameObject Fireballprefab = null;

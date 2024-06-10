@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 using System;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class AiRangedController : MonoBehaviour
@@ -20,8 +21,8 @@ public class AiRangedController : MonoBehaviour
     [SerializeField]
     private Life life = null;
 
-    [SerializeField]
-    private Firespell firespell = null;
+    [FormerlySerializedAs("firespell")] [SerializeField]
+    private Firespell_bak firespellBak = null;
 
     [SerializeField]
     private float shootCD = 1.0f;
@@ -47,7 +48,7 @@ public class AiRangedController : MonoBehaviour
         sightZone.onStay += OnEnemySpotted;
         sightZone.onExit += OnEnemyLeft;
         life.onEmpty += Die;
-        firespell = GetComponentInChildren<Firespell>();
+        firespellBak = GetComponentInChildren<Firespell_bak>();
     }
 
     private bool CanSeeObject(GameObject go)
@@ -79,7 +80,7 @@ public class AiRangedController : MonoBehaviour
                     Debug.LogError("Close");
                     if (timeBetweenShots >= shootCD)
                     {
-                        firespell.Attack();
+                        firespellBak.Attack();
                         timeBetweenShots = 0.0f;
                     }
                 }
