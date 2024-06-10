@@ -57,7 +57,7 @@ namespace Abilities
             {
                 State = States.COOLDOWN;
                 CurrentCooldown = Cooldown;
-                Target.Heal(HealAmount);
+                Target.CmdHeal(HealAmount);
             }
         }
 

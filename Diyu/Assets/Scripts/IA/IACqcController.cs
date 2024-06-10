@@ -87,7 +87,7 @@ public class AiCqcController : Entity
     {
         //when player not in sightzone -> return to spawn
         ai.SetDestination(spawn.transform.position);
-        Heal(1000);
+        CmdHeal(1000);
     }
 
     private void Die()

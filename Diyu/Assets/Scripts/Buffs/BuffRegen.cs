@@ -28,7 +28,7 @@ namespace Buffs
             if (timer <= 0)
             {
                 timer = Delay;
-                Target.Heal(HealAmount);
+                Target.CmdHeal(HealAmount);
             }
         }
 

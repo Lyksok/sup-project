@@ -164,7 +164,13 @@ namespace Entities
         }
         
         [Command(requiresAuthority = false)]
-        public void TakeDamage(float damage, DamageType damageType)
+        public void CmdTakeDamage(float damage, DamageType damageType)
+        {
+            TakeDamageRpc(damage, damageType);
+        }
+
+        [ClientRpc]
+        public void TakeDamageRpc(float damage, DamageType damageType)
         {
             if (damage < 0)
             {
@@ -192,7 +198,13 @@ namespace Entities
         }
         
         [Command(requiresAuthority = false)]
-        public void Heal(float healing)
+        public void CmdHeal(float healing)
+        {
+            HealRpc(healing);
+        }
+
+        [ClientRpc]
+        public void HealRpc(float healing)
         {
             if (healing < 0)
             {
