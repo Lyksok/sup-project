@@ -10,7 +10,7 @@ public class LobbySceneManager : MonoBehaviour
 
      */
 
-    private GameObject networkManager;
+    private NetworkManager networkManager;
 
     // On start find network manager and set all menus to false exept waiting screen
 
@@ -18,7 +18,7 @@ public class LobbySceneManager : MonoBehaviour
     public void Start()
     {
         // Get the network manager
-        networkManager = GameObject.FindWithTag("NetworkManager");
+        networkManager = NetworkManager.singleton;
         // Debug.Log(networkManager.name);
     }
 
@@ -27,7 +27,9 @@ public class LobbySceneManager : MonoBehaviour
     {
         // Stop the client
         networkManager.gameObject.GetComponent<MyNetworkRoomManager>().StopClient();
-
+        //NetworkManager.singleton.StopHost();
+        
+        networkManager.StopServer();
         // Load offline scene
     
         //SceneManager.LoadScene(networkManager.gameObject.GetComponent<MyNetworkRoomManager>().offlineScene);
