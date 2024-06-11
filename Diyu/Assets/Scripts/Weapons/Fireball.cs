@@ -104,7 +104,7 @@ namespace Weapons
             }
 
             Entity target = collider.gameObject.GetComponentInParent<Entity>();
-            Debug.LogError(target != null);
+            //Debug.LogError(target != null);
             if (target != null)
             {
                 target.CmdTakeDamage(damage,DamageType.MAGICAL);
@@ -112,7 +112,6 @@ namespace Weapons
             }
             //if (!rb && !target)
                 //return;
-            OnDeath();
         }
     }
 }

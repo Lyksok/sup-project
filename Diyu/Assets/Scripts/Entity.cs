@@ -138,7 +138,7 @@ namespace Entities
         protected void HandleAbility(Ability ability, KeyCode key)
         {
             ability.Tick(Time.deltaTime);
-            if (Input.GetKeyDown(key))
+            if (Input.GetKey(key))
             {
                 ability.SetupEffect();
             }
@@ -219,6 +219,16 @@ namespace Entities
             }
         }
         
+        
+        public void CalculateASPD()
+        {
+            attackSpeed = 1;
+            foreach (var mod in aspdModifiers.Values)
+            {
+                attackSpeed += mod;
+            }
+        }
+        
         [Header("Base Stats")] 
         [SyncVar] public float health; //current HP
         [SyncVar] public float maxHealth; //flat base HP
@@ -232,7 +242,12 @@ namespace Entities
         [SyncVar] public float cooldownReduction; //cooldown multiplier, 1 = 100% of original cooldown, hard cap at 50% CDR
         [SyncVar] public float tenacity; //reduces debuffs & CCs duration
         [SyncVar] public float lifesteal; //health gained from damage, 1 = 100%, reduced by 50% to abilities
-
+        
+        public Dictionary<int,float> aspdModifiers;
+        
+        public GameObject body;  //part of the player that moves
+        public GameObject model;  //part of the player that turns
+        
         public bool canMove; //crowd control checks
         public bool canAttack;
         public bool canCast;

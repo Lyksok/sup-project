@@ -11,7 +11,6 @@ namespace Buffs
 
         public BuffRegen(float healAmount, float delay, float? duration,int id, Entity target)
         {
-            Name = "Regeneration";
             HealAmount = healAmount;
             Delay = delay;
             Duration = duration;

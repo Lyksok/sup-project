@@ -8,17 +8,12 @@ using Entities;
 using Mirror;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 using Weapons;
-using Random = System.Random;
 
 public class NewPlayer : Entity
 {
     [Header("Player characteristics")] 
     public Rigidbody playerRigidbody;
-    public GameObject body;  //part of the player that moves
-    public GameObject model;  //part of the player that turns
     public Camera playerCamera;
     public CinemachineVirtualCamera playerVirtualCamera;
     public Canvas playerHUD;
@@ -50,12 +45,13 @@ public class NewPlayer : Entity
         //abilityList[0] = new AbilityRegen_1(Rarities.COMMON, this);
         //abilityList[1] = new AbilityHeal_2(Rarities.LEGENDARY, this);
         //abilityList[2] = new AbilityExplosion_3(Rarities.LEGENDARY, this);
-        primaryWeapon = new Firespell(Rarities.RARE,this);
-        health = 20;
+        //primaryWeapon = new Firespell(Rarities.LEGENDARY,this);
+        primaryWeapon = new SwordAttack(Rarities.LEGENDARY, this);
+        health = 5;
         maxHealth = 100;
         pos = body.transform.position;
         rot = model.transform.rotation;
-        
+        aspdModifiers = new Dictionary<int, float>();
         if (!isLocalPlayer)
         {
             playerCamera.gameObject.SetActive(false);
@@ -81,18 +77,18 @@ public class NewPlayer : Entity
             HandleAbility(abilityList[1],KeyCode.Alpha2);
             HandleAbility(abilityList[2],KeyCode.Alpha3);
             HandleAbility(abilityList[3],KeyCode.Alpha4);
+            CalculateASPD();
             DebugPickup();
             //SrvMovement();
         }
     }
-
-
+    
     public void DebugPickup() //gives the player a random ability
     {
         if (Input.GetKeyDown(KeyCode.R) && isLocalPlayer)
         {
             int rank = RandomNumberGenerator.GetInt32(0, 5);
-            int id = RandomNumberGenerator.GetInt32(1, 4);
+            int id = RandomNumberGenerator.GetInt32(1, resources.abilityCount + 1);
             Ability ability = resources.GetAbility(id, resources.GetRarity(rank), this);
             PickupAbility(ability);
             //Debug.LogError($"{ability.Rarity} {resources.GetRarity(rank)}");
@@ -126,9 +122,9 @@ public class NewPlayer : Entity
         }
     }
     
-    private string GetAbilityState(Ability ability)
+    private string GetAbilityState(Ability ability) //used for HUD display
     {
-        string res = ability.Name + $"{ ability.Rarity}";
+        string res = ability.Name + $" {ability.Rarity}";
         if (ability.State == States.READY)
         { 
             res += " : Ready";
@@ -139,24 +135,39 @@ public class NewPlayer : Entity
         return res;
     }
 
-    private string GetBuffList()
+    private string GetBuffList() //used for HUD display
     {
         string res = "";
         foreach (var buff in buffList)
         {
-            res += buff.Name + $" {buff.timer}" + "\n";
+            if (!buff.permanent)
+            {
+                if (buff.timer <= 0)
+                {
+                    res += buff.Name + $" - {Math.Round((float)buff.Duration,2)}" + "\n";
+                }
+                else
+                {
+                    res += buff.Name + $" - {Math.Round(buff.timer,2)}" + $" - {Math.Round((float)buff.Duration,2)}" + "\n";
+                }
+            }
+            else
+            {
+                res += buff.Name + $" - {buff.timer}" + "\n";
+            }
+            
         }
 
         return res;
     }
     
-    private void UpdateHUD()
+    private void UpdateHUD() //used for HUD display
     {
-        statsValue = $" Health : {health} / {maxHealth}\n Attack Damage : {attackDamage}\n Ability Power : {abilityPower}\n Armor : {armor}\n Magic Resist : {magicResist}\n Movement Speed : {moveSpeed}\n Attack Speed : {attackSpeed}\n Lifesteal% : {lifesteal}\n Cooldown Reduction% : {cooldownReduction}\n Tenacity% : {tenacity}";
+        statsValue = $" Health : {health} / {maxHealth}\n Attack Damage : {attackDamage}\n Ability Power : {abilityPower}\n Armor : {armor}\n Magic Resist : {magicResist}\n Movement Speed : {movementSpeed}\n Movement Speed% : {moveSpeed}\n Attack Speed : {attackSpeed}\n Lifesteal% : {lifesteal}\n Cooldown Reduction% : {cooldownReduction}\n Tenacity% : {tenacity}";
         statsHUD2.text = statsValue;
         abilitiesValue = $" Key 1 - {GetAbilityState(abilityList[0])}\n Key 2 - {GetAbilityState(abilityList[1])}\n Key 3 - {GetAbilityState(abilityList[2])}\n Key 4 - {GetAbilityState(abilityList[3])}";
         abilitiesHUD2.text = abilitiesValue;
-        buffsValue = $"{GetBuffList()}";
+        buffsValue = $"\n \n{GetBuffList()}";
         buffsHUD2.text = buffsValue;
     }
     

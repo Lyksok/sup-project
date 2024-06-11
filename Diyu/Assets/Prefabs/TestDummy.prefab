@@ -26,14 +26,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1209647422718520314}
-  m_LocalRotation: {x: -0, y: 0.000000119209275, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 0, y: 0, z: -0.6}
   m_LocalScale: {x: 0.009999999, y: 0.01, z: 0.009999999}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3965628728192093024}
   m_Father: {fileID: 4457709542220070704}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 7.6169996}
@@ -169,12 +169,12 @@ MonoBehaviour:
   cooldownReduction: 0
   tenacity: 0
   lifesteal: 0
+  body: {fileID: 5901461634505955441}
+  model: {fileID: 3522112923295665645}
   canMove: 0
   canAttack: 0
   canCast: 0
   playerRigidbody: {fileID: 1452268346836274190}
-  body: {fileID: 5901461634505955441}
-  model: {fileID: 3522112923295665645}
   movementSpeed: 5
 --- !u!114 &8646467321235160143
 MonoBehaviour:

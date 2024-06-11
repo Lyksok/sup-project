@@ -245,8 +245,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 299.99988, y: -29.807007}
-  m_SizeDelta: {x: 600, y: 59.614}
+  m_AnchoredPosition: {x: 400, y: -30}
+  m_SizeDelta: {x: 800, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7299828425157360228
 CanvasRenderer:
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Abilities Go Here
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -486,7 +486,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Buffs Go Here
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -791,7 +791,7 @@ GameObject:
   - component: {fileID: 8537337066519938394}
   - component: {fileID: 6380370966852379380}
   m_Layer: 0
-  m_Name: Ressources
+  m_Name: Resources
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -827,8 +827,11 @@ MonoBehaviour:
   projectileList:
   - {fileID: 4929927344873843062, guid: 3176f00c996ec3a4e963bd8eb8ff782a, type: 3}
   - {fileID: 4843045067119190212, guid: 47b29504b36ebeb47a30a6a3da49036e, type: 3}
+  - {fileID: 8741892215208238561, guid: 549254c40768bd64888c3e69dfbca6f1, type: 3}
   particleList:
   - {fileID: 3667816805564532740, guid: afa3c445762db294392686bac257bfa1, type: 3}
+  indicatorList:
+  - {fileID: 6572906761774532393, guid: 8f8b813920f32054c8ee7269d9c37799, type: 3}
 --- !u!1 &3095895027194075405
 GameObject:
   m_ObjectHideFlags: 0
@@ -1807,12 +1810,12 @@ MonoBehaviour:
   cooldownReduction: 1
   tenacity: 0
   lifesteal: 0
+  body: {fileID: 6970888086019410702}
+  model: {fileID: 3095895027194075405}
   canMove: 0
   canAttack: 0
   canCast: 0
   playerRigidbody: {fileID: 3025151234643421501}
-  body: {fileID: 6970888086019410702}
-  model: {fileID: 3095895027194075405}
   playerCamera: {fileID: 9072318821021083656}
   playerVirtualCamera: {fileID: 6635885000260050420}
   playerHUD: {fileID: 2445849082776096680}
