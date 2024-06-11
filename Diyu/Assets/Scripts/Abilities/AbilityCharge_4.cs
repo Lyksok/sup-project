@@ -3,53 +3,50 @@ using Entities;
 
 namespace Abilities
 {
-    public class AbilityRegen_1 : Ability
+    public class AbilityCharge_4 : Ability
     {
-        public float HealAmount; //Health healed each tick
-        public float Delay; //Time in seconds between each tick
-        public override int id { get => 1; }
+        public float Speed; //Speed Buff
+        public override int id { get => 4; }
         
-        public AbilityRegen_1(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
+        public AbilityCharge_4(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Regeneration";
+            Name = "Charge";
             switch (rarity)
             {
                 case Rarities.COMMON:
-                    HealAmount = 1;
-                    Delay = 2;
+                    Speed = 0.3f;
+                    Cooldown = 15;
                     break;
                 case Rarities.UNCOMMON:
-                    HealAmount = 2;
-                    Delay = 2;
+                    Speed = 0.35f;
+                    Cooldown = 14;
                     break;
                 case Rarities.RARE:
-                    HealAmount = 3;
-                    Delay = 1.5f;
+                    Speed = 0.4f;
+                    Cooldown = 13;
                     break;
                 case Rarities.EPIC:
-                    HealAmount = 5;
-                    Delay = 2;
+                    Speed = 0.45f;
+                    Cooldown = 12;
                     break;
                 case Rarities.LEGENDARY:
-                    HealAmount = 4;
-                    Delay = 1.25f;
+                    Speed = 0.5f;
+                    Cooldown = 11;
                     break;
                 case Rarities.MYTHIC:
-                    HealAmount = 5;
-                    Delay = 1;
+                    Speed = 0.55f;
+                    Cooldown = 10;
                     break;
             }
-
             Rarity = rarity;
-            State = States.PASSIVE;
+            State = States.READY;
             Target = target;
-            BuffRegen buff = new BuffRegen(HealAmount, Delay, null, 1, Target);
-            Target.AddBuff(buff);
+            
         }
 
         public override void OnEnd()
         {
-            Target.RemoveBuff(new BuffRegen(HealAmount, Delay, null, 1, Target));
+            Target.RemoveBuff(new BuffMS(Speed, 3, 4, Target));
         }
 
         public override void PassiveEffect()
@@ -65,7 +62,13 @@ namespace Abilities
 
         public override void SetupEffect()
         {
-            
+            if (State == States.READY)
+            {
+                State = States.COOLDOWN;
+                CurrentCooldown = Cooldown;
+                BuffMS buff = new BuffMS(Speed, 5, 4, Target);
+                Target.AddBuff(buff);
+            }
         }
 
         public override void SetRarity(Rarities rarity)
@@ -73,32 +76,31 @@ namespace Abilities
             switch (rarity)
             {
                 case Rarities.COMMON:
-                    HealAmount = 1;
-                    Delay = 2;
+                    Speed = 0.1f;
+                    Cooldown = 15;
                     break;
                 case Rarities.UNCOMMON:
-                    HealAmount = 2;
-                    Delay = 2;
+                    Speed = 0.15f;
+                    Cooldown = 14;
                     break;
                 case Rarities.RARE:
-                    HealAmount = 3;
-                    Delay = 1.5f;
+                    Speed = 0.2f;
+                    Cooldown = 13;
                     break;
                 case Rarities.EPIC:
-                    HealAmount = 5;
-                    Delay = 2;
+                    Speed = 0.25f;
+                    Cooldown = 12;
                     break;
                 case Rarities.LEGENDARY:
-                    HealAmount = 4;
-                    Delay = 1.25f;
+                    Speed = 0.3f;
+                    Cooldown = 11;
                     break;
                 case Rarities.MYTHIC:
-                    HealAmount = 5;
-                    Delay = 1;
+                    Speed = 0.35f;
+                    Cooldown = 10;
                     break;
             }
             Rarity = rarity;
-            Target.AddBuff(new BuffRegen(HealAmount, Delay, null, 1, Target));
         }
     }
 }

@@ -9,17 +9,16 @@ using Object = UnityEngine.Object;
 
 namespace Abilities
 {
-    public class AbilityExplosion_3 : Ability
+    public class AbilityShockwave_6 : Ability
     {
-        public override int id { get => 3; }
+        public override int id { get => 6; }
         public AreaOfEffect aoe;
         public float damage;
         private readonly GameObject _explosion;
-        private readonly GameObject _indicator;
         
-        public AbilityExplosion_3(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
+        public AbilityShockwave_6(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Explosion";
+            Name = "Shockwave";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -51,9 +50,6 @@ namespace Abilities
             State = States.READY;
             Target = target;
             _explosion = Target.resources.projectileList[1];
-            _indicator = Object.Instantiate(Target.resources.indicatorList[0], GetPostion(), Quaternion.identity);
-            _indicator.transform.localScale *= 3;
-            _indicator.SetActive(false);
         }
 
         public Vector3 GetPostion()
@@ -80,13 +76,12 @@ namespace Abilities
 
         public override void ActiveEffect()
         {
-            _indicator.SetActive(false);
             if (State == States.READY)
             {
                 State = States.COOLDOWN;
                 CurrentCooldown = Cooldown;
-                Vector3 pos = GetPostion();
-                aoe = new AreaOfEffect(pos, 6.0f,Target,damage,null,true,false,DamageType.MAGICAL);
+                Vector3 pos = Target.body.transform.position;
+                aoe = new AreaOfEffect(pos, 6.0f,Target,damage,null,true,false,DamageType.PHYSICAL);
                 aoe.Effect(aoe.FindTargets());
                 GameObject newExplosion = Object.Instantiate(_explosion, pos, Quaternion.identity);
                 //VisualEffect(pos);
@@ -104,8 +99,7 @@ namespace Abilities
 
         public override void SetupEffect()
         {
-            _indicator.SetActive(true);
-            _indicator.transform.position = GetPostion();
+            //ability preview
         }
 
         public override void SetRarity(Rarities rarity)

@@ -33,12 +33,13 @@ namespace Entities
         public void AddBuff(Buff buff)
         {
             bool isnew = true;
-            foreach (var b in buffList)
+            for (int i = 0; i < buffList.Count; i++)
             {
-                if (b.Id == buff.Id && !b.Stackable)
+                if (buffList[i].Id == buff.Id && isnew)
                 {
                     isnew = false;
-                    b.Refresh(buff);
+                    //b.Refresh(buff);
+                    buffList[i] = buff;
                 }
             }
 
@@ -57,7 +58,10 @@ namespace Entities
                 if (buffList[i].Id == buff.Id)
                 {
                     buffList.RemoveAt(i);
-                    i = debuffList.Count + 1;
+                }
+                else
+                {
+                    i++;
                 }
             }
         }
@@ -67,7 +71,7 @@ namespace Entities
             bool isnew = true;
             foreach (var b in debuffList)
             {
-                if (b.Id == buff.Id && !b.Stackable)
+                if (b.Id == buff.Id)
                 {
                     isnew = false;
                     b.Refresh(buff);
@@ -89,7 +93,10 @@ namespace Entities
                 if (debuffList[i].Id == buff.Id)
                 {
                     debuffList.RemoveAt(i);
-                    i = debuffList.Count + 1;
+                }
+                else
+                {
+                    i++;
                 }
             }
         }
@@ -99,9 +106,9 @@ namespace Entities
             foreach (var b in buffList)
             {
                 b.Effect();
+                b.Tick(Time.deltaTime);
                 if (!b.permanent)
                 {
-                    b.Tick(Time.deltaTime);
                     if (b.Duration <= 0)
                     {
                         b.OnEnd();
@@ -131,7 +138,7 @@ namespace Entities
         protected void HandleAbility(Ability ability, KeyCode key)
         {
             ability.Tick(Time.deltaTime);
-            if (Input.GetKeyDown(key))
+            if (Input.GetKey(key))
             {
                 ability.SetupEffect();
             }
@@ -157,7 +164,13 @@ namespace Entities
         }
         
         [Command(requiresAuthority = false)]
-        public void TakeDamage(float damage, DamageType damageType)
+        public void CmdTakeDamage(float damage, DamageType damageType)
+        {
+            TakeDamageRpc(damage, damageType);
+        }
+
+        [ClientRpc]
+        public void TakeDamageRpc(float damage, DamageType damageType)
         {
             if (damage < 0)
             {
@@ -185,7 +198,13 @@ namespace Entities
         }
         
         [Command(requiresAuthority = false)]
-        public void Heal(float healing)
+        public void CmdHeal(float healing)
+        {
+            HealRpc(healing);
+        }
+
+        [ClientRpc]
+        public void HealRpc(float healing)
         {
             if (healing < 0)
             {
@@ -197,6 +216,16 @@ namespace Entities
             if (health > maxHealth)
             {
                 health = maxHealth;
+            }
+        }
+        
+        
+        public void CalculateASPD()
+        {
+            attackSpeed = 1;
+            foreach (var mod in aspdModifiers.Values)
+            {
+                attackSpeed += mod;
             }
         }
         
@@ -213,7 +242,12 @@ namespace Entities
         [SyncVar] public float cooldownReduction; //cooldown multiplier, 1 = 100% of original cooldown, hard cap at 50% CDR
         [SyncVar] public float tenacity; //reduces debuffs & CCs duration
         [SyncVar] public float lifesteal; //health gained from damage, 1 = 100%, reduced by 50% to abilities
-
+        
+        public Dictionary<int,float> aspdModifiers;
+        
+        public GameObject body;  //part of the player that moves
+        public GameObject model;  //part of the player that turns
+        
         public bool canMove; //crowd control checks
         public bool canAttack;
         public bool canCast;

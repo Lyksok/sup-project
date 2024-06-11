@@ -7,27 +7,27 @@ namespace Buffs
     {
         public float HealAmount; //Health healed each tick
         public float Delay; //Time in seconds between each tick
-        public float timer;
+        //public float timer;
 
-        public BuffRegen(float healAmount, float delay, float? duration, bool stackable,int id, Entity target)
+        public BuffRegen(float healAmount, float delay, float? duration,int id, Entity target)
         {
             HealAmount = healAmount;
             Delay = delay;
             Duration = duration;
-            Stackable = stackable;
             Id = id;
             Name = "Regeneration";
             Desc = "Slowly regenerating health points.";
             Target = target;
-            timer = 0;
+            timer = Delay;
+            //Debug.LogError(Delay);
         }
 
         public override void Effect()
         {
-            if (timer <= Time.time)
+            if (timer <= 0)
             {
-                timer = Delay + Time.time;
-                Target.Heal(HealAmount);
+                timer = Delay;
+                Target.CmdHeal(HealAmount);
             }
         }
 
@@ -43,7 +43,7 @@ namespace Buffs
 
         public override void Refresh(float duration)
         {
-            
+            Duration = duration;
         }
 
         public override void Refresh(Buff buff)

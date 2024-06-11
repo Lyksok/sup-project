@@ -7,17 +7,18 @@ namespace Abilities
     //Abstract class used for managing Abilities
     public abstract class Ability 
     {
-        public string Name { get; }
-        public string Desc { get; }
+        public string Name { get; protected set; }
+        public string Desc { get; protected set; }
         public abstract int id { get; }
         public Entity Target;
         public bool inUse = false;
-        protected Rarities Rarity; //Rarity of the ability, changes stats
-        protected float CurrentCooldown { get; set; } = 0; //Current cooldown, if >= Cooldown the ability can be used, is set to 0 when used (c'est l'inverse en fait lol)
+        public Rarities Rarity { get; protected set; } //Rarity of the ability, changes stats
+        public float CurrentCooldown { get; set; } = 0; //Current cooldown, if >= Cooldown the ability can be used, is set to 0 when used (c'est l'inverse en fait lol)
         protected float CurrentDuration { get; set; } = 0; //Current Duration, if == 0 the ability ends
         protected float Cooldown { get; set; } //Base cooldown of the ability
-        protected States State;
+        public States State;
         protected bool CanUse => State == States.READY;
+        public abstract void OnEnd(); //Deletes the effect of the ability, called when the ability is removed / swapped out
         public abstract void PassiveEffect(); //Passive effect of the Ability, can be null
         public abstract void ActiveEffect(); //Active effect of the Ability, can be null, called on key release
         public abstract void SetupEffect(); //Called when ability key is pressed, to either preview ability or use it if it doesnt have a preview

@@ -9,6 +9,7 @@ namespace Abilities
         
         public AbilityHeal_2(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
+            Name = "Heal";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -36,8 +37,10 @@ namespace Abilities
                     Cooldown = 5;
                     break;
             }
+            Rarity = rarity;
             Target = target;
         }
+        public override void OnEnd(){}
         public override void PassiveEffect()
         {
             
@@ -54,7 +57,7 @@ namespace Abilities
             {
                 State = States.COOLDOWN;
                 CurrentCooldown = Cooldown;
-                Target.Heal(HealAmount);
+                Target.CmdHeal(HealAmount);
             }
         }
 
@@ -87,6 +90,7 @@ namespace Abilities
                     Cooldown = 5;
                     break;
             }
+            Rarity = rarity;
         }
     }
 }
