@@ -5,7 +5,7 @@ using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
 
-public class AiRangedController : MonoBehaviour
+public class BossController : MonoBehaviour
 {
     //where ai will return without target
     [SerializeField]
@@ -24,10 +24,34 @@ public class AiRangedController : MonoBehaviour
     private Firespell firespell = null;
 
     [SerializeField]
-    private float shootCD = 1.0f;
+    private Firespell firespellwave = null;
 
     [SerializeField]
-    private float timeBetweenShots = 0.0f;
+    private Firespell firespellg1 = null;
+
+    [SerializeField]
+    private Firespell firespellg2 = null;
+
+    [SerializeField]
+    private Firespell firespellg3 = null;
+
+    [SerializeField]
+    private Firespell firespellg4 = null;
+
+    [SerializeField]
+    private Firespell firespellg5 = null;
+
+    [SerializeField]
+    private Firespell firespelltri1 = null;
+
+    [SerializeField]
+    private Firespell firespelltri2 = null;
+
+    [SerializeField]
+    private Firespell firespelltri3 = null;
+
+    [SerializeField]
+    private float timeBetweenAttacks = 0.0f;
 
     [SerializeField]
     private float HealTime = 0.0f;
@@ -46,7 +70,6 @@ public class AiRangedController : MonoBehaviour
 
     void FixedUpdate()
     {
-        timeBetweenShots += Time.deltaTime;
         float distanceWithSpawn = Vector3.Distance(transform.position, spawn.transform.position);
         if (!Spotted)
         {
@@ -92,40 +115,35 @@ public class AiRangedController : MonoBehaviour
     {
         if (CanSeeObject(enemy))
         {
-            Spotted = true;
-            float distanceWithEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceWithEnemy <= 10)
+            transform.LookAt(enemy.transform);
+            timeBetweenAttacks += Time.deltaTime;
+            if (timeBetweenAttacks >= 3.0f)
             {
-                if (CanSeeObject(enemy))
+                timeBetweenAttacks = 0.0f;
+                int rand = UnityEngine.Random.Range(1, 4);
+                if (rand == 1)
                 {
-                    transform.LookAt(enemy.transform);
-                    ai.SetDestination(transform.position);
-                    Debug.LogError("Close");
-                    if (timeBetweenShots >= shootCD)
-                    {
-                        firespell.Attack();
-                        timeBetweenShots = 0.0f;
-                    }
+                    firespellg1.Attack();
+                    firespellg2.Attack();
+                    firespellg3.Attack();
+                    firespellg4.Attack();
+                    firespellg5.Attack();
                 }
-            }
-            if (distanceWithEnemy > 10)
-            {
-                //ai follows player until it leaves
-                ai.SetDestination(enemy.transform.position);
+                if (rand == 2)
+                {
+                    firespellwave.Attack();
+                }
+                if (rand == 3)
+                {
+                    firespelltri1.Attack();
+                    firespelltri2.Attack();
+                    firespelltri3.Attack();
+                }
             }
         }
         else
         {
-            ai.SetDestination(spawn.transform.position);
-            if (!CanSeeObject(enemy))
-            {
-                Spotted = false;
-                if (HealTime >= 0.5)
-                {
-                    life.ChangeHP(1.0f);
-                    HealTime = 0;
-                }
-            }
+            
         }
     }
     private void OnEnemyLeft(GameObject enemy)

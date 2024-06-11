@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0d1c282da06724d9c4c07003142d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Fireballprefab: {fileID: 4929927344873843062, guid: bc811222bbaba6342904a8bdf22b866c,
+  Fireballprefab: {fileID: 4929927344873843062, guid: 4916e3989f3dbb44fa16d6313b8f8677,
     type: 3}
   Firelaunch: {fileID: 3735946599712298172}
   SpawnTransform: {fileID: 6740001942682104850}
@@ -617,11 +617,19 @@ MonoBehaviour:
   sightZone: {fileID: 3850983709455505996}
   life: {fileID: 6013508418181315388}
   firespell: {fileID: 8878068784740136643}
+  firespellg1: {fileID: 0}
+  firespellg2: {fileID: 0}
+  firespellg3: {fileID: 0}
+  firespellg4: {fileID: 0}
+  firespellg5: {fileID: 0}
   shootCD: 1
   timeBetweenShots: 0
+  HealTime: 0
   eyeTransform: {fileID: 4013629792826185625}
   Greenkey: {fileID: 5750424093614981986, guid: 101a0768f56a14b65a8d09fb6f339b7e,
     type: 3}
+  Spotted: 0
+  AtSpawn: 1
 --- !u!114 &6013508418181315388
 MonoBehaviour:
   m_ObjectHideFlags: 0
