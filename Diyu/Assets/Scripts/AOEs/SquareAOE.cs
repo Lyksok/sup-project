@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace AOEs
 {
-    public class AreaOfEffect
+    public class SquareAOE
     {
-        public float radius;
+        public Vector3 size;
         public Vector3 center;
         public Entity user;
         public float damage;
@@ -17,19 +17,21 @@ namespace AOEs
         public bool canAffectSelf;
         public DamageType damageType;
         public bool isBuff;
+        public Quaternion orientation;
 
         public GameObject visual;
 
-        public AreaOfEffect(Vector3 _center, float _radius, Entity _user, float _damage, [CanBeNull] Buff _buff, bool _isBuff, bool _canAffectSelf, DamageType _damageType)
+        public SquareAOE(Vector3 _center, Vector3 _size, Quaternion _orientation, Entity _user, float _damage, [CanBeNull] Buff _buff, bool _isBuff, bool _canAffectSelf, DamageType _damageType)
         {
             center = _center;
-            radius = _radius;
+            size = _size;
             user = _user;
             damage = _damage;
             buff = _buff;
             canAffectSelf = _canAffectSelf;
             damageType = _damageType;
             isBuff = _isBuff;
+            orientation = _orientation;
         }
 
         public void Effect(List<Entity> targets) //applies the effect to the targets, use FindTargets() to get the targets
@@ -54,7 +56,7 @@ namespace AOEs
         public List<Entity> FindTargets() //return list of entities hit by the attack
         {
             List<Entity> targets = new List<Entity>();
-            Collider[] colliders = Physics.OverlapSphere(center,radius);
+            Collider[] colliders = Physics.OverlapBox(center,size,orientation);
             foreach (var c in colliders)
             { 
                 Debug.LogError(c.gameObject.name);

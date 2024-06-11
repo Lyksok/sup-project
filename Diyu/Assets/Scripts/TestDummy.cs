@@ -11,8 +11,6 @@ namespace Entities
     {
         [Header("Player characteristics")] 
         public Rigidbody playerRigidbody;
-        public GameObject body;  //part of the player that moves
-        public GameObject model;  //part of the player that turns
         //public Camera playerCamera;
         public float movementSpeed = 5f;
         private void Start()

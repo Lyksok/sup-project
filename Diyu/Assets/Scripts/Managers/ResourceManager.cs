@@ -9,8 +9,12 @@ namespace Managers
     {
         public GameObject[] projectileList; //handles projectile spawning
         public ParticleSystem[] particleList; //handles particle spawning
+        public GameObject[] indicatorList; //used to preview abilities
 
-
+        public int abilityCount
+        {
+            get => 7;
+        }
         public Rarities GetRarity(int rank)
         {
             switch (rank)
@@ -39,6 +43,14 @@ namespace Managers
                     return new AbilityHeal_2(rarity,target);
                 case 3:
                     return new AbilityExplosion_3(rarity,target);
+                case 4:
+                    return new AbilityCharge_4(rarity,target);
+                case 5:
+                    return new AbilityBerserk_5(rarity,target);
+                case 6:
+                    return new AbilityShockwave_6(rarity,target);
+                case 7:
+                    return new AbilityVolley_7(rarity,target);
                 default:
                     return new AbilityNone_0();
             }

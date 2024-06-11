@@ -1,4 +1,7 @@
-﻿using Abilities;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Abilities;
+using AOEs;
 using Entities;
 using Mirror;
 using UnityEngine;
@@ -6,18 +9,15 @@ using Object = UnityEngine.Object;
 
 namespace Weapons
 {
-    public class Firespell : RangedWeapon
+    public class SwordAttack : Weapon
     {
-        private readonly GameObject _fireball;
-        private readonly ParticleSystem _firelaunch;
-        private const float FireSpeed = 50.0f;
-
         //public override string Name => "firespell";
-        public override int id => 1;
+        public override int id => 2;
+        private readonly GameObject _conal;
 
-        public Firespell(Rarities rarity,Entity user)
+        public SwordAttack(Rarities rarity,Entity user)
         {
-            Name = "Fireball Spell book";
+            Name = "Sword";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -51,13 +51,11 @@ namespace Weapons
                     damagePercent = 0.9f;
                     break;
             }
-            type = DamageType.MAGICAL;
+            type = DamageType.PHYSICAL;
             User = user;
             Cooldown = 1 / (baseASPD * (attackSpeedPercent * User.attackSpeed));
             CurrentCooldown = 0;
-            _fireball = User.resources.projectileList[0];
-            _firelaunch = User.resources.particleList[0];
-            anchor = User.anchor;
+            _conal = User.resources.projectileList[2];
         }
 
         public override void SetRarity(Rarities rarity)
@@ -87,33 +85,32 @@ namespace Weapons
                 AttackRpc();
             }
         }
+        
         [ClientRpc]
         public override void AttackRpc()
         {
-            var position = anchor.transform.position;
-            GameObject newFireball = Object.Instantiate(_fireball, position, Quaternion.identity);
-            newFireball.GetComponent<Fireball>().damage = (baseDamage + damagePercent * User.abilityPower);
-            Rigidbody rb = newFireball.GetComponent<Rigidbody>();
-
-            rb.AddForce(FireSpeed * anchor.transform.forward, ForceMode.VelocityChange);
-            _firelaunch.transform.position = position;
-            _firelaunch.Play();
+            var position = User.model.transform.position;
+            SquareAOE aoe = new SquareAOE(User.model.transform.position + (User.model.transform.forward * 2.5f), Vector3.one * 1.5f, User.model.transform.rotation * Quaternion.AngleAxis(45,Vector3.up),User,(baseDamage + damagePercent * User.abilityPower),null,true,false,type);
+            var hitList = aoe.FindTargets();
+            AreaOfEffect aoe2 = new AreaOfEffect(position, 3.0f,User,0,null,true,false,type);
+            var hitList2 = aoe2.FindTargets();
+            List<Entity> hitFinal = new List<Entity>();
+            //Debug
+            //GameObject newConal = Object.Instantiate(_conal, User.model.transform.position + (User.model.transform.forward * 2.5f), User.model.transform.rotation * Quaternion.AngleAxis(45,Vector3.up));
+            foreach (var entity in hitList)
+            {
+                foreach (var entity2 in hitList2)
+                {
+                    if (entity.netId == entity2.netId)
+                    {
+                        hitFinal.Add(entity);
+                    }
+                }
+            }
+            //var hitFinal = hitList.Intersect(hitList2);
+            aoe.Effect(hitFinal);
+            //Debug.LogError((hitList.Count,hitList2.Count,hitFinal.Count));
         }
-        /*[Command]
-        public override void CmdAttack(Transform source)
-        {
-            if (!isLocalPlayer)
-                return;
-            GameObject newProjectile = Instantiate(projectile, source.position, source.rotation);
-            RpcAttack(source);
-        }
-        [ClientRpc]
-        public override void RpcAttack(Transform source)
-        {
-            throw new NotImplementedException();
-        }*/
-
-        public override int? Ammo => null;
         
     }
 }
