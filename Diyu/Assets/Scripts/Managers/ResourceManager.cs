@@ -10,6 +10,7 @@ namespace Managers
         public GameObject[] projectileList; //handles projectile spawning
         public ParticleSystem[] particleList; //handles particle spawning
         public GameObject[] indicatorList; //used to preview abilities
+        public GameObject[] lootList;
 
         public int abilityCount
         {
@@ -58,6 +59,29 @@ namespace Managers
                     return new AbilityVolley_7(rarity,target);
                 default:
                     return new AbilityNone_0();
+            }
+        }
+
+        public string GetAbilityName(int id)
+        {
+            switch (id)
+            {
+                case 1:
+                    return "Regeneration";
+                case 2:
+                    return "Heal";
+                case 3:
+                    return "Explosion";
+                case 4:
+                    return "Charge";
+                case 5:
+                    return "Berserk";
+                case 6:
+                    return "Shockwave";
+                case 7:
+                    return "Fire Volley";
+                default:
+                    return "No Abilities";
             }
         }
         

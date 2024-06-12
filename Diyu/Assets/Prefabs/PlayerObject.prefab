@@ -837,6 +837,8 @@ MonoBehaviour:
   indicatorList:
   - {fileID: 6572906761774532393, guid: 8f8b813920f32054c8ee7269d9c37799, type: 3}
   - {fileID: 6572906761774532393, guid: d4363908d8aab8e4b98bd8978d45e9c2, type: 3}
+  lootList:
+  - {fileID: 4441857392704860318, guid: 6fa399c353c9a774aabb4433a16b2eac, type: 3}
 --- !u!1 &3095895027194075405
 GameObject:
   m_ObjectHideFlags: 0

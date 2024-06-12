@@ -9,6 +9,7 @@ using Mirror;
 using TMPro;
 using UnityEngine;
 using Weapons;
+using Object = UnityEngine.Object;
 
 public class NewPlayer : Entity
 {
@@ -33,7 +34,7 @@ public class NewPlayer : Entity
     public GameObject buffsHUD;
     private string buffsValue;
     private TextMeshProUGUI buffsHUD2;
-    
+
     private void Start()
     {
         statsHUD2 = statsHUD.GetComponent<TextMeshProUGUI>();
@@ -49,8 +50,6 @@ public class NewPlayer : Entity
         primaryWeapon = new SwordAttack(Rarities.LEGENDARY, this);
         health = 5;
         maxHealth = 100;
-        pos = body.transform.position;
-        rot = model.transform.rotation;
         aspdModifiers = new Dictionary<int, float>();
         if (!isLocalPlayer)
         {
@@ -80,7 +79,21 @@ public class NewPlayer : Entity
             CalculateASPD();
             DebugPickup();
             DebugPickupWpn();
+            DebugOrb();
             //SrvMovement();
+        }
+    }
+
+
+    public void DebugOrb()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && isLocalPlayer)
+        {
+            Vector3 pos = model.transform.position;
+            pos.y -= 0.95f;
+            pos.x += 3;
+            Object.Instantiate(resources.lootList[0],pos,Quaternion.identity);
+            //Debug.LogError($"{pos}");
         }
     }
     
@@ -118,31 +131,39 @@ public class NewPlayer : Entity
         primaryWeapon = weapon;
     }
     
-    public void PickupAbility(Ability ability)
+    public Ability PickupAbility(Ability ability)
     {
+        Ability backup;
         if (!isLocalPlayer)
         {
-            return;
+            return new AbilityNone_0();
         }
-        if (abilityList[0] is AbilityNone_0)
+        if (abilityList[0] is AbilityNone_0 || abilityList[0].GetType() == ability.GetType())
         {
+            backup = abilityList[0];
             abilityList[0] = ability;
-        } else if (abilityList[1] is AbilityNone_0)
+        } else if (abilityList[1] is AbilityNone_0 || abilityList[1].GetType() == ability.GetType())
         {
+            backup = abilityList[1];
             abilityList[1] = ability;
-        } else if (abilityList[2] is AbilityNone_0)
+        } else if (abilityList[2] is AbilityNone_0 || abilityList[2].GetType() == ability.GetType())
         {
+            backup = abilityList[2];
             abilityList[2] = ability;
-        } else if (abilityList[3] is AbilityNone_0)
+        } else if (abilityList[3] is AbilityNone_0 || abilityList[3].GetType() == ability.GetType())
         {
+            backup = abilityList[3];
             abilityList[3] = ability;
             ability.ChangeRarity(1);
         }
         else //WIP
         {
             abilityList[0].OnEnd();
+            backup = abilityList[0];
             abilityList[0] = ability;
+            
         }
+        return backup;
     }
     
     private string GetAbilityState(Ability ability) //used for HUD display

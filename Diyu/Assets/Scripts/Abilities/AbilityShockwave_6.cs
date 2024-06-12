@@ -66,8 +66,11 @@ namespace Abilities
             return position;
             
         }
-        
-        public override void OnEnd(){}
+
+        public override void OnEnd()
+        {
+            Object.Destroy(_indicator);
+        }
         
         public override void PassiveEffect()
         {

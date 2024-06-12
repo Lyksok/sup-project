@@ -80,8 +80,11 @@ namespace Abilities
             
             return Vector3.one;
         }
-        
-        public override void OnEnd(){}
+
+        public override void OnEnd()
+        {
+            Object.Destroy(_indicator);
+        }
         
         public override void PassiveEffect()
         {
