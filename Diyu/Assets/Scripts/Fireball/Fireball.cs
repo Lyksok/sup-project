@@ -59,7 +59,6 @@ public class Fireball : MonoBehaviour
     {
         if (diecounter >= limit)
         {
-            Debug.LogError("fireball is dead");
             ParticleSystem particleSystem = Instantiate(ded, transform.position, transform.rotation);
             Destroy(gameObject);
         }
