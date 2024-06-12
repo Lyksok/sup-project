@@ -21,6 +21,8 @@ namespace Abilities
         private readonly ParticleSystem _firelaunch;
         private const float FireSpeed = 50.0f;
         
+        private readonly GameObject _indicator;
+        
         public AbilityVolley_7(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
             Name = "Fire Volley";
@@ -64,6 +66,18 @@ namespace Abilities
             curCount = 0;
             _fireball = Target.resources.projectileList[0];
             _firelaunch = Target.resources.particleList[0];
+            _indicator = Object.Instantiate(Target.resources.indicatorList[1], GetPostion(), Quaternion.identity);
+            _indicator.transform.localScale *= 3;
+            _indicator.SetActive(false);
+        }
+        
+        public Vector3 GetPostion()
+        {
+            NewPlayer target = (NewPlayer)Target;
+            var position = target.model.transform.position;
+            position.y -= 0.95f;
+            return position;
+            
         }
         
         public override void OnEnd(){}
@@ -88,6 +102,7 @@ namespace Abilities
 
         public override void ActiveEffect()
         {
+            _indicator.SetActive(false);
             if (State == States.READY)
             {
                 State = States.ACTIVE;
@@ -98,7 +113,9 @@ namespace Abilities
 
         public override void SetupEffect()
         {
-            //ability preview
+            _indicator.SetActive(true);
+            _indicator.transform.position = GetPostion();
+            _indicator.transform.rotation = Target.model.transform.rotation;
         }
 
         public override void SetRarity(Rarities rarity)

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Abilities;
-using AOEs;
+﻿using Abilities;
 using Entities;
 using Mirror;
 using UnityEngine;
@@ -9,15 +6,18 @@ using Object = UnityEngine.Object;
 
 namespace Weapons
 {
-    public class SwordAttack : Weapon
+    public class ScepterAttack : RangedWeapon
     {
-        //public override string Name => "firespell";
-        public override int id => 2;
-        private readonly GameObject _conal;
+        private readonly GameObject _energyball;
+        private readonly ParticleSystem _firelaunch;
+        private const float Speed = 30.0f;
 
-        public SwordAttack(Rarities rarity,Entity user)
+        //public override string Name => "firespell";
+        public override int id => 5;
+
+        public ScepterAttack(Rarities rarity,Entity user)
         {
-            Name = "Sword";
+            Name = "Magic Scepter";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -51,12 +51,14 @@ namespace Weapons
                     damagePercent = 0.9f;
                     break;
             }
-            type = DamageType.PHYSICAL;
+            type = DamageType.MAGICAL;
             Rarity = rarity;
             User = user;
             Cooldown = 1 / (baseASPD * (attackSpeedPercent * User.attackSpeed));
             CurrentCooldown = 0;
-            _conal = User.resources.projectileList[2];
+            _energyball = User.resources.projectileList[3];
+            _firelaunch = User.resources.particleList[0];
+            anchor = User.anchor;
         }
 
         public override void SetRarity(Rarities rarity)
@@ -86,32 +88,33 @@ namespace Weapons
                 AttackRpc();
             }
         }
-        
         [ClientRpc]
         public override void AttackRpc()
         {
-            var position = User.model.transform.position;
-            SquareAOE aoe = new SquareAOE(User.model.transform.position + (User.model.transform.forward * 2.5f), Vector3.one * 1.5f, User.model.transform.rotation * Quaternion.AngleAxis(45,Vector3.up),User,(baseDamage + damagePercent * User.abilityPower),null,true,false,type);
-            var hitList = aoe.FindTargets();
-            AreaOfEffect aoe2 = new AreaOfEffect(position, 3.0f,User,0,null,true,false,type);
-            var hitList2 = aoe2.FindTargets();
-            List<Entity> hitFinal = new List<Entity>();
-            //Debug
-            //GameObject newConal = Object.Instantiate(_conal, User.model.transform.position + (User.model.transform.forward * 2.5f), User.model.transform.rotation * Quaternion.AngleAxis(45,Vector3.up));
-            foreach (var entity in hitList)
-            {
-                foreach (var entity2 in hitList2)
-                {
-                    if (entity.netId == entity2.netId)
-                    {
-                        hitFinal.Add(entity);
-                    }
-                }
-            }
-            //var hitFinal = hitList.Intersect(hitList2);
-            aoe.Effect(hitFinal);
-            //Debug.LogError((hitList.Count,hitList2.Count,hitFinal.Count));
+            var position = anchor.transform.position;
+            GameObject newFireball = Object.Instantiate(_energyball, position, Quaternion.identity);
+            newFireball.GetComponent<Energyball>().damage = (baseDamage + damagePercent * User.abilityPower);
+            Rigidbody rb = newFireball.GetComponent<Rigidbody>();
+
+            rb.AddForce(Speed * anchor.transform.forward, ForceMode.VelocityChange);
+            _firelaunch.transform.position = position;
+            _firelaunch.Play();
         }
+        /*[Command]
+        public override void CmdAttack(Transform source)
+        {
+            if (!isLocalPlayer)
+                return;
+            GameObject newProjectile = Instantiate(projectile, source.position, source.rotation);
+            RpcAttack(source);
+        }
+        [ClientRpc]
+        public override void RpcAttack(Transform source)
+        {
+            throw new NotImplementedException();
+        }*/
+
+        public override int? Ammo => null;
         
     }
 }

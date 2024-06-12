@@ -12,7 +12,7 @@ namespace Weapons
         public string Desc { get; set; }
         public abstract int id { get; }
         public Entity User;
-        protected Rarities Rarity; //Rarity of the weapon, changes stats
+        public Rarities Rarity; //Rarity of the weapon, changes stats
         
         protected DamageType type; //type of damage dealt
         public float damagePercent; //% of AD/AP of the user taken for damage calculations

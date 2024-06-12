@@ -14,6 +14,7 @@ namespace Abilities
         public override int id { get => 3; }
         public AreaOfEffect aoe;
         public float damage;
+        public float range;
         private readonly GameObject _explosion;
         private readonly GameObject _indicator;
         
@@ -50,6 +51,7 @@ namespace Abilities
             Rarity = rarity;
             State = States.READY;
             Target = target;
+            range = 7.5f;
             _explosion = Target.resources.projectileList[1];
             _indicator = Object.Instantiate(Target.resources.indicatorList[0], GetPostion(), Quaternion.identity);
             _indicator.transform.localScale *= 3;
@@ -65,7 +67,14 @@ namespace Abilities
                 if (Physics.Raycast(ray, out RaycastHit hit, 100))
                 {
                     Debug.DrawLine(ray.origin, hit.point);
-                    return new Vector3(hit.point.x, target.model.transform.position.y, hit.point.z);
+                    var position = target.model.transform.position;
+                    position.y -= 0.95f;
+                    Vector3 hitPoint = new Vector3(hit.point.x, position.y, hit.point.z);
+                    var hitPosDir = (hitPoint - position).normalized;
+                    float dist = Vector3.Distance(hitPoint, position);
+                    dist = Math.Min(dist,range);
+                    var newHitPos = position + hitPosDir * dist;
+                    return newHitPos;
                 }
             }
             
@@ -106,6 +115,7 @@ namespace Abilities
         {
             _indicator.SetActive(true);
             _indicator.transform.position = GetPostion();
+            _indicator.transform.rotation = Target.model.transform.rotation;
         }
 
         public override void SetRarity(Rarities rarity)

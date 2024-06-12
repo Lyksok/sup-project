@@ -15,6 +15,11 @@ namespace Managers
         {
             get => 7;
         }
+        
+        public int weaponCount
+        {
+            get => 8;
+        }
         public Rarities GetRarity(int rank)
         {
             switch (rank)
@@ -30,7 +35,7 @@ namespace Managers
                 case 4:
                     return Rarities.LEGENDARY;
                 default:
-                    return Rarities.MYTHIC;
+                    return Rarities.COMMON;
             }
         }
         public Ability GetAbility(int id,Rarities rarity, Entity target)
@@ -53,6 +58,31 @@ namespace Managers
                     return new AbilityVolley_7(rarity,target);
                 default:
                     return new AbilityNone_0();
+            }
+        }
+        
+        public Weapon GetWeapon(int id,Rarities rarity, Entity target)
+        {
+            switch (id)
+            {
+                case 1:
+                    return new Firespell(rarity,target);
+                case 2:
+                    return new SwordAttack(rarity,target);
+                case 3:
+                    return new AxeAttack(rarity,target);
+                case 4:
+                    return new ScytheAttack(rarity,target);
+                case 5:
+                    return new ScepterAttack(rarity,target);
+                case 6:
+                    return new ConjurationAttack(rarity,target);
+                case 7:
+                    return new BowAttack(rarity, target);
+                case 8:
+                    return new DaggerAttack(rarity, target);
+                default:
+                    return new SwordAttack(rarity,target);
             }
         }
     }

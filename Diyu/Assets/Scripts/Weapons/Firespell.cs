@@ -52,6 +52,7 @@ namespace Weapons
                     break;
             }
             type = DamageType.MAGICAL;
+            Rarity = rarity;
             User = user;
             Cooldown = 1 / (baseASPD * (attackSpeedPercent * User.attackSpeed));
             CurrentCooldown = 0;

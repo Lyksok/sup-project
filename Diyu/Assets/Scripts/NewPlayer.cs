@@ -79,6 +79,7 @@ public class NewPlayer : Entity
             HandleAbility(abilityList[3],KeyCode.Alpha4);
             CalculateASPD();
             DebugPickup();
+            DebugPickupWpn();
             //SrvMovement();
         }
     }
@@ -93,6 +94,28 @@ public class NewPlayer : Entity
             PickupAbility(ability);
             //Debug.LogError($"{ability.Rarity} {resources.GetRarity(rank)}");
         }
+    }
+    
+    public void DebugPickupWpn() //gives the player a random weapon
+    {
+        if (Input.GetKeyDown(KeyCode.F) && isLocalPlayer)
+        {
+            int rank = RandomNumberGenerator.GetInt32(0, 5);
+            int id = RandomNumberGenerator.GetInt32(1, resources.weaponCount + 1);
+            Weapon weapon = resources.GetWeapon(id, resources.GetRarity(rank), this);
+            PickupWeapon(weapon);
+            //Debug.LogError($"{ability.Rarity} {resources.GetRarity(rank)}");
+        }
+    }
+
+    public void PickupWeapon(Weapon weapon)
+    {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
+        primaryWeapon = weapon;
     }
     
     public void PickupAbility(Ability ability)
@@ -166,6 +189,7 @@ public class NewPlayer : Entity
         statsValue = $" Health : {health} / {maxHealth}\n Attack Damage : {attackDamage}\n Ability Power : {abilityPower}\n Armor : {armor}\n Magic Resist : {magicResist}\n Movement Speed : {movementSpeed}\n Movement Speed% : {moveSpeed}\n Attack Speed : {attackSpeed}\n Lifesteal% : {lifesteal}\n Cooldown Reduction% : {cooldownReduction}\n Tenacity% : {tenacity}";
         statsHUD2.text = statsValue;
         abilitiesValue = $" Key 1 - {GetAbilityState(abilityList[0])}\n Key 2 - {GetAbilityState(abilityList[1])}\n Key 3 - {GetAbilityState(abilityList[2])}\n Key 4 - {GetAbilityState(abilityList[3])}";
+        abilitiesValue += $"\n \n{primaryWeapon.Name} - {primaryWeapon.Rarity}";
         abilitiesHUD2.text = abilitiesValue;
         buffsValue = $"\n \n{GetBuffList()}";
         buffsHUD2.text = buffsValue;

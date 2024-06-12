@@ -14,7 +14,9 @@ namespace Abilities
         public override int id { get => 6; }
         public AreaOfEffect aoe;
         public float damage;
+        public float range;
         private readonly GameObject _explosion;
+        private readonly GameObject _indicator;
         
         public AbilityShockwave_6(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
@@ -49,23 +51,20 @@ namespace Abilities
             Rarity = rarity;
             State = States.READY;
             Target = target;
+            range = 7.5f;
             _explosion = Target.resources.projectileList[1];
+            _indicator = Object.Instantiate(Target.resources.indicatorList[0], GetPostion(), Quaternion.identity);
+            _indicator.transform.localScale *= 3;
+            _indicator.SetActive(false);
         }
 
         public Vector3 GetPostion()
         {
-            if (Target is NewPlayer)
-            {
-                NewPlayer target = (NewPlayer)Target;
-                Ray ray = target.playerCamera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit hit, 100))
-                {
-                    Debug.DrawLine(ray.origin, hit.point);
-                    return new Vector3(hit.point.x, target.model.transform.position.y, hit.point.z);
-                }
-            }
+            NewPlayer target = (NewPlayer)Target;
+            var position = target.model.transform.position;
+            position.y -= 0.95f;
+            return position;
             
-            return Vector3.one;
         }
         
         public override void OnEnd(){}
@@ -76,11 +75,12 @@ namespace Abilities
 
         public override void ActiveEffect()
         {
+            _indicator.SetActive(false);
             if (State == States.READY)
             {
                 State = States.COOLDOWN;
                 CurrentCooldown = Cooldown;
-                Vector3 pos = Target.body.transform.position;
+                Vector3 pos = GetPostion();
                 aoe = new AreaOfEffect(pos, 6.0f,Target,damage,null,true,false,DamageType.PHYSICAL);
                 aoe.Effect(aoe.FindTargets());
                 GameObject newExplosion = Object.Instantiate(_explosion, pos, Quaternion.identity);
@@ -99,7 +99,9 @@ namespace Abilities
 
         public override void SetupEffect()
         {
-            //ability preview
+            _indicator.SetActive(true);
+            _indicator.transform.position = GetPostion();
+            _indicator.transform.rotation = Target.model.transform.rotation;
         }
 
         public override void SetRarity(Rarities rarity)

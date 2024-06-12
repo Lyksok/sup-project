@@ -9,15 +9,15 @@ using Object = UnityEngine.Object;
 
 namespace Weapons
 {
-    public class SwordAttack : Weapon
+    public class AxeAttack : Weapon
     {
         //public override string Name => "firespell";
-        public override int id => 2;
+        public override int id => 3;
         private readonly GameObject _conal;
 
-        public SwordAttack(Rarities rarity,Entity user)
+        public AxeAttack(Rarities rarity,Entity user)
         {
-            Name = "Sword";
+            Name = "Axe";
             switch (rarity)
             {
                 case Rarities.COMMON:

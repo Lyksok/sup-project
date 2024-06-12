@@ -9,15 +9,15 @@ using Object = UnityEngine.Object;
 
 namespace Weapons
 {
-    public class SwordAttack : Weapon
+    public class ScytheAttack : Weapon
     {
         //public override string Name => "firespell";
-        public override int id => 2;
+        public override int id => 4;
         private readonly GameObject _conal;
 
-        public SwordAttack(Rarities rarity,Entity user)
+        public ScytheAttack(Rarities rarity,Entity user)
         {
-            Name = "Sword";
+            Name = "Scythe";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -91,25 +91,9 @@ namespace Weapons
         public override void AttackRpc()
         {
             var position = User.model.transform.position;
-            SquareAOE aoe = new SquareAOE(User.model.transform.position + (User.model.transform.forward * 2.5f), Vector3.one * 1.5f, User.model.transform.rotation * Quaternion.AngleAxis(45,Vector3.up),User,(baseDamage + damagePercent * User.abilityPower),null,true,false,type);
-            var hitList = aoe.FindTargets();
-            AreaOfEffect aoe2 = new AreaOfEffect(position, 3.0f,User,0,null,true,false,type);
+            AreaOfEffect aoe2 = new AreaOfEffect(position, 3.0f,User,(baseDamage + damagePercent * User.abilityPower),null,true,false,type);
             var hitList2 = aoe2.FindTargets();
-            List<Entity> hitFinal = new List<Entity>();
-            //Debug
-            //GameObject newConal = Object.Instantiate(_conal, User.model.transform.position + (User.model.transform.forward * 2.5f), User.model.transform.rotation * Quaternion.AngleAxis(45,Vector3.up));
-            foreach (var entity in hitList)
-            {
-                foreach (var entity2 in hitList2)
-                {
-                    if (entity.netId == entity2.netId)
-                    {
-                        hitFinal.Add(entity);
-                    }
-                }
-            }
-            //var hitFinal = hitList.Intersect(hitList2);
-            aoe.Effect(hitFinal);
+            aoe2.Effect(hitList2);
             //Debug.LogError((hitList.Count,hitList2.Count,hitFinal.Count));
         }
         
