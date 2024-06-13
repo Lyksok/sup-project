@@ -22,6 +22,7 @@ public class NewPlayer : Entity
     public LayerMask layerMask;
     [SyncVar] public Vector3 pos;
     [SyncVar] public Quaternion rot;
+    public bool isSpectator;
 
     public GameObject statsHUD;
     private string statsValue;
@@ -81,13 +82,23 @@ public class NewPlayer : Entity
             DebugPickupWpn();
             DebugOrb();
             //SrvMovement();
+            DebugDamage();
         }
     }
 
+
+    public void DebugDamage()
+    {
+        if (Input.GetKeyDown(KeyCode.C) && isLocalPlayer)
+        {
+            TakeDamageRpc(10,DamageType.TRUE_DAMAGE);
+        }
+    }
     
     public override void OnDeath()
     {
-        Destroy(gameObject);
+        isSpectator = true;
+        body.SetActive(false);
     }
 
     public void DebugOrb()
@@ -197,7 +208,14 @@ public class NewPlayer : Entity
             {
                 if (buff.timer <= 0)
                 {
-                    res += buff.Name + $" - {Math.Round((float)buff.Duration,2)}" + "\n";
+                    if (buff.Duration > 0)
+                    {
+                        res += buff.Name + $" - {Math.Round((float)buff.Duration,2)}" + "\n";
+                    }
+                    else
+                    {
+                        res += buff.Name + "\n";
+                    }
                 }
                 else
                 {
