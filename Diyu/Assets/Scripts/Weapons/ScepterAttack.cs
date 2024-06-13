@@ -81,6 +81,7 @@ namespace Weapons
         [Command]
         public override void CmdAttack()
         {
+            timeSinceLastAttack = 0;
             if (CanAttack)
             {
                 Cooldown = 1 / (baseASPD * (attackSpeedPercent * User.attackSpeed));
@@ -91,6 +92,7 @@ namespace Weapons
         [ClientRpc]
         public override void AttackRpc()
         {
+            timeSinceLastAttack = 0;
             var position = anchor.transform.position;
             GameObject newFireball = Object.Instantiate(_energyball, position, Quaternion.identity);
             newFireball.GetComponent<Energyball>().damage = (baseDamage + damagePercent * User.abilityPower);

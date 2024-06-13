@@ -14,11 +14,8 @@ namespace Entities
         
         public ResourceManager resources; //handles projectile spawning
         
-        [Header("Weapons")] 
-        protected Weapon primaryWeapon;
+        [Header("Weapons")] public Weapon primaryWeapon;
         public KeyCode primaryWeaponAttackKey = KeyCode.Mouse0;
-        protected Weapon secondaryWeapon;
-        public KeyCode secondaryWeaponAttackKey = KeyCode.Mouse1;
 
         [Header("Abilities")] 
         public Ability[] abilityList = {new AbilityNone_0(),new AbilityNone_0(),new AbilityNone_0(),new AbilityNone_0()};
@@ -141,6 +138,10 @@ namespace Entities
 
         protected void HandleAbility(Ability ability, KeyCode key)
         {
+            if (inEvent || !canCast)
+            {
+                return;
+            }
             ability.Tick(Time.deltaTime);
             if (Input.GetKey(key))
             {
@@ -155,6 +156,10 @@ namespace Entities
         
         protected void HandleAttack(Weapon weapon, KeyCode key)
         {
+            if (inEvent || !canAttack)
+            {
+                return;
+            }
             weapon.Tick(Time.deltaTime);
             if (Input.GetKeyDown(key))
             {
@@ -240,8 +245,8 @@ namespace Entities
         [SyncVar] public float moveSpeed; //movement speed multiplier, 1 = 100%, 2 = 200%
         [SyncVar] public float attackSpeed; //# of attacks per second, 1 = 1 sec between each attack, 2 = 0.5 sec per attack
         [SyncVar] public float healingPower; //healing received multiplier, 1 = 100%, 2 = 200%
-        [SyncVar] public float cooldownReduction; //cooldown multiplier, 1 = 100% of original cooldown, hard cap at 50% CDR
-        [SyncVar] public float tenacity; //reduces debuffs & CCs duration
+        //[SyncVar] public float cooldownReduction; //cooldown multiplier, 1 = 100% of original cooldown, hard cap at 50% CDR
+        //[SyncVar] public float tenacity; //reduces debuffs & CCs duration
         [SyncVar] public float lifesteal; //health gained from damage, 1 = 100%, reduced by 50% to abilities
         
         public Dictionary<int,float> aspdModifiers;
@@ -252,5 +257,6 @@ namespace Entities
         public bool canMove; //crowd control checks
         public bool canAttack;
         public bool canCast;
+        public bool inEvent;
     }
 }

@@ -81,6 +81,7 @@ namespace Weapons
         {
             if (CanAttack)
             {
+                timeSinceLastAttack = 0;
                 Cooldown = 1 / (baseASPD * (attackSpeedPercent * User.attackSpeed));
                 CurrentCooldown = Cooldown;
                 AttackRpc();
@@ -90,6 +91,7 @@ namespace Weapons
         [ClientRpc]
         public override void AttackRpc()
         {
+            timeSinceLastAttack = 0;
             var position = User.model.transform.position;
             SquareAOE aoe = new SquareAOE(User.model.transform.position + (User.model.transform.forward * 2.5f), Vector3.one * 1.5f, User.model.transform.rotation * Quaternion.AngleAxis(45,Vector3.up),User,(baseDamage + damagePercent * User.abilityPower),null,true,false,type);
             var hitList = aoe.FindTargets();

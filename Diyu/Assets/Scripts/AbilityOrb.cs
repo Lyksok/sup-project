@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using Abilities;
+using JetBrains.Annotations;
 using Managers;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ namespace Entities
                 _rarity = resources.GetRarity(RandomNumberGenerator.GetInt32(0, 5));
                 UpdateInfo();
         }
-
+        
         public override void OnPickup(NewPlayer player)
         {
             //Debug.LogError("Picked up");
@@ -33,6 +34,7 @@ namespace Entities
                 _rarity = replaced.Rarity;
             }
             UpdateInfo();
+
         }
 
         public override void UpdateInfo()

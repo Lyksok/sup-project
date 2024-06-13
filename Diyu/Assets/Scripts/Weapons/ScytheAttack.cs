@@ -79,6 +79,7 @@ namespace Weapons
         [Command]
         public override void CmdAttack()
         {
+            timeSinceLastAttack = 0;
             if (CanAttack)
             {
                 Cooldown = 1 / (baseASPD * (attackSpeedPercent * User.attackSpeed));
@@ -90,6 +91,7 @@ namespace Weapons
         [ClientRpc]
         public override void AttackRpc()
         {
+            timeSinceLastAttack = 0;
             var position = User.model.transform.position;
             AreaOfEffect aoe2 = new AreaOfEffect(position, 3.0f,User,(baseDamage + damagePercent * User.abilityPower),null,true,false,type);
             var hitList2 = aoe2.FindTargets();

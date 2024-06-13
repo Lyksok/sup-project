@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 using Abilities;
 using Buffs;
 using Cinemachine;
 using Entities;
+using Gems;
+using JetBrains.Annotations;
 using Mirror;
 using TMPro;
 using UnityEngine;
@@ -39,6 +42,12 @@ public class NewPlayer : Entity
     private DataManager _dataManager;
     private string _name;
 
+    public GameObject popUp;
+    private TextMeshProUGUI _popUpText;
+    public int classId;
+
+    public List<Gem> gemList;
+    
     public override void OnStartLocalPlayer()
     {
         _dataManager = FindObjectOfType<DataManager>();
@@ -56,17 +65,22 @@ public class NewPlayer : Entity
 
     private void Start()
     {
+        inEvent = false;
+        popUp.SetActive(false);
+        _popUpText = popUp.GetComponent<TextMeshProUGUI>();
         statsHUD2 = statsHUD.GetComponent<TextMeshProUGUI>();
         buffsHUD2 = buffsHUD.GetComponent<TextMeshProUGUI>();
         abilitiesHUD2 = abilitiesHUD.GetComponent<TextMeshProUGUI>();
         layerMask = LayerMask.GetMask("groundMask");
         buffList = new List<Buff>();
         debuffList = new List<Buff>();
+        gemList = new List<Gem>();
         //abilityList[0] = new AbilityRegen_1(Rarities.COMMON, this);
         //abilityList[1] = new AbilityHeal_2(Rarities.LEGENDARY, this);
         //abilityList[2] = new AbilityExplosion_3(Rarities.LEGENDARY, this);
         //primaryWeapon = new Firespell(Rarities.LEGENDARY,this);
-        primaryWeapon = new SwordAttack(Rarities.LEGENDARY, this);
+        //primaryWeapon = new SwordAttack(Rarities.LEGENDARY, this);
+        resources.SetClass(this,classId);
         health = 5;
         maxHealth = 100;
         aspdModifiers = new Dictionary<int, float>();
@@ -75,6 +89,7 @@ public class NewPlayer : Entity
             playerCamera.gameObject.SetActive(false);
             playerHUD.gameObject.SetActive(false);
         }
+        OnRoundStart();
     }
 
     // Update is called once per frame
@@ -95,16 +110,46 @@ public class NewPlayer : Entity
             HandleAbility(abilityList[1],KeyCode.Alpha2);
             HandleAbility(abilityList[2],KeyCode.Alpha3);
             HandleAbility(abilityList[3],KeyCode.Alpha4);
+            HandleAbility(classPassive,KeyCode.Alpha0);
             CalculateASPD();
-            DebugPickup();
-            DebugPickupWpn();
+            //DebugPickup();
+            //DebugPickupWpn();
             DebugOrb();
+            DebugWeaponOrb();
+            DebugGemOrb();
             //SrvMovement();
             DebugDamage();
+            //EventManager();
         }
     }
 
+    /*public async Task<int> EventManager()
+    {
+        if (inEvent)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                inEvent = false;
+                return 0;
 
+            } else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                inEvent = false;
+                return 1;
+            } else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                inEvent = false;
+                return 2;
+            } else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                inEvent = false;
+                return 3;
+            } 
+        }
+
+        return -1;
+    }*/
+    
     public void DebugDamage()
     {
         if (Input.GetKeyDown(KeyCode.C) && isLocalPlayer)
@@ -119,6 +164,37 @@ public class NewPlayer : Entity
         body.SetActive(false);
     }
 
+    public void OnRevive()
+    {
+        isSpectator = false;
+        body.SetActive(true);
+        canAttack = false;
+        canCast = false;
+        canMove = false;
+        health = maxHealth;
+        
+    }
+
+    public void OnRoundStart()
+    {
+        canAttack = true;
+        canCast = true;
+        canMove = true;
+    }
+
+    public void OpenPopUp()
+    {
+        popUp.SetActive(true);
+        inEvent = true;
+    }
+    
+    public void ClosePopUp()
+    {
+        popUp.SetActive(false);
+        inEvent = false;
+    }
+    
+    
     public void DebugOrb()
     {
         if (Input.GetKeyDown(KeyCode.E) && isLocalPlayer)
@@ -131,7 +207,31 @@ public class NewPlayer : Entity
         }
     }
     
-    public void DebugPickup() //gives the player a random ability
+    public void DebugWeaponOrb()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && isLocalPlayer)
+        {
+            Vector3 pos = model.transform.position;
+            pos.y -= 0.95f;
+            pos.x -= 3;
+            Object.Instantiate(resources.lootList[1],pos,Quaternion.identity);
+            //Debug.LogError($"{pos}");
+        }
+    }
+    
+    public void DebugGemOrb()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && isLocalPlayer)
+        {
+            Vector3 pos = model.transform.position;
+            pos.y -= 0.95f;
+            pos.z -= 3;
+            Object.Instantiate(resources.lootList[2],pos,Quaternion.identity);
+            //Debug.LogError($"{pos}");
+        }
+    }
+    
+    /*public void DebugPickup() //gives the player a random ability
     {
         if (Input.GetKeyDown(KeyCode.R) && isLocalPlayer)
         {
@@ -141,9 +241,9 @@ public class NewPlayer : Entity
             PickupAbility(ability);
             //Debug.LogError($"{ability.Rarity} {resources.GetRarity(rank)}");
         }
-    }
+    }*/
     
-    public void DebugPickupWpn() //gives the player a random weapon
+    /*public void DebugPickupWpn() //gives the player a random weapon
     {
         if (Input.GetKeyDown(KeyCode.F) && isLocalPlayer)
         {
@@ -154,16 +254,28 @@ public class NewPlayer : Entity
             PickupWeapon(weapon);
             //Debug.LogError($"{ability.Rarity} {resources.GetRarity(rank)}");
         }
-    }
+    }*/
 
-    public void PickupWeapon(Weapon weapon)
+    [CanBeNull]
+    public Weapon PickupWeapon(Weapon weapon)
+    {
+        if (!isLocalPlayer)
+        {
+            return null;
+        }
+
+        Weapon backup = primaryWeapon;
+        primaryWeapon = weapon;
+        return backup;
+    }
+    
+    public void PickupGem(Gem gem)
     {
         if (!isLocalPlayer)
         {
             return;
         }
-
-        primaryWeapon = weapon;
+        gemList.Add(gem);
     }
     
     public Ability PickupAbility(Ability ability)
@@ -190,17 +302,43 @@ public class NewPlayer : Entity
             abilityList[2] = ability;
         } else if (abilityList[3] is AbilityNone_0 || abilityList[3].GetType() == ability.GetType())
         {
+            
             backup = abilityList[3];
             //abilityList[3].OnEnd();
             abilityList[3] = ability;
-            ability.ChangeRarity(1);
+            if (classId == 6)
+            {
+                ability.ChangeRarity(1);
+                ability.ChangeRarity(1);
+                if (backup.Rarity == Rarities.MYTHIC)
+                {
+                    backup.ChangeRarity(-1);
+                }
+                else
+                {
+                    backup.ChangeRarity(-1);
+                    backup.ChangeRarity(-1);
+                }
+                
+            }
+            else
+            {
+                ability.ChangeRarity(1);
+                backup.ChangeRarity(-1);
+            }
         }
         else //WIP
         {
+            /*OpenPopUp();
+            int abilitySlot = -1;
+            while (abilitySlot == -1)
+            {
+                abilitySlot = await EventManager();
+            }*/
             abilityList[0].OnEnd();
             backup = abilityList[0];
             abilityList[0] = ability;
-            
+            //ClosePopUp();
         }
         return backup;
     }
@@ -213,6 +351,10 @@ public class NewPlayer : Entity
             res += " : Ready";
         } else if (ability.State == States.COOLDOWN)
         { 
+            res += $" : {Math.Round(ability.CurrentCooldown, 2)}";
+        }
+        else if (ability.State == States.PASSIVE && ability.CurrentCooldown >0)
+        {
             res += $" : {Math.Round(ability.CurrentCooldown, 2)}";
         }
         return res;
@@ -253,10 +395,11 @@ public class NewPlayer : Entity
     
     private void UpdateHUD() //used for HUD display
     {
-        statsValue = $" Health : {health} / {maxHealth}\n Attack Damage : {attackDamage}\n Ability Power : {abilityPower}\n Armor : {armor}\n Magic Resist : {magicResist}\n Movement Speed : {movementSpeed}\n Movement Speed% : {moveSpeed}\n Attack Speed : {attackSpeed}\n Lifesteal% : {lifesteal}\n Cooldown Reduction% : {cooldownReduction}\n Tenacity% : {tenacity}";
+        statsValue = $" Health : {health} / {maxHealth}\n Attack Damage : {attackDamage}\n Ability Power : {abilityPower}\n Armor : {armor}\n Magic Resist : {magicResist}\n Movement Speed : {movementSpeed}\n Movement Speed% : {moveSpeed}\n Attack Speed : {attackSpeed}\n Lifesteal% : {lifesteal}\n Heal Power% : {healingPower}";
         statsHUD2.text = statsValue;
-        abilitiesValue = $" Key 1 - {GetAbilityState(abilityList[0])}\n Key 2 - {GetAbilityState(abilityList[1])}\n Key 3 - {GetAbilityState(abilityList[2])}\n Key 4 - {GetAbilityState(abilityList[3])}";
-        abilitiesValue += $"\n \n{primaryWeapon.Name} - {primaryWeapon.Rarity}";
+        abilitiesValue = $" Key 1 - {GetAbilityState(abilityList[0])}\n Key 2 - {GetAbilityState(abilityList[1])}\n Key 3 - {GetAbilityState(abilityList[2])}\n Key 4 - {GetAbilityState(abilityList[3])}\n\n Class - {GetAbilityState(classPassive)}";
+        abilitiesValue += $"\n \n {primaryWeapon.Name} - {primaryWeapon.Rarity}";
+        abilitiesValue += $"\n Gem Count : {gemList.Count}";
         abilitiesHUD2.text = abilitiesValue;
         buffsValue = $"\n \n{GetBuffList()}";
         buffsHUD2.text = buffsValue;
@@ -264,6 +407,10 @@ public class NewPlayer : Entity
     
     private void HandleMovement()
     {
+        if (inEvent || !canMove)
+        {
+            return;
+        }
         // check if the player is owned by the local player
         if (!isOwned) { return; }
 
