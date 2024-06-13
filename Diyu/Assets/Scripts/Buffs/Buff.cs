@@ -32,6 +32,11 @@ namespace Buffs
         
         public abstract void Refresh(Buff buff);
 
+        public void Refresh(Entity target)
+        {
+            Target = target;
+        }
+
         
         //[Command]
         public void Tick(float delta)

@@ -39,7 +39,10 @@ namespace Entities
                 {
                     isnew = false;
                     //b.Refresh(buff);
-                    buffList[i] = buff;
+                    //buffList[i].OnEnd();
+                    //buffList[i] = buff;
+                    //buff.OnAdd();
+                    buffList[i].Refresh(buff);
                 }
             }
 
@@ -57,6 +60,7 @@ namespace Entities
             {
                 if (buffList[i].Id == buff.Id)
                 {
+                    buffList[i].OnEnd();
                     buffList.RemoveAt(i);
                 }
                 else
@@ -158,10 +162,7 @@ namespace Entities
             }
         }
 
-        public void OnDeath()
-        {
-            Destroy(gameObject);
-        }
+        public abstract void OnDeath();
         
         [Command(requiresAuthority = false)]
         public void CmdTakeDamage(float damage, DamageType damageType)

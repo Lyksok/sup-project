@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Weapons
 {
-    public class ThrownDagger : Entity
+    public class ThrownDagger : Projectile
     {
         [SerializeField]
         private float lifespan = 0.0f;

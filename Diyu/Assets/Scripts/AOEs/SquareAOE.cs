@@ -59,7 +59,7 @@ namespace AOEs
             Collider[] colliders = Physics.OverlapBox(center,size,orientation);
             foreach (var c in colliders)
             { 
-                Debug.LogError(c.gameObject.name);
+                //Debug.LogError(c.gameObject.name);
                 if (c.gameObject.GetComponentInParent<NetworkIdentity>() && (canAffectSelf || c.gameObject.GetComponentInParent<NetworkIdentity>().netId != user.netId))
                 {
                     var componentInParent = c.gameObject.GetComponentInParent<Entity>();

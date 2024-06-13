@@ -41,11 +41,15 @@ namespace AOEs
                 {
                     if (isBuff)
                     {
-                        target.AddBuff(buff);
+                        Buff newbuff = buff;
+                        newbuff.Refresh(target);
+                        target.AddBuff(newbuff);
                     }
                     else
                     {
-                        target.AddDebuff(buff);
+                        Buff newDebuff = buff;
+                        newDebuff.Refresh(target);
+                        target.AddDebuff(newDebuff);
                     }
                 }
             }

@@ -14,7 +14,7 @@ namespace Managers
 
         public int abilityCount
         {
-            get => 7;
+            get => 10;
         }
         
         public int weaponCount
@@ -57,6 +57,12 @@ namespace Managers
                     return new AbilityShockwave_6(rarity,target);
                 case 7:
                     return new AbilityVolley_7(rarity,target);
+                case 8:
+                    return new AbilityLifesteal_8(rarity,target);
+                case 9:
+                    return new AbilityLastStand_9(rarity,target);
+                case 10:
+                    return new AbilityThunder_10(rarity,target);
                 default:
                     return new AbilityNone_0();
             }
@@ -80,6 +86,12 @@ namespace Managers
                     return "Shockwave";
                 case 7:
                     return "Fire Volley";
+                case 8:
+                    return "Lifesteal";
+                case 9:
+                    return "Last Stand";
+                case 10:
+                    return "Thunder";
                 default:
                     return "No Abilities";
             }

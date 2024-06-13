@@ -9,19 +9,19 @@ using Object = UnityEngine.Object;
 
 namespace Abilities
 {
-    public class AbilityExplosion_3 : Ability
+    public class AbilityThunder_10 : Ability
     {
         public override int id { get => 3; }
         public AreaOfEffect aoe;
         public float damage;
         public float range;
-        private readonly GameObject _explosion;
+        private readonly GameObject _thunder;
         private readonly GameObject _indicator;
         private readonly GameObject _rangeIndicator;
         
-        public AbilityExplosion_3(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
+        public AbilityThunder_10(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Explosion";
+            Name = "Thunder";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -52,10 +52,10 @@ namespace Abilities
             Rarity = rarity;
             State = States.READY;
             Target = target;
-            range = 7.5f;
-            _explosion = Target.resources.projectileList[1];
+            range = 10f;
+            _thunder = Target.resources.projectileList[7];
             _indicator = Object.Instantiate(Target.resources.indicatorList[0], GetPostion(), Quaternion.identity);
-            _indicator.transform.localScale *= 3;
+            _indicator.transform.localScale *= 2;
             _indicator.SetActive(false);
             _rangeIndicator= Object.Instantiate(Target.resources.indicatorList[2], Target.model.transform.position - (Vector3.up * 0.95f), Quaternion.identity);
             _rangeIndicator.transform.localScale *= range;
@@ -72,7 +72,7 @@ namespace Abilities
                 {
                     Debug.DrawLine(ray.origin, hit.point);
                     var position = target.model.transform.position;
-                    position.y -= 0.95f;
+                    position.y -= 0.94f;
                     Vector3 hitPoint = new Vector3(hit.point.x, position.y, hit.point.z);
                     var hitPosDir = (hitPoint - position).normalized;
                     float dist = Vector3.Distance(hitPoint, position);
@@ -103,16 +103,16 @@ namespace Abilities
                 State = States.COOLDOWN;
                 CurrentCooldown = Cooldown;
                 Vector3 pos = GetPostion();
-                aoe = new AreaOfEffect(pos, 6.0f,Target,damage,null,true,false,DamageType.MAGICAL);
+                aoe = new AreaOfEffect(pos, 4.0f,Target,damage,new DebuffSlow(3,3,10,Target),false,false,DamageType.MAGICAL);
                 aoe.Effect(aoe.FindTargets());
-                GameObject newExplosion = Object.Instantiate(_explosion, pos, Quaternion.identity);
+                GameObject newExplosion = Object.Instantiate(_thunder, pos, Quaternion.identity);
                 //VisualEffect(pos);
             }
         }
 
         public IEnumerator VisualEffect(Vector3 pos)
         {
-            GameObject newExplosion = Object.Instantiate(_explosion, pos, Quaternion.identity);
+            GameObject newExplosion = Object.Instantiate(_thunder, pos, Quaternion.identity);
             newExplosion.SetActive(true);
             yield return new WaitForSeconds(0.5f);
             newExplosion.SetActive(false);

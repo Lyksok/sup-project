@@ -39,7 +39,12 @@ namespace Entities
                 //SrvMovement();
             }
         }
-        
+
+        public override void OnDeath()
+        {
+            Destroy(gameObject);
+        }
+
         [Command(requiresAuthority = false)]
         private void SrvStopMovement()
         {
