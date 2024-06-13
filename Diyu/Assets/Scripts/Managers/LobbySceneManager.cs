@@ -1,8 +1,12 @@
+using System;
+using System.Net;
+using System.Net.Sockets;
 using Mirror;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LobbySceneManager : MonoBehaviour
+public class LobbySceneManager : NetworkBehaviour
 {
     /*
      LobbySceneManager is responsible for managing the lobby scene.
@@ -11,6 +15,7 @@ public class LobbySceneManager : MonoBehaviour
      */
 
     private NetworkManager networkManager;
+    public TMP_Text localIp;
 
     // On start find network manager and set all menus to false exept waiting screen
 
@@ -20,6 +25,11 @@ public class LobbySceneManager : MonoBehaviour
         // Get the network manager
         networkManager = NetworkManager.singleton;
         // Debug.Log(networkManager.name);
+
+        if (isServer)
+        {
+            localIp.text = GetLocalIPAddress();
+        }
     }
 
     // Method to exit the waiting screen (exit the lobby)
@@ -34,8 +44,20 @@ public class LobbySceneManager : MonoBehaviour
     
         //SceneManager.LoadScene(networkManager.gameObject.GetComponent<MyNetworkRoomManager>().offlineScene);
     }
-
-    // TEMPORARY
+    
+    public static string GetLocalIPAddress()
+    {
+        var host = Dns.GetHostEntry(Dns.GetHostName());
+        foreach (var ip in host.AddressList)
+        {
+            if (ip.AddressFamily == AddressFamily.InterNetwork)
+            {
+                return ip.ToString();
+            }
+        }
+        throw new Exception("No network adapters with an IPv4 address in the system!");
+    }
+    
     // Temporary method to start the game as host (for testing)
     public void TempHostGame()
     {
