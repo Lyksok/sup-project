@@ -51,6 +51,6 @@ public class MainLoop : NetworkBehaviour
                                 player.AddBuff(new DebuffMapBurn(5,3,null,100,player));
                         }
                 }
-                Debug.LogError($"{players.Count}");
+                //Debug.LogError($"{players.Count}");
         }
 }
