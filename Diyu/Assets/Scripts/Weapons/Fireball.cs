@@ -59,7 +59,7 @@ using UnityEngine;
 
 namespace Weapons
 {
-    public class Fireball : Entity
+    public class Fireball : Projectile
     {
         [SerializeField]
         private float lifespan = 0.0f;

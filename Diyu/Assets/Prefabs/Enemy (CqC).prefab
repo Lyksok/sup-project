@@ -293,21 +293,24 @@ MonoBehaviour:
   primaryWeaponAttackKey: 323
   secondaryWeaponAttackKey: 324
   anchor: {fileID: 0}
-  health: 0
-  maxHealth: 0
-  attackDamage: 0
-  abilityPower: 0
+  health: 50
+  maxHealth: 50
+  attackDamage: 5
+  abilityPower: 5
   armor: 0
   magicResist: 0
-  moveSpeed: 0
-  attackSpeed: 0
-  healingPower: 0
-  cooldownReduction: 0
+  moveSpeed: 1
+  attackSpeed: 1
+  healingPower: 1
+  cooldownReduction: 1
   tenacity: 0
   lifesteal: 0
+  body: {fileID: 2614339480972811726}
+  model: {fileID: 541977698119173968}
   canMove: 0
   canAttack: 0
   canCast: 0
+  root: {fileID: 1631489571816230520}
   spawn: {fileID: 2123858580446492052}
   ded: {fileID: 1061216277372453865, guid: 7cebae751ce5de14188a39d6eda0281f, type: 3}
   AttackCD: 1
@@ -812,6 +815,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6462d091f282b24abbde0e77ab2cd14, type: 3}
+--- !u!1 &541977698119173968 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b6462d091f282b24abbde0e77ab2cd14,
+    type: 3}
+  m_PrefabInstance: {fileID: 811795864549784065}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &922865690978000362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b6462d091f282b24abbde0e77ab2cd14,

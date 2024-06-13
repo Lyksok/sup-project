@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Weapons
 {
-    public class Elementball : Entity
+    public class Elementball : Projectile
     {
         [SerializeField]
         private float lifespan = 0.0f;

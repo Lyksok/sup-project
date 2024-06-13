@@ -19,7 +19,7 @@ public class NewPlayer : Entity
     public CinemachineVirtualCamera playerVirtualCamera;
     public Canvas playerHUD;
     public float movementSpeed = 5f;
-    private LayerMask layerMask;
+    public LayerMask layerMask;
     [SyncVar] public Vector3 pos;
     [SyncVar] public Quaternion rot;
 
@@ -84,6 +84,11 @@ public class NewPlayer : Entity
         }
     }
 
+    
+    public override void OnDeath()
+    {
+        Destroy(gameObject);
+    }
 
     public void DebugOrb()
     {
@@ -141,18 +146,22 @@ public class NewPlayer : Entity
         if (abilityList[0] is AbilityNone_0 || abilityList[0].GetType() == ability.GetType())
         {
             backup = abilityList[0];
+            //abilityList[0].OnEnd();
             abilityList[0] = ability;
         } else if (abilityList[1] is AbilityNone_0 || abilityList[1].GetType() == ability.GetType())
         {
             backup = abilityList[1];
+            //abilityList[1].OnEnd();
             abilityList[1] = ability;
         } else if (abilityList[2] is AbilityNone_0 || abilityList[2].GetType() == ability.GetType())
         {
             backup = abilityList[2];
+            //abilityList[2].OnEnd();
             abilityList[2] = ability;
         } else if (abilityList[3] is AbilityNone_0 || abilityList[3].GetType() == ability.GetType())
         {
             backup = abilityList[3];
+            //abilityList[3].OnEnd();
             abilityList[3] = ability;
             ability.ChangeRarity(1);
         }

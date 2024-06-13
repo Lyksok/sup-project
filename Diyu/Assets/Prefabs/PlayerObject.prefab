@@ -832,11 +832,13 @@ MonoBehaviour:
   - {fileID: 1996432642297616750, guid: 36015262138588f4181c9efc7698095b, type: 3}
   - {fileID: 1996432642297616750, guid: 4410e5aa63d3ea440a89f1fc5c660c23, type: 3}
   - {fileID: 1996432642297616750, guid: 959951299c7c5344e949a403c921d26b, type: 3}
+  - {fileID: 4843045067119190212, guid: 22d0ac922d24e3a4e9435e3ec1d2b4fc, type: 3}
   particleList:
   - {fileID: 3667816805564532740, guid: afa3c445762db294392686bac257bfa1, type: 3}
   indicatorList:
   - {fileID: 6572906761774532393, guid: 8f8b813920f32054c8ee7269d9c37799, type: 3}
   - {fileID: 6572906761774532393, guid: d4363908d8aab8e4b98bd8978d45e9c2, type: 3}
+  - {fileID: 6572906761774532393, guid: a570282429a789d49b7c0e298d0f022b, type: 3}
   lootList:
   - {fileID: 4441857392704860318, guid: 6fa399c353c9a774aabb4433a16b2eac, type: 3}
 --- !u!1 &3095895027194075405
@@ -1827,6 +1829,9 @@ MonoBehaviour:
   playerVirtualCamera: {fileID: 6635885000260050420}
   playerHUD: {fileID: 2445849082776096680}
   movementSpeed: 5
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   pos: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0, w: 0}
   statsHUD: {fileID: 8695123752927629787}

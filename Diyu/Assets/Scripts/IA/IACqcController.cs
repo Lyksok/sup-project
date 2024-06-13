@@ -6,8 +6,10 @@ using System;
 using Entities;
 using Random = UnityEngine.Random;
 
-public class AiCqcController : Entity
+public class AiCqcController : Monster
 {
+    public GameObject root;
+    
     //where ai will return without target
     [SerializeField]
     private Transform spawn = null;
@@ -45,10 +47,7 @@ public class AiCqcController : Entity
         health = 50;
     }
 
-    private void Update()
-    {
-        if (health <= 0) { Die();}
-    }
+    private void Update() {}
 
     private bool CanSeeObject(GameObject go)
     {
@@ -66,16 +65,18 @@ public class AiCqcController : Entity
     }
     private void OnEnemySpotted(GameObject enemy)
     {
-        if (CanSeeObject(enemy))
+        NewPlayer player = enemy.GetComponentInParent<NewPlayer>();
+        if (CanSeeObject(enemy) && player != null)
         {
             //ai follows player until it leaves
-            ai.SetDestination(enemy.transform.position);
-            Life life = enemy.gameObject.GetComponent<Life>();
-            float distanceWithEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            var position = player.body.transform.position;
+            ai.SetDestination(position);
+            //Life life = enemy.gameObject.GetComponent<Life>();
+            float distanceWithEnemy = Vector3.Distance(transform.position, position);
             if (distanceWithEnemy <= 3 && TimeBetweenAttacks >= AttackCD)
             {
                 Debug.LogError("ATTAAAAAAAAAAAAAAAACK");
-                life.ChangeHP(-1.0f);
+                player.CmdTakeDamage(5,DamageType.PHYSICAL);
                 TimeBetweenAttacks = 0.0f;
             }
         }
@@ -90,9 +91,8 @@ public class AiCqcController : Entity
         CmdHeal(1000);
     }
 
-    private void Die()
+    public override void OnDeath()
     {
-        //Debug.Log("matteofdp");
         StartCoroutine(DestroAIRoutine());
     }
 
@@ -102,6 +102,6 @@ public class AiCqcController : Entity
         ParticleSystem particleSystem = Instantiate(ded, transform.position, transform.rotation);
         //Instantiate(DeathParticlePrefab, transform.position, Quaternion.identity);
         Instantiate(Redkey, transform.position, Quaternion.identity);
-        OnDeath();
+        Destroy(root);
     }
 }
