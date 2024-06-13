@@ -1,5 +1,6 @@
 using Abilities;
 using Entities;
+using Gems;
 using UnityEngine;
 using Weapons;
 
@@ -107,6 +108,56 @@ namespace Managers
             }
         }
 
+        public Gem GetGem(int id,Rarities rarity, Entity target)
+        {
+            switch (id)
+            {
+                case 1:
+                    return new GemAD(rarity,target);
+                case 2:
+                    return new GemAR(rarity,target);
+                case 3:
+                    return new GemMR(rarity,target);
+                case 4:
+                    return new GemLifeSteal(rarity,target);
+                case 5:
+                    return new GemHealPower(rarity,target);
+                case 6:
+                    return new GemHP(rarity,target);
+                case 7:
+                    return new GemAS(rarity,target);
+                case 8:
+                    return new GemAP(rarity,target);
+                default:
+                    return new GemAD(rarity,target);
+            }
+        }
+        
+        public string GetGemName(int id)
+        {
+            switch (id)
+            {
+                case 1:
+                    return "Attack Damage Gem";
+                case 2:
+                    return "Armor Gem";
+                case 3:
+                    return "Magic Resist Gem";
+                case 4:
+                    return "Lifesteal Gem";
+                case 5:
+                    return "Healing Power Gem";
+                case 6:
+                    return "Health Gem";
+                case 7:
+                    return "Attack Speed Gem";
+                case 8:
+                    return "Ability Power Gem";
+                default:
+                    return "No Gem";
+            }
+        }
+        
         public string GetAbilityName(int id)
         {
             switch (id)

@@ -245,8 +245,8 @@ namespace Entities
         [SyncVar] public float moveSpeed; //movement speed multiplier, 1 = 100%, 2 = 200%
         [SyncVar] public float attackSpeed; //# of attacks per second, 1 = 1 sec between each attack, 2 = 0.5 sec per attack
         [SyncVar] public float healingPower; //healing received multiplier, 1 = 100%, 2 = 200%
-        [SyncVar] public float cooldownReduction; //cooldown multiplier, 1 = 100% of original cooldown, hard cap at 50% CDR
-        [SyncVar] public float tenacity; //reduces debuffs & CCs duration
+        //[SyncVar] public float cooldownReduction; //cooldown multiplier, 1 = 100% of original cooldown, hard cap at 50% CDR
+        //[SyncVar] public float tenacity; //reduces debuffs & CCs duration
         [SyncVar] public float lifesteal; //health gained from damage, 1 = 100%, reduced by 50% to abilities
         
         public Dictionary<int,float> aspdModifiers;

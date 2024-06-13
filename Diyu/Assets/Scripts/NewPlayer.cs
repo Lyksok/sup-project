@@ -6,6 +6,7 @@ using Abilities;
 using Buffs;
 using Cinemachine;
 using Entities;
+using Gems;
 using JetBrains.Annotations;
 using Mirror;
 using TMPro;
@@ -44,6 +45,8 @@ public class NewPlayer : Entity
     private TextMeshProUGUI _popUpText;
     public int classId;
 
+    public List<Gem> gemList;
+    
     public override void OnStartLocalPlayer()
     {
         _dataManager = FindObjectOfType<DataManager>();
@@ -70,6 +73,7 @@ public class NewPlayer : Entity
         layerMask = LayerMask.GetMask("groundMask");
         buffList = new List<Buff>();
         debuffList = new List<Buff>();
+        gemList = new List<Gem>();
         //abilityList[0] = new AbilityRegen_1(Rarities.COMMON, this);
         //abilityList[1] = new AbilityHeal_2(Rarities.LEGENDARY, this);
         //abilityList[2] = new AbilityExplosion_3(Rarities.LEGENDARY, this);
@@ -111,6 +115,7 @@ public class NewPlayer : Entity
             //DebugPickupWpn();
             DebugOrb();
             DebugWeaponOrb();
+            DebugGemOrb();
             //SrvMovement();
             DebugDamage();
             //EventManager();
@@ -213,6 +218,18 @@ public class NewPlayer : Entity
         }
     }
     
+    public void DebugGemOrb()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && isLocalPlayer)
+        {
+            Vector3 pos = model.transform.position;
+            pos.y -= 0.95f;
+            pos.z -= 3;
+            Object.Instantiate(resources.lootList[2],pos,Quaternion.identity);
+            //Debug.LogError($"{pos}");
+        }
+    }
+    
     /*public void DebugPickup() //gives the player a random ability
     {
         if (Input.GetKeyDown(KeyCode.R) && isLocalPlayer)
@@ -249,6 +266,15 @@ public class NewPlayer : Entity
         Weapon backup = primaryWeapon;
         primaryWeapon = weapon;
         return backup;
+    }
+    
+    public void PickupGem(Gem gem)
+    {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+        gemList.Add(gem);
     }
     
     public Ability PickupAbility(Ability ability)
@@ -368,10 +394,11 @@ public class NewPlayer : Entity
     
     private void UpdateHUD() //used for HUD display
     {
-        statsValue = $" Health : {health} / {maxHealth}\n Attack Damage : {attackDamage}\n Ability Power : {abilityPower}\n Armor : {armor}\n Magic Resist : {magicResist}\n Movement Speed : {movementSpeed}\n Movement Speed% : {moveSpeed}\n Attack Speed : {attackSpeed}\n Lifesteal% : {lifesteal}\n Cooldown Reduction% : {cooldownReduction}\n Tenacity% : {tenacity}";
+        statsValue = $" Health : {health} / {maxHealth}\n Attack Damage : {attackDamage}\n Ability Power : {abilityPower}\n Armor : {armor}\n Magic Resist : {magicResist}\n Movement Speed : {movementSpeed}\n Movement Speed% : {moveSpeed}\n Attack Speed : {attackSpeed}\n Lifesteal% : {lifesteal}\n Heal Power% : {healingPower}";
         statsHUD2.text = statsValue;
         abilitiesValue = $" Key 1 - {GetAbilityState(abilityList[0])}\n Key 2 - {GetAbilityState(abilityList[1])}\n Key 3 - {GetAbilityState(abilityList[2])}\n Key 4 - {GetAbilityState(abilityList[3])}\n\n Class - {GetAbilityState(classPassive)}";
         abilitiesValue += $"\n \n {primaryWeapon.Name} - {primaryWeapon.Rarity}";
+        abilitiesValue += $"\n Gem Count : {gemList.Count}";
         abilitiesHUD2.text = abilitiesValue;
         buffsValue = $"\n \n{GetBuffList()}";
         buffsHUD2.text = buffsValue;
