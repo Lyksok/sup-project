@@ -4,6 +4,7 @@ using System.Net;
 using UnityEngine.UI;
 using TMPro;
 using Mirror;
+using UnityEngine.Serialization;
 
 public class MenuManager : MonoBehaviour
 {
@@ -12,32 +13,30 @@ public class MenuManager : MonoBehaviour
     It contains methods that are called by the buttons in the scene.
     */
 
-    // Initialize login menu attributs
-    [SerializeField] private TMP_InputField nameInput;
-
-    // Initialize all menus as variables
-    public GameObject mainMenu;
-    public GameObject joinMenu;
+    
 
     // Initialize join game menu variables
     [SerializeField] private TMP_InputField ipInput;
     [SerializeField] private TMP_Text incorrectInputText;
+    
+    public NetworkManager networkManager; 
+    public LocalDataManager localDataManager;
 
-    // Initialize all gameobject prefabs
-    [SerializeField] private GameObject playerPrefab;
-
-    // Initialize id manager
-    [SerializeField] private IdManager idManager;
-   
-    public NetworkManager networkManager;
-
-
+    // Initialize all menus as variables
+    [Header("All pages")]
+    public GameObject mainMenu;
+    public GameObject joinPage;
+    public GameObject playerInfoPage;
+    public GameObject selectClassPage;
+    
     // Start is called before the first frame update
     void Start()
     {
         // Insures that only main menu is active at the start
         mainMenu.SetActive(true);
-        joinMenu.SetActive(false);
+        joinPage.SetActive(false);
+        playerInfoPage.SetActive(false);
+        selectClassPage.SetActive(false);
     }
 
     // Verify if the input is a valid IP address
@@ -106,6 +105,19 @@ public class MenuManager : MonoBehaviour
         else
         {
             incorrectInputText.gameObject.SetActive(true);
+        }
+    }
+
+    public void ValidateInputs()
+    {
+        if (localDataManager.CheckInputs())
+        {
+            // Do nothing because there are problems
+        }
+        else
+        {
+            playerInfoPage.SetActive(false);
+            joinPage.SetActive(true);
         }
     }
 

@@ -37,6 +37,7 @@ public class NewPlayer : Entity
     private TextMeshProUGUI buffsHUD2;
 
     private DataManager _dataManager;
+    private string _name;
 
     public override void OnStartLocalPlayer()
     {
