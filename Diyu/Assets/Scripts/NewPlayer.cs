@@ -35,6 +35,23 @@ public class NewPlayer : Entity
     private string buffsValue;
     private TextMeshProUGUI buffsHUD2;
 
+    private DataManager _dataManager;
+
+    public override void OnStartLocalPlayer()
+    {
+        _dataManager = FindObjectOfType<DataManager>();
+        _dataManager.AddPlayer(netIdentity,gameObject);
+        
+        base.OnStartLocalPlayer();
+    }
+
+    public override void OnStopLocalPlayer()
+    {
+        _dataManager.RemovePlayer(netIdentity);
+        
+        base.OnStopLocalPlayer();
+    }
+
     private void Start()
     {
         statsHUD2 = statsHUD.GetComponent<TextMeshProUGUI>();
@@ -113,6 +130,7 @@ public class NewPlayer : Entity
     {
         if (Input.GetKeyDown(KeyCode.F) && isLocalPlayer)
         {
+            Debug.LogError(_dataManager.DebugPlayers());
             int rank = RandomNumberGenerator.GetInt32(0, 5);
             int id = RandomNumberGenerator.GetInt32(1, resources.weaponCount + 1);
             Weapon weapon = resources.GetWeapon(id, resources.GetRarity(rank), this);
