@@ -13,6 +13,8 @@ namespace Weapons
         public abstract int id { get; }
         public Entity User;
         public Rarities Rarity; //Rarity of the weapon, changes stats
+
+        public float timeSinceLastAttack;
         
         protected DamageType type; //type of damage dealt
         public float damagePercent; //% of AD/AP of the user taken for damage calculations
@@ -67,6 +69,7 @@ namespace Weapons
         //public abstract void RpcAttack(Transform source);
         public void Tick(float delta)
         {
+            timeSinceLastAttack += delta;
             if (!CanAttack)
             {
                 CurrentCooldown -= delta;

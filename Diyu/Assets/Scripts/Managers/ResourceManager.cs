@@ -16,11 +16,50 @@ namespace Managers
         {
             get => 10;
         }
-        
-        public int weaponCount
+
+        public void SetClass(NewPlayer player, int id)
         {
-            get => 8;
+            switch (id)
+            {
+                case 1:
+                    player.PickupWeapon(new Firespell(Rarities.COMMON,player));
+                    player.classPassive = new AbilityArcanist_04(Rarities.COMMON,player);
+                    break;
+                case 2:
+                    player.PickupWeapon(new SwordAttack(Rarities.COMMON,player));
+                    player.classPassive = new AbilityBulwark_01(Rarities.COMMON,player);
+                    break;
+                case 3:
+                    player.PickupWeapon(new AxeAttack(Rarities.COMMON,player));
+                    player.classPassive = new AbilityBerserk_5(Rarities.COMMON,player);
+                    break;
+                case 4:
+                    player.PickupWeapon(new ScytheAttack(Rarities.COMMON,player));
+                    player.classPassive = new AbilityLifesteal_8(Rarities.COMMON,player);
+                    break;
+                case 5:
+                    player.PickupWeapon(new ScepterAttack(Rarities.COMMON,player));
+                    player.classPassive = new AbilityMagicMastery_06(Rarities.COMMON,player);
+                    break;
+                case 6:
+                    player.PickupWeapon(new ConjurationAttack(Rarities.COMMON,player));
+                    player.classPassive = new AbilityElemental_03(Rarities.COMMON,player);
+                    break;
+                case 7:
+                    player.PickupWeapon(new BowAttack(Rarities.COMMON,player));
+                    player.classPassive = new AbilityAttackMS_02(Rarities.COMMON,player);
+                    break;
+                case 8:
+                    player.PickupWeapon(new DaggerAttack(Rarities.COMMON,player));
+                    player.classPassive = new AbilityAssassin_05(Rarities.COMMON,player);
+                    break;
+                default:
+                    player.PickupWeapon(new SwordAttack(Rarities.COMMON,player));
+                    player.classPassive = new AbilityBulwark_01(Rarities.COMMON,player);
+                    break;
+            }
         }
+        
         public Rarities GetRarity(int rank)
         {
             switch (rank)
@@ -92,6 +131,31 @@ namespace Managers
                     return "Last Stand";
                 case 10:
                     return "Thunder";
+                default:
+                    return "No Abilities";
+            }
+        }
+        
+        public string GetWeaponName(int id)
+        {
+            switch (id)
+            {
+                case 1:
+                    return "Fireball Spell Book";
+                case 2:
+                    return "Sword";
+                case 3:
+                    return "Axe";
+                case 4:
+                    return "Scythe";
+                case 5:
+                    return "Magic Scepter";
+                case 6:
+                    return "Conjuration Catalyst";
+                case 7:
+                    return "Bow";
+                case 8:
+                    return "Throwing Daggers";
                 default:
                     return "No Abilities";
             }

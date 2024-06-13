@@ -9,6 +9,7 @@ public class DataManager : MonoBehaviour
     private List<DataCharacter> _classCharacters = new List<DataCharacter>();
     public List<GameObject> prefabs = new List<GameObject>(); 
     public List<(uint,GameObject)> Players = new List<(uint, GameObject)>();
+    public MainLoop loop;
     private void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
@@ -22,6 +23,7 @@ public class DataManager : MonoBehaviour
     public void AddPlayer(NetworkIdentity identity, GameObject player)
     {
         Players.Add((identity.netId,player));
+        loop.players.Add(player.GetComponentInChildren<NewPlayer>());
     }
 
     public void RemovePlayer(NetworkIdentity identity)

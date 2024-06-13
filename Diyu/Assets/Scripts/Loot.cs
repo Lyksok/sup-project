@@ -32,7 +32,7 @@ namespace Entities
         {
             NewPlayer player = other.gameObject.GetComponentInParent<NewPlayer>();
             //Debug.LogError(player != null);
-            if (player == null)
+            if (player == null || cooldown > 0)
             {
                 return;
             }

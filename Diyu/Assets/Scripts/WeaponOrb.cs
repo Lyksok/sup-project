@@ -4,33 +4,34 @@ using Abilities;
 using JetBrains.Annotations;
 using Managers;
 using UnityEngine;
+using Weapons;
 
 namespace Entities
 {
-    public class AbilityOrb : Loot
+    public class WeaponOrb : Loot
     {
         public ResourceManager resources;
-        private int _abilityId;
+        private int _weaponId;
         private Rarities _rarity;
         
         public void Start()
         {
-                _abilityId = RandomNumberGenerator.GetInt32(1, resources.abilityCount + 1);
-                _rarity = resources.GetRarity(RandomNumberGenerator.GetInt32(0, 5));
-                UpdateInfo();
+            _weaponId = RandomNumberGenerator.GetInt32(1, 8 + 1);
+            _rarity = resources.GetRarity(RandomNumberGenerator.GetInt32(0, 5));
+            UpdateInfo();
         }
         
         public override void OnPickup(NewPlayer player)
         {
             //Debug.LogError("Picked up");
-            Ability replaced = player.PickupAbility(player.resources.GetAbility(_abilityId,_rarity,player));
-            if (replaced is AbilityNone_0)
+            Weapon replaced = player.PickupWeapon(player.resources.GetWeapon(_weaponId,_rarity,player));
+            if (replaced is null)
             {
                 Collected();
             }
             else
             {
-                _abilityId = replaced.id;
+                _weaponId = replaced.id;
                 _rarity = replaced.Rarity;
             }
             UpdateInfo();
@@ -39,7 +40,7 @@ namespace Entities
 
         public override void UpdateInfo()
         {
-            text.text = $"{resources.GetAbilityName(_abilityId)} - {_rarity}";
+            text.text = $"{resources.GetWeaponName(_weaponId)} - {_rarity}";
         }
     }
 }
