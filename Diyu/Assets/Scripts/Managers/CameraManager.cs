@@ -27,10 +27,16 @@ public class CameraManager : MonoBehaviour
     {
         //Debug.LogError(pb.isOwned);
         if (!pb.isOwned) { return; }
-        if (Input.GetKeyDown(KeyCode.Y))
+        if (Input.GetKeyDown(KeyCode.Y) || pb.isSpectator)
         {
-            vCam = !vCam;
-
+            if (pb.isSpectator)
+            {
+                vCam = false;
+            }
+            else
+            {
+                vCam = !vCam;
+            }
             if (vCam)
             {
                 CmVirtualCamera.gameObject.SetActive(true);
@@ -48,18 +54,18 @@ public class CameraManager : MonoBehaviour
             float x = Input.mousePosition.x;
             float y = Input.mousePosition.y;
 
-            if (y < 10)
+            if (y < 30)
             {
                 mainCamera.transform.position -= Vector3.forward * (Time.deltaTime * 25);
-            } else if (y > Screen.height - 10)
+            } else if (y > Screen.height - 30)
             {
                 mainCamera.transform.position -= Vector3.back * (Time.deltaTime * 25);
             }
             
-            if (x < 10)
+            if (x < 30)
             {
                 mainCamera.transform.position -= Vector3.right * (Time.deltaTime * 25);
-            } else if (x > Screen.width - 10)
+            } else if (x > Screen.width - 30)
             {
                 mainCamera.transform.position -= Vector3.left * (Time.deltaTime * 25);
             }
