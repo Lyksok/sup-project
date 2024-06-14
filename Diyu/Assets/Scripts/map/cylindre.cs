@@ -12,6 +12,7 @@ namespace Entities.map
         public GameObject door_;
         public float smoothTime = 0.5f;
         public bool key = false;
+        public int count = 0;
         private void OnTriggerEnter(Collider collider)
         {
             NewPlayer pb = collider.GetComponentInParent<NewPlayer>();
@@ -29,8 +30,9 @@ namespace Entities.map
 
         private void Update()
         {
-            if (key)
+            if (key && count < 320)
             {
+                count++;
                 door_.transform.Translate(transform.up * (-1 * speed * Time.deltaTime));
             }
         }
