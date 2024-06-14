@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GreenKey : MonoBehaviour
+public class Key : MonoBehaviour
 {
     public UnityEvent unityEvent = new UnityEvent();
     public GameObject bouton;
@@ -20,7 +20,7 @@ public class GreenKey : MonoBehaviour
         PlayerBody pb = other.GetComponent<PlayerBody>();
         if (pb != null)
         {
-            pb.GetGreenKey = true;
+            pb.Keys ++;
             Destroy(gameObject);
         }
     }

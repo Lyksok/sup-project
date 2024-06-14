@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-public class RedDoor : MonoBehaviour
+public class Door : MonoBehaviour
 {
     
     public float speed = 3;
@@ -11,7 +11,7 @@ public class RedDoor : MonoBehaviour
     public float smoothTime = 0.5f;
     public bool key = false;
     [SerializeField] public SightZone sketuve = null;
-    public bool caca = false;
+    public bool boul = false;
 
     // Start is called before the first frame update
     void Start()
@@ -23,24 +23,25 @@ public class RedDoor : MonoBehaviour
     }
     void Open(GameObject player)
     {
-        Debug.Log("oui");
-        PlayerBody pb = player.gameObject.GetComponent<PlayerBody>();
-        if (pb.GetRedKey && Input.GetKeyDown(KeyCode.E))
-        {
-            transform.Translate(-1 * transform.up * speed * Time.deltaTime);
-            key = true;
-            caca = true;
-            pb.GetRedKey = false;
-            Debug.Log("test");
-        }
+        // PlayerBody pb = player.gameObject.GetComponent<NewPlayer>();
+        // if (pb.GetGreenKey && Input.GetKeyDown(KeyCode.E))
+        // {
+        //     
+        //     door_.transform.Translate(-1 * transform.up * speed * Time.deltaTime);
+        //     key = true;
+        //     caca = true;
+        //     pb.GetGreenKey = false;
+        //     Debug.Log("test");
+        // }
+        // TODO : à refaire
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (caca)
+        if (boul)
         {
-            transform.Translate(-1 * transform.up * speed * Time.deltaTime);
+            door_.transform.Translate(-1 * transform.up * speed * Time.deltaTime);
         }
     }
 }
