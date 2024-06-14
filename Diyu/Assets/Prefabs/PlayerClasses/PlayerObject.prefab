@@ -2049,6 +2049,7 @@ MonoBehaviour:
   statsHUD: {fileID: 8695123752927629787}
   abilitiesHUD: {fileID: 1147742174065043890}
   buffsHUD: {fileID: 1691058987869588144}
+  Keys: 100
   popUp: {fileID: 6030368205771637782}
   classId: 1
 --- !u!114 &3008909449444402458

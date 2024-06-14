@@ -63,6 +63,7 @@ public class NewPlayer : Entity
         base.OnStopLocalPlayer();
     }
 
+    public uint Keys = 100;
     private void Start()
     {
         inEvent = false;
