@@ -11,7 +11,8 @@ namespace Gems
         
         public GemLifeSteal(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Gem
         {
-            Name = "Lifesteal Gem";
+            displayName = "Lifesteal Gem";
+            displayDesc = "Permanently boosts Lifesteal";
             switch (rarity)
             {
                 case Rarities.COMMON:

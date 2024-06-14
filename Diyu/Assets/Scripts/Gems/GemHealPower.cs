@@ -11,7 +11,8 @@ namespace Gems
         
         public GemHealPower(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Gem
         {
-            Name = "Healing Power Gem";
+            displayName = "Healing Power Gem";
+            displayDesc = "Permanently boosts Healing Power";
             switch (rarity)
             {
                 case Rarities.COMMON:

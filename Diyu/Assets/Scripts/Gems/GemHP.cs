@@ -11,7 +11,8 @@ namespace Gems
         
         public GemHP(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Gem
         {
-            Name = "Health Gem";
+            displayName = "Health Gem";
+            displayDesc = "Permanently boosts Max Health";
             switch (rarity)
             {
                 case Rarities.COMMON:

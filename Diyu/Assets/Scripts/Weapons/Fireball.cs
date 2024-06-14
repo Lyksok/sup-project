@@ -107,7 +107,7 @@ namespace Weapons
             //Debug.LogError(target != null);
             if (target != null)
             {
-                target.CmdTakeDamage(damage,DamageType.MAGICAL);
+                target.CmdTakeDamage(damage,DamageType.MAGICAL,attacker);
                 OnDeath();
             }
             //if (!rb && !target)

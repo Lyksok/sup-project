@@ -76,7 +76,7 @@ public class AiCqcController : Monster
             if (distanceWithEnemy <= 3 && TimeBetweenAttacks >= AttackCD)
             {
                 Debug.LogError("ATTAAAAAAAAAAAAAAAACK");
-                player.CmdTakeDamage(5,DamageType.PHYSICAL);
+                player.CmdTakeDamage(5,DamageType.PHYSICAL,this);
                 TimeBetweenAttacks = 0.0f;
             }
         }

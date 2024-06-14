@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Weapons
 {
     //Abstract class used for managing Weapons
-    public abstract class Weapon
+    public abstract class Weapon : DescribableObject
     {
         public string Name { get; set; }
         public string Desc { get; set; }

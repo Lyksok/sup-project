@@ -11,7 +11,8 @@ namespace Gems
         
         public GemAD(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Gem
         {
-            Name = "Attack Damage Gem";
+            displayName = "Attack Damage Gem";
+            displayDesc = "Permanently boosts Attack Damage";
             switch (rarity)
             {
                 case Rarities.COMMON:

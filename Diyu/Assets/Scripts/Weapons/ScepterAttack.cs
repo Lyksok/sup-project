@@ -96,6 +96,7 @@ namespace Weapons
             var position = anchor.transform.position;
             GameObject newFireball = Object.Instantiate(_energyball, position, Quaternion.identity);
             newFireball.GetComponent<Energyball>().damage = (baseDamage + damagePercent * User.abilityPower);
+            newFireball.GetComponent<Energyball>().attacker = User;
             Rigidbody rb = newFireball.GetComponent<Rigidbody>();
 
             rb.AddForce(Speed * anchor.transform.forward, ForceMode.VelocityChange);

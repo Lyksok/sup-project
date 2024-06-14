@@ -12,7 +12,7 @@ namespace Abilities
         
         public AbilityLastStand_9(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Last Stand";
+            displayName = "Last Stand";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -52,7 +52,7 @@ namespace Abilities
                     Cooldown = 35;
                     break;
             }
-
+            displayDesc = $"Automatically triggers when below 30% Health. Heals you for {HealAmount} Health, and gives you +{ArmorBuff} Armor and Magic Resist for 10 seconds. Has a {Cooldown} seconds cooldown.";
             CurrentCooldown = 0;
             Rarity = rarity;
             State = States.PASSIVE;
@@ -122,6 +122,7 @@ namespace Abilities
                     break;
             }
             Rarity = rarity;
+            displayDesc = $"Automatically triggers when below 30% Health. Heals you for {HealAmount} Health, and gives you +{ArmorBuff} Armor and Magic Resist for 10 seconds. Has a {Cooldown} seconds cooldown.";
         }
     }
 }

@@ -844,6 +844,8 @@ MonoBehaviour:
   - {fileID: 4441857392704860318, guid: 6fa399c353c9a774aabb4433a16b2eac, type: 3}
   - {fileID: 4441857392704860318, guid: d1a846476666b054fbe669b84f536ffa, type: 3}
   - {fileID: 4441857392704860318, guid: cbb7457c910d465448a261853fd0f310, type: 3}
+  abilityIconList: []
+  passiveAbilityIconList: []
 --- !u!1 &3095895027194075405
 GameObject:
   m_ObjectHideFlags: 0

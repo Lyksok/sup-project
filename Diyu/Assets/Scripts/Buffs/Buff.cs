@@ -5,16 +5,17 @@ using UnityEngine;
 
 namespace Buffs
 {
-    public abstract class Buff
+    public abstract class Buff : DescribableObject
     {
         public string Name;
 
         public string Desc;
-
+        public int iconId;
         public int Id;
         public float timer;
         public Entity Target;
         public float? Duration { get; set; } = 0; //Time left on the buff, null if permanent
+        public float? maxDuration;
 
         protected float BaseDuration { get; }
         public bool permanent

@@ -20,7 +20,7 @@ namespace Abilities
         
         public AbilityShockwave_6(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Shockwave";
+            displayName = "Shockwave";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -48,6 +48,7 @@ namespace Abilities
                     Cooldown = 10;
                     break;
             }
+            displayDesc = $"Creates a shockwave at your location, dealing {damage} damage to all enemies hit. Has a {Cooldown} seconds cooldown.";
             Rarity = rarity;
             State = States.READY;
             Target = target;
@@ -137,6 +138,7 @@ namespace Abilities
                     break;
             }
             Rarity = rarity;
+            displayDesc = $"Creates a shockwave at your location, dealing {damage} damage to all enemies hit. Has a {Cooldown} seconds cooldown.";
         }
     }
 }

@@ -6,6 +6,7 @@ namespace Weapons
 {
     public abstract class Projectile : Entity
     {
+        public Entity attacker;
         //protected abstract float BulletSpeed { get; }
         //protected abstract float BulletLifeCycle { get; }
         //public abstract void OnTriggerEnter(Collider other);

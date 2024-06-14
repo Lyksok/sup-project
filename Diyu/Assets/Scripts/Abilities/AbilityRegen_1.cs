@@ -11,7 +11,7 @@ namespace Abilities
         
         public AbilityRegen_1(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Regeneration";
+            displayName = "Regeneration";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -39,7 +39,7 @@ namespace Abilities
                     Delay = 1;
                     break;
             }
-
+            displayDesc = $"Passively regenerate {HealAmount} Health every {Delay} seconds.";
             Rarity = rarity;
             State = States.PASSIVE;
             Target = target;
@@ -99,6 +99,7 @@ namespace Abilities
             }
             Rarity = rarity;
             Target.AddBuff(new BuffRegen(HealAmount, Delay, null, 1, Target));
+            displayDesc = $"Passively regenerate {HealAmount} Health every {Delay} seconds.";
         }
     }
 }

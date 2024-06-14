@@ -10,7 +10,7 @@ namespace Abilities
         
         public AbilityArcanist_04(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Conjuration";
+            displayName = "Conjuration";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -32,7 +32,7 @@ namespace Abilities
                     apBuff = 17.5f;
                     break;
             }
-
+            displayDesc = $"Gain +{apBuff} Ability Power";
             Rarity = rarity;
             State = States.PASSIVE;
             Target = target;
@@ -85,6 +85,7 @@ namespace Abilities
                     break;
             }
             Rarity = rarity;
+            displayDesc = $"Gain +{apBuff} Ability Power";
             Target.AddBuff(new BuffAP(apBuff, null, 204, Target));
         }
     }

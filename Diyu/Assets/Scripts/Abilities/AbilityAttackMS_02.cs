@@ -11,7 +11,7 @@ namespace Abilities
         
         public AbilityAttackMS_02(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Hunt";
+            displayName = "Hunter's Mark";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -33,6 +33,7 @@ namespace Abilities
                     Speed = 0.35f;
                     break;
             }
+            displayDesc = $"Gain +{Speed}% Movement Speed for 1 second after attacking";
 
             //Cooldown = 3;
             //CurrentCooldown = 0;
@@ -43,7 +44,7 @@ namespace Abilities
 
         public override void OnEnd()
         {
-            Target.RemoveBuff(new BuffMS(Speed, 3, 4, Target));
+            Target.RemoveBuff(new BuffMS(Speed, 1, 202, Target));
         }
 
         public override void PassiveEffect()
@@ -88,6 +89,7 @@ namespace Abilities
                     Speed = 0.35f;
                     break;
             }
+            displayDesc = $"Gain +{Speed}% Movement Speed for 1 second after attacking";
             Rarity = rarity;
         }
     }

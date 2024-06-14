@@ -2,6 +2,7 @@ using Abilities;
 using Entities;
 using Gems;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Weapons;
 
 namespace Managers
@@ -12,7 +13,10 @@ namespace Managers
         public ParticleSystem[] particleList; //handles particle spawning
         public GameObject[] indicatorList; //used to preview abilities
         public GameObject[] lootList;
-
+        public Sprite[] buffIconList;
+        public Sprite[] abilityIconList;
+        public Sprite[] passiveAbilityIconList; //class passives icons
+        
         public int abilityCount
         {
             get => 10;

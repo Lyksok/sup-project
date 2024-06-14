@@ -15,6 +15,8 @@ namespace Buffs
             Id = id;
             Desc = "You take reduced magical damage.";
             Target = target;
+            maxDuration = duration;
+            iconId = 5;
         }
 
         public override void Effect()

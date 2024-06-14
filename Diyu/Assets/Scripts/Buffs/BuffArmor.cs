@@ -15,6 +15,8 @@ namespace Buffs
             Id = id;
             Desc = "Damage taken is reduced.";
             Target = target;
+            maxDuration = duration;
+            iconId = 2;
         }
 
         public override void Effect()

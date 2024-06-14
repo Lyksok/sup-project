@@ -11,7 +11,8 @@ namespace Gems
         
         public GemAR(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Gem
         {
-            Name = "Armor Gem";
+            displayName = "Armor Gem";
+            displayDesc = "Permanently boosts Armor";
             switch (rarity)
             {
                 case Rarities.COMMON:

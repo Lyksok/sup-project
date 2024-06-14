@@ -11,7 +11,7 @@ namespace Abilities
         
         public AbilityBulwark_01(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Bulwark";
+            displayName = "Bulwark";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -33,7 +33,7 @@ namespace Abilities
                     ArmorBuff = 10; 
                     break;
             }
-
+            displayDesc = $"Gain +{ArmorBuff} Armor and Magic Resistance after not attacking for 3 seconds";
             Cooldown = 3;
             CurrentCooldown = 0;
             Rarity = rarity;
@@ -94,6 +94,7 @@ namespace Abilities
                     break;
             }
             Rarity = rarity;
+            displayDesc = $"Gain +{ArmorBuff} Armor and Magic Resistance after not attacking for 3 seconds";
         }
     }
 }

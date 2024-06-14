@@ -25,7 +25,7 @@ namespace Abilities
         
         public AbilityVolley_7(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Fire Volley";
+            displayName = "Fireball Volley";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -59,6 +59,7 @@ namespace Abilities
                     count = 5;
                     break;
             }
+            displayDesc = $"Fires {count} fireballs in a quick succession, each dealing {damage} damage. Has a {Cooldown} seconds cooldown.";
             Rarity = rarity;
             State = States.READY;
             Target = target;
@@ -157,6 +158,7 @@ namespace Abilities
                     break;
             }
             Rarity = rarity;
+            displayDesc = $"Fires {count} fireballs in a quick succession, each dealing {damage} damage. Has a {Cooldown} seconds cooldown.";
         }
     }
 }

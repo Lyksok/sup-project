@@ -10,7 +10,7 @@ namespace Abilities
         
         public AbilityAssassin_05(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Assassin";
+            displayName = "Assassin's Mastery";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -32,7 +32,7 @@ namespace Abilities
                     adBuff = 17.5f;
                     break;
             }
-
+            displayDesc = $"Gain +{adBuff} Attack Damage";
             Rarity = rarity;
             State = States.PASSIVE;
             Target = target;
@@ -84,6 +84,7 @@ namespace Abilities
                     adBuff = 17.5f;
                     break;
             }
+            displayDesc = $"Gain +{adBuff} Attack Damage";
             Rarity = rarity;
             Target.AddBuff(new BuffAD(adBuff, null, 205, Target));
         }
