@@ -27,7 +27,7 @@ public class Metal : MonoBehaviour
             Vie -=1;
             Debug.Log("caillou");
             if (Vie == 0)
-                Destroy(metal);
+                Destroy(this);
         }
     }
 
