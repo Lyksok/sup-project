@@ -36,7 +36,7 @@ namespace AOEs
         {
             foreach (var target in targets)
             {
-                target.CmdTakeDamage(damage,damageType);
+                target.CmdTakeDamage(damage,damageType,user);
                 if (buff != null)
                 {
                     if (isBuff)

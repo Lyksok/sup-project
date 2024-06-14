@@ -21,7 +21,7 @@ namespace Abilities
         
         public AbilityExplosion_3(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Explosion";
+            displayName = "Explosion";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -49,6 +49,7 @@ namespace Abilities
                     Cooldown = 10;
                     break;
             }
+            displayDesc = $"Creates an explosion at your cursor's location, dealing {damage} damage to all enemies hit. Has a {Cooldown} seconds cooldown.";
             Rarity = rarity;
             State = States.READY;
             Target = target;
@@ -160,6 +161,7 @@ namespace Abilities
                     break;
             }
             Rarity = rarity;
+            displayDesc = $"Creates an explosion at your cursor's location, dealing {damage} damage to all enemies hit. Has a {Cooldown} seconds cooldown.";
         }
     }
 }

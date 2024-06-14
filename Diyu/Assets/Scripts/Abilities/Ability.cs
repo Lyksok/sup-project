@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Abilities
 {
     //Abstract class used for managing Abilities
-    public abstract class Ability 
+    public abstract class Ability : DescribableObject
     {
         public string Name { get; protected set; }
         public string Desc { get; protected set; }
@@ -15,7 +15,7 @@ namespace Abilities
         public Rarities Rarity { get; protected set; } //Rarity of the ability, changes stats
         public float CurrentCooldown { get; set; } = 0; //Current cooldown, if >= Cooldown the ability can be used, is set to 0 when used (c'est l'inverse en fait lol)
         protected float CurrentDuration { get; set; } = 0; //Current Duration, if == 0 the ability ends
-        protected float Cooldown { get; set; } //Base cooldown of the ability
+        public float Cooldown { get; set; } //Base cooldown of the ability
         public States State;
         protected bool CanUse => State == States.READY;
         public abstract void OnEnd(); //Deletes the effect of the ability, called when the ability is removed / swapped out

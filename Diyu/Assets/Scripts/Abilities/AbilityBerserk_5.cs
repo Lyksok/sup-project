@@ -10,7 +10,7 @@ namespace Abilities
         
         public AbilityBerserk_5(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Berserk";
+            displayName = "Berserk";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -32,7 +32,7 @@ namespace Abilities
                     aspd = 0.095f;
                     break;
             }
-
+            displayDesc = $"Gain +{aspd}% Attack Speed for every 5% of your missing Health";
             Rarity = rarity;
             State = States.PASSIVE;
             Target = target;
@@ -84,6 +84,7 @@ namespace Abilities
                     aspd = 0.095f;
                     break;
             }
+            displayDesc = $"Gain +{aspd}% Attack Speed for every 5% of your missing Health";
             Rarity = rarity;
             Target.AddBuff(new BuffBerserk(aspd, null, 5, Target));
         }

@@ -20,6 +20,8 @@ namespace Buffs
             Target = target;
             timer = Delay;
             //Debug.LogError(Delay);
+            maxDuration = duration;
+            iconId = 7;
         }
 
         public override void Effect()

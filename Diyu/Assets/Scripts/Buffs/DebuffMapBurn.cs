@@ -27,7 +27,7 @@ namespace Buffs
             if (timer <= 0)
             {
                 timer = Delay;
-                Target.CmdTakeDamage(DamageAmount,DamageType.TRUE_DAMAGE);
+                Target.CmdTakeDamage(DamageAmount,DamageType.TRUE_DAMAGE,null);
             }
         }
 

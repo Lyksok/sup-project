@@ -1,4 +1,5 @@
-﻿using Buffs;
+﻿using System;
+using Buffs;
 using Entities;
 
 namespace Abilities
@@ -10,7 +11,7 @@ namespace Abilities
         
         public AbilityLifesteal_8(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Lifesteal";
+            displayName = "Reaper's Mark";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -32,7 +33,7 @@ namespace Abilities
                     StealAmount = 0.2f;
                     break;
             }
-
+            displayDesc = $"Gain +{Math.Round(StealAmount*100)}% Lifesteal.";
             Rarity = rarity;
             State = States.PASSIVE;
             Target = target;
@@ -86,6 +87,7 @@ namespace Abilities
             }
             Rarity = rarity;
             Target.AddBuff(new BuffLifesteal(StealAmount, null, 8, Target));
+            displayDesc = $"Gain +{Math.Round(StealAmount*100)}% Lifesteal.";
         }
     }
 }

@@ -15,6 +15,8 @@ namespace Buffs
             Id = id;
             Desc = "Your attacks heal you.";
             Target = target;
+            maxDuration = duration;
+            iconId = 4;
         }
 
         public override void Effect()

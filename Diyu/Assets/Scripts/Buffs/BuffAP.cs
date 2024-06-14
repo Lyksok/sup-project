@@ -15,6 +15,8 @@ namespace Buffs
             Id = id;
             Desc = "Your magical attacks deal more damage.";
             Target = target;
+            maxDuration = duration;
+            iconId = 1;
         }
 
         public override void Effect()

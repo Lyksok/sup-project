@@ -9,7 +9,7 @@ namespace Abilities
         
         public AbilityHeal_2(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Heal";
+            displayName = "Heal";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -37,6 +37,7 @@ namespace Abilities
                     Cooldown = 5;
                     break;
             }
+            displayDesc = $"Heals you for {HealAmount} Health. Has a {Cooldown} seconds cooldown.";
             Rarity = rarity;
             Target = target;
         }
@@ -90,6 +91,7 @@ namespace Abilities
                     Cooldown = 5;
                     break;
             }
+            displayDesc = $"Heals you for {HealAmount} Health. Has a {Cooldown} seconds cooldown.";
             Rarity = rarity;
         }
     }

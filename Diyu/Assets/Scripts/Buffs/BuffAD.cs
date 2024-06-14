@@ -15,6 +15,8 @@ namespace Buffs
             Id = id;
             Desc = "Your physical attacks deal more damage.";
             Target = target;
+            maxDuration = duration;
+            iconId = 0;
         }
 
         public override void Effect()

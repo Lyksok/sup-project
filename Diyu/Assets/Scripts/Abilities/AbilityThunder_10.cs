@@ -21,7 +21,7 @@ namespace Abilities
         
         public AbilityThunder_10(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Thunder";
+            displayName = "Thunder";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -60,6 +60,7 @@ namespace Abilities
             _rangeIndicator= Object.Instantiate(Target.resources.indicatorList[2], Target.model.transform.position - (Vector3.up * 0.95f), Quaternion.identity);
             _rangeIndicator.transform.localScale *= range;
             _rangeIndicator.SetActive(false);
+            displayDesc = $"Creates an thunderbolt at your cursor's location, dealing {damage} damage to all enemies hit and slowing them for 3 seconds. Has a {Cooldown} seconds cooldown.";
         }
 
         public Vector3 GetPostion()

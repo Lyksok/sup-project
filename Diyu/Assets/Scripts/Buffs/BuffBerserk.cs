@@ -17,6 +17,8 @@ namespace Buffs
             Id = id;
             Desc = "Attack Delay reduced based on lost Health";
             Target = target;
+            maxDuration = duration;
+            iconId = 3;
         }
 
         public override void Effect()

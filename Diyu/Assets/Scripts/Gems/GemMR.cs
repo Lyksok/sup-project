@@ -11,7 +11,8 @@ namespace Gems
         
         public GemMR(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Gem
         {
-            Name = "Magic Resist Gem";
+            displayName = "Magic Resist Gem";
+            displayDesc = "Permanently boosts Magical Resistance";
             switch (rarity)
             {
                 case Rarities.COMMON:

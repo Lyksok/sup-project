@@ -11,7 +11,8 @@ namespace Gems
         
         public GemAS(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Gem
         {
-            Name = "Attack Speed Gem";
+            displayName = "Attack Speed Gem";
+            displayDesc = "Permanently boosts Attack Speed";
             switch (rarity)
             {
                 case Rarities.COMMON:

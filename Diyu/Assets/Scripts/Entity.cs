@@ -170,13 +170,13 @@ namespace Entities
         public abstract void OnDeath();
         
         [Command(requiresAuthority = false)]
-        public void CmdTakeDamage(float damage, DamageType damageType)
+        public void CmdTakeDamage(float damage, DamageType damageType,Entity attacker)
         {
-            TakeDamageRpc(damage, damageType);
+            TakeDamageRpc(damage, damageType, attacker);
         }
 
         [ClientRpc]
-        public void TakeDamageRpc(float damage, DamageType damageType)
+        public void TakeDamageRpc(float damage, DamageType damageType,Entity attacker)
         {
             if (damage < 0)
             {
@@ -197,6 +197,10 @@ namespace Entities
             }
             
             health -= (float)(Math.Round(actualDamage) + 1); //min damage is 1
+            if (attacker != null && attacker.lifesteal > 0)
+            {
+                attacker.CmdHeal(actualDamage * lifesteal);
+            }
             if (health <= 0) //trigger death if HP reaches 0
             {
                 OnDeath();

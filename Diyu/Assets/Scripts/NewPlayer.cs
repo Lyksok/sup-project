@@ -155,7 +155,7 @@ public class NewPlayer : Entity
     {
         if (Input.GetKeyDown(KeyCode.C) && isLocalPlayer)
         {
-            TakeDamageRpc(10,DamageType.TRUE_DAMAGE);
+            TakeDamageRpc(10,DamageType.TRUE_DAMAGE,null);
         }
     }
     

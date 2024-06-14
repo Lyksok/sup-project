@@ -11,7 +11,8 @@ namespace Gems
         
         public GemAP(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Gem
         {
-            Name = "Ability Power Gem";
+            displayName = "Ability Power Gem";
+            displayDesc = "Permanently boosts Ability Power";
             switch (rarity)
             {
                 case Rarities.COMMON:

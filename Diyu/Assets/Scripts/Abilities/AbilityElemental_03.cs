@@ -11,8 +11,8 @@ namespace Abilities
         
         public AbilityElemental_03(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Elemental";
-
+            displayName = "Elemental Mastery";
+            displayDesc = $"Your 4th Ability Slot upgrades the Ability inside by an additional stage (Cannot go past Mythic)";
             //Cooldown = 3;
             //CurrentCooldown = 0;
             Rarity = rarity;

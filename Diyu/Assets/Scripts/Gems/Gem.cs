@@ -4,7 +4,7 @@ using Mirror;
 
 namespace Gems
 {
-    public abstract class Gem
+    public abstract class Gem : DescribableObject
     {
         public string Name { get; protected set; }
         public string Desc { get; protected set; }

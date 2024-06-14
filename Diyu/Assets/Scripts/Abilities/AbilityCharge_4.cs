@@ -10,7 +10,7 @@ namespace Abilities
         
         public AbilityCharge_4(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            Name = "Charge";
+            displayName = "Charge";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -38,6 +38,7 @@ namespace Abilities
                     Cooldown = 10;
                     break;
             }
+            displayDesc = $"Gain +{Speed}% speed for 3 seconds. Has a {Cooldown} seconds cooldown.";
             Rarity = rarity;
             State = States.READY;
             Target = target;
@@ -101,6 +102,7 @@ namespace Abilities
                     break;
             }
             Rarity = rarity;
+            displayDesc = $"Gain +{Speed}% speed for 3 seconds. Has a {Cooldown} seconds cooldown.";
         }
     }
 }
