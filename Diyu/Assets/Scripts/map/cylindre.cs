@@ -30,7 +30,7 @@ namespace Entities.map
 
         private void Update()
         {
-            if (key && count < 320)
+            if (key && count < 640)
             {
                 count++;
                 door_.transform.Translate(transform.up * (-1 * speed * Time.deltaTime));
