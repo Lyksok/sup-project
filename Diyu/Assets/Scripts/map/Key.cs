@@ -17,7 +17,7 @@ public class Key : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerStay(Collider other)
     {
-        PlayerBody pb = other.GetComponent<PlayerBody>();
+        NewPlayer pb = other.GetComponent<NewPlayer>();
         if (pb != null)
         {
             pb.Keys ++;

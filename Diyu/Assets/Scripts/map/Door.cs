@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,33 +8,29 @@ public class Door : MonoBehaviour
     
     public float speed = 3;
     public UnityEvent unityEvent = new UnityEvent();
-    public GameObject door_;
+    public GameObject door_ ;
     public float smoothTime = 0.5f;
     public bool key = false;
-    [SerializeField] public SightZone sketuve = null;
+    [SerializeField] public SightZone sketuve;
     public bool boul = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        door_ = this.gameObject;
-        sketuve = GetComponentInChildren<SightZone>();
         sketuve.onStay += Open;
         sketuve.onEnter += Open;
     }
     void Open(GameObject player)
     {
-        // PlayerBody pb = player.gameObject.GetComponent<NewPlayer>();
-        // if (pb.GetGreenKey && Input.GetKeyDown(KeyCode.E))
-        // {
-        //     
-        //     door_.transform.Translate(-1 * transform.up * speed * Time.deltaTime);
-        //     key = true;
-        //     caca = true;
-        //     pb.GetGreenKey = false;
-        //     Debug.Log("test");
-        // }
-        // TODO : à refaire
+        NewPlayer pb = player.gameObject.GetComponent<NewPlayer>();
+        if (pb.Keys>0 && Input.GetKeyDown(KeyCode.E))
+        { 
+            pb.Keys--;
+           door_.transform.Translate(-1 * transform.up * speed * Time.deltaTime);
+           Debug.Log("test");
+        key = true;
+        boul = true;
+        }
     }
 
     // Update is called once per frame
@@ -41,7 +38,7 @@ public class Door : MonoBehaviour
     {
         if (boul)
         {
-            door_.transform.Translate(-1 * transform.up * speed * Time.deltaTime);
+            door_.transform.Translate(transform.up * (-1 * speed * Time.deltaTime));
         }
     }
 }

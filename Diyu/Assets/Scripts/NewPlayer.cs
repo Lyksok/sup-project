@@ -33,7 +33,7 @@ public class NewPlayer : Entity
     public GameObject buffsHUD;
     private string buffsValue;
     private TextMeshProUGUI buffsHUD2;
-    
+    [SerializeField] public uint Keys = 100;
     private void Start()
     {
         statsHUD2 = statsHUD.GetComponent<TextMeshProUGUI>();
@@ -163,7 +163,7 @@ public class NewPlayer : Entity
     
     private void UpdateHUD() //used for HUD display
     {
-        statsValue = $" Health : {health} / {maxHealth}\n Attack Damage : {attackDamage}\n Ability Power : {abilityPower}\n Armor : {armor}\n Magic Resist : {magicResist}\n Movement Speed : {movementSpeed}\n Movement Speed% : {moveSpeed}\n Attack Speed : {attackSpeed}\n Lifesteal% : {lifesteal}\n Cooldown Reduction% : {cooldownReduction}\n Tenacity% : {tenacity}";
+        statsValue = $" Health : {health} / {maxHealth}\n Attack Damage : {attackDamage}\n Ability Power : {abilityPower}\n Armor : {armor}\n Magic Resist : {magicResist}\n Movement Speed : {movementSpeed}\n Movement Speed% : {moveSpeed}\n Attack Speed : {attackSpeed}\n Lifesteal% : {lifesteal}\n Cooldown Reduction% : {cooldownReduction}\n Tenacity% : {tenacity}\n Keys : {Keys}";
         statsHUD2.text = statsValue;
         abilitiesValue = $" Key 1 - {GetAbilityState(abilityList[0])}\n Key 2 - {GetAbilityState(abilityList[1])}\n Key 3 - {GetAbilityState(abilityList[2])}\n Key 4 - {GetAbilityState(abilityList[3])}";
         abilitiesHUD2.text = abilitiesValue;

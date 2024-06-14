@@ -21,7 +21,6 @@ public class PlayerBody : NetworkBehaviour
 
     [SerializeField]
     public Life life = null;
-    [SerializeField] public uint Keys = 0;
     [SerializeField] public int metal = 0;
 
     // This method is called when the local player object is set up
