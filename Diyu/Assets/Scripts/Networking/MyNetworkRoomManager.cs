@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MyNetworkRoomManager : NetworkRoomManager
 {
     public List<(NetworkIdentity, GameObject)> Players = new List<(NetworkIdentity, GameObject)>();
-    
+    public MainLoop gameLoop;
     public void AddPlayer(NetworkIdentity identity, GameObject player)
     {
         Players.Add((identity,player));
@@ -21,5 +21,11 @@ public class MyNetworkRoomManager : NetworkRoomManager
     public void Debug()
     {
         UnityEngine.Debug.LogError(Players[0].Item2.GetComponent<NewPlayer>()._name);
+    }
+
+    public override void OnRoomServerPlayersReady()
+    {
+        base.OnRoomServerPlayersReady();
+        gameLoop.hasGameStarted = true;
     }
 }

@@ -1,23 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using Abilities;
 using Buffs;
 using Managers;
 using Mirror;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainLoop : NetworkBehaviour
 {
-        public List<NewPlayer> players = new List<NewPlayer>(); //Contains the current players
+        public MyNetworkRoomManager NetworkRoomManager;
+        public List<NewPlayer> players => NetworkRoomManager.Players.Select(tuple => tuple.Item2.GetComponent<NewPlayer>()).ToList(); //Contains the current players
         public float roundTime = 0; //Timer for the current round, a 5min every player starts burning, scaling with distance to spawn
         public int curRound = 0; //current round indicator
         public bool activeRound = false; //True if a round is currently going on
         private float _burnCd = 0;
         private int _burnCount = 1;
-        public ResourceManager resourceManager;
         private float _downTimer;
         public NewPlayer winner = null;
+        public ResourceManager resourceManager => players[0].resources;
+
+        public bool hasGameStarted = false;
         
         private void Awake()
         { 
@@ -44,6 +49,7 @@ public class MainLoop : NetworkBehaviour
                 {
                         player.OnRevive();
                 }
+                Debug.LogError("Manche terminée");
                 //transition autre scene
         }
 
@@ -122,7 +128,7 @@ public class MainLoop : NetworkBehaviour
                         }
                 }
 
-                if (deadCount >= 3)
+                if (deadCount >= 1)
                 {
                         foreach (var player in players)
                         {
@@ -152,6 +158,9 @@ public class MainLoop : NetworkBehaviour
         
         private void Update()
         {
+                if (!hasGameStarted) 
+                        return;
+                Debug.LogError(players.Count);
                 if (activeRound)
                 {
                         UpdateCurrentRound(); 
@@ -161,7 +170,5 @@ public class MainLoop : NetworkBehaviour
                 {
                         UpdateDownTime();
                 }
-                
-                
         }
 }

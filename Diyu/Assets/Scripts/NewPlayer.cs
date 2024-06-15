@@ -133,7 +133,7 @@ public class NewPlayer : Entity
             //SrvMovement();
             DebugDamage();
             //EventManager();
-            _networkRoomManager.Debug();
+            //_networkRoomManager.Debug();
         }
     }
 

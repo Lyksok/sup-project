@@ -3255,11 +3255,13 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  players: []
+  NetworkRoomManager: {fileID: 891148143}
   roundTime: 0
-  score: 00000000000000000000000000000000
   curRound: 0
   activeRound: 0
+  resourceManager: {fileID: 0}
+  winner: {fileID: 0}
+  hasGameStarted: 0
 --- !u!4 &702326455
 Transform:
   m_ObjectHideFlags: 0
@@ -4401,6 +4403,7 @@ MonoBehaviour:
   _allPlayersReady: 1
   roomSlots: []
   clientIndex: 0
+  gameLoop: {fileID: 702326454}
 --- !u!1 &919850581
 GameObject:
   m_ObjectHideFlags: 0
