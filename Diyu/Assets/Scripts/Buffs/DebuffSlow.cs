@@ -16,6 +16,7 @@ namespace Buffs
             Id = id;
             Desc = "You move slower.";
             Target = target;
+            iconId = 1;
         }
 
         public override void Effect()

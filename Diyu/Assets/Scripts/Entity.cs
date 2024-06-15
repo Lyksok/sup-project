@@ -124,9 +124,9 @@ namespace Entities
             foreach (var b in debuffList)
             {
                 b.Effect();
+                b.Tick(Time.deltaTime);
                 if (!b.permanent)
                 {
-                    b.Tick(Time.deltaTime);
                     if (b.Duration <= 0)
                     {
                         b.OnEnd();
@@ -204,6 +204,7 @@ namespace Entities
             if (health <= 0) //trigger death if HP reaches 0
             {
                 OnDeath();
+                health = 0;
             }
         }
         

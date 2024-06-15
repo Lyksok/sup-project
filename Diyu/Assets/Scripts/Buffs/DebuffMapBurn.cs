@@ -19,6 +19,7 @@ namespace Buffs
             Desc = "You are burning alive, get closer to the center of the labyrinth to lessen the effects.";
             Target = target;
             timer = Delay;
+            iconId = 0;
             //Debug.LogError(Delay);
         }
 

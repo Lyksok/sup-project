@@ -11,14 +11,11 @@ public class Door : MonoBehaviour
     public GameObject door_ ;
     public float smoothTime = 0.5f;
     public bool key = false;
-    [SerializeField] public SightZone sketuve;
     public bool boul = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        sketuve.onStay += Open;
-        sketuve.onEnter += Open;
     }
     void Open(GameObject player)
     {

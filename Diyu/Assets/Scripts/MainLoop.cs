@@ -11,8 +11,8 @@ using UnityEngine.SceneManagement;
 
 public class MainLoop : NetworkBehaviour
 {
-        public MyNetworkRoomManager NetworkRoomManager;
-        public List<NewPlayer> players => NetworkRoomManager.Players.Select(tuple => tuple.Item2.GetComponent<NewPlayer>()).ToList(); //Contains the current players
+        //public MyNetworkRoomManager NetworkRoomManager;
+        [SyncVar] public List<NewPlayer> players; //Contains the current players
         public float roundTime = 0; //Timer for the current round, a 5min every player starts burning, scaling with distance to spawn
         public int curRound = 0; //current round indicator
         public bool activeRound = false; //True if a round is currently going on
@@ -20,15 +20,48 @@ public class MainLoop : NetworkBehaviour
         private int _burnCount = 1;
         private float _downTimer;
         public NewPlayer winner = null;
-        public ResourceManager resourceManager => players[0].resources;
+        private ResourceManager resourceManager => players[0].resources;
 
-        public bool hasGameStarted = false;
-        
+        [SyncVar] public bool hasGameStarted = true;
+
+        private void Start()
+        {
+                DontDestroyOnLoad(transform.gameObject);
+                players = FindObjectsOfType<NewPlayer>().ToList();
+                Debug.LogError(players.Count);
+        }
+
         private void Awake()
         { 
                 DontDestroyOnLoad(transform.gameObject);
+                players = FindObjectsOfType<NewPlayer>().ToList();
+                Debug.LogError(players.Count);
         }
 
+
+        private void UpdatePlayers()
+        {
+                players = FindObjectsOfType<NewPlayer>().ToList();
+                Debug.LogError(players.Count);
+        }
+
+        public void StartGame()
+        {
+                hasGameStarted = true;
+                players = NetworkServer.connections.Select((pair =>
+                {
+                        List<(NetworkIdentity identity, GameObject gameObject)> identities =
+                                FindObjectsOfType<NetworkIdentity>()
+                                        .Where((identity => identity.GetComponent<NewPlayer>() != null))
+                                        .Select((identity => (identity, identity.gameObject))).ToList();
+                        var res = identities.Where(((tuple) => tuple.identity == pair.Value.identity)).ToList();
+                        if (res.Count == 0)
+                                throw new Exception("Pas de client avec le bon id");
+
+                        return res[0].gameObject.GetComponent<NewPlayer>();
+                })).ToList();
+        }
+        
         public void OnRoundStart()
         { 
                 curRound += 1;
@@ -38,19 +71,27 @@ public class MainLoop : NetworkBehaviour
                 {
                         player.OnRoundStart();
                 }
-                //transition map scene
         }
 
         public void OnRoundEnd()
         {
                 activeRound = false;
-                _downTimer = 30;
+                _downTimer = 0;
                 foreach (var player in players)
                 {
                         player.OnRevive();
+                        player.debuffList = new List<Buff>();
+                        player.roundTimer = -15;
+                        foreach (var ability in player.abilityList)
+                        {
+                                ability.CurrentCooldown = ability.Cooldown;
+                                if (ability.State != States.PASSIVE)
+                                {
+                                        ability.State = States.READY;
+                                }
+                        }
                 }
                 Debug.LogError("Manche terminée");
-                //transition autre scene
         }
 
         private void UpdateCurrentRound()
@@ -66,15 +107,15 @@ public class MainLoop : NetworkBehaviour
                         _burnCd = 30;
                         foreach (var player in players)
                         {
-                                player.AddBuff(new DebuffMapBurn(5,3,null,100 + _burnCount,player));
+                                player.AddDebuff(new DebuffMapBurn(5,3,null,100 + _burnCount,player));
                         }
                 }
         }
 
         private void UpdateDownTime()
         {
-                _downTimer -= Time.deltaTime;
-                if (_downTimer <= 0)
+                _downTimer += Time.deltaTime;
+                if (_downTimer >= 15)
                 {
                         OnRoundStart();
                 }
@@ -158,9 +199,10 @@ public class MainLoop : NetworkBehaviour
         
         private void Update()
         {
-                if (!hasGameStarted) 
+                
+                if (SceneManager.GetActiveScene().name != "MapScene")
                         return;
-                Debug.LogError(players.Count);
+                //Debug.LogError(players.Count);
                 if (activeRound)
                 {
                         UpdateCurrentRound(); 
@@ -169,6 +211,18 @@ public class MainLoop : NetworkBehaviour
                 else
                 {
                         UpdateDownTime();
+                }
+                players = FindObjectsOfType<NewPlayer>().ToList();
+                foreach (var player in players)
+                {
+                        Debug.LogError(player._name);
+                }
+
+                if (players.Count == 0)
+                {
+                        DontDestroyOnLoad(transform.gameObject);
+                        players = FindObjectsOfType<NewPlayer>().ToList();
+                        Debug.LogError(players.Count);
                 }
         }
 }

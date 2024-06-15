@@ -27,6 +27,8 @@ public class NewPlayer : Entity
     [SyncVar] public Quaternion rot;
     public bool isSpectator;
 
+    public GameObject transition;
+    
     public GameObject statsHUD;
     private string statsValue;
     private TextMeshProUGUI statsHUD2;
@@ -61,6 +63,9 @@ public class NewPlayer : Entity
     public float lsBonus;
     public float hpoBonus;
 
+    public float roundTimer;
+    public int roundNumber;
+
     public override void OnStopLocalPlayer()
     {
         _networkRoomManager.RemovePlayer(netIdentity);
@@ -85,8 +90,8 @@ public class NewPlayer : Entity
         //primaryWeapon = new Firespell(Rarities.LEGENDARY,this);
         //primaryWeapon = new SwordAttack(Rarities.LEGENDARY, this);
         resources.SetClass(this,classId);
-        health = 5;
-        maxHealth = 100;
+        health = 200;
+        maxHealth = 200;
         aspdModifiers = new Dictionary<int, float>();
         if (!isLocalPlayer)
         {
@@ -108,9 +113,6 @@ public class NewPlayer : Entity
     // Update is called once per frame
     void Update()
     {
-        if (!Application.isFocused)
-            return;
-
         if (isLocalPlayer)
         {
             UpdateHUD();
@@ -134,6 +136,7 @@ public class NewPlayer : Entity
             DebugDamage();
             //EventManager();
             //_networkRoomManager.Debug();
+            roundTimer += Time.deltaTime;
         }
     }
 
@@ -186,7 +189,7 @@ public class NewPlayer : Entity
         canCast = false;
         canMove = false;
         health = maxHealth;
-        
+        transition.gameObject.SetActive(true);
     }
 
     public void OnRoundStart()
@@ -194,6 +197,7 @@ public class NewPlayer : Entity
         canAttack = true;
         canCast = true;
         canMove = true;
+        transition.gameObject.SetActive(false);
     }
     
     

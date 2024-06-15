@@ -22,10 +22,4 @@ public class MyNetworkRoomManager : NetworkRoomManager
     {
         UnityEngine.Debug.LogError(Players[0].Item2.GetComponent<NewPlayer>()._name);
     }
-
-    public override void OnRoomServerPlayersReady()
-    {
-        base.OnRoomServerPlayersReady();
-        gameLoop.hasGameStarted = true;
-    }
 }

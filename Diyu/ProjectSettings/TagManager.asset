@@ -8,6 +8,7 @@ TagManager:
   - DoorButton
   - NetworkManager
   - Lobby
+  - Loop
   layers:
   - Default
   - TransparentFX

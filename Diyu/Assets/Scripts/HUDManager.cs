@@ -72,9 +72,13 @@ public class HUDManager : NetworkBehaviour
     public TextMeshProUGUI cd3;
     public TextMeshProUGUI cd4;
     public TextMeshProUGUI cd5;
-
+    
     private bool _inChoice = false;
     public GameObject choice;
+
+    public TextMeshProUGUI roundTime;
+    public TextMeshProUGUI roundNumber;
+    public TextMeshProUGUI foundAbility;
     
     [Header("Buffs")] 
     public List<GameObject> buffList;
@@ -213,9 +217,16 @@ public class HUDManager : NetworkBehaviour
         UpdateBuffs();
         UpdateDebuffs();
         StartInfo();
+        UpdateTimer();
         player.inEvent = _inChoice;
     }
 
+    private void UpdateTimer()
+    {
+        roundTime.text = $"{(int)player.roundTimer/60}:{(int)player.roundTimer%60}";
+        roundNumber.text = $"Round {player.roundNumber}";
+    }
+    
     public void Choice1()
     {
         _inChoice = false;
@@ -295,6 +306,8 @@ public class HUDManager : NetworkBehaviour
     {
         _inChoice = true;
         choice.SetActive(true);
+        foundAbility.text =
+            $"You found an {player.awaitingChange.displayName} Ability Fragment !\nChoose which ability to discard (discarded ability will be turned into a random Gem of the same Rarity.)";
     }
     
     private void UpdateHealth()
