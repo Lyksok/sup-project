@@ -11,7 +11,9 @@ public class MainLoop : NetworkBehaviour
         public int[] score = {0,0,0,0}; //Score of each player, 1 round win = 1 point, 3? points = win
         public int curRound = 0; //current round indicator
         public bool activeRound = false; //True if a round is currently going on
-
+        private float _burnCd = 0;
+        private int _burnCount = 1;
+        
         private void Awake()
         { 
                 DontDestroyOnLoad(transform.gameObject);
@@ -35,22 +37,33 @@ public class MainLoop : NetworkBehaviour
                 {
                         player.OnRevive();
                 }
+                //transition autre scene
         }
-        
-        private void Update()
+
+        private void UpdateCurrentRound()
         {
                 if (activeRound)
                 {
                         roundTime += Time.deltaTime;
-                }
-
-                if (roundTime >= 30)
-                {
-                        foreach (var player in players)
+                        if (_burnCd > 0)
                         {
-                                player.AddBuff(new DebuffMapBurn(5,3,null,100,player));
+                                _burnCd -= Time.deltaTime;
                         }
                 }
-                //Debug.LogError($"{players.Count}");
+
+                if (roundTime >= 30 && _burnCd <= 0)
+                {
+                        _burnCount++;
+                        _burnCd = 30;
+                        foreach (var player in players)
+                        {
+                                player.AddBuff(new DebuffMapBurn(5,3,null,100 + _burnCount,player));
+                        }
+                }
+        }
+        
+        private void Update()
+        {
+                UpdateCurrentRound();
         }
 }
