@@ -44,6 +44,8 @@ public class AiRangedController : MonoBehaviour
     [SerializeField]
     public bool AtSpawn = true;
 
+    public LayerMask projectileMask;
+
     void FixedUpdate()
     {
         timeBetweenShots += Time.deltaTime;

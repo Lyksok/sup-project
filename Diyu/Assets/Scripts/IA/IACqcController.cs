@@ -42,6 +42,8 @@ public class AiCqcController : MonoBehaviour
     public bool AtSpawn = true;
     public Animator animator;
 
+    public LayerMask projectileMask;
+
     void FixedUpdate()
     {
 

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8477496931432081178}
   - component: {fileID: 4412514468573695959}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 98193814087828936}
   - component: {fileID: 252012538564813242}
   - component: {fileID: 3324491402581810766}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,6 +347,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flame particules1
       objectReference: {fileID: 0}
+    - target: {fileID: 3690506584229626658, guid: 6723777fcb8e7c84d8d654ced5e26cad,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3972501457867197219, guid: 6723777fcb8e7c84d8d654ced5e26cad,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -411,6 +416,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4232431095308532503, guid: 6723777fcb8e7c84d8d654ced5e26cad,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5790184468835508578, guid: 6723777fcb8e7c84d8d654ced5e26cad,
         type: 3}

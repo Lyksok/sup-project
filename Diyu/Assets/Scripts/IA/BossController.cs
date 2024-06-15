@@ -68,6 +68,11 @@ public class BossController : MonoBehaviour
     [SerializeField]
     public bool AtSpawn = true;
 
+    [SerializeField]
+    private Animator anim = null;
+
+    public LayerMask projectileMask;
+
     void FixedUpdate()
     {
         float distanceWithSpawn = Vector3.Distance(transform.position, spawn.transform.position);
@@ -115,41 +120,44 @@ public class BossController : MonoBehaviour
     {
         if (CanSeeObject(enemy))
         {
+            anim.SetBool("isSitting", false);
             transform.LookAt(enemy.transform);
             timeBetweenAttacks += Time.deltaTime;
-            if (timeBetweenAttacks >= 3.0f)
+            if (timeBetweenAttacks >= 5.0f)
             {
-                timeBetweenAttacks = 0.0f;
                 int rand = UnityEngine.Random.Range(1, 4);
+                Debug.Log(rand);
                 if (rand == 1)
                 {
-                    firespellg1.Attack();
-                    firespellg2.Attack();
-                    firespellg3.Attack();
-                    firespellg4.Attack();
-                    firespellg5.Attack();
+                    timeBetweenAttacks = -2.9f;
+                    StartCoroutine(GeyRoutine());
                 }
                 if (rand == 2)
                 {
-                    firespellwave.Attack();
+                    timeBetweenAttacks = -4.3f;
+                    StartCoroutine(WavRoutine());
                 }
                 if (rand == 3)
                 {
-                    firespelltri1.Attack();
-                    firespelltri2.Attack();
-                    firespelltri3.Attack();
+                    timeBetweenAttacks = -3.2f;
+                    StartCoroutine(TriRoutine());
                 }
             }
         }
         else
         {
-            
+            anim.SetBool("isSitting", true);
+            if (HealTime >= 0.5)
+            {
+                life.ChangeHP(1.0f);
+                HealTime = 0;
+            }
         }
     }
     private void OnEnemyLeft(GameObject enemy)
     {
         //when player not in sightzone -> return to spawn
-        ai.SetDestination(spawn.transform.position);
+        anim.SetBool("isSitting", true);
         Spotted = false;
         if (HealTime >= 0.5)
         {
@@ -170,5 +178,35 @@ public class BossController : MonoBehaviour
         //Instantiate(DeathParticlePrefab, transform.position, Quaternion.identity);
         Instantiate(Greenkey, transform.position, Quaternion.identity);
         Destroy(gameObject);
+    }
+
+    IEnumerator GeyRoutine()
+    {
+        anim.SetBool("geysers", true);
+        yield return new WaitForSeconds(2.9f);
+        anim.SetBool("geysers", false);
+        firespellg1.Attack();
+        firespellg2.Attack();
+        firespellg3.Attack();
+        firespellg4.Attack();
+        firespellg5.Attack();
+    }
+
+    IEnumerator WavRoutine()
+    {
+        anim.SetBool("vague", true);
+        yield return new WaitForSeconds(4.3f);
+        anim.SetBool("vague", false);
+        firespellwave.Attack();
+    }
+
+    IEnumerator TriRoutine()
+    {
+        anim.SetBool("triple_projectile", true);
+        yield return new WaitForSeconds(3.2f);
+        anim.SetBool("triple_projectile", false);
+        firespelltri1.Attack();
+        firespelltri2.Attack();
+        firespelltri3.Attack();
     }
 }

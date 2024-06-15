@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4664170198524361064}
   - component: {fileID: 6529756579818332842}
   - component: {fileID: 4952147454412774598}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Metal
   m_TagString: Walls
   m_Icon: {fileID: 0}
