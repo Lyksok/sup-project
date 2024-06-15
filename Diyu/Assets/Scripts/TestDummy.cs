@@ -21,8 +21,6 @@ namespace Entities
             abilityList[0] = new AbilityRegen_1(Rarities.COMMON, this);
             abilityList[1] = new AbilityHeal_2(Rarities.LEGENDARY, this);
             primaryWeapon = new Firespell(Rarities.RARE,this);
-            health = 50;
-            maxHealth = 100;
         }
 
         // Update is called once per frame

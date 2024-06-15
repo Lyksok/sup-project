@@ -1543,8 +1543,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'You found an {AbilityName} Ability Fragment !
 
-    Choose which ability
-    to discard (discarded ability will be turned into a random Gem of the same Rarity.)'
+    Choose which ability to discard (discarded ability will be turned into a random
+    Gem of the same Rarity.)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4690,6 +4690,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3439204881837939555}
   - {fileID: 5148729119631111951}
   m_Father: {fileID: 2148531993450566200}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -4700,7 +4701,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3095895027194075405}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!23 &683390614871594749
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14556,7 +14557,6 @@ MonoBehaviour:
   buffsHUD: {fileID: 0}
   _name: 
   classId: 2
-  score: 0
   hudManager: {fileID: 0}
   hpBonus: 0
   adBonus: 0
@@ -14566,9 +14566,10 @@ MonoBehaviour:
   mrBonus: 0
   lsBonus: 0
   hpoBonus: 0
+  Keys: 100
+  score: 0
   roundTimer: 0
   roundNumber: 0
-  Keys: 100
 --- !u!114 &3008909449444402458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15850,6 +15851,111 @@ MonoBehaviour:
   m_YawDamping: 0
   m_RollDamping: 0
   m_AngularDamping: 0
+--- !u!1001 &2895880407432051848
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8464247246410209868}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 6c4be6ad433c1f94ba301ba34faa11ba,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6c4be6ad433c1f94ba301ba34faa11ba,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6c4be6ad433c1f94ba301ba34faa11ba,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6c4be6ad433c1f94ba301ba34faa11ba,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6c4be6ad433c1f94ba301ba34faa11ba,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6c4be6ad433c1f94ba301ba34faa11ba,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6c4be6ad433c1f94ba301ba34faa11ba,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6c4be6ad433c1f94ba301ba34faa11ba,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6c4be6ad433c1f94ba301ba34faa11ba,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6c4be6ad433c1f94ba301ba34faa11ba,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c4be6ad433c1f94ba301ba34faa11ba,
+        type: 3}
+      propertyPath: m_Name
+      value: Paladin ready rig
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6c4be6ad433c1f94ba301ba34faa11ba,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4640915331303841791}
+  m_SourcePrefab: {fileID: 100100000, guid: 6c4be6ad433c1f94ba301ba34faa11ba, type: 3}
+--- !u!1 &2661999232961806809 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6c4be6ad433c1f94ba301ba34faa11ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 2895880407432051848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4640915331303841791
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2661999232961806809}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 6c4be6ad433c1f94ba301ba34faa11ba, type: 3}
+  m_Controller: {fileID: 9100000, guid: e6562f1276c50a2409f89018f743fdad, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &3439204881837939555 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6c4be6ad433c1f94ba301ba34faa11ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 2895880407432051848}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9149646806597283583
 GameObject:
   m_ObjectHideFlags: 0
