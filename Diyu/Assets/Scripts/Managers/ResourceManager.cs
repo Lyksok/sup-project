@@ -20,7 +20,7 @@ namespace Managers
         
         public int abilityCount
         {
-            get => 10;
+            get => 14;
         }
 
         public void SetClass(NewPlayer player, int id)
@@ -84,6 +84,81 @@ namespace Managers
                     return Rarities.COMMON;
             }
         }
+
+        public bool isRarer(Rarities raritiy1, Rarities rarity2)
+        {
+            int rar1;
+            switch (raritiy1)
+            {
+                case Rarities.COMMON:
+                    rar1 = 1;
+                    break;
+                case Rarities.UNCOMMON:
+                    rar1 = 2;
+                    break;
+                case Rarities.RARE:
+                    rar1 = 3;
+                    break;
+                case Rarities.EPIC:
+                    rar1 = 4;
+                    break;
+                case Rarities.LEGENDARY:
+                    rar1 = 5;
+                    break;
+                case Rarities.MYTHIC:
+                    rar1 = 6;
+                    break;
+                default:
+                    rar1 = 0;
+                    break;
+            }
+            int rar2;
+            switch (raritiy1)
+            {
+                case Rarities.COMMON:
+                    rar2 = 1;
+                    break;
+                case Rarities.UNCOMMON:
+                    rar2 = 2;
+                    break;
+                case Rarities.RARE:
+                    rar2 = 3;
+                    break;
+                case Rarities.EPIC:
+                    rar2 = 4;
+                    break;
+                case Rarities.LEGENDARY:
+                    rar2 = 5;
+                    break;
+                case Rarities.MYTHIC:
+                    rar2 = 6;
+                    break;
+                default:
+                    rar2 = 0;
+                    break;
+            }
+            return rar1 >= rar2;
+        }
+
+        public Color GetRarityColor(Rarities rarity)
+        {
+            switch (rarity)
+            {
+                case Rarities.COMMON:
+                    return new Color(50, 50, 50);;
+                case Rarities.UNCOMMON:
+                    return new Color(0, 200, 0);;
+                case Rarities.RARE:
+                    return new Color(0, 0, 200);;
+                case Rarities.EPIC:
+                    return new Color(100, 0,150);;
+                case Rarities.LEGENDARY:
+                    return new Color(200, 200, 0);;
+                default:
+                    return new Color(100, 100, 100);;
+            }
+        }
+        
         public Ability GetAbility(int id,Rarities rarity, Entity target)
         {
             switch (id)
@@ -108,6 +183,14 @@ namespace Managers
                     return new AbilityLastStand_9(rarity,target);
                 case 10:
                     return new AbilityThunder_10(rarity,target);
+                case 11:
+                    return new AbilityWildfire_11(rarity,target);
+                case 12:
+                    return new AbilityGravity_12(rarity,target);
+                case 13:
+                    return new AbilityIceVolley_13(rarity,target);
+                case 14:
+                    return new AbilityBigFireball_14(rarity,target);
                 default:
                     return new AbilityNone_0();
             }
@@ -176,17 +259,25 @@ namespace Managers
                 case 4:
                     return "Charge";
                 case 5:
-                    return "Berserk";
+                    return "Arrow Rain";
                 case 6:
                     return "Shockwave";
                 case 7:
                     return "Fire Volley";
                 case 8:
-                    return "Lifesteal";
+                    return "Earth Spike";
                 case 9:
                     return "Last Stand";
                 case 10:
                     return "Thunder";
+                case 11:
+                    return "Wildfire";
+                case 12:
+                    return "Gravity";
+                case 13:
+                    return "Ice Volley";
+                case 14:
+                    return "Big Fireball";
                 default:
                     return "No Abilities";
             }

@@ -8,7 +8,7 @@ namespace Entities
 {
     public abstract class Loot : NetworkBehaviour
     {
-        protected float cooldown = 0;
+        protected float cooldown = 0.5f;
         public TextMeshProUGUI text;
         public abstract void OnPickup(NewPlayer player);
 

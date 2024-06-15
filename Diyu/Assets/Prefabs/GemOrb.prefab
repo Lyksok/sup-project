@@ -58,6 +58,10 @@ MonoBehaviour:
   - {fileID: 6572906761774532393, guid: 8f8b813920f32054c8ee7269d9c37799, type: 3}
   - {fileID: 6572906761774532393, guid: d4363908d8aab8e4b98bd8978d45e9c2, type: 3}
   lootList: []
+  debuffIconList: []
+  buffIconList: []
+  abilityIconList: []
+  passiveAbilityIconList: []
 --- !u!1 &441265066689656675
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +288,8 @@ MonoBehaviour:
   syncInterval: 0
   text: {fileID: 1704508897358505372}
   resources: {fileID: 7538355887747643411}
+  _rarity: 0
+  Sphere: {fileID: 8079666778880970620}
 --- !u!1 &8079666778880970620
 GameObject:
   m_ObjectHideFlags: 0

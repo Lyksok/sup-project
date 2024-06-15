@@ -11,13 +11,15 @@ namespace Entities
     {
         public ResourceManager resources;
         private int _gemId;
-        private Rarities _rarity;
+        public Rarities _rarity;
+        public GameObject Sphere;
         
         public void Start()
         {
             _gemId = RandomNumberGenerator.GetInt32(1, 9);
             _rarity = resources.GetRarity(RandomNumberGenerator.GetInt32(0, 5));
             UpdateInfo();
+            Sphere.gameObject.GetComponent<Renderer>().material.color = resources.GetRarityColor(_rarity);
         }
         
         public override void OnPickup(NewPlayer player)

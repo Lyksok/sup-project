@@ -9,9 +9,9 @@ using Object = UnityEngine.Object;
 
 namespace Abilities
 {
-    public class AbilityThunder_10 : Ability
+    public class AbilityWildfire_11 : Ability
     {
-        public override int id { get => 3; }
+        public override int id { get => 11; }
         public AreaOfEffect aoe;
         public float damage;
         public float range;
@@ -19,9 +19,9 @@ namespace Abilities
         private readonly GameObject _indicator;
         private readonly GameObject _rangeIndicator;
         
-        public AbilityThunder_10(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
+        public AbilityWildfire_11(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
-            displayName = "Thunder";
+            displayName = "Wildfire";
             switch (rarity)
             {
                 case Rarities.COMMON:
@@ -55,12 +55,12 @@ namespace Abilities
             range = 10f;
             _thunder = Target.resources.projectileList[7];
             _indicator = Object.Instantiate(Target.resources.indicatorList[0], GetPostion(), Quaternion.identity);
-            _indicator.transform.localScale *= 2;
+            _indicator.transform.localScale *= 3;
             _indicator.SetActive(false);
             _rangeIndicator= Object.Instantiate(Target.resources.indicatorList[2], Target.model.transform.position - (Vector3.up * 0.95f), Quaternion.identity);
             _rangeIndicator.transform.localScale *= range;
             _rangeIndicator.SetActive(false);
-            displayDesc = $"Creates an thunderbolt at your cursor's location, dealing {damage} damage to all enemies hit and slowing them for 3 seconds. Has a {Cooldown} seconds cooldown.";
+            displayDesc = $"Creates a wildfire at your cursor's location, dealing {damage} damage to all enemies hit and burning them for 5 seconds. Has a {Cooldown} seconds cooldown.";
         }
 
         public Vector3 GetPostion()
@@ -104,7 +104,7 @@ namespace Abilities
                 State = States.COOLDOWN;
                 CurrentCooldown = Cooldown;
                 Vector3 pos = GetPostion();
-                aoe = new AreaOfEffect(pos, 4.0f,Target,damage,new DebuffSlow(3,3,10,Target),false,false,DamageType.MAGICAL);
+                aoe = new AreaOfEffect(pos, 4.0f,Target,5,new DebuffBurn(damage,3,10,11,Target),false,false,DamageType.MAGICAL);
                 aoe.Effect(aoe.FindTargets());
                 GameObject newExplosion = Object.Instantiate(_thunder, pos, Quaternion.identity);
                 //VisualEffect(pos);
@@ -161,7 +161,7 @@ namespace Abilities
                     break;
             }
             Rarity = rarity;
-            displayDesc = $"Creates an thunderbolt at your cursor's location, dealing {damage} damage to all enemies hit and slowing them for 3 seconds. Has a {Cooldown} seconds cooldown.";
+            displayDesc = $"Creates a wildfire at your cursor's location, dealing {damage} damage to all enemies hit and burning them for 5 seconds. Has a {Cooldown} seconds cooldown.";
         }
     }
 }

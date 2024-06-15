@@ -13,12 +13,14 @@ namespace Entities
         public ResourceManager resources;
         private int _weaponId;
         private Rarities _rarity;
+        public GameObject Sphere;
         
         public void Start()
         {
             _weaponId = RandomNumberGenerator.GetInt32(1, 8 + 1);
             _rarity = resources.GetRarity(RandomNumberGenerator.GetInt32(0, 5));
             UpdateInfo();
+            Sphere.gameObject.GetComponent<Renderer>().material.color = resources.GetRarityColor(_rarity);
         }
         
         public override void OnPickup(NewPlayer player)

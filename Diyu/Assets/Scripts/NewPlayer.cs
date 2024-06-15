@@ -283,44 +283,72 @@ public class NewPlayer : Entity
         }
         if (abilityList[0] is AbilityNone_0 || abilityList[0].GetType() == ability.GetType())
         {
-            backup = abilityList[0];
-            //abilityList[0].OnEnd();
-            abilityList[0] = ability;
-        } else if (abilityList[1] is AbilityNone_0 || abilityList[1].GetType() == ability.GetType())
-        {
-            backup = abilityList[1];
-            //abilityList[1].OnEnd();
-            abilityList[1] = ability;
-        } else if (abilityList[2] is AbilityNone_0 || abilityList[2].GetType() == ability.GetType())
-        {
-            backup = abilityList[2];
-            //abilityList[2].OnEnd();
-            abilityList[2] = ability;
-        } else if (abilityList[3] is AbilityNone_0 || abilityList[3].GetType() == ability.GetType())
-        {
-            
-            backup = abilityList[3];
-            //abilityList[3].OnEnd();
-            abilityList[3] = ability;
-            if (classId == 6)
+            if (abilityList[0] is not AbilityNone_0 && resources.isRarer(abilityList[0].Rarity,ability.Rarity))
             {
-                ability.ChangeRarity(1);
-                ability.ChangeRarity(1);
-                if (backup.Rarity == Rarities.MYTHIC)
-                {
-                    backup.ChangeRarity(-1);
-                }
-                else
-                {
-                    backup.ChangeRarity(-1);
-                    backup.ChangeRarity(-1);
-                }
-                
+                backup = ability;
             }
             else
             {
-                ability.ChangeRarity(1);
-                backup.ChangeRarity(-1);
+                backup = abilityList[0];
+                abilityList[0].OnEnd();
+                abilityList[0] = ability;
+            }
+        } else if (abilityList[1] is AbilityNone_0 || abilityList[1].GetType() == ability.GetType())
+        {
+            if (abilityList[1] is not AbilityNone_0 && resources.isRarer(abilityList[1].Rarity,ability.Rarity))
+            {
+                backup = ability;
+            }
+            else
+            {
+                backup = abilityList[1];
+                abilityList[1].OnEnd();
+                abilityList[1] = ability;
+            }
+        } else if (abilityList[2] is AbilityNone_0 || abilityList[2].GetType() == ability.GetType())
+        {
+            if (abilityList[2] is not AbilityNone_0 && resources.isRarer(abilityList[2].Rarity,ability.Rarity))
+            {
+                backup = ability;
+            }
+            else
+            {
+                backup = abilityList[2];
+                abilityList[2].OnEnd();
+                abilityList[2] = ability;
+            }
+        } else if (abilityList[3] is AbilityNone_0 || abilityList[3].GetType() == ability.GetType())
+        {
+            
+            if (abilityList[3] is not AbilityNone_0 && resources.isRarer(abilityList[3].Rarity,ability.Rarity))
+            {
+                backup = ability;
+            }
+            else
+            {
+                backup = abilityList[3];
+                abilityList[3].OnEnd();
+                abilityList[3] = ability;
+                if (classId == 6)
+                {
+                    ability.ChangeRarity(1);
+                    ability.ChangeRarity(1);
+                    if (backup.Rarity == Rarities.MYTHIC)
+                    {
+                        backup.ChangeRarity(-1);
+                    }
+                    else
+                    {
+                        backup.ChangeRarity(-1);
+                        backup.ChangeRarity(-1);
+                    }
+
+                }
+                else
+                {
+                    ability.ChangeRarity(1);
+                    backup.ChangeRarity(-1);
+                }
             }
         }
         else //WIP
@@ -331,7 +359,10 @@ public class NewPlayer : Entity
 
         if (backup != null && backup is not AbilityNone_0)
         {
-            Instantiate(resources.lootList[2],model.transform.position,Quaternion.identity); //need to fix rarity
+            
+            GameObject newGem = Instantiate(resources.lootList[2],model.transform.position,Quaternion.identity); //set rarity needed
+            newGem.GetComponent<GemOrb>()._rarity = backup.Rarity;
+            newGem.GetComponent<GemOrb>().UpdateInfo();
         }
     }
     

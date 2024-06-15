@@ -188,9 +188,9 @@ public class HUDManager : NetworkBehaviour
         managerAbility3.describableObject = player.abilityList[2];
         managerAbility4.describableObject = player.abilityList[3];
         managerAbilityP.describableObject = player.classPassive;
-        _gem1.displayDesc = _gem1.baseDesc + $"\nCurrent bonus : {player.hpoBonus}";
+        _gem1.displayDesc = _gem1.baseDesc + $"\nCurrent bonus : {Math.Round(player.hpoBonus*100)}%";
         managerGem1.describableObject = _gem1;
-        _gem2.displayDesc = _gem2.baseDesc + $"\nCurrent bonus : {player.lsBonus}";
+        _gem2.displayDesc = _gem2.baseDesc + $"\nCurrent bonus : {Math.Round(player.lsBonus*100)}%";
         managerGem2.describableObject = _gem2;
         _gem3.displayDesc = _gem3.baseDesc + $"\nCurrent bonus : {player.adBonus}";
         managerGem3.describableObject = _gem3;
@@ -198,7 +198,7 @@ public class HUDManager : NetworkBehaviour
         managerGem4.describableObject = _gem4;
         _gem5.displayDesc = _gem5.baseDesc + $"\nCurrent bonus : {player.hpBonus}";
         managerGem5.describableObject = _gem5;
-        _gem6.displayDesc = _gem6.baseDesc + $"\nCurrent bonus : {player.asBonus}";
+        _gem6.displayDesc = _gem6.baseDesc + $"\nCurrent bonus : {Math.Round(player.asBonus*100)}%";
         managerGem6.describableObject = _gem6;
         _gem7.displayDesc = _gem7.baseDesc + $"\nCurrent bonus : {player.mrBonus}";
         managerGem7.describableObject = _gem7;
@@ -213,6 +213,7 @@ public class HUDManager : NetworkBehaviour
         UpdateBuffs();
         UpdateDebuffs();
         StartInfo();
+        player.inEvent = _inChoice;
     }
 
     public void Choice1()
@@ -253,9 +254,31 @@ public class HUDManager : NetworkBehaviour
         _inChoice = false;
         player.abilityList[3].OnEnd();
         Ability backup = player.abilityList[3];
+        if (player.classId == 6)
+        {
+            player.awaitingChange.ChangeRarity(1);
+            player.awaitingChange.ChangeRarity(1);
+            if (backup.Rarity == Rarities.MYTHIC)
+            {
+                backup.ChangeRarity(-1);
+            }
+            else
+            {
+                backup.ChangeRarity(-1);
+                backup.ChangeRarity(-1);
+            }
+                
+        }
+        else
+        {
+            player.awaitingChange.ChangeRarity(1);
+            backup.ChangeRarity(-1);
+        }
         player.abilityList[3] = player.awaitingChange;
         player.awaitingChange = null;
-        Instantiate(_resources.lootList[2],player.model.transform.position,Quaternion.identity); //set rarity needed
+        GameObject newGem = Instantiate(_resources.lootList[2],player.model.transform.position,Quaternion.identity); //set rarity needed
+        newGem.GetComponent<GemOrb>()._rarity = backup.Rarity;
+        newGem.GetComponent<GemOrb>().UpdateInfo();
         choice.SetActive(false);
     }
     
