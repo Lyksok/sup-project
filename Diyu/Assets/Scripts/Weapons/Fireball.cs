@@ -90,7 +90,7 @@ namespace Weapons
 
         private void OnTriggerEnter(Collider collider)
         {
-            Debug.LogError(collider.gameObject.name);
+            //Debug.LogError(collider.gameObject.name);
             Rigidbody rb = collider.GetComponent<Rigidbody>();
             if (rb)
             {

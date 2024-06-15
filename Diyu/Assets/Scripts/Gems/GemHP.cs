@@ -9,7 +9,7 @@ namespace Gems
         public float statBuff;
         public override int id { get => 6; }
         
-        public GemHP(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Gem
+        public GemHP(Rarities rarity,NewPlayer target) //Sets the stats according to Rarity of the Gem
         {
             displayName = "Health Gem";
             displayDesc = "Permanently boosts Max Health";
@@ -37,8 +37,12 @@ namespace Gems
 
             Rarity = rarity;
             Target = target;
-            Target.maxHealth += statBuff;
-            Target.health += statBuff;
+            if (target != null)
+            {
+                Target.maxHealth += statBuff;
+                Target.health += statBuff;
+                Target.hpBonus += statBuff;
+            }
         }
 
         public override void SetRarity(Rarities rarity)

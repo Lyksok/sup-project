@@ -13,33 +13,31 @@ namespace Managers
 
         private void Update()
         {
-            if (EventSystem.current.IsPointerOverGameObject())
+            /*if (EventSystem.current.IsPointerOverGameObject())
             {
-                Debug.LogError("uwu");
+                Debug.LogError("uwu1");
                 infoText.inUse = true;
-                var transform1 = infoText.transform;
-                transform1.position = gameObject.transform.position;
-                var transformPosition = transform1.position;
-                transformPosition.y += 100;
                 infoText.displayName.text = describableObject.displayName;
                 infoText.displayDesc.text = describableObject.displayDesc;
             }
+            else
+            {
+                Debug.LogError("uwu3");
+                infoText.inUse = false;
+            }*/
         }
 
-        public void OnMouseOver()
+        public void OnMouseEnter()
         {
-            Debug.LogError("uwu");
+            //Debug.LogError("uwu1");
             infoText.inUse = true;
-            var transform1 = infoText.transform;
-            transform1.position = gameObject.transform.position;
-            var transformPosition = transform1.position;
-            transformPosition.y += 100;
             infoText.displayName.text = describableObject.displayName;
             infoText.displayDesc.text = describableObject.displayDesc;
         }
 
         public void OnMouseExit()
         {
+            //Debug.LogError("uwu3");
             infoText.inUse = false;
         }
     }

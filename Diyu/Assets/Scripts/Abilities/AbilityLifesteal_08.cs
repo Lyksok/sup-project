@@ -4,12 +4,12 @@ using Entities;
 
 namespace Abilities
 {
-    public class AbilityLifesteal_8 : Ability
+    public class AbilityLifesteal_08 : Ability
     {
         public float StealAmount;
-        public override int id { get => 8; }
+        public override int id { get => 208; }
         
-        public AbilityLifesteal_8(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
+        public AbilityLifesteal_08(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
             displayName = "Reaper's Mark";
             switch (rarity)
@@ -37,13 +37,13 @@ namespace Abilities
             Rarity = rarity;
             State = States.PASSIVE;
             Target = target;
-            BuffLifesteal buff = new BuffLifesteal(StealAmount, null, 8, Target);
+            BuffLifesteal buff = new BuffLifesteal(StealAmount, null, 208, Target);
             Target.AddBuff(buff);
         }
 
         public override void OnEnd()
         {
-            Target.RemoveBuff(new BuffLifesteal(StealAmount, null, 8, Target));
+            Target.RemoveBuff(new BuffLifesteal(StealAmount, null, 208, Target));
         }
 
         public override void PassiveEffect()
@@ -86,7 +86,7 @@ namespace Abilities
                     break;
             }
             Rarity = rarity;
-            Target.AddBuff(new BuffLifesteal(StealAmount, null, 8, Target));
+            Target.AddBuff(new BuffLifesteal(StealAmount, null, 208, Target));
             displayDesc = $"Gain +{Math.Round(StealAmount*100)}% Lifesteal.";
         }
     }

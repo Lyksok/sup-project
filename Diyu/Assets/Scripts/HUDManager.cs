@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Abilities;
 using Entities;
+using Gems;
 using Managers;
 using Mirror;
 using TMPro;
@@ -14,20 +15,17 @@ public class HUDManager : NetworkBehaviour
     public NewPlayer player;
     private ResourceManager _resources;
 
-    public Canvas hud;
-    public GameObject statsHUD;
     private string _statsValue;
     private TextMeshProUGUI _statsHUD2;
     
-    public GameObject abilitiesHUD;
     private string _abilitiesValue;
     private TextMeshProUGUI _abilitiesHUD2;
     
-    public GameObject buffsHUD;
     private string _buffsValue;
     private TextMeshProUGUI _buffsHUD2;
 
-    private RawImage _passiveAbilityIcon;
+    private Image _passiveAbilityIcon;
+    public GameObject abilityP;
     public GameObject ability1;
     public GameObject ability2;
     public GameObject ability3;
@@ -44,6 +42,7 @@ public class HUDManager : NetworkBehaviour
     public GameObject frame2;
     public GameObject frame3;
     public GameObject frame4;
+    public GameObject frameP;
     public Sprite frameNone;
     public Sprite frameCommon;
     public Sprite frameUncommon;
@@ -55,22 +54,28 @@ public class HUDManager : NetworkBehaviour
     private Image _frame2;
     private Image _frame3;
     private Image _frame4;
+    private Image _frameP;
 
     public GameObject ability1Cd;
     public GameObject ability2Cd;
     public GameObject ability3Cd;
     public GameObject ability4Cd;
+    public GameObject abilityPCd;
     private Image _ability1IconCd;
     private Image _ability2IconCd;
     private Image _ability3IconCd;
     private Image _ability4IconCd;
+    private Image _abilityPIconCd;
     
     public TextMeshProUGUI cd1;
     public TextMeshProUGUI cd2;
     public TextMeshProUGUI cd3;
     public TextMeshProUGUI cd4;
+    public TextMeshProUGUI cd5;
 
-
+    private bool _inChoice = false;
+    public GameObject choice;
+    
     [Header("Buffs")] 
     public List<GameObject> buffList;
     public List<GameObject> buffIconList;
@@ -78,6 +83,13 @@ public class HUDManager : NetworkBehaviour
     private List<Image> _buffIconCdList;
     private List<Image> _buffIconList;
 
+    [Header("Debuffs")] 
+    public List<GameObject> debuffList;
+    public List<GameObject> debuffIconList;
+    public List<GameObject> debuffIconCdList;
+    private List<Image> _debuffIconCdList;
+    private List<Image> _debuffIconList;
+    
     [Header("Desc")] 
     public InfoTextManager managerAbility1;
     public InfoTextManager managerAbility2;
@@ -85,13 +97,6 @@ public class HUDManager : NetworkBehaviour
     public InfoTextManager managerAbility4;
     public InfoTextManager managerAbilityP;
     public InfoTextManager managerWeapon;
-    public InfoTextManager managerBuff1;
-    public InfoTextManager managerBuff2;
-    public InfoTextManager managerBuff3;
-    public InfoTextManager managerBuff4;
-    public InfoTextManager managerBuff5;
-    public InfoTextManager managerBuff6;
-    public InfoTextManager managerBuff7;
     public InfoTextManager managerGem1;
     public InfoTextManager managerGem2;
     public InfoTextManager managerGem3;
@@ -105,21 +110,28 @@ public class HUDManager : NetworkBehaviour
     
     private void Start()
     {
+        _inChoice = false;
+        choice.SetActive(false);
         _buffIconCdList = new List<Image>();
         _buffIconList = new List<Image>();
+        _debuffIconCdList = new List<Image>();
+        _debuffIconList = new List<Image>();
         _resources = player.resources;
         _ability1Icon = ability1.GetComponent<Image>();
         _ability2Icon = ability2.GetComponent<Image>();
         _ability3Icon = ability3.GetComponent<Image>();
         _ability4Icon = ability4.GetComponent<Image>();
+        _passiveAbilityIcon = abilityP.GetComponent<Image>();
         _frame1 = frame1.GetComponent<Image>();
         _frame2 = frame2.GetComponent<Image>();
         _frame3 = frame3.GetComponent<Image>();
         _frame4 = frame4.GetComponent<Image>();
+        _frameP = frameP.GetComponent<Image>();
         _ability1IconCd = ability1Cd.GetComponent<Image>();
         _ability2IconCd = ability2Cd.GetComponent<Image>();
         _ability3IconCd = ability3Cd.GetComponent<Image>();
         _ability4IconCd = ability4Cd.GetComponent<Image>();
+        _abilityPIconCd = abilityPCd.GetComponent<Image>();
         foreach (var t in buffIconList)
         {
             _buffIconList.Add(t.GetComponent<Image>());
@@ -128,15 +140,70 @@ public class HUDManager : NetworkBehaviour
         {
             _buffIconCdList.Add(t.GetComponent<Image>());
         }
+        foreach (var t in debuffIconList)
+        {
+            _debuffIconList.Add(t.GetComponent<Image>());
+        }
+        foreach (var t in debuffIconCdList)
+        {
+            _debuffIconCdList.Add(t.GetComponent<Image>());
+        }
         StartInfo();
+        SetupGemNames();
     }
 
+    private readonly DescribableObject _gem1 = new DescribableObject();
+    private readonly DescribableObject _gem2 = new DescribableObject();
+    private readonly DescribableObject _gem3 = new DescribableObject();
+    private readonly DescribableObject _gem4 = new DescribableObject();
+    private readonly DescribableObject _gem5 = new DescribableObject();
+    private readonly DescribableObject _gem6 = new DescribableObject();
+    private readonly DescribableObject _gem7 = new DescribableObject();
+    private readonly DescribableObject _gem8 = new DescribableObject();
+    private void SetupGemNames()
+    {
+        
+        _gem1.displayName = new GemHealPower(Rarities.COMMON,null).displayName;
+        _gem1.baseDesc = new GemHealPower(Rarities.COMMON, null).displayDesc;
+        _gem2.displayName = new GemLifeSteal(Rarities.COMMON,null).displayName;
+        _gem2.baseDesc = new GemLifeSteal(Rarities.COMMON, null).displayDesc;
+        _gem3.displayName = new GemAD(Rarities.COMMON,null).displayName;
+        _gem3.baseDesc = new GemAD(Rarities.COMMON, null).displayDesc;
+        _gem4.displayName = new GemAR(Rarities.COMMON,null).displayName;
+        _gem4.baseDesc = new GemAR(Rarities.COMMON, null).displayDesc;
+        _gem5.displayName = new GemHP(Rarities.COMMON,null).displayName;
+        _gem5.baseDesc = new GemHP(Rarities.COMMON, null).displayDesc;
+        _gem6.displayName = new GemAS(Rarities.COMMON,null).displayName;
+        _gem6.baseDesc = new GemAS(Rarities.COMMON, null).displayDesc;
+        _gem7.displayName = new GemMR(Rarities.COMMON,null).displayName;
+        _gem7.baseDesc = new GemMR(Rarities.COMMON, null).displayDesc;
+        _gem8.displayName = new GemAP(Rarities.COMMON,null).displayName;
+        _gem8.baseDesc = new GemAP(Rarities.COMMON, null).displayDesc;
+    }
+    
     private void StartInfo()
     {
         managerAbility1.describableObject = player.abilityList[0];
         managerAbility2.describableObject = player.abilityList[1];
         managerAbility3.describableObject = player.abilityList[2];
         managerAbility4.describableObject = player.abilityList[3];
+        managerAbilityP.describableObject = player.classPassive;
+        _gem1.displayDesc = _gem1.baseDesc + $"\nCurrent bonus : {player.hpoBonus}";
+        managerGem1.describableObject = _gem1;
+        _gem2.displayDesc = _gem2.baseDesc + $"\nCurrent bonus : {player.lsBonus}";
+        managerGem2.describableObject = _gem2;
+        _gem3.displayDesc = _gem3.baseDesc + $"\nCurrent bonus : {player.adBonus}";
+        managerGem3.describableObject = _gem3;
+        _gem4.displayDesc = _gem4.baseDesc + $"\nCurrent bonus : {player.arBonus}";
+        managerGem4.describableObject = _gem4;
+        _gem5.displayDesc = _gem5.baseDesc + $"\nCurrent bonus : {player.hpBonus}";
+        managerGem5.describableObject = _gem5;
+        _gem6.displayDesc = _gem6.baseDesc + $"\nCurrent bonus : {player.asBonus}";
+        managerGem6.describableObject = _gem6;
+        _gem7.displayDesc = _gem7.baseDesc + $"\nCurrent bonus : {player.mrBonus}";
+        managerGem7.describableObject = _gem7;
+        _gem8.displayDesc = _gem8.baseDesc + $"\nCurrent bonus : {player.apBonus}";
+        managerGem8.describableObject = _gem8;
     }
     
     private void Update()
@@ -144,8 +211,69 @@ public class HUDManager : NetworkBehaviour
         UpdateIcon();
         UpdateHealth();
         UpdateBuffs();
+        UpdateDebuffs();
+        StartInfo();
     }
 
+    public void Choice1()
+    {
+        _inChoice = false;
+        player.abilityList[0].OnEnd();
+        Ability backup = player.abilityList[0];
+        player.abilityList[0] = player.awaitingChange;
+        player.awaitingChange = null;
+        Instantiate(_resources.lootList[2],player.model.transform.position,Quaternion.identity); //set rarity needed
+        choice.SetActive(false);
+    }
+    
+    public void Choice2()
+    {
+        _inChoice = false;
+        player.abilityList[1].OnEnd();
+        Ability backup = player.abilityList[1];
+        player.abilityList[1] = player.awaitingChange;
+        player.awaitingChange = null;
+        Instantiate(_resources.lootList[2],player.model.transform.position,Quaternion.identity); //set rarity needed
+        choice.SetActive(false);
+    }
+    
+    public void Choice3()
+    {
+        _inChoice = false;
+        player.abilityList[2].OnEnd();
+        Ability backup = player.abilityList[2];
+        player.abilityList[2] = player.awaitingChange;
+        player.awaitingChange = null;
+        Instantiate(_resources.lootList[2],player.model.transform.position,Quaternion.identity); //set rarity needed
+        choice.SetActive(false);
+    }
+    
+    public void Choice4()
+    {
+        _inChoice = false;
+        player.abilityList[3].OnEnd();
+        Ability backup = player.abilityList[3];
+        player.abilityList[3] = player.awaitingChange;
+        player.awaitingChange = null;
+        Instantiate(_resources.lootList[2],player.model.transform.position,Quaternion.identity); //set rarity needed
+        choice.SetActive(false);
+    }
+    
+    public void Choice5()
+    {
+        _inChoice = false;
+        Ability backup = player.awaitingChange;
+        player.awaitingChange = null;
+        Instantiate(_resources.lootList[2],player.model.transform.position,Quaternion.identity); //set rarity needed
+        choice.SetActive(false);
+    }
+
+    public void ActivateChoice()
+    {
+        _inChoice = true;
+        choice.SetActive(true);
+    }
+    
     private void UpdateHealth()
     {
         hp.value = player.health;
@@ -180,6 +308,33 @@ public class HUDManager : NetworkBehaviour
         }
     }
 
+    private void UpdateDebuffs()
+    {
+        for (int i = 0; i < debuffList.Count; i++)
+        {
+            if (i < player.debuffList.Count)
+            {
+                debuffList[i].SetActive(true);
+                _debuffIconCdList[i].sprite = _resources.debuffIconList[player.debuffList[i].iconId];
+                _debuffIconList[i].sprite = _resources.debuffIconList[player.debuffList[i].iconId];
+                var duration = player.debuffList[i].Duration;
+                var maxDuration = player.debuffList[i].maxDuration;
+                if (duration != null && maxDuration != null)
+                {
+                    _debuffIconCdList[i].fillAmount = (float) (duration / maxDuration);
+                }
+                else
+                {
+                    _debuffIconCdList[i].fillAmount = 0;
+                }
+            }
+            else
+            {
+                debuffList[i].SetActive(false);
+            }
+        }
+    }
+    
     private void UpdateBuffs()
     {
         for (int i = 0; i < buffList.Count; i++)
@@ -309,13 +464,29 @@ public class HUDManager : NetworkBehaviour
             }
         }
         
-        /*if (player.classPassive is AbilityNone_0)
+        if (player.classPassive is AbilityNone_0)
         {
-            passiveAbilityIcon.visible = false;
+            abilityP.SetActive(false);
+            abilityPCd.SetActive(false);
+            cd5.text = "";
         }
         else
         {
-            passiveAbilityIcon.image = _resources.passiveAbilityIconList[player.classPassive.id - 201];
-        }*/
+            if (player.classPassive.State == States.COOLDOWN)
+            {
+                cd5.text = $"{Math.Round(player.classPassive.CurrentCooldown,1)}";
+                _abilityPIconCd.fillAmount = player.classPassive.CurrentCooldown / player.classPassive.Cooldown;
+            }
+            else
+            {
+                cd5.text = "";
+                abilityP.SetActive(true);
+                abilityPCd.SetActive(true);
+                _abilityPIconCd.fillAmount = 0;
+                _passiveAbilityIcon.sprite = _resources.passiveAbilityIconList[player.classPassive.id-201];
+                _abilityPIconCd.sprite = _resources.passiveAbilityIconList[player.classPassive.id-201];
+                _frameP.sprite = GetIconRarity(player.classPassive);
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace Gems
         public float statBuff;
         public override int id { get => 1; }
         
-        public GemAD(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Gem
+        public GemAD(Rarities rarity,NewPlayer target) //Sets the stats according to Rarity of the Gem
         {
             displayName = "Attack Damage Gem";
             displayDesc = "Permanently boosts Attack Damage";
@@ -37,7 +37,11 @@ namespace Gems
 
             Rarity = rarity;
             Target = target;
-            Target.attackDamage += statBuff;
+            if (target != null)
+            {
+                Target.attackDamage += statBuff;
+                Target.adBonus += statBuff;
+            }
         }
 
         public override void SetRarity(Rarities rarity)

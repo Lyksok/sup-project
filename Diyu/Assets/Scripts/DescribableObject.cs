@@ -1,8 +1,9 @@
 ﻿namespace Entities
 {
-    public abstract class DescribableObject
+    public class DescribableObject
     {
         public string displayName;
         public string displayDesc;
+        public string baseDesc;
     }
 }

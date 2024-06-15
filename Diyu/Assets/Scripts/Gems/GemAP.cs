@@ -9,7 +9,7 @@ namespace Gems
         public float statBuff;
         public override int id { get => 9; }
         
-        public GemAP(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Gem
+        public GemAP(Rarities rarity,NewPlayer target) //Sets the stats according to Rarity of the Gem
         {
             displayName = "Ability Power Gem";
             displayDesc = "Permanently boosts Ability Power";
@@ -37,7 +37,11 @@ namespace Gems
 
             Rarity = rarity;
             Target = target;
-            Target.abilityPower += statBuff;
+            if (target != null)
+            {
+                Target.abilityPower += statBuff;
+                Target.apBonus += statBuff;
+            }
         }
 
         public override void SetRarity(Rarities rarity)

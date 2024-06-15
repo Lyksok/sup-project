@@ -1,4 +1,5 @@
-﻿using Buffs;
+﻿using System;
+using Buffs;
 using Entities;
 
 namespace Abilities
@@ -38,7 +39,7 @@ namespace Abilities
                     Cooldown = 10;
                     break;
             }
-            displayDesc = $"Gain +{Speed}% speed for 3 seconds. Has a {Cooldown} seconds cooldown.";
+            displayDesc = $"Gain +{Math.Round(Speed * 100)}% speed for 3 seconds. Has a {Cooldown} seconds cooldown.";
             Rarity = rarity;
             State = States.READY;
             Target = target;
@@ -102,7 +103,7 @@ namespace Abilities
                     break;
             }
             Rarity = rarity;
-            displayDesc = $"Gain +{Speed}% speed for 3 seconds. Has a {Cooldown} seconds cooldown.";
+            displayDesc = $"Gain +{Math.Round(Speed * 100)}% speed for 3 seconds. Has a {Cooldown} seconds cooldown.";
         }
     }
 }

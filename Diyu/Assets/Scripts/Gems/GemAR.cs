@@ -9,7 +9,7 @@ namespace Gems
         public float statBuff;
         public override int id { get => 2; }
         
-        public GemAR(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Gem
+        public GemAR(Rarities rarity,NewPlayer target) //Sets the stats according to Rarity of the Gem
         {
             displayName = "Armor Gem";
             displayDesc = "Permanently boosts Armor";
@@ -37,7 +37,11 @@ namespace Gems
 
             Rarity = rarity;
             Target = target;
-            Target.armor += statBuff;
+            if (target != null)
+            {
+                Target.armor += statBuff;
+                Target.arBonus += statBuff;
+            }
         }
 
         public override void SetRarity(Rarities rarity)
