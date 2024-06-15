@@ -13,6 +13,7 @@ namespace Managers
         public ParticleSystem[] particleList; //handles particle spawning
         public GameObject[] indicatorList; //used to preview abilities
         public GameObject[] lootList;
+        public Sprite[] debuffIconList;
         public Sprite[] buffIconList;
         public Sprite[] abilityIconList;
         public Sprite[] passiveAbilityIconList; //class passives icons
@@ -36,11 +37,11 @@ namespace Managers
                     break;
                 case 3:
                     player.PickupWeapon(new AxeAttack(Rarities.COMMON,player));
-                    player.classPassive = new AbilityBerserk_5(Rarities.COMMON,player);
+                    player.classPassive = new AbilityBerserk_07(Rarities.COMMON,player);
                     break;
                 case 4:
                     player.PickupWeapon(new ScytheAttack(Rarities.COMMON,player));
-                    player.classPassive = new AbilityLifesteal_8(Rarities.COMMON,player);
+                    player.classPassive = new AbilityLifesteal_08(Rarities.COMMON,player);
                     break;
                 case 5:
                     player.PickupWeapon(new ScepterAttack(Rarities.COMMON,player));
@@ -96,13 +97,13 @@ namespace Managers
                 case 4:
                     return new AbilityCharge_4(rarity,target);
                 case 5:
-                    return new AbilityBerserk_5(rarity,target);
+                    return new AbilityArrowRain_5(rarity,target);
                 case 6:
                     return new AbilityShockwave_6(rarity,target);
                 case 7:
                     return new AbilityVolley_7(rarity,target);
                 case 8:
-                    return new AbilityLifesteal_8(rarity,target);
+                    return new AbilityEarthSpike_8(rarity,target);
                 case 9:
                     return new AbilityLastStand_9(rarity,target);
                 case 10:
@@ -112,7 +113,7 @@ namespace Managers
             }
         }
 
-        public Gem GetGem(int id,Rarities rarity, Entity target)
+        public Gem GetGem(int id,Rarities rarity, NewPlayer target)
         {
             switch (id)
             {

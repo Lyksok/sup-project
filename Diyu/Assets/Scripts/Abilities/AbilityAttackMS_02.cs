@@ -33,7 +33,7 @@ namespace Abilities
                     Speed = 0.35f;
                     break;
             }
-            displayDesc = $"Gain +{Speed}% Movement Speed for 1 second after attacking";
+            displayDesc = $"Gain +{Math.Round(Speed * 100)}% Movement Speed for 1 second after attacking";
 
             //Cooldown = 3;
             //CurrentCooldown = 0;
@@ -89,7 +89,7 @@ namespace Abilities
                     Speed = 0.35f;
                     break;
             }
-            displayDesc = $"Gain +{Speed}% Movement Speed for 1 second after attacking";
+            displayDesc = $"Gain +{Math.Round(Speed * 100)}% Movement Speed for 1 second after attacking";
             Rarity = rarity;
         }
     }

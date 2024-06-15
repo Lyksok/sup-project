@@ -9,7 +9,7 @@ namespace Gems
         public string Name { get; protected set; }
         public string Desc { get; protected set; }
         public abstract int id { get; }
-        public Entity Target;
+        public NewPlayer Target;
         public Rarities Rarity { get; protected set; } //Rarity of the ability, changes stats
         public abstract void SetRarity(Rarities rarity); //Sets the Rarity of the Ability to the input Rarity, changing stats
         public void ChangeRarity(int change) //Changes the Rarity of the ability by 1 tier, up or down (1 -> 1 tier up, -1 -> 1 tier down)

@@ -1,14 +1,15 @@
-﻿using Buffs;
+﻿using System;
+using Buffs;
 using Entities;
 
 namespace Abilities
 {
-    public class AbilityBerserk_5 : Ability
+    public class AbilityBerserk_07 : Ability
     {
         public float aspd;
-        public override int id { get => 5; }
+        public override int id { get => 207; }
         
-        public AbilityBerserk_5(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
+        public AbilityBerserk_07(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
             displayName = "Berserk";
             switch (rarity)
@@ -32,17 +33,17 @@ namespace Abilities
                     aspd = 0.095f;
                     break;
             }
-            displayDesc = $"Gain +{aspd}% Attack Speed for every 5% of your missing Health";
+            displayDesc = $"Gain +{Math.Round(aspd * 100)}% Attack Speed for every 5% of your missing Health";
             Rarity = rarity;
             State = States.PASSIVE;
             Target = target;
-            BuffBerserk buff = new BuffBerserk(aspd, null, 5, Target);
+            BuffBerserk buff = new BuffBerserk(aspd, null, 207, Target);
             Target.AddBuff(buff);
         }
 
         public override void OnEnd()
         {
-            Target.RemoveBuff(new BuffBerserk(aspd, null, 5, Target));
+            Target.RemoveBuff(new BuffBerserk(aspd, null, 207, Target));
         }
 
         public override void PassiveEffect()
@@ -84,9 +85,9 @@ namespace Abilities
                     aspd = 0.095f;
                     break;
             }
-            displayDesc = $"Gain +{aspd}% Attack Speed for every 5% of your missing Health";
+            displayDesc = $"Gain +{Math.Round(aspd * 100)}% Attack Speed for every 5% of your missing Health";
             Rarity = rarity;
-            Target.AddBuff(new BuffBerserk(aspd, null, 5, Target));
+            Target.AddBuff(new BuffBerserk(aspd, null, 207, Target));
         }
     }
 }

@@ -10,21 +10,24 @@ namespace Entities
         public bool inUse;
         public TextMeshProUGUI displayName;
         public TextMeshProUGUI displayDesc;
+        public GameObject background;
         
         private void Start()
         {
             inUse = false;
         }
 
-        private void Update()
+        public void Update()
         {
             if (inUse)
             {
-                gameObject.SetActive(true);
+                background.SetActive(true);
             }
             else
             {
-                gameObject.SetActive(false);
+                background.SetActive(false);
+                displayDesc.text = "";
+                displayName.text = "";
             }
         }
     }

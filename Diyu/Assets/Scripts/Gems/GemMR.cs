@@ -9,7 +9,7 @@ namespace Gems
         public float statBuff;
         public override int id { get => 3; }
         
-        public GemMR(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Gem
+        public GemMR(Rarities rarity,NewPlayer target) //Sets the stats according to Rarity of the Gem
         {
             displayName = "Magic Resist Gem";
             displayDesc = "Permanently boosts Magical Resistance";
@@ -37,7 +37,11 @@ namespace Gems
 
             Rarity = rarity;
             Target = target;
-            Target.magicResist += statBuff;
+            if (target != null)
+            {
+                Target.magicResist += statBuff;
+                Target.mrBonus += statBuff;
+            }
         }
 
         public override void SetRarity(Rarities rarity)

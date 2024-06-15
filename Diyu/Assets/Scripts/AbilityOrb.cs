@@ -23,17 +23,8 @@ namespace Entities
         public override void OnPickup(NewPlayer player)
         {
             //Debug.LogError("Picked up");
-            Ability replaced = player.PickupAbility(player.resources.GetAbility(_abilityId,_rarity,player));
-            if (replaced is AbilityNone_0)
-            {
-                Collected();
-            }
-            else
-            {
-                _abilityId = replaced.id;
-                _rarity = replaced.Rarity;
-            }
-            UpdateInfo();
+            player.PickupAbility(player.resources.GetAbility(_abilityId,_rarity,player));
+            Collected();
 
         }
 

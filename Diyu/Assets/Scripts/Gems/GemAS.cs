@@ -9,7 +9,7 @@ namespace Gems
         public float statBuff;
         public override int id { get => 7; }
         
-        public GemAS(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Gem
+        public GemAS(Rarities rarity,NewPlayer target) //Sets the stats according to Rarity of the Gem
         {
             displayName = "Attack Speed Gem";
             displayDesc = "Permanently boosts Attack Speed";
@@ -37,7 +37,11 @@ namespace Gems
 
             Rarity = rarity;
             Target = target;
-            Target.aspdModifiers[7] = statBuff;
+            if (target != null)
+            {
+                Target.aspdModifiers[7] = statBuff;
+                Target.asBonus += statBuff;
+            }
         }
 
         public override void SetRarity(Rarities rarity)

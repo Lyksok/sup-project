@@ -9,7 +9,7 @@ namespace Gems
         public float statBuff;
         public override int id { get => 4; }
         
-        public GemLifeSteal(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Gem
+        public GemLifeSteal(Rarities rarity,NewPlayer target) //Sets the stats according to Rarity of the Gem
         {
             displayName = "Lifesteal Gem";
             displayDesc = "Permanently boosts Lifesteal";
@@ -37,7 +37,11 @@ namespace Gems
 
             Rarity = rarity;
             Target = target;
-            Target.lifesteal += statBuff;
+            if (target != null)
+            {
+                Target.lifesteal += statBuff;
+                Target.lsBonus += statBuff;
+            }
         }
 
         public override void SetRarity(Rarities rarity)

@@ -41,12 +41,21 @@ public class NewPlayer : Entity
 
     private DataManager _dataManager;
     private string _name;
-
-    public GameObject popUp;
-    private TextMeshProUGUI _popUpText;
     public int classId;
 
     public List<Gem> gemList;
+
+    [CanBeNull] public Ability awaitingChange;
+    public HUDManager hudManager;
+
+    public float hpBonus;
+    public float adBonus;
+    public float apBonus;
+    public float asBonus;
+    public float arBonus;
+    public float mrBonus;
+    public float lsBonus;
+    public float hpoBonus;
     
     public override void OnStartLocalPlayer()
     {
@@ -67,8 +76,6 @@ public class NewPlayer : Entity
     private void Start()
     {
         inEvent = false;
-        popUp.SetActive(false);
-        _popUpText = popUp.GetComponent<TextMeshProUGUI>();
         statsHUD2 = statsHUD.GetComponent<TextMeshProUGUI>();
         buffsHUD2 = buffsHUD.GetComponent<TextMeshProUGUI>();
         abilitiesHUD2 = abilitiesHUD.GetComponent<TextMeshProUGUI>();
@@ -182,18 +189,6 @@ public class NewPlayer : Entity
         canCast = true;
         canMove = true;
     }
-
-    public void OpenPopUp()
-    {
-        popUp.SetActive(true);
-        inEvent = true;
-    }
-    
-    public void ClosePopUp()
-    {
-        popUp.SetActive(false);
-        inEvent = false;
-    }
     
     
     public void DebugOrb()
@@ -279,12 +274,12 @@ public class NewPlayer : Entity
         gemList.Add(gem);
     }
     
-    public Ability PickupAbility(Ability ability)
+    public void PickupAbility(Ability ability)
     {
-        Ability backup;
+        Ability? backup = null;
         if (!isLocalPlayer)
         {
-            return new AbilityNone_0();
+            return ;
         }
         if (abilityList[0] is AbilityNone_0 || abilityList[0].GetType() == ability.GetType())
         {
@@ -330,18 +325,14 @@ public class NewPlayer : Entity
         }
         else //WIP
         {
-            /*OpenPopUp();
-            int abilitySlot = -1;
-            while (abilitySlot == -1)
-            {
-                abilitySlot = await EventManager();
-            }*/
-            abilityList[0].OnEnd();
-            backup = abilityList[0];
-            abilityList[0] = ability;
-            //ClosePopUp();
+            awaitingChange = ability;
+            hudManager.ActivateChoice();
         }
-        return backup;
+
+        if (backup != null && backup is not AbilityNone_0)
+        {
+            Instantiate(resources.lootList[2],model.transform.position,Quaternion.identity); //need to fix rarity
+        }
     }
     
     private string GetAbilityState(Ability ability) //used for HUD display
@@ -396,7 +387,7 @@ public class NewPlayer : Entity
     
     private void UpdateHUD() //used for HUD display
     {
-        statsValue = $" Health : {health} / {maxHealth}\n Attack Damage : {attackDamage}\n Ability Power : {abilityPower}\n Armor : {armor}\n Magic Resist : {magicResist}\n Movement Speed : {movementSpeed}\n Movement Speed% : {moveSpeed}\n Attack Speed : {attackSpeed}\n Lifesteal% : {lifesteal}\n Heal Power% : {healingPower}";
+        statsValue = $" Health : {health} / {maxHealth}\n Attack Damage : {attackDamage}\n Ability Power : {abilityPower}\n Armor : {armor}\n Magic Resist : {magicResist}\n Movement Speed : {movementSpeed}\n Movement Speed% : {moveSpeed}\n Attack Speed : {(primaryWeapon.baseASPD * (primaryWeapon.attackSpeedPercent * attackSpeed))}\n Lifesteal% : {lifesteal}\n Heal Power% : {healingPower}";
         statsHUD2.text = statsValue;
         abilitiesValue = $" Key 1 - {GetAbilityState(abilityList[0])}\n Key 2 - {GetAbilityState(abilityList[1])}\n Key 3 - {GetAbilityState(abilityList[2])}\n Key 4 - {GetAbilityState(abilityList[3])}\n\n Class - {GetAbilityState(classPassive)}";
         abilitiesValue += $"\n \n {primaryWeapon.Name} - {primaryWeapon.Rarity}";

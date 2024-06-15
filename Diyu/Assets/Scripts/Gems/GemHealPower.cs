@@ -9,7 +9,7 @@ namespace Gems
         public float statBuff;
         public override int id { get => 5; }
         
-        public GemHealPower(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Gem
+        public GemHealPower(Rarities rarity,NewPlayer target) //Sets the stats according to Rarity of the Gem
         {
             displayName = "Healing Power Gem";
             displayDesc = "Permanently boosts Healing Power";
@@ -37,7 +37,11 @@ namespace Gems
 
             Rarity = rarity;
             Target = target;
-            Target.healingPower += statBuff;
+            if (target != null)
+            {
+                Target.healingPower += statBuff;
+                Target.hpoBonus += statBuff;
+            }
         }
 
         public override void SetRarity(Rarities rarity)
