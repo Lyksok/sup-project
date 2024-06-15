@@ -47,6 +47,8 @@ public class NewPlayer : Entity
 
     public List<Gem> gemList;
 
+    public int score;
+
     [CanBeNull] public Ability awaitingChange;
     public HUDManager hudManager;
 
@@ -68,6 +70,7 @@ public class NewPlayer : Entity
     public uint Keys = 100;
     private void Start()
     {
+        score = 0;
         inEvent = false;
         statsHUD2 = statsHUD.GetComponent<TextMeshProUGUI>();
         buffsHUD2 = buffsHUD.GetComponent<TextMeshProUGUI>();

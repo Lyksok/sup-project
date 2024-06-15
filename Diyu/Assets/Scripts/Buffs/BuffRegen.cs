@@ -50,6 +50,13 @@ namespace Buffs
 
         public override void Refresh(Buff buff)
         {
+            if (buff is BuffRegen)
+            {
+                BuffRegen buffRegen = (BuffRegen)buff;
+                Duration = buffRegen.Duration;
+                Delay = buffRegen.Delay;
+                HealAmount = buffRegen.HealAmount;
+            }
             
         }
     }
