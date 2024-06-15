@@ -844,6 +844,8 @@ MonoBehaviour:
   - {fileID: 4441857392704860318, guid: 6fa399c353c9a774aabb4433a16b2eac, type: 3}
   - {fileID: 4441857392704860318, guid: d1a846476666b054fbe669b84f536ffa, type: 3}
   - {fileID: 4441857392704860318, guid: cbb7457c910d465448a261853fd0f310, type: 3}
+  debuffIconList: []
+  buffIconList: []
   abilityIconList: []
   passiveAbilityIconList: []
 --- !u!1 &3095895027194075405
@@ -2051,8 +2053,17 @@ MonoBehaviour:
   statsHUD: {fileID: 8695123752927629787}
   abilitiesHUD: {fileID: 1147742174065043890}
   buffsHUD: {fileID: 1691058987869588144}
-  popUp: {fileID: 3515995632447573074}
   classId: 2
+  hudManager: {fileID: 0}
+  hpBonus: 0
+  adBonus: 0
+  apBonus: 0
+  asBonus: 0
+  arBonus: 0
+  mrBonus: 0
+  lsBonus: 0
+  hpoBonus: 0
+  Keys: 100
 --- !u!114 &3008909449444402458
 MonoBehaviour:
   m_ObjectHideFlags: 0
