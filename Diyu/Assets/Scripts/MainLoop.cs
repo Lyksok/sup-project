@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using Abilities;
 using Buffs;
+using Managers;
 using Mirror;
 using UnityEngine;
 
@@ -8,11 +11,13 @@ public class MainLoop : NetworkBehaviour
 {
         public List<NewPlayer> players = new List<NewPlayer>(); //Contains the current players
         public float roundTime = 0; //Timer for the current round, a 5min every player starts burning, scaling with distance to spawn
-        public int[] score = {0,0,0,0}; //Score of each player, 1 round win = 1 point, 3? points = win
         public int curRound = 0; //current round indicator
         public bool activeRound = false; //True if a round is currently going on
         private float _burnCd = 0;
         private int _burnCount = 1;
+        public ResourceManager resourceManager;
+        private float _downTimer;
+        public NewPlayer winner = null;
         
         private void Awake()
         { 
@@ -28,11 +33,13 @@ public class MainLoop : NetworkBehaviour
                 {
                         player.OnRoundStart();
                 }
+                //transition map scene
         }
 
         public void OnRoundEnd()
         {
                 activeRound = false;
+                _downTimer = 30;
                 foreach (var player in players)
                 {
                         player.OnRevive();
@@ -42,15 +49,11 @@ public class MainLoop : NetworkBehaviour
 
         private void UpdateCurrentRound()
         {
-                if (activeRound)
-                {
-                        roundTime += Time.deltaTime;
-                        if (_burnCd > 0)
-                        {
-                                _burnCd -= Time.deltaTime;
-                        }
+                roundTime += Time.deltaTime;
+                if (_burnCd > 0)
+                { 
+                        _burnCd -= Time.deltaTime;
                 }
-
                 if (roundTime >= 30 && _burnCd <= 0)
                 {
                         _burnCount++;
@@ -61,9 +64,104 @@ public class MainLoop : NetworkBehaviour
                         }
                 }
         }
+
+        private void UpdateDownTime()
+        {
+                _downTimer -= Time.deltaTime;
+                if (_downTimer <= 0)
+                {
+                        OnRoundStart();
+                }
+        }
+
+        private void OnRoundLost(NewPlayer player)
+        {
+                int _abilityId = RandomNumberGenerator.GetInt32(1, resourceManager.abilityCount + 1);
+                Rarities _rarity = resourceManager.GetRarity(RandomNumberGenerator.GetInt32(0, 5));
+                player.PickupAbility(resourceManager.GetAbility(_abilityId,_rarity,player));
+                
+                player.classPassive.ChangeRarity(1);
+                
+                int _gemId = RandomNumberGenerator.GetInt32(1, 9);
+                _rarity = resourceManager.GetRarity(RandomNumberGenerator.GetInt32(0, 5));
+                player.PickupGem(player.resources.GetGem(_gemId,_rarity,player));
+                _gemId = RandomNumberGenerator.GetInt32(1, 9);
+                _rarity = resourceManager.GetRarity(RandomNumberGenerator.GetInt32(0, 5));
+                player.PickupGem(player.resources.GetGem(_gemId,_rarity,player));
+                _gemId = RandomNumberGenerator.GetInt32(1, 9);
+                _rarity = resourceManager.GetRarity(RandomNumberGenerator.GetInt32(0, 5));
+                player.PickupGem(player.resources.GetGem(_gemId,_rarity,player));
+        }
+
+        private void OnRoundWin(NewPlayer player)
+        {
+                int slot = RandomNumberGenerator.GetInt32(0, 4);
+                player.abilityList[slot].ChangeRarity(1);
+                
+                player.classPassive.ChangeRarity(1);
+                
+                int _gemId = RandomNumberGenerator.GetInt32(1, 9);
+                Rarities _rarity = resourceManager.GetRarity(RandomNumberGenerator.GetInt32(0, 5));
+                player.PickupGem(player.resources.GetGem(_gemId,_rarity,player));
+                _gemId = RandomNumberGenerator.GetInt32(1, 9);
+                _rarity = resourceManager.GetRarity(RandomNumberGenerator.GetInt32(0, 5));
+                player.PickupGem(player.resources.GetGem(_gemId,_rarity,player));
+                _gemId = RandomNumberGenerator.GetInt32(1, 9);
+                _rarity = resourceManager.GetRarity(RandomNumberGenerator.GetInt32(0, 5));
+                player.PickupGem(player.resources.GetGem(_gemId,_rarity,player));
+        }
+        
+        private void CheckEndRound()
+        {
+                int deadCount = 0;
+                foreach (var player in players)
+                {
+                        if (player.isSpectator)
+                        {
+                                deadCount++;
+                        }
+                }
+
+                if (deadCount >= 3)
+                {
+                        foreach (var player in players)
+                        {
+                                if (player.isSpectator)
+                                {
+                                        OnRoundLost(player);
+                                }
+                                else
+                                {
+                                        player.score++;
+                                        if (player.score >= 3)
+                                        {
+                                                OnGameWin(player);
+                                        }
+                                        OnRoundWin(player);
+                                }
+                        }
+                        OnRoundEnd();
+                }
+        }
+
+        private void OnGameWin(NewPlayer player)
+        {
+                winner = player;
+                // transistion scene fin
+        }
         
         private void Update()
         {
-                UpdateCurrentRound();
+                if (activeRound)
+                {
+                        UpdateCurrentRound(); 
+                        CheckEndRound();
+                }
+                else
+                {
+                        UpdateDownTime();
+                }
+                
+                
         }
 }

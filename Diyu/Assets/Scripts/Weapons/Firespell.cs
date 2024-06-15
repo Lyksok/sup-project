@@ -10,7 +10,7 @@ namespace Weapons
     {
         private readonly GameObject _fireball;
         private readonly ParticleSystem _firelaunch;
-        private const float FireSpeed = 50.0f;
+        private const float FireSpeed = 30.0f;
 
         //public override string Name => "firespell";
         public override int id => 1;
