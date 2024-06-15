@@ -2558,7 +2558,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  prefabs: []
 --- !u!4 &579229161
 Transform:
   m_ObjectHideFlags: 0

@@ -40,7 +40,9 @@ public class NewPlayer : Entity
     private TextMeshProUGUI buffsHUD2;
 
     private DataManager _dataManager;
-    private string _name;
+    private LocalDataManager _localDataManager;
+    private MyNetworkRoomManager _networkRoomManager;
+    public string _name;
     public int classId;
 
     public List<Gem> gemList;
@@ -56,19 +58,10 @@ public class NewPlayer : Entity
     public float mrBonus;
     public float lsBonus;
     public float hpoBonus;
-    
-    public override void OnStartLocalPlayer()
-    {
-        _dataManager = FindObjectOfType<DataManager>();
-        _dataManager.AddPlayer(netIdentity,gameObject);
-        
-        base.OnStartLocalPlayer();
-    }
 
     public override void OnStopLocalPlayer()
     {
-        _dataManager.RemovePlayer(netIdentity);
-        
+        _networkRoomManager.RemovePlayer(netIdentity);
         base.OnStopLocalPlayer();
     }
 
@@ -97,6 +90,15 @@ public class NewPlayer : Entity
             playerCamera.gameObject.SetActive(false);
             playerHUD.gameObject.SetActive(false);
         }
+
+        if (isLocalPlayer)
+        {
+            _networkRoomManager = FindObjectOfType<MyNetworkRoomManager>();
+            _networkRoomManager.AddPlayer(netIdentity,gameObject);
+            _localDataManager = FindObjectOfType<LocalDataManager>();
+            _name = _localDataManager.playerName;
+        }
+        
         OnRoundStart();
     }
 
@@ -128,6 +130,7 @@ public class NewPlayer : Entity
             //SrvMovement();
             DebugDamage();
             //EventManager();
+            _networkRoomManager.Debug();
         }
     }
 

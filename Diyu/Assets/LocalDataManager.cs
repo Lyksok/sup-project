@@ -43,6 +43,7 @@ public class LocalDataManager : MonoBehaviour
 
     private void Start()
     {
+        DontDestroyOnLoad(this);
         characterCards.ForEach(charCard => charCard.IsSelected = false);
     }
 

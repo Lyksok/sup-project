@@ -1,7 +1,6 @@
 using System;
 using Mirror;
 using UnityEngine;
-using UnityEngine;
 using UnityEngine.Events;
 namespace Entities.map
 {
