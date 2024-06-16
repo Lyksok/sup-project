@@ -46,7 +46,7 @@ public class NewPlayer : Entity
     private DataManager _dataManager;
     private LocalDataManager _localDataManager;
     private MyNetworkRoomManager _networkRoomManager;
-    public string _name;
+    [SyncVar] public string _name = "a";
     public int classId;
 
     public List<Gem> gemList;
@@ -77,6 +77,8 @@ public class NewPlayer : Entity
     public uint Keys = 100;
     private void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
+        
         score = 0;
         inEvent = false;
         statsHUD2 = statsHUD.GetComponent<TextMeshProUGUI>();
@@ -201,6 +203,7 @@ public class NewPlayer : Entity
         canCast = true;
         canMove = true;
         transition.gameObject.SetActive(false);
+        body.transform.position = new Vector3(gameObject.transform.position.x,model.transform.position.y,gameObject.transform.position.z);
     }
     
     

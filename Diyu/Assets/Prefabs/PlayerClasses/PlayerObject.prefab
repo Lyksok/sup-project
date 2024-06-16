@@ -8294,7 +8294,7 @@ Transform:
   m_GameObject: {fileID: 4646592180277275865}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 1, z: 1.25}
+  m_LocalPosition: {x: -0, y: 0, z: 1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12671,7 +12671,7 @@ Transform:
   m_GameObject: {fileID: 6970888086019410702}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0}
   m_LocalScale: {x: 0.99999976, y: 1, z: 0.99999976}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14286,6 +14286,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   resources: {fileID: 6380370966852379380}
+  isAttacking: 0
+  isCasting: 0
   primaryWeaponAttackKey: 323
   anchor: {fileID: 4646592180277275865}
   health: 20
@@ -14316,7 +14318,7 @@ MonoBehaviour:
   rot: {x: 0, y: 0, z: 0, w: 0}
   isSpectator: 0
   transition: {fileID: 8794454848986173804}
-  transitionText: {fileID: 0}
+  transitionText: {fileID: 1316693988447214658}
   victor: 
   statsHUD: {fileID: 8695123752927629787}
   abilitiesHUD: {fileID: 1147742174065043890}

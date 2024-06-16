@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using Abilities;
 using Buffs;
+using Entities;
 using Managers;
 using Mirror;
 using UnityEngine;
@@ -14,8 +15,8 @@ public class MainLoop : NetworkBehaviour
         //public MyNetworkRoomManager NetworkRoomManager;
         [SyncVar] public List<NewPlayer> players; //Contains the current players
         public float roundTime = 0; //Timer for the current round, a 5min every player starts burning, scaling with distance to spawn
-        public int curRound = 0; //current round indicator
-        public bool activeRound = false; //True if a round is currently going on
+        public int curRound = 1; //current round indicator
+        public bool activeRound = true; //True if a round is currently going on
         private float _burnCd = 0;
         private int _burnCount = 1;
         private float _downTimer;
@@ -65,6 +66,11 @@ public class MainLoop : NetworkBehaviour
         
         public void OnRoundStart()
         { 
+                List<TestDummy> Minerals = FindObjectsOfType<TestDummy>().ToList();
+                foreach (var mineral in Minerals)
+                {
+                        mineral.OnRevive();
+                }
                 if (curRound % 2 == 0)
                 {
                         lootRank++;
@@ -206,6 +212,18 @@ public class MainLoop : NetworkBehaviour
         {
                 // transition scene fin
         }
+
+        [Command(requiresAuthority = false)]
+        public void CmdUpdatePlayers()
+        {
+                UpdatePlayersRpc(players);
+        }
+        
+        [ClientRpc]
+        public void UpdatePlayersRpc(List<NewPlayer> playerList)
+        {
+                players = playerList;
+        }
         
         private void Update()
         {
@@ -223,12 +241,16 @@ public class MainLoop : NetworkBehaviour
                         UpdateDownTime();
                 }
 
-                players = FindObjectsOfType<NewPlayer>().ToList();
-
+                //players = FindObjectsOfType<NewPlayer>().ToList();
                 if (players.Count == 0)
                 {
                         DontDestroyOnLoad(transform.gameObject);
                         players = FindObjectsOfType<NewPlayer>().ToList();
+                }
+                Debug.LogError(players.Count);
+                foreach (var player in players)
+                {
+                        Debug.LogError(player._name);
                 }
         }
 }

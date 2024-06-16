@@ -134,7 +134,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9174354139023919890}
+  - {fileID: 2420307297111407184}
   - {fileID: 4457709542220070704}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -153,7 +153,9 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  resources: {fileID: 1277947232470040088}
+  resources: {fileID: 2888959091640182817}
+  isAttacking: 0
+  isCasting: 0
   primaryWeaponAttackKey: 323
   anchor: {fileID: 0}
   health: 30
@@ -318,59 +320,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &5517519223765843916
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9174354139023919890}
-  - component: {fileID: 1277947232470040088}
-  m_Layer: 0
-  m_Name: Ressources
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9174354139023919890
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5517519223765843916}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -7.616446, y: -5.7396183, z: 43.56609}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 679560282636434647}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1277947232470040088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5517519223765843916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 837d0ce1d1e85a34c9499d846fecacb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileList:
-  - {fileID: 4929927344873843062, guid: 3176f00c996ec3a4e963bd8eb8ff782a, type: 3}
-  particleList:
-  - {fileID: 3667816805564532740, guid: afa3c445762db294392686bac257bfa1, type: 3}
-  indicatorList: []
-  lootList: []
-  buffIconList: []
-  abilityIconList: []
-  passiveAbilityIconList: []
 --- !u!1 &5901461634505955441
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +456,117 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &7211367375085403259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2420307297111407184}
+  - component: {fileID: 2888959091640182817}
+  m_Layer: 0
+  m_Name: Resources
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2420307297111407184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7211367375085403259}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -7.616446, y: -5.7396183, z: 43.56609}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 679560282636434647}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2888959091640182817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7211367375085403259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 837d0ce1d1e85a34c9499d846fecacb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileList:
+  - {fileID: 4929927344873843062, guid: 2edcbf084066ba8458f5de60d0f0898c, type: 3}
+  - {fileID: 4843045067119190212, guid: 47b29504b36ebeb47a30a6a3da49036e, type: 3}
+  - {fileID: 8741892215208238561, guid: 549254c40768bd64888c3e69dfbca6f1, type: 3}
+  - {fileID: 1996432642297616750, guid: 3176f00c996ec3a4e963bd8eb8ff782a, type: 3}
+  - {fileID: 1996432642297616750, guid: 36015262138588f4181c9efc7698095b, type: 3}
+  - {fileID: 1996432642297616750, guid: 4410e5aa63d3ea440a89f1fc5c660c23, type: 3}
+  - {fileID: 1996432642297616750, guid: 959951299c7c5344e949a403c921d26b, type: 3}
+  - {fileID: 4843045067119190212, guid: 22d0ac922d24e3a4e9435e3ec1d2b4fc, type: 3}
+  - {fileID: 4843045067119190212, guid: 06a5d19522791954c8ccabd463e8e13c, type: 3}
+  - {fileID: 4843045067119190212, guid: abcd3bbb5172a1140b93b5ca575fa5f6, type: 3}
+  particleList:
+  - {fileID: 3667816805564532740, guid: afa3c445762db294392686bac257bfa1, type: 3}
+  indicatorList:
+  - {fileID: 6572906761774532393, guid: 8f8b813920f32054c8ee7269d9c37799, type: 3}
+  - {fileID: 6572906761774532393, guid: d4363908d8aab8e4b98bd8978d45e9c2, type: 3}
+  - {fileID: 6572906761774532393, guid: a570282429a789d49b7c0e298d0f022b, type: 3}
+  lootList:
+  - {fileID: 4441857392704860318, guid: 6fa399c353c9a774aabb4433a16b2eac, type: 3}
+  - {fileID: 4441857392704860318, guid: d1a846476666b054fbe669b84f536ffa, type: 3}
+  - {fileID: 4441857392704860318, guid: cbb7457c910d465448a261853fd0f310, type: 3}
+  debuffIconList:
+  - {fileID: 21300000, guid: 9113d706c9b00364994c4bc4c779cc90, type: 3}
+  - {fileID: 21300000, guid: 3fcde16e60de7e7438dadb0909775d6c, type: 3}
+  - {fileID: 21300000, guid: ddfe6380e427a034c98cf286b332173c, type: 3}
+  buffIconList:
+  - {fileID: 21300000, guid: 66ea6d4dcfce95c4a98eba75acf30526, type: 3}
+  - {fileID: 21300000, guid: 57dc60da6e682344680826a29342ad11, type: 3}
+  - {fileID: 21300000, guid: f44bf062172d59b4db02b29c751aa67f, type: 3}
+  - {fileID: 21300000, guid: 835919401f538eb42b06914372123e8e, type: 3}
+  - {fileID: 21300000, guid: da2428cc0a18c1a4f97c365ed0f129ac, type: 3}
+  - {fileID: 21300000, guid: bd5565336885f3446975c585f1b70ddd, type: 3}
+  - {fileID: 21300000, guid: 00d93e870e281474eaffc504915561f0, type: 3}
+  - {fileID: 21300000, guid: 6220d67e58db4b74ebed750b4c5d1312, type: 3}
+  abilityIconList:
+  - {fileID: 21300000, guid: 6220d67e58db4b74ebed750b4c5d1312, type: 3}
+  - {fileID: 21300000, guid: ea2fcfff1b6007641a93cdb51dffaa31, type: 3}
+  - {fileID: 21300000, guid: b12502ba5c973e3488a651f1e7634829, type: 3}
+  - {fileID: 21300000, guid: edb6c6f1eb55f4e43a992713db705866, type: 3}
+  - {fileID: 21300000, guid: 83da52182bc637e498b2e0da38d233a7, type: 3}
+  - {fileID: 21300000, guid: 2630aaca550cda44986260cb35cf1387, type: 3}
+  - {fileID: 21300000, guid: c6ae35aa675f33d4eb9c57987f1f96e1, type: 3}
+  - {fileID: 21300000, guid: 4c0827473773009449cf0ef7d0a228f6, type: 3}
+  - {fileID: 21300000, guid: f3e87f4aa00be774c9017322c9bd656c, type: 3}
+  - {fileID: 21300000, guid: 10dc9c67ffb56dd4f800103585f26888, type: 3}
+  - {fileID: 21300000, guid: ddfe6380e427a034c98cf286b332173c, type: 3}
+  - {fileID: 21300000, guid: 07720b55bb7cb3c45a9e509ca5b5e01c, type: 3}
+  - {fileID: 21300000, guid: 8013ced2516877c43b1e60720f52748f, type: 3}
+  - {fileID: 21300000, guid: 4fea7209b87bf684698342b7de78e2d0, type: 3}
+  weaponIconList:
+  - {fileID: 21300000, guid: cc16da6188962544787f7f3b5c7f499f, type: 3}
+  - {fileID: 21300000, guid: f7297527d4fb1e34ca5bd1d2e3cedcd6, type: 3}
+  - {fileID: 21300000, guid: 60be931574a9c17468f13cdfa68e39ce, type: 3}
+  - {fileID: 21300000, guid: 4d14b773d329f484780c89a159aae4ab, type: 3}
+  - {fileID: 21300000, guid: 06b5cddace56b90498046276b4690865, type: 3}
+  - {fileID: 21300000, guid: 523bf6f3c1806ce48b9c36cf69041836, type: 3}
+  - {fileID: 21300000, guid: 8d95bcf261f259f4786a397bc66e3705, type: 3}
+  - {fileID: 21300000, guid: 874be534e1ea3074da09e41e25ee4e2b, type: 3}
+  passiveAbilityIconList:
+  - {fileID: 21300000, guid: f44bf062172d59b4db02b29c751aa67f, type: 3}
+  - {fileID: 21300000, guid: 00d93e870e281474eaffc504915561f0, type: 3}
+  - {fileID: 21300000, guid: e7c66fb6bf0e75f47b713684aafe510a, type: 3}
+  - {fileID: 21300000, guid: 57dc60da6e682344680826a29342ad11, type: 3}
+  - {fileID: 21300000, guid: 66ea6d4dcfce95c4a98eba75acf30526, type: 3}
+  - {fileID: 21300000, guid: 0b55b49bf61a0e14ab542ec69fe02786, type: 3}
+  - {fileID: 21300000, guid: 835919401f538eb42b06914372123e8e, type: 3}
+  - {fileID: 21300000, guid: da2428cc0a18c1a4f97c365ed0f129ac, type: 3}
 --- !u!1 &8146673403064752454
 GameObject:
   m_ObjectHideFlags: 0

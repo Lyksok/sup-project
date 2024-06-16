@@ -40,9 +40,17 @@ namespace Entities
 
         public override void OnDeath()
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            model.gameObject.SetActive(false);
+            resources.GenerateLoot(model.transform.position);
         }
 
+        public void OnRevive()
+        {
+            model.gameObject.SetActive(true);
+            health = maxHealth;
+        }
+        
         [Command(requiresAuthority = false)]
         private void SrvStopMovement()
         {

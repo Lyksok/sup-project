@@ -13,6 +13,9 @@ namespace Entities
     {
         
         public ResourceManager resources; //handles projectile spawning
+        public bool isAttacking;
+        public bool isCasting;
+        
         
         [Header("Weapons")] public Weapon primaryWeapon;
         public KeyCode primaryWeaponAttackKey = KeyCode.Mouse0;
@@ -146,10 +149,12 @@ namespace Entities
             if (Input.GetKey(key))
             {
                 ability.SetupEffect();
+                isCasting = true;
             }
             if (Input.GetKeyUp(key))
             {
                 ability.ActiveEffect();
+                isCasting = false;
             }
             ability.PassiveEffect();
         }
@@ -164,6 +169,11 @@ namespace Entities
             if (Input.GetKeyDown(key))
             {
                 weapon.CmdAttack();
+                isAttacking = true;
+            }
+            else
+            {
+                isAttacking = false;
             }
         }
 
@@ -178,6 +188,7 @@ namespace Entities
         [ClientRpc]
         public void TakeDamageRpc(float damage, DamageType damageType,Entity attacker)
         {
+            //resources.GenerateLoot(model.transform.position);
             
             if (damage < 0)
             {

@@ -197,7 +197,7 @@ namespace Managers
                     }
                     GameObject go = Instantiate(lootList[2],position,Quaternion.identity);
                     go.GetComponent<GemOrb>()._rarity = rarities;
-                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                    go.GetComponent<GemOrb>().UpdateInfo();
                 } else if (luck > 80)
                 {
                     Rarities rarities;
@@ -222,7 +222,7 @@ namespace Managers
                     }
                     GameObject go = Instantiate(lootList[1],position,Quaternion.identity);
                     go.GetComponent<WeaponOrb>()._rarity = rarities;
-                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                    go.GetComponent<WeaponOrb>().UpdateInfo();
                 }
                 else
                 {
@@ -278,7 +278,7 @@ namespace Managers
                     }
                     GameObject go = Instantiate(lootList[2],position,Quaternion.identity);
                     go.GetComponent<GemOrb>()._rarity = rarities;
-                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                    go.GetComponent<GemOrb>().UpdateInfo();
                 } else if (luck > 80)
                 {
                     Rarities rarities;
@@ -303,7 +303,7 @@ namespace Managers
                     }
                     GameObject go = Instantiate(lootList[1],position,Quaternion.identity);
                     go.GetComponent<WeaponOrb>()._rarity = rarities;
-                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                    go.GetComponent<WeaponOrb>().UpdateInfo();
                 }
                 else
                 {
@@ -359,7 +359,7 @@ namespace Managers
                     }
                     GameObject go = Instantiate(lootList[2],position,Quaternion.identity);
                     go.GetComponent<GemOrb>()._rarity = rarities;
-                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                    go.GetComponent<GemOrb>().UpdateInfo();
                 } else if (luck > 80)
                 {
                     Rarities rarities;
@@ -384,7 +384,7 @@ namespace Managers
                     }
                     GameObject go = Instantiate(lootList[1],position,Quaternion.identity);
                     go.GetComponent<WeaponOrb>()._rarity = rarities;
-                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                    go.GetComponent<WeaponOrb>().UpdateInfo();
                 }
                 else
                 {
