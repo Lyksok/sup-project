@@ -66,7 +66,7 @@ public class NewPlayer : Entity
     public float hpoBonus;
 
     public float roundTimer;
-    public int roundNumber;
+    public int roundNumber = 1;
     public Animator animator;
 
     public override void OnStopLocalPlayer()
@@ -79,7 +79,7 @@ public class NewPlayer : Entity
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject);
-        
+        roundNumber = 1;
         score = 0;
         inEvent = false;
         statsHUD2 = statsHUD.GetComponent<TextMeshProUGUI>();

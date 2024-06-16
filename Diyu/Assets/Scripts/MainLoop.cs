@@ -180,9 +180,13 @@ public class MainLoop : NetworkBehaviour
                                 deadCount++;
                         }
                 }
-
+                Debug.LogError(deadCount);
                 if (deadCount >= 1)
                 {
+                        foreach (var player in players)
+                        {
+                                player.victor = winner._name;
+                        }
                         foreach (var player in players)
                         {
                                 if (player.isSpectator)
@@ -201,10 +205,7 @@ public class MainLoop : NetworkBehaviour
                                 }
                         }
                         OnRoundEnd();
-                        foreach (var player in players)
-                        {
-                                player.victor = winner._name;
-                        }
+                        
                 }
         }
 

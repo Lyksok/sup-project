@@ -50,17 +50,51 @@ public class syncManager : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdSpawnFireball(GameObject prefab, Vector3 pos,float damage,Vector3 orientation)
+    public void CmdSpawnFireball(int type, Vector3 pos,float damage,Vector3 orientation)
     {
-        GameObject newFireball = Object.Instantiate(prefab, pos, Quaternion.identity);
-        newFireball.GetComponent<Fireball>().damage = damage;
+        SpawnFireballRpc(type, pos, damage,orientation);
+            
+    }
+    
+    [ClientRpc]
+    public void SpawnFireballRpc(int type, Vector3 pos,float damage,Vector3 orientation)
+    {
+        GameObject newFireball;
+        switch (type)
+        {
+            case 0:
+                newFireball = Object.Instantiate(resourceManager.projectileList[type], pos, Quaternion.identity);
+                newFireball.GetComponent<Fireball>().damage = damage;
+                break;
+            case 3:
+                newFireball = Object.Instantiate(resourceManager.projectileList[type], pos, Quaternion.identity);
+                newFireball.GetComponent<Energyball>().damage = damage;
+                break;
+            case 4:
+                newFireball = Object.Instantiate(resourceManager.projectileList[type], pos, Quaternion.identity);
+                newFireball.GetComponent<Elementball>().damage = damage;
+                break;
+            case 5:
+                newFireball = Object.Instantiate(resourceManager.projectileList[type], pos, Quaternion.identity);
+                newFireball.GetComponent<Arrow>().damage = damage;
+                break;
+            case 6:
+                newFireball = Object.Instantiate(resourceManager.projectileList[type], pos, Quaternion.identity);
+                newFireball.GetComponent<ThrownDagger>().damage = damage;
+                break;
+            default:
+                newFireball = Object.Instantiate(resourceManager.projectileList[type], pos, Quaternion.identity);
+                newFireball.GetComponent<Fireball>().damage = damage;
+                break;
+                
+        }
+        
         //newFireball.GetComponent<Fireball>().attacker = User;
         Rigidbody rb = newFireball.GetComponent<Rigidbody>();
-
         rb.AddForce(30 * orientation, ForceMode.VelocityChange);
         //_firelaunch.transform.position = position;
         //_firelaunch.Play();
-        NetworkServer.Spawn(newFireball);
+        //NetworkServer.Spawn(newFireball);
             
     }
 }

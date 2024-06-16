@@ -96,19 +96,7 @@ namespace Weapons
                 CurrentCooldown = Cooldown;
                 //AttackRpc();
                 var position = anchor.transform.position;
-                syncManager.CmdSpawnFireball(_fireball,position,(baseDamage + damagePercent * User.abilityPower),anchor.transform.forward);
-                
-                /*timeSinceLastAttack = 0;
-                var position = anchor.transform.position;
-                GameObject newFireball = Object.Instantiate(_fireball, position, Quaternion.identity);
-                newFireball.GetComponent<Fireball>().damage = (baseDamage + damagePercent * User.abilityPower);
-                newFireball.GetComponent<Fireball>().attacker = User;
-                Rigidbody rb = newFireball.GetComponent<Rigidbody>();
-
-                rb.AddForce(FireSpeed * anchor.transform.forward, ForceMode.VelocityChange);
-                _firelaunch.transform.position = position;
-                _firelaunch.Play();
-                NetworkServer.Spawn(newFireball);*/
+                syncManager.CmdSpawnFireball(0,position,(baseDamage + damagePercent * User.abilityPower),anchor.transform.forward);
             }
         }
         [ClientRpc]

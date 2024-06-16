@@ -38205,7 +38205,7 @@ MonoBehaviour:
   syncInterval: 0
   players: []
   roundTime: 0
-  curRound: 3
+  curRound: 1
   activeRound: 1
   winner: {fileID: 0}
   lootRank: 0

@@ -12,6 +12,14 @@ namespace Weapons
         private readonly ParticleSystem _firelaunch;
         private const float Speed = 30.0f;
 
+        private syncManager syncManager;
+
+        private void Update()
+        {
+            syncManager = Object.FindObjectOfType<syncManager>();
+            //Debug.LogError(syncManager != null);
+        }
+        
         //public override string Name => "firespell";
         public override int id => 8;
 
@@ -78,15 +86,17 @@ namespace Weapons
             }
         }
         
-        [Command]
         public override void CmdAttack()
         {
+            Update();
             timeSinceLastAttack = 0;
             if (CanAttack)
             {
                 Cooldown = 1 / (baseASPD * (attackSpeedPercent * User.attackSpeed));
                 CurrentCooldown = Cooldown;
-                AttackRpc();
+                //AttackRpc();
+                var position = anchor.transform.position;
+                syncManager.CmdSpawnFireball(6,position,(baseDamage + damagePercent * User.abilityPower),anchor.transform.forward);
             }
         }
         [ClientRpc]
