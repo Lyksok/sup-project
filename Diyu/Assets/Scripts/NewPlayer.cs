@@ -65,6 +65,7 @@ public class NewPlayer : Entity
 
     public float roundTimer;
     public int roundNumber;
+    public Animator animator;
 
     public override void OnStopLocalPlayer()
     {
@@ -456,12 +457,18 @@ public class NewPlayer : Entity
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {
             //Debug.Log("Stopping");
+            
             playerRigidbody.velocity = Vector3.zero;
+            Debug.Log("is not running");
+            animator.SetBool("isRunning", false);
         }
         else
         {
             var position = body.transform.position;
+            
             playerRigidbody.MovePosition(position + moveBy.normalized * ((movementSpeed * Time.fixedDeltaTime) * moveSpeed));
+            animator.SetBool("isRunning", true);
+            Debug.Log("run");
         }
     }
     
