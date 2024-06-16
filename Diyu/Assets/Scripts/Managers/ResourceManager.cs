@@ -17,6 +17,7 @@ namespace Managers
         public Sprite[] debuffIconList;
         public Sprite[] buffIconList;
         public Sprite[] abilityIconList;
+        public Sprite[] weaponIconList;
         public Sprite[] passiveAbilityIconList; //class passives icons
         
         public int abilityCount

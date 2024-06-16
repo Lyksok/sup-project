@@ -222,17 +222,13 @@ public class MainLoop : NetworkBehaviour
                 {
                         UpdateDownTime();
                 }
+
                 players = FindObjectsOfType<NewPlayer>().ToList();
-                foreach (var player in players)
-                {
-                        Debug.LogError(player._name);
-                }
 
                 if (players.Count == 0)
                 {
                         DontDestroyOnLoad(transform.gameObject);
                         players = FindObjectsOfType<NewPlayer>().ToList();
-                        Debug.LogError(players.Count);
                 }
         }
 }

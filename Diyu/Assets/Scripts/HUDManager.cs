@@ -34,6 +34,8 @@ public class HUDManager : NetworkBehaviour
     private Image _ability2Icon;
     private Image _ability3Icon;
     private Image _ability4Icon;
+    public GameObject weapon;
+    private Image _weaponIcon;
     
     public Slider hp;
     public TextMeshProUGUI hpValue;
@@ -43,6 +45,7 @@ public class HUDManager : NetworkBehaviour
     public GameObject frame3;
     public GameObject frame4;
     public GameObject frameP;
+    public GameObject frameW;
     public Sprite frameNone;
     public Sprite frameCommon;
     public Sprite frameUncommon;
@@ -55,6 +58,8 @@ public class HUDManager : NetworkBehaviour
     private Image _frame3;
     private Image _frame4;
     private Image _frameP;
+    private Image _frameW;
+    public TextMeshProUGUI weaponName;
 
     public GameObject ability1Cd;
     public GameObject ability2Cd;
@@ -100,7 +105,7 @@ public class HUDManager : NetworkBehaviour
     public InfoTextManager managerAbility3;
     public InfoTextManager managerAbility4;
     public InfoTextManager managerAbilityP;
-    public InfoTextManager managerWeapon;
+    //public InfoTextManager managerWeapon;
     public InfoTextManager managerGem1;
     public InfoTextManager managerGem2;
     public InfoTextManager managerGem3;
@@ -125,12 +130,14 @@ public class HUDManager : NetworkBehaviour
         _ability2Icon = ability2.GetComponent<Image>();
         _ability3Icon = ability3.GetComponent<Image>();
         _ability4Icon = ability4.GetComponent<Image>();
+        _weaponIcon = weapon.GetComponent<Image>();
         _passiveAbilityIcon = abilityP.GetComponent<Image>();
         _frame1 = frame1.GetComponent<Image>();
         _frame2 = frame2.GetComponent<Image>();
         _frame3 = frame3.GetComponent<Image>();
         _frame4 = frame4.GetComponent<Image>();
         _frameP = frameP.GetComponent<Image>();
+        _frameW = frameW.GetComponent<Image>();
         _ability1IconCd = ability1Cd.GetComponent<Image>();
         _ability2IconCd = ability2Cd.GetComponent<Image>();
         _ability3IconCd = ability3Cd.GetComponent<Image>();
@@ -343,6 +350,28 @@ public class HUDManager : NetworkBehaviour
                 return frameNone;
         }
     }
+    
+    private Sprite GetIconRarity(Rarities ability)
+    {
+
+        switch (ability)
+        {
+            case Rarities.COMMON:
+                return frameCommon;
+            case Rarities.UNCOMMON:
+                return frameUncommon;
+            case Rarities.RARE:
+                return frameRare;
+            case Rarities.EPIC:
+                return frameEpic;
+            case Rarities.LEGENDARY:
+                return frameLegendary;
+            case Rarities.MYTHIC:
+                return frameMythic;
+            default:
+                return frameNone;
+        }
+    }
 
     private void UpdateDebuffs()
     {
@@ -400,6 +429,9 @@ public class HUDManager : NetworkBehaviour
     
     private void UpdateIcon()
     {
+        weaponName.text = player.primaryWeapon.Name;
+        _weaponIcon.sprite = _resources.weaponIconList[player.primaryWeapon.id-1];
+        _frameP.sprite = GetIconRarity(player.primaryWeapon.Rarity);
         if (player.abilityList[0] is AbilityNone_0)
         {
             ability1.SetActive(false);

@@ -432,7 +432,7 @@ public class NewPlayer : Entity
     
     private void UpdateHUD() //used for HUD display
     {
-        statsValue = $" Health : {health} / {maxHealth}\n Attack Damage : {attackDamage}\n Ability Power : {abilityPower}\n Armor : {armor}\n Magic Resist : {magicResist}\n Movement Speed : {movementSpeed}\n Movement Speed% : {moveSpeed}\n Attack Speed : {(primaryWeapon.baseASPD * (primaryWeapon.attackSpeedPercent * attackSpeed))}\n Lifesteal% : {lifesteal}\n Heal Power% : {healingPower}";
+        statsValue = $" Attack Damage : {attackDamage}\n Ability Power : {abilityPower}\n Armor : {armor}\n Magic Resist : {magicResist}\n Movement Speed : {movementSpeed}\n Speed Bonus : {Math.Round(moveSpeed*100)}%\n Attack Speed : {(primaryWeapon.baseASPD * (primaryWeapon.attackSpeedPercent * attackSpeed))}\n Lifesteal : {Math.Round(lifesteal*100)}%\n Heal Power : {Math.Round(healingPower*100)}%";
         statsHUD2.text = statsValue;
         abilitiesValue = $" Key 1 - {GetAbilityState(abilityList[0])}\n Key 2 - {GetAbilityState(abilityList[1])}\n Key 3 - {GetAbilityState(abilityList[2])}\n Key 4 - {GetAbilityState(abilityList[3])}\n\n Class - {GetAbilityState(classPassive)}";
         abilitiesValue += $"\n \n {primaryWeapon.Name} - {primaryWeapon.Rarity}";
