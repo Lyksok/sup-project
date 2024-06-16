@@ -131,6 +131,7 @@ public class BossController : MonoBehaviour
     {
         if (CanSeeObject(enemy))
         {
+            Debug.Log("SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             anim.SetBool("isSitting", false);
             transform.LookAt(enemy.transform);
             timeBetweenAttacks += Time.deltaTime;
