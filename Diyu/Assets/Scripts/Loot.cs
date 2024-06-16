@@ -28,7 +28,7 @@ namespace Entities
             }
         }
         
-        public void OnCollisionEnter(Collision other)
+        public void OnTriggerEnter(Collider other)
         {
             NewPlayer player = other.gameObject.GetComponentInParent<NewPlayer>();
             //Debug.LogError(player != null);

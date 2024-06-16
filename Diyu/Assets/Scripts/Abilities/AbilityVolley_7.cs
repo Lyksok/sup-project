@@ -12,7 +12,7 @@ namespace Abilities
 {
     public class AbilityVolley_7 : Ability
     {
-        public override int id { get => 6; }
+        public override int id { get => 7; }
         public float damage;
         public float timer;
         public int count;

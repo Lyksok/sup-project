@@ -11,7 +11,7 @@ namespace Abilities
 {
     public class AbilityThunder_10 : Ability
     {
-        public override int id { get => 3; }
+        public override int id { get => 10; }
         public AreaOfEffect aoe;
         public float damage;
         public float range;

@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using Abilities;
 using Entities;
 using Gems;
@@ -156,6 +157,341 @@ namespace Managers
                     return new Color(200, 200, 0);;
                 default:
                     return new Color(100, 100, 100);;
+            }
+        }
+
+        public void GenerateLoot(Vector3 position)
+        {
+            int lootRank = 0;
+            MainLoop loop = FindObjectOfType<MainLoop>();
+            if (loop != null)
+            {
+                lootRank = loop.lootRank;
+            }
+            
+            if (lootRank == 0)
+            {
+                int luck = RandomNumberGenerator.GetInt32(0, 100);
+                if (luck < 40)
+                {
+                    Rarities rarities;
+                    int rarity = RandomNumberGenerator.GetInt32(0, 100);
+                    switch (rarity)
+                    {
+                        case <5:
+                            rarities = Rarities.LEGENDARY;
+                            break;
+                        case <15:
+                            rarities = Rarities.EPIC;
+                            break;
+                        case <35:
+                            rarities = Rarities.RARE;
+                            break;
+                        case <60:
+                            rarities = Rarities.UNCOMMON;
+                            break;
+                        default:
+                            rarities = Rarities.COMMON;
+                            break;
+                    }
+                    GameObject go = Instantiate(lootList[2],position,Quaternion.identity);
+                    go.GetComponent<GemOrb>()._rarity = rarities;
+                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                } else if (luck > 80)
+                {
+                    Rarities rarities;
+                    int rarity = RandomNumberGenerator.GetInt32(0, 100);
+                    switch (rarity)
+                    {
+                        case <5:
+                            rarities = Rarities.LEGENDARY;
+                            break;
+                        case <15:
+                            rarities = Rarities.EPIC;
+                            break;
+                        case <35:
+                            rarities = Rarities.RARE;
+                            break;
+                        case <60:
+                            rarities = Rarities.UNCOMMON;
+                            break;
+                        default:
+                            rarities = Rarities.COMMON;
+                            break;
+                    }
+                    GameObject go = Instantiate(lootList[1],position,Quaternion.identity);
+                    go.GetComponent<WeaponOrb>()._rarity = rarities;
+                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                }
+                else
+                {
+                    Rarities rarities;
+                    int rarity = RandomNumberGenerator.GetInt32(0, 100);
+                    switch (rarity)
+                    {
+                        case <5:
+                            rarities = Rarities.LEGENDARY;
+                            break;
+                        case <15:
+                            rarities = Rarities.EPIC;
+                            break;
+                        case <35:
+                            rarities = Rarities.RARE;
+                            break;
+                        case <60:
+                            rarities = Rarities.UNCOMMON;
+                            break;
+                        default:
+                            rarities = Rarities.COMMON;
+                            break;
+                    }
+                    GameObject go = Instantiate(lootList[0],position,Quaternion.identity);
+                    go.GetComponent<AbilityOrb>()._rarity = rarities;
+                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                }
+            } 
+            else if (lootRank == 1)
+            {
+                int luck = RandomNumberGenerator.GetInt32(0, 100);
+                if (luck < 40)
+                {
+                    Rarities rarities;
+                    int rarity = RandomNumberGenerator.GetInt32(0, 100);
+                    switch (rarity)
+                    {
+                        case <10:
+                            rarities = Rarities.LEGENDARY;
+                            break;
+                        case <25:
+                            rarities = Rarities.EPIC;
+                            break;
+                        case <50:
+                            rarities = Rarities.RARE;
+                            break;
+                        case <80:
+                            rarities = Rarities.UNCOMMON;
+                            break;
+                        default:
+                            rarities = Rarities.COMMON;
+                            break;
+                    }
+                    GameObject go = Instantiate(lootList[2],position,Quaternion.identity);
+                    go.GetComponent<GemOrb>()._rarity = rarities;
+                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                } else if (luck > 80)
+                {
+                    Rarities rarities;
+                    int rarity = RandomNumberGenerator.GetInt32(0, 100);
+                    switch (rarity)
+                    {
+                        case <10:
+                            rarities = Rarities.LEGENDARY;
+                            break;
+                        case <25:
+                            rarities = Rarities.EPIC;
+                            break;
+                        case <50:
+                            rarities = Rarities.RARE;
+                            break;
+                        case <80:
+                            rarities = Rarities.UNCOMMON;
+                            break;
+                        default:
+                            rarities = Rarities.COMMON;
+                            break;
+                    }
+                    GameObject go = Instantiate(lootList[1],position,Quaternion.identity);
+                    go.GetComponent<WeaponOrb>()._rarity = rarities;
+                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                }
+                else
+                {
+                    Rarities rarities;
+                    int rarity = RandomNumberGenerator.GetInt32(0, 100);
+                    switch (rarity)
+                    {
+                        case <10:
+                            rarities = Rarities.LEGENDARY;
+                            break;
+                        case <25:
+                            rarities = Rarities.EPIC;
+                            break;
+                        case <50:
+                            rarities = Rarities.RARE;
+                            break;
+                        case <80:
+                            rarities = Rarities.UNCOMMON;
+                            break;
+                        default:
+                            rarities = Rarities.COMMON;
+                            break;
+                    }
+                    GameObject go = Instantiate(lootList[0],position,Quaternion.identity);
+                    go.GetComponent<AbilityOrb>()._rarity = rarities;
+                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                }
+            } 
+            else if (lootRank == 2)
+            {
+                int luck = RandomNumberGenerator.GetInt32(0, 100);
+                if (luck < 40)
+                {
+                    Rarities rarities;
+                    int rarity = RandomNumberGenerator.GetInt32(0, 100);
+                    switch (rarity)
+                    {
+                        case <20:
+                            rarities = Rarities.LEGENDARY;
+                            break;
+                        case <35:
+                            rarities = Rarities.EPIC;
+                            break;
+                        case <65:
+                            rarities = Rarities.RARE;
+                            break;
+                        case <90:
+                            rarities = Rarities.UNCOMMON;
+                            break;
+                        default:
+                            rarities = Rarities.COMMON;
+                            break;
+                    }
+                    GameObject go = Instantiate(lootList[2],position,Quaternion.identity);
+                    go.GetComponent<GemOrb>()._rarity = rarities;
+                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                } else if (luck > 80)
+                {
+                    Rarities rarities;
+                    int rarity = RandomNumberGenerator.GetInt32(0, 100);
+                    switch (rarity)
+                    {
+                        case <20:
+                            rarities = Rarities.LEGENDARY;
+                            break;
+                        case <35:
+                            rarities = Rarities.EPIC;
+                            break;
+                        case <65:
+                            rarities = Rarities.RARE;
+                            break;
+                        case <90:
+                            rarities = Rarities.UNCOMMON;
+                            break;
+                        default:
+                            rarities = Rarities.COMMON;
+                            break;
+                    }
+                    GameObject go = Instantiate(lootList[1],position,Quaternion.identity);
+                    go.GetComponent<WeaponOrb>()._rarity = rarities;
+                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                }
+                else
+                {
+                    Rarities rarities;
+                    int rarity = RandomNumberGenerator.GetInt32(0, 100);
+                    switch (rarity)
+                    {
+                        case <20:
+                            rarities = Rarities.LEGENDARY;
+                            break;
+                        case <35:
+                            rarities = Rarities.EPIC;
+                            break;
+                        case <65:
+                            rarities = Rarities.RARE;
+                            break;
+                        case <90:
+                            rarities = Rarities.UNCOMMON;
+                            break;
+                        default:
+                            rarities = Rarities.COMMON;
+                            break;
+                    }
+                    GameObject go = Instantiate(lootList[0],position,Quaternion.identity);
+                    go.GetComponent<AbilityOrb>()._rarity = rarities;
+                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                }
+            }
+            else
+            {
+                int luck = RandomNumberGenerator.GetInt32(0, 100);
+                if (luck < 40)
+                {
+                    Rarities rarities;
+                    int rarity = RandomNumberGenerator.GetInt32(0, 100);
+                    switch (rarity)
+                    {
+                        case <25:
+                            rarities = Rarities.LEGENDARY;
+                            break;
+                        case <50:
+                            rarities = Rarities.EPIC;
+                            break;
+                        case <70:
+                            rarities = Rarities.RARE;
+                            break;
+                        case <95:
+                            rarities = Rarities.UNCOMMON;
+                            break;
+                        default:
+                            rarities = Rarities.COMMON;
+                            break;
+                    }
+                    GameObject go = Instantiate(lootList[2],position,Quaternion.identity);
+                    go.GetComponent<GemOrb>()._rarity = rarities;
+                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                } else if (luck > 80)
+                {
+                    Rarities rarities;
+                    int rarity = RandomNumberGenerator.GetInt32(0, 100);
+                    switch (rarity)
+                    {
+                        case <25:
+                            rarities = Rarities.LEGENDARY;
+                            break;
+                        case <50:
+                            rarities = Rarities.EPIC;
+                            break;
+                        case <70:
+                            rarities = Rarities.RARE;
+                            break;
+                        case <95:
+                            rarities = Rarities.UNCOMMON;
+                            break;
+                        default:
+                            rarities = Rarities.COMMON;
+                            break;
+                    }
+                    GameObject go = Instantiate(lootList[1],position,Quaternion.identity);
+                    go.GetComponent<WeaponOrb>()._rarity = rarities;
+                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                }
+                else
+                {
+                    Rarities rarities;
+                    int rarity = RandomNumberGenerator.GetInt32(0, 100);
+                    switch (rarity)
+                    {
+                        case <25:
+                            rarities = Rarities.LEGENDARY;
+                            break;
+                        case <50:
+                            rarities = Rarities.EPIC;
+                            break;
+                        case <70:
+                            rarities = Rarities.RARE;
+                            break;
+                        case <95:
+                            rarities = Rarities.UNCOMMON;
+                            break;
+                        default:
+                            rarities = Rarities.COMMON;
+                            break;
+                    }
+                    GameObject go = Instantiate(lootList[0],position,Quaternion.identity);
+                    go.GetComponent<AbilityOrb>()._rarity = rarities;
+                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                }
             }
         }
         

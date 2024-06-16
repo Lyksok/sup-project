@@ -28,6 +28,8 @@ public class NewPlayer : Entity
     public bool isSpectator;
 
     public GameObject transition;
+    public TextMeshProUGUI transitionText;
+    public string victor;
     
     public GameObject statsHUD;
     private string statsValue;
@@ -130,8 +132,8 @@ public class NewPlayer : Entity
             //DebugPickup();
             //DebugPickupWpn();
             DebugOrb();
-            DebugWeaponOrb();
-            DebugGemOrb();
+            //DebugWeaponOrb();
+            //DebugGemOrb();
             //SrvMovement();
             DebugDamage();
             //EventManager();
@@ -190,6 +192,7 @@ public class NewPlayer : Entity
         canMove = false;
         health = maxHealth;
         transition.gameObject.SetActive(true);
+        transitionText.text = $"{victor} has won Round {roundNumber}.";
     }
 
     public void OnRoundStart()
@@ -208,12 +211,13 @@ public class NewPlayer : Entity
             Vector3 pos = model.transform.position;
             pos.y -= 0.95f;
             pos.x += 3;
-            Object.Instantiate(resources.lootList[0],pos,Quaternion.identity);
+            resources.GenerateLoot(pos);
+            //Object.Instantiate(resources.lootList[0],pos,Quaternion.identity);
             //Debug.LogError($"{pos}");
         }
     }
     
-    public void DebugWeaponOrb()
+    /*public void DebugWeaponOrb()
     {
         if (Input.GetKeyDown(KeyCode.R) && isLocalPlayer)
         {
@@ -235,7 +239,7 @@ public class NewPlayer : Entity
             Object.Instantiate(resources.lootList[2],pos,Quaternion.identity);
             //Debug.LogError($"{pos}");
         }
-    }
+    }*/
     
     /*public void DebugPickup() //gives the player a random ability
     {

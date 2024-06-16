@@ -12,7 +12,7 @@ namespace Entities
     {
         public ResourceManager resources;
         private int _weaponId;
-        private Rarities _rarity;
+        public Rarities _rarity;
         public GameObject Sphere;
         
         public void Start()

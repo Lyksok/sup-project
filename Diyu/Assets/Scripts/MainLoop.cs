@@ -20,6 +20,7 @@ public class MainLoop : NetworkBehaviour
         private int _burnCount = 1;
         private float _downTimer;
         public NewPlayer winner = null;
+        public int lootRank = 0;
         private ResourceManager resourceManager => players[0].resources;
 
         [SyncVar] public bool hasGameStarted = true;
@@ -64,12 +65,17 @@ public class MainLoop : NetworkBehaviour
         
         public void OnRoundStart()
         { 
+                if (curRound % 2 == 0)
+                {
+                        lootRank++;
+                }
                 curRound += 1;
                 roundTime = 0;
                 activeRound = true;
                 foreach (var player in players)
                 {
                         player.OnRoundStart();
+                        player.roundNumber = curRound;
                 }
         }
 
@@ -179,6 +185,7 @@ public class MainLoop : NetworkBehaviour
                                 }
                                 else
                                 {
+                                        winner = player;
                                         player.score++;
                                         if (player.score >= 3)
                                         {
@@ -188,13 +195,16 @@ public class MainLoop : NetworkBehaviour
                                 }
                         }
                         OnRoundEnd();
+                        foreach (var player in players)
+                        {
+                                player.victor = winner._name;
+                        }
                 }
         }
 
         private void OnGameWin(NewPlayer player)
         {
-                winner = player;
-                // transistion scene fin
+                // transition scene fin
         }
         
         private void Update()
