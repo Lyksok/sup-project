@@ -14288,7 +14288,7 @@ MonoBehaviour:
   resources: {fileID: 6380370966852379380}
   isAttacking: 0
   isCasting: 0
-  heal: {fileID: 0}
+  heal: {fileID: 1527686382323640006, guid: 28b05e12bb4b49e42bdf2677a0a4b4a9, type: 3}
   primaryWeaponAttackKey: 323
   anchor: {fileID: 4646592180277275865}
   health: 20

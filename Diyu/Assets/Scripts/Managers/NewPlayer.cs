@@ -134,7 +134,7 @@ public class NewPlayer : Entity
             CalculateASPD();
             //DebugPickup();
             //DebugPickupWpn();
-            DebugOrb();
+            //DebugOrb();
             //DebugWeaponOrb();
             //DebugGemOrb();
             //SrvMovement();
@@ -208,7 +208,7 @@ public class NewPlayer : Entity
     }
     
     
-    public void DebugOrb()
+    /*public void DebugOrb()
     {
         if (Input.GetKeyDown(KeyCode.E) && isLocalPlayer)
         {
@@ -219,7 +219,7 @@ public class NewPlayer : Entity
             //Object.Instantiate(resources.lootList[0],pos,Quaternion.identity);
             //Debug.LogError($"{pos}");
         }
-    }
+    }*/
     
     /*public void DebugWeaponOrb()
     {
@@ -438,12 +438,12 @@ public class NewPlayer : Entity
     {
         statsValue = $" Attack Damage : {attackDamage}\n Ability Power : {abilityPower}\n Armor : {armor}\n Magic Resist : {magicResist}\n Movement Speed : {movementSpeed}\n Speed Bonus : {Math.Round(moveSpeed*100)}%\n Attack Speed : {(primaryWeapon.baseASPD * (primaryWeapon.attackSpeedPercent * attackSpeed))}\n Lifesteal : {Math.Round(lifesteal*100)}%\n Heal Power : {Math.Round(healingPower*100)}%";
         statsHUD2.text = statsValue;
-        abilitiesValue = $" Key 1 - {GetAbilityState(abilityList[0])}\n Key 2 - {GetAbilityState(abilityList[1])}\n Key 3 - {GetAbilityState(abilityList[2])}\n Key 4 - {GetAbilityState(abilityList[3])}\n\n Class - {GetAbilityState(classPassive)}";
-        abilitiesValue += $"\n \n {primaryWeapon.Name} - {primaryWeapon.Rarity}";
-        abilitiesValue += $"\n Gem Count : {gemList.Count}";
-        abilitiesHUD2.text = abilitiesValue;
-        buffsValue = $"\n \n{GetBuffList()}";
-        buffsHUD2.text = buffsValue;
+        //abilitiesValue = $" Key 1 - {GetAbilityState(abilityList[0])}\n Key 2 - {GetAbilityState(abilityList[1])}\n Key 3 - {GetAbilityState(abilityList[2])}\n Key 4 - {GetAbilityState(abilityList[3])}\n\n Class - {GetAbilityState(classPassive)}";
+        //abilitiesValue += $"\n \n {primaryWeapon.Name} - {primaryWeapon.Rarity}";
+        //abilitiesValue += $"\n Gem Count : {gemList.Count}";
+        //abilitiesHUD2.text = abilitiesValue;
+        //buffsValue = $"\n \n{GetBuffList()}";
+        //buffsHUD2.text = buffsValue;
     }
     
     private void HandleMovement()
