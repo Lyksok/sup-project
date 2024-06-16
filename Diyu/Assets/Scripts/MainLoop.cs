@@ -247,10 +247,10 @@ public class MainLoop : NetworkBehaviour
                         DontDestroyOnLoad(transform.gameObject);
                         players = FindObjectsOfType<NewPlayer>().ToList();
                 }
-                Debug.LogError(players.Count);
+                //Debug.LogError(players.Count);
                 foreach (var player in players)
                 {
-                        Debug.LogError(player._name);
+                        //Debug.LogError(player._name);
                 }
         }
 }

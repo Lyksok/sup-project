@@ -1,3 +1,4 @@
+using System;
 using System.Security.Cryptography;
 using Abilities;
 using Entities;
@@ -20,7 +21,14 @@ namespace Managers
         public Sprite[] abilityIconList;
         public Sprite[] weaponIconList;
         public Sprite[] passiveAbilityIconList; //class passives icons
-        
+        private syncManager syncManager;
+
+        private void Update()
+        {
+            syncManager = FindObjectOfType<syncManager>();
+            //Debug.LogError(syncManager != null);
+        }
+
         public int abilityCount
         {
             get => 14;
@@ -162,37 +170,6 @@ namespace Managers
             }
         }
 
-        //[Command(requiresAuthority = false)]
-        public void CmdSpawnLoot(Rarities rarities, Vector3 pos,int index)
-        {
-            SpawnLootRpc(rarities, pos, index);
-        }
-
-        //[ClientRpc]
-        public void SpawnLootRpc(Rarities rarities, Vector3 pos,int index)
-        {
-            GameObject go;
-            switch (index)
-            {
-                case 0:
-                    go = Instantiate(lootList[0],pos,Quaternion.identity);
-                    go.GetComponent<AbilityOrb>()._rarity = rarities;
-                    go.GetComponent<AbilityOrb>().UpdateInfo();
-                    break;
-                case 1:
-                    go = Instantiate(lootList[1],pos,Quaternion.identity);
-                    go.GetComponent<WeaponOrb>()._rarity = rarities;
-                    go.GetComponent<WeaponOrb>().UpdateInfo();
-                    break;
-                case 2:
-                    go = Instantiate(lootList[2],pos,Quaternion.identity);
-                    go.GetComponent<GemOrb>()._rarity = rarities;
-                    go.GetComponent<GemOrb>().UpdateInfo();
-                    break;
-            }
-            
-        }
-
         public void GenerateLoot(Vector3 position)
         {
             int lootRank = 0;
@@ -228,7 +205,7 @@ namespace Managers
                             break;
                     }
 
-                    CmdSpawnLoot(rarities, position, 2);
+                    syncManager.CmdSpawnLoot(rarities, position, 2);
                 } else if (luck > 80)
                 {
                     Rarities rarities;
@@ -251,7 +228,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    CmdSpawnLoot(rarities, position, 1);
+                    syncManager.CmdSpawnLoot(rarities, position, 1);
                 }
                 else
                 {
@@ -275,7 +252,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    CmdSpawnLoot(rarities, position, 0);
+                    syncManager.CmdSpawnLoot(rarities, position, 0);
                 }
             } 
             else if (lootRank == 1)
@@ -303,7 +280,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    CmdSpawnLoot(rarities, position, 2);
+                    syncManager.CmdSpawnLoot(rarities, position, 2);
                 } else if (luck > 80)
                 {
                     Rarities rarities;
@@ -326,7 +303,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    CmdSpawnLoot(rarities, position, 1);
+                    syncManager.CmdSpawnLoot(rarities, position, 1);
                 }
                 else
                 {
@@ -350,7 +327,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    CmdSpawnLoot(rarities, position, 0);
+                    syncManager.CmdSpawnLoot(rarities, position, 0);
                 }
             } 
             else if (lootRank == 2)
@@ -378,7 +355,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    CmdSpawnLoot(rarities, position, 2);
+                    syncManager.CmdSpawnLoot(rarities, position, 2);
                 } else if (luck > 80)
                 {
                     Rarities rarities;
@@ -401,7 +378,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    CmdSpawnLoot(rarities, position, 1);
+                    syncManager.CmdSpawnLoot(rarities, position, 1);
                 }
                 else
                 {
@@ -425,7 +402,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    CmdSpawnLoot(rarities, position, 0);
+                    syncManager.CmdSpawnLoot(rarities, position, 0);
                 }
             }
             else
@@ -453,7 +430,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    CmdSpawnLoot(rarities, position, 2);
+                    syncManager.CmdSpawnLoot(rarities, position, 2);
                 } else if (luck > 80)
                 {
                     Rarities rarities;
@@ -476,7 +453,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    CmdSpawnLoot(rarities, position, 1);
+                    syncManager.CmdSpawnLoot(rarities, position, 1);
                 }
                 else
                 {
@@ -500,7 +477,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    CmdSpawnLoot(rarities, position, 0);
+                    syncManager.CmdSpawnLoot(rarities, position, 0);
                 }
             }
         }

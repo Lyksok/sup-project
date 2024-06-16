@@ -183,12 +183,12 @@ namespace Entities
         public void CmdTakeDamage(float damage, DamageType damageType,Entity attacker)
         {
             TakeDamageRpc(damage, damageType, attacker);
+            //resources.GenerateLoot(model.transform.position);
         }
 
         [ClientRpc]
         public void TakeDamageRpc(float damage, DamageType damageType,Entity attacker)
         {
-            resources.GenerateLoot(model.transform.position);
             
             if (damage < 0)
             {

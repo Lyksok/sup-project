@@ -1,4 +1,6 @@
-﻿namespace Entities
+﻿using Mirror;
+
+namespace Entities
 {
     public class DescribableObject
     {

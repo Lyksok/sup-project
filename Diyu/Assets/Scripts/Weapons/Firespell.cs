@@ -12,6 +12,14 @@ namespace Weapons
         private readonly ParticleSystem _firelaunch;
         private const float FireSpeed = 30.0f;
 
+        private syncManager syncManager;
+
+        private void Update()
+        {
+            syncManager = Object.FindObjectOfType<syncManager>();
+            //Debug.LogError(syncManager != null);
+        }
+        
         //public override string Name => "firespell";
         public override int id => 1;
 
@@ -78,15 +86,29 @@ namespace Weapons
             }
         }
         
-        [Command]
         public override void CmdAttack()
         {
+            Update();
             timeSinceLastAttack = 0;
             if (CanAttack)
             {
                 Cooldown = 1 / (baseASPD * (attackSpeedPercent * User.attackSpeed));
                 CurrentCooldown = Cooldown;
-                AttackRpc();
+                //AttackRpc();
+                var position = anchor.transform.position;
+                syncManager.CmdSpawnFireball(_fireball,position,(baseDamage + damagePercent * User.abilityPower),anchor.transform.forward);
+                
+                /*timeSinceLastAttack = 0;
+                var position = anchor.transform.position;
+                GameObject newFireball = Object.Instantiate(_fireball, position, Quaternion.identity);
+                newFireball.GetComponent<Fireball>().damage = (baseDamage + damagePercent * User.abilityPower);
+                newFireball.GetComponent<Fireball>().attacker = User;
+                Rigidbody rb = newFireball.GetComponent<Rigidbody>();
+
+                rb.AddForce(FireSpeed * anchor.transform.forward, ForceMode.VelocityChange);
+                _firelaunch.transform.position = position;
+                _firelaunch.Play();
+                NetworkServer.Spawn(newFireball);*/
             }
         }
         [ClientRpc]

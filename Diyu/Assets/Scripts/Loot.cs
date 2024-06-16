@@ -8,7 +8,7 @@ namespace Entities
 {
     public abstract class Loot : NetworkBehaviour
     {
-        protected float cooldown = 0.5f;
+        protected float cooldown = 0f;
         public TextMeshProUGUI text;
         public abstract void OnPickup(NewPlayer player);
 
@@ -22,9 +22,10 @@ namespace Entities
         
         public void Update()
         {
-            if (cooldown > 0)
+            cooldown += Time.deltaTime;
+            if (cooldown > 10)
             {
-                cooldown -= Time.deltaTime;
+                Collected();
             }
         }
         
@@ -32,7 +33,7 @@ namespace Entities
         {
             NewPlayer player = other.gameObject.GetComponentInParent<NewPlayer>();
             //Debug.LogError(player != null);
-            if (player == null || cooldown > 0)
+            if (player == null)
             {
                 return;
             }
