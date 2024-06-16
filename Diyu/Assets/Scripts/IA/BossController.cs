@@ -6,7 +6,7 @@ using System;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class AiRangedController : MonoBehaviour
+public class BossController : MonoBehaviour
 {
     //where ai will return without target
     [SerializeField]
@@ -21,17 +21,51 @@ public class AiRangedController : MonoBehaviour
     [SerializeField]
     private Life life = null;
 
-    [FormerlySerializedAs("firespell")] [SerializeField]
+    [FormerlySerializedAs("firespell")]
+    [SerializeField]
     private Firespell_bak firespellBak = null;
+
+    [FormerlySerializedAs("firespell")]
+    [SerializeField]
+    private Firespell_bak firespellBakwav = null;
+
+    [FormerlySerializedAs("firespell")]
+    [SerializeField]
+    private Firespell_bak firespellBakg1 = null;
+
+    [FormerlySerializedAs("firespell")]
+    [SerializeField]
+    private Firespell_bak firespellBakg2 = null;
+
+    [FormerlySerializedAs("firespell")]
+    [SerializeField]
+    private Firespell_bak firespellBakg3 = null;
+
+    [FormerlySerializedAs("firespell")]
+    [SerializeField]
+    private Firespell_bak firespellBakg4 = null;
+
+    [FormerlySerializedAs("firespell")]
+    [SerializeField]
+    private Firespell_bak firespellBakg5 = null;
+
+    [FormerlySerializedAs("firespell")]
+    [SerializeField]
+    private Firespell_bak firespellBaktri1 = null;
+
+    [FormerlySerializedAs("firespell")]
+    [SerializeField]
+    private Firespell_bak firespellBaktri2 = null;
+
+    [FormerlySerializedAs("firespell")]
+    [SerializeField]
+    private Firespell_bak firespellBaktri3 = null;
+
+    [SerializeField]
+    private float timeBetweenAttacks = 0.0f;
 
     [SerializeField]
     private float HealTime = 0.0f;
-
-    [SerializeField]
-    private float shootCD = 1.0f;
-
-    [SerializeField]
-    private float timeBetweenShots = 0.0f;
 
     [SerializeField]
     private Transform eyeTransform = null;
@@ -45,11 +79,13 @@ public class AiRangedController : MonoBehaviour
     [SerializeField]
     public bool AtSpawn = true;
 
+    [SerializeField]
+    private Animator anim = null;
+
     public LayerMask projectileMask;
 
     void FixedUpdate()
     {
-        timeBetweenShots += Time.deltaTime;
         float distanceWithSpawn = Vector3.Distance(transform.position, spawn.transform.position);
         if (!Spotted)
         {
@@ -95,45 +131,44 @@ public class AiRangedController : MonoBehaviour
     {
         if (CanSeeObject(enemy))
         {
-            float distanceWithEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceWithEnemy <= 10)
+            anim.SetBool("isSitting", false);
+            transform.LookAt(enemy.transform);
+            timeBetweenAttacks += Time.deltaTime;
+            if (timeBetweenAttacks >= 5.0f)
             {
-                if (CanSeeObject(enemy))
+                int rand = UnityEngine.Random.Range(1, 4);
+                Debug.Log(rand);
+                if (rand == 1)
                 {
-                    transform.LookAt(enemy.transform);
-                    ai.SetDestination(transform.position);
-                    Debug.LogError("Close");
-                    if (timeBetweenShots >= shootCD)
-                    {
-                        firespellBak.Attack();
-                        timeBetweenShots = 0.0f;
-                    }
+                    timeBetweenAttacks = -2.9f;
+                    StartCoroutine(GeyRoutine());
                 }
-            }
-            if (distanceWithEnemy > 10)
-            {
-                //ai follows player until it leaves
-                ai.SetDestination(enemy.transform.position);
+                if (rand == 2)
+                {
+                    timeBetweenAttacks = -4.3f;
+                    StartCoroutine(WavRoutine());
+                }
+                if (rand == 3)
+                {
+                    timeBetweenAttacks = -3.2f;
+                    StartCoroutine(TriRoutine());
+                }
             }
         }
         else
         {
-            ai.SetDestination(spawn.transform.position);
-            if (!CanSeeObject(enemy))
+            anim.SetBool("isSitting", true);
+            if (HealTime >= 0.5)
             {
-                Spotted = false;
-                if (HealTime >= 0.5)
-                {
-                    life.ChangeHP(1.0f);
-                    HealTime = 0;
-                }
+                life.ChangeHP(1.0f);
+                HealTime = 0;
             }
         }
     }
     private void OnEnemyLeft(GameObject enemy)
     {
         //when player not in sightzone -> return to spawn
-        ai.SetDestination(spawn.transform.position);
+        anim.SetBool("isSitting", true);
         Spotted = false;
         if (HealTime >= 0.5)
         {
@@ -154,5 +189,35 @@ public class AiRangedController : MonoBehaviour
         //Instantiate(DeathParticlePrefab, transform.position, Quaternion.identity);
         Instantiate(Greenkey, transform.position, Quaternion.identity);
         Destroy(gameObject);
+    }
+
+    IEnumerator GeyRoutine()
+    {
+        anim.SetBool("geysers", true);
+        yield return new WaitForSeconds(2.9f);
+        anim.SetBool("geysers", false);
+        firespellBakg1.Attack();
+        firespellBakg2.Attack();
+        firespellBakg3.Attack();
+        firespellBakg4.Attack();
+        firespellBakg5.Attack();
+    }
+
+    IEnumerator WavRoutine()
+    {
+        anim.SetBool("vague", true);
+        yield return new WaitForSeconds(4.3f);
+        anim.SetBool("vague", false);
+        firespellBakwav.Attack();
+    }
+
+    IEnumerator TriRoutine()
+    {
+        anim.SetBool("triple_projectile", true);
+        yield return new WaitForSeconds(3.2f);
+        anim.SetBool("triple_projectile", false);
+        firespellBaktri1.Attack();
+        firespellBaktri2.Attack();
+        firespellBaktri3.Attack();
     }
 }

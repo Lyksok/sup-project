@@ -30,24 +30,64 @@ public class AiCqcController : Monster
     public SightZone sightZone = null;
 
     [SerializeField]
+    private float HealTime = 0.0f;
+
+    [SerializeField]
+    private Life life = null;
+
+    [SerializeField]
     public GameObject Redkey = null;
+
+    [SerializeField]
+    public bool Spotted = false;
+
+    [SerializeField]
+    public bool AtSpawn = true;
+    public Animator animator;
+
+    public LayerMask projectileMask;
 
     void FixedUpdate()
     {
         TimeBetweenAttacks += Time.deltaTime;
+        float distanceWithSpawn = Vector3.Distance(transform.position, spawn.transform.position);
+        if (!Spotted)
+        {
+            HealTime += Time.deltaTime;
+            if (distanceWithSpawn < 3)
+            {
+                AtSpawn = true;
+            }
+        }
+        else
+        {
+            AtSpawn = false;
+        }
     }
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         ai = GetComponent<NavMeshAgent>();
         //had to put it in parent to make the sightzone still
         sightZone = GetComponentInParent<SightZone>();
         sightZone.onStay += OnEnemySpotted;
         sightZone.onExit += OnEnemyLeft;
-        health = 50;
+        life.onEmpty += OnDeath;
     }
 
-    private void Update() {}
+    private void Update() {
+
+        if (AtSpawn)
+        {
+            animator.SetBool("IsRunning", false);
+        }
+        if (Spotted)
+        {
+            Debug.Log("running");
+            animator.SetBool("IsRunning", true);
+        }
+    }
 
     private bool CanSeeObject(GameObject go)
     {
@@ -68,6 +108,7 @@ public class AiCqcController : Monster
         NewPlayer player = enemy.GetComponentInParent<NewPlayer>();
         if (CanSeeObject(enemy) && player != null)
         {
+            Spotted = true;
             //ai follows player until it leaves
             var position = player.body.transform.position;
             ai.SetDestination(position);
@@ -75,20 +116,44 @@ public class AiCqcController : Monster
             float distanceWithEnemy = Vector3.Distance(transform.position, position);
             if (distanceWithEnemy <= 3 && TimeBetweenAttacks >= AttackCD)
             {
+                animator.SetBool("IsRunning", false);
+                Debug.Log("attack");
+                animator.SetBool("IsAttacking", true);
+
                 Debug.LogError("ATTAAAAAAAAAAAAAAAACK");
-                player.CmdTakeDamage(5,DamageType.PHYSICAL,this);
+                player.CmdTakeDamage(5, DamageType.PHYSICAL, this);
                 TimeBetweenAttacks = 0.0f;
+            }
+            else
+            {
+                animator.SetBool("IsAttacking", false);
             }
         }
         else
+        {
             ai.SetDestination(spawn.transform.position);
+            if (!CanSeeObject(enemy))
+            {
+                Spotted = false;
+                if (HealTime >= 0.5)
+                {
+                    life.ChangeHP(1.0f);
+                    HealTime = 0;
+                }
+            }
+        }
 
     }
     private void OnEnemyLeft(GameObject enemy)
     {
         //when player not in sightzone -> return to spawn
         ai.SetDestination(spawn.transform.position);
-        CmdHeal(1000);
+        Spotted = false;
+        if (HealTime >= 0.5)
+        {
+            life.ChangeHP(1.0f);
+            HealTime = 0;
+        }
     }
 
     public override void OnDeath()

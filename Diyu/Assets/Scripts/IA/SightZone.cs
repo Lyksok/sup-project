@@ -15,8 +15,9 @@ public class SightZone : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        NewPlayer pb = other.GetComponent<NewPlayer>();
+        Aled pb = other.GetComponent<Aled>();
         if (pb != null)
+            Debug.Log("CACA");
             onStay?.Invoke(other.gameObject);
     }
 

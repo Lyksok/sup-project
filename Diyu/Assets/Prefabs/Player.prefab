@@ -229,7 +229,7 @@ MonoBehaviour:
   onlySyncOnChangeCorrectionMultiplier: 2
   rotationSensitivity: 0.01
   compressRotation: 0
-  positionPrecision: 0.01
+  positionPrecision: 0.324
   scalePrecision: 0.01
 --- !u!1 &1566654015574217205
 GameObject:
@@ -689,8 +689,6 @@ MonoBehaviour:
   movementSpeed: 7
   launcher: {fileID: 1347626886891388975}
   life: {fileID: 4186728293990571267}
-  GetRedKey: 0
-  GetGreenKey: 0
   metal: 0
 --- !u!114 &4593035817733457870
 MonoBehaviour:

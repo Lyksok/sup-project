@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8477496931432081178}
   - component: {fileID: 4412514468573695959}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 7133803258123561939}
   - component: {fileID: 3685169888804170514}
   - component: {fileID: 987420822183423605}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,6 @@ MonoBehaviour:
   syncInterval: 0
   resources: {fileID: 0}
   primaryWeaponAttackKey: 323
-  secondaryWeaponAttackKey: 324
   anchor: {fileID: 0}
   health: 0
   maxHealth: 0
@@ -333,14 +332,14 @@ MonoBehaviour:
   moveSpeed: 0
   attackSpeed: 0
   healingPower: 0
-  cooldownReduction: 0
-  tenacity: 0
   lifesteal: 0
   body: {fileID: 0}
   model: {fileID: 0}
   canMove: 0
   canAttack: 0
   canCast: 0
+  inEvent: 0
+  attacker: {fileID: 0}
   lifespan: 0
   limit: 1.5
   ded: {fileID: 919593391859659676}
@@ -424,6 +423,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flame particules1
       objectReference: {fileID: 0}
+    - target: {fileID: 3690506584229626658, guid: 6723777fcb8e7c84d8d654ced5e26cad,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3972501457867197219, guid: 6723777fcb8e7c84d8d654ced5e26cad,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -488,6 +492,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4232431095308532503, guid: 6723777fcb8e7c84d8d654ced5e26cad,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5790184468835508578, guid: 6723777fcb8e7c84d8d654ced5e26cad,
         type: 3}

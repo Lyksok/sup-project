@@ -844,6 +844,10 @@ MonoBehaviour:
   - {fileID: 4441857392704860318, guid: 6fa399c353c9a774aabb4433a16b2eac, type: 3}
   - {fileID: 4441857392704860318, guid: d1a846476666b054fbe669b84f536ffa, type: 3}
   - {fileID: 4441857392704860318, guid: cbb7457c910d465448a261853fd0f310, type: 3}
+  debuffIconList: []
+  buffIconList: []
+  abilityIconList: []
+  passiveAbilityIconList: []
 --- !u!1 &3095895027194075405
 GameObject:
   m_ObjectHideFlags: 0
@@ -1665,6 +1669,7 @@ GameObject:
   - component: {fileID: 2148531993450566200}
   - component: {fileID: 3025151234643421501}
   - component: {fileID: 4970895077315757922}
+  - component: {fileID: 4247578322995476125}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -1752,6 +1757,18 @@ MonoBehaviour:
   compressRotation: 0
   positionPrecision: 0.01
   scalePrecision: 0.01
+--- !u!114 &4247578322995476125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6970888086019410702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf37e938ccc4ec4ab9340fd40ea97f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7640093162711168435
 GameObject:
   m_ObjectHideFlags: 0
@@ -2050,8 +2067,17 @@ MonoBehaviour:
   statsHUD: {fileID: 8695123752927629787}
   abilitiesHUD: {fileID: 1147742174065043890}
   buffsHUD: {fileID: 1691058987869588144}
-  popUp: {fileID: 6030368205771637782}
   classId: 1
+  hudManager: {fileID: 0}
+  hpBonus: 0
+  adBonus: 0
+  apBonus: 0
+  asBonus: 0
+  arBonus: 0
+  mrBonus: 0
+  lsBonus: 0
+  hpoBonus: 0
+  Keys: 100
 --- !u!114 &3008909449444402458
 MonoBehaviour:
   m_ObjectHideFlags: 0
