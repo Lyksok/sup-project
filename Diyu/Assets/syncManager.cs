@@ -56,6 +56,38 @@ public class syncManager : NetworkBehaviour
             
     }
     
+    [Command(requiresAuthority = false)]
+    public void CmdSpawnAoe(int type, Vector3 pos)
+    {
+        SpawnAoeRpc(type, pos);
+            
+    }
+    
+    [ClientRpc]
+    public void SpawnAoeRpc(int type, Vector3 pos)
+    {
+        GameObject newFireball;
+        switch (type)
+        {
+            case 1:
+                newFireball = Object.Instantiate(resourceManager.projectileList[type], pos, Quaternion.identity);
+                break;
+            case 7:
+                newFireball = Object.Instantiate(resourceManager.projectileList[type], pos, Quaternion.identity);
+                break;
+            case 8:
+                newFireball = Object.Instantiate(resourceManager.projectileList[type], pos, Quaternion.identity);
+                break;
+            case 9:
+                newFireball = Object.Instantiate(resourceManager.projectileList[type], pos, Quaternion.identity);
+                break;
+            default:
+                newFireball = Object.Instantiate(resourceManager.projectileList[1], pos, Quaternion.identity);
+                break;
+        }
+            
+    }
+    
     [ClientRpc]
     public void SpawnFireballRpc(int type, Vector3 pos,float damage,Vector3 orientation)
     {
@@ -88,13 +120,8 @@ public class syncManager : NetworkBehaviour
                 break;
                 
         }
-        
-        //newFireball.GetComponent<Fireball>().attacker = User;
         Rigidbody rb = newFireball.GetComponent<Rigidbody>();
         rb.AddForce(30 * orientation, ForceMode.VelocityChange);
-        //_firelaunch.transform.position = position;
-        //_firelaunch.Play();
-        //NetworkServer.Spawn(newFireball);
             
     }
 }

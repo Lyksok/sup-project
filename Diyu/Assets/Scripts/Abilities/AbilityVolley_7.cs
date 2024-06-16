@@ -21,6 +21,14 @@ namespace Abilities
         private readonly ParticleSystem _firelaunch;
         private const float FireSpeed = 50.0f;
         
+        private syncManager syncManager;
+
+        private void Update()
+        {
+            syncManager = Object.FindObjectOfType<syncManager>();
+            //Debug.LogError(syncManager != null);
+        }
+        
         private readonly GameObject _indicator;
         
         public AbilityVolley_7(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
@@ -72,13 +80,20 @@ namespace Abilities
             _indicator.SetActive(false);
         }
         
+        public void CmdAttack()
+        {
+            Update();
+            CurrentCooldown = Cooldown;
+            var position = Target.anchor.transform.position;
+            syncManager.CmdSpawnFireball(0,position,(damage + Target.abilityPower),Target.anchor.transform.forward);
+        }
+        
         public Vector3 GetPostion()
         {
             NewPlayer target = (NewPlayer)Target;
             var position = target.model.transform.position;
             position.y -= 0.95f;
             return position;
-            
         }
 
         public override void OnEnd()
@@ -93,14 +108,7 @@ namespace Abilities
             {
                 curCount--;
                 timer = 0.3f;
-                var position = Target.anchor.transform.position;
-                GameObject newFireball = Object.Instantiate(_fireball, position, Quaternion.identity);
-                newFireball.GetComponent<Fireball>().damage = (damage);
-                Rigidbody rb = newFireball.GetComponent<Rigidbody>();
-
-                rb.AddForce(FireSpeed * Target.anchor.transform.forward, ForceMode.VelocityChange);
-                _firelaunch.transform.position = position;
-                _firelaunch.Play();
+                CmdAttack();
             }
         }
 

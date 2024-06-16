@@ -18,7 +18,14 @@ namespace Abilities
         public int curCount;
         private readonly GameObject _fireball;
         private readonly ParticleSystem _firelaunch;
-        private const float FireSpeed = 50.0f;
+        
+        private syncManager syncManager;
+
+        private void Update()
+        {
+            syncManager = Object.FindObjectOfType<syncManager>();
+            //Debug.LogError(syncManager != null);
+        }
         
         private readonly GameObject _indicator;
         
@@ -77,18 +84,19 @@ namespace Abilities
             Object.Destroy(_indicator);
         }
         
+        public void CmdAttack()
+        {
+            Update();
+            CurrentCooldown = Cooldown;
+            var position = Target.anchor.transform.position;
+            syncManager.CmdSpawnFireball(0,position,(damage + Target.abilityPower),Target.anchor.transform.forward);
+        }
+        
         public override void PassiveEffect()
         {
             if (State == States.ACTIVE)
             {
-                var position = Target.anchor.transform.position;
-                GameObject newFireball = Object.Instantiate(_fireball, position, Quaternion.identity);
-                newFireball.GetComponent<Fireball>().damage = (damage);
-                Rigidbody rb = newFireball.GetComponent<Rigidbody>();
-
-                rb.AddForce(FireSpeed * Target.anchor.transform.forward, ForceMode.VelocityChange);
-                _firelaunch.transform.position = position;
-                _firelaunch.Play();
+                CmdAttack();
             }
         }
 

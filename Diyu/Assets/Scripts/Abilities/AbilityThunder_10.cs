@@ -19,6 +19,14 @@ namespace Abilities
         private readonly GameObject _indicator;
         private readonly GameObject _rangeIndicator;
         
+        private syncManager syncManager;
+
+        private void Update()
+        {
+            syncManager = Object.FindObjectOfType<syncManager>();
+            //Debug.LogError(syncManager != null);
+        }
+        
         public AbilityThunder_10(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
             displayName = "Thunder";
@@ -106,11 +114,17 @@ namespace Abilities
                 Vector3 pos = GetPostion();
                 aoe = new AreaOfEffect(pos, 4.0f,Target,damage,new DebuffSlow(3,3,10,Target),false,false,DamageType.MAGICAL);
                 aoe.Effect(aoe.FindTargets());
-                GameObject newExplosion = Object.Instantiate(_thunder, pos, Quaternion.identity);
-                //VisualEffect(pos);
+                CmdAttack();
             }
         }
 
+        public void CmdAttack()
+        {
+            Update();
+            var position = GetPostion();
+            syncManager.CmdSpawnAoe(7,position);
+        }
+        
         public IEnumerator VisualEffect(Vector3 pos)
         {
             GameObject newExplosion = Object.Instantiate(_thunder, pos, Quaternion.identity);

@@ -19,6 +19,14 @@ namespace Abilities
         private readonly GameObject _indicator;
         private readonly GameObject _rangeIndicator;
         
+        private syncManager syncManager;
+
+        private void Update()
+        {
+            syncManager = Object.FindObjectOfType<syncManager>();
+            //Debug.LogError(syncManager != null);
+        }
+        
         public AbilityEarthSpike_8(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
             displayName = "Earth Spike";
@@ -95,6 +103,13 @@ namespace Abilities
         {
         }
 
+        public void CmdAttack()
+        {
+            Update();
+            var position = GetPostion();
+            syncManager.CmdSpawnAoe(8,position);
+        }
+        
         public override void ActiveEffect()
         {
             _indicator.SetActive(false);
@@ -106,8 +121,7 @@ namespace Abilities
                 Vector3 pos = GetPostion();
                 aoe = new AreaOfEffect(pos, 6.0f,Target,damage,null,true,false,DamageType.PHYSICAL);
                 aoe.Effect(aoe.FindTargets());
-                GameObject newExplosion = Object.Instantiate(_explosion, pos, Quaternion.identity);
-                //VisualEffect(pos);
+                CmdAttack();
             }
         }
 

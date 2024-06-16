@@ -18,6 +18,14 @@ namespace Abilities
         private readonly GameObject _explosion;
         private readonly GameObject _indicator;
         
+        private syncManager syncManager;
+
+        private void Update()
+        {
+            syncManager = Object.FindObjectOfType<syncManager>();
+            //Debug.LogError(syncManager != null);
+        }
+        
         public AbilityGravity_12(Rarities rarity,Entity target) //Sets the stats according to Rarity of the Ability
         {
             displayName = "Gravity";
@@ -59,6 +67,13 @@ namespace Abilities
             _indicator.SetActive(false);
         }
 
+        public void CmdAttack()
+        {
+            Update();
+            var position = GetPostion();
+            syncManager.CmdSpawnAoe(9,position);
+        }
+        
         public Vector3 GetPostion()
         {
             NewPlayer target = (NewPlayer)Target;
@@ -87,8 +102,7 @@ namespace Abilities
                 Vector3 pos = GetPostion();
                 aoe = new AreaOfEffect(pos, 6.0f,Target,damage,new DebuffSlow(4,3,12,Target),false,false,DamageType.MAGICAL);
                 aoe.Effect(aoe.FindTargets());
-                GameObject newExplosion = Object.Instantiate(_explosion, pos, Quaternion.identity);
-                //VisualEffect(pos);
+                CmdAttack();
             }
         }
 
