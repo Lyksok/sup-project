@@ -2,13 +2,14 @@ using System.Security.Cryptography;
 using Abilities;
 using Entities;
 using Gems;
+using Mirror;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Weapons;
 
 namespace Managers
 {
-    public class ResourceManager : MonoBehaviour
+    public class ResourceManager : MonoBehaviour //: NetworkBehaviour
     {
         public GameObject[] projectileList; //handles projectile spawning
         public ParticleSystem[] particleList; //handles particle spawning
@@ -161,6 +162,37 @@ namespace Managers
             }
         }
 
+        //[Command(requiresAuthority = false)]
+        public void CmdSpawnLoot(Rarities rarities, Vector3 pos,int index)
+        {
+            SpawnLootRpc(rarities, pos, index);
+        }
+
+        //[ClientRpc]
+        public void SpawnLootRpc(Rarities rarities, Vector3 pos,int index)
+        {
+            GameObject go;
+            switch (index)
+            {
+                case 0:
+                    go = Instantiate(lootList[0],pos,Quaternion.identity);
+                    go.GetComponent<AbilityOrb>()._rarity = rarities;
+                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                    break;
+                case 1:
+                    go = Instantiate(lootList[1],pos,Quaternion.identity);
+                    go.GetComponent<WeaponOrb>()._rarity = rarities;
+                    go.GetComponent<WeaponOrb>().UpdateInfo();
+                    break;
+                case 2:
+                    go = Instantiate(lootList[2],pos,Quaternion.identity);
+                    go.GetComponent<GemOrb>()._rarity = rarities;
+                    go.GetComponent<GemOrb>().UpdateInfo();
+                    break;
+            }
+            
+        }
+
         public void GenerateLoot(Vector3 position)
         {
             int lootRank = 0;
@@ -195,9 +227,8 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    GameObject go = Instantiate(lootList[2],position,Quaternion.identity);
-                    go.GetComponent<GemOrb>()._rarity = rarities;
-                    go.GetComponent<GemOrb>().UpdateInfo();
+
+                    CmdSpawnLoot(rarities, position, 2);
                 } else if (luck > 80)
                 {
                     Rarities rarities;
@@ -220,9 +251,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    GameObject go = Instantiate(lootList[1],position,Quaternion.identity);
-                    go.GetComponent<WeaponOrb>()._rarity = rarities;
-                    go.GetComponent<WeaponOrb>().UpdateInfo();
+                    CmdSpawnLoot(rarities, position, 1);
                 }
                 else
                 {
@@ -246,9 +275,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    GameObject go = Instantiate(lootList[0],position,Quaternion.identity);
-                    go.GetComponent<AbilityOrb>()._rarity = rarities;
-                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                    CmdSpawnLoot(rarities, position, 0);
                 }
             } 
             else if (lootRank == 1)
@@ -276,9 +303,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    GameObject go = Instantiate(lootList[2],position,Quaternion.identity);
-                    go.GetComponent<GemOrb>()._rarity = rarities;
-                    go.GetComponent<GemOrb>().UpdateInfo();
+                    CmdSpawnLoot(rarities, position, 2);
                 } else if (luck > 80)
                 {
                     Rarities rarities;
@@ -301,9 +326,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    GameObject go = Instantiate(lootList[1],position,Quaternion.identity);
-                    go.GetComponent<WeaponOrb>()._rarity = rarities;
-                    go.GetComponent<WeaponOrb>().UpdateInfo();
+                    CmdSpawnLoot(rarities, position, 1);
                 }
                 else
                 {
@@ -327,9 +350,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    GameObject go = Instantiate(lootList[0],position,Quaternion.identity);
-                    go.GetComponent<AbilityOrb>()._rarity = rarities;
-                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                    CmdSpawnLoot(rarities, position, 0);
                 }
             } 
             else if (lootRank == 2)
@@ -357,9 +378,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    GameObject go = Instantiate(lootList[2],position,Quaternion.identity);
-                    go.GetComponent<GemOrb>()._rarity = rarities;
-                    go.GetComponent<GemOrb>().UpdateInfo();
+                    CmdSpawnLoot(rarities, position, 2);
                 } else if (luck > 80)
                 {
                     Rarities rarities;
@@ -382,9 +401,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    GameObject go = Instantiate(lootList[1],position,Quaternion.identity);
-                    go.GetComponent<WeaponOrb>()._rarity = rarities;
-                    go.GetComponent<WeaponOrb>().UpdateInfo();
+                    CmdSpawnLoot(rarities, position, 1);
                 }
                 else
                 {
@@ -408,9 +425,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    GameObject go = Instantiate(lootList[0],position,Quaternion.identity);
-                    go.GetComponent<AbilityOrb>()._rarity = rarities;
-                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                    CmdSpawnLoot(rarities, position, 0);
                 }
             }
             else
@@ -438,9 +453,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    GameObject go = Instantiate(lootList[2],position,Quaternion.identity);
-                    go.GetComponent<GemOrb>()._rarity = rarities;
-                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                    CmdSpawnLoot(rarities, position, 2);
                 } else if (luck > 80)
                 {
                     Rarities rarities;
@@ -463,9 +476,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    GameObject go = Instantiate(lootList[1],position,Quaternion.identity);
-                    go.GetComponent<WeaponOrb>()._rarity = rarities;
-                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                    CmdSpawnLoot(rarities, position, 1);
                 }
                 else
                 {
@@ -489,9 +500,7 @@ namespace Managers
                             rarities = Rarities.COMMON;
                             break;
                     }
-                    GameObject go = Instantiate(lootList[0],position,Quaternion.identity);
-                    go.GetComponent<AbilityOrb>()._rarity = rarities;
-                    go.GetComponent<AbilityOrb>().UpdateInfo();
+                    CmdSpawnLoot(rarities, position, 0);
                 }
             }
         }

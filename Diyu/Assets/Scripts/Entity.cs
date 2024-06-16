@@ -188,7 +188,7 @@ namespace Entities
         [ClientRpc]
         public void TakeDamageRpc(float damage, DamageType damageType,Entity attacker)
         {
-            //resources.GenerateLoot(model.transform.position);
+            resources.GenerateLoot(model.transform.position);
             
             if (damage < 0)
             {
