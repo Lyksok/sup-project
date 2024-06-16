@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
+using Mirror;
 using TMPro;
 using UnityEngine;
 
@@ -22,23 +23,12 @@ public class LocalDataManager : MonoBehaviour
         playerName = nameInput.text;
     }
 
-    public void SetPlayerClassPrefab()
-    {
-        foreach (CharacterCard card in characterCards)
-        {
-            if (card.IsSelected)
-            {
-                playerClassPrefab = card.prefab;
-            }
-
-            break;
-        }
-    }
-
     public void SelectCharacterCard(CharacterCard card)
     {
         characterCards.ForEach(charCard => charCard.IsSelected = false);
         card.IsSelected = true;
+        NetworkManager.singleton.playerPrefab = card.prefab;
+        playerClassPrefab = card.prefab;
     }
 
     private void Start()

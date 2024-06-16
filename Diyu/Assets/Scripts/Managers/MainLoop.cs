@@ -114,7 +114,7 @@ public class MainLoop : NetworkBehaviour
                 { 
                         _burnCd -= Time.deltaTime;
                 }
-                if (roundTime >= 30 && _burnCd <= 0)
+                if (roundTime >= 300 && _burnCd <= 0)
                 {
                         _burnCount++;
                         _burnCd = 30;
