@@ -5,6 +5,8 @@
     "Lucida Sans", Arial, sans-serif;
   background-color: rgb(30, 30, 30);
   color: rgb(150, 150, 150);
+  font-size: x-large;
+  text-align: center;
 }
 
 body {
@@ -86,4 +88,35 @@ nav > ul li:hover .sous {
 .conteneur {
   margin: 50px 20px;
   height: 1500px;
+}
+
+p {
+  margin-left: 100pt;
+  margin-right: 100pt;
+  padding-top: 20pt;
+  padding-bottom: 20pt;
+}
+
+h3 {
+  margin-left: 100pt;
+  margin-right: 100pt;
+  padding-top: 20pt;
+}
+
+h2 {
+  margin-left: 100pt;
+  margin-right: 100pt;
+  padding-top: 20pt;
+}
+
+#div_top_hypers {
+  background-color: #eeeeee;
+  display: inline;
+  text-align: center;
+}
+#ul_top_hypers li {
+  display: inline;
+  list-style-type: none;
+  justify-content: space-evenly;
+  padding-inline: 10pt;
 }
