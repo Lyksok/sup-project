@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diecounter: 0
   limit: 1.5
-  damage: -1
+  damage: -10
   ded: {fileID: 1061216277372453865, guid: a22bf0c5433ed8c49bceb52b6baf250f, type: 3}
 --- !u!54 &252012538564813242
 Rigidbody:

@@ -31,21 +31,18 @@ public class MainLoop : NetworkBehaviour
         {
                 DontDestroyOnLoad(transform.gameObject);
                 players = FindObjectsOfType<NewPlayer>().ToList();
-                Debug.LogError(players.Count);
         }
 
         private void Awake()
         { 
                 DontDestroyOnLoad(transform.gameObject);
                 players = FindObjectsOfType<NewPlayer>().ToList();
-                Debug.LogError(players.Count);
         }
 
 
         private void UpdatePlayers()
         {
                 players = FindObjectsOfType<NewPlayer>().ToList();
-                Debug.LogError(players.Count);
         }
 
         public void StartGame()
@@ -104,7 +101,6 @@ public class MainLoop : NetworkBehaviour
                                 }
                         }
                 }
-                Debug.LogError("Manche terminée");
         }
 
         private void UpdateCurrentRound()
@@ -181,7 +177,6 @@ public class MainLoop : NetworkBehaviour
                                 deadCount++;
                         }
                 }
-                Debug.LogError(deadCount);
                 if (deadCount >= 3)
                 {
                         foreach (var player in players)

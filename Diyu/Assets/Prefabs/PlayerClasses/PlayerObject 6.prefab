@@ -11885,6 +11885,7 @@ GameObject:
   - component: {fileID: 2148531993450566200}
   - component: {fileID: 3025151234643421501}
   - component: {fileID: 4970895077315757922}
+  - component: {fileID: 5179121395278557107}
   m_Layer: 0
   m_Name: Body
   m_TagString: Player
@@ -11972,6 +11973,18 @@ MonoBehaviour:
   compressRotation: 0
   positionPrecision: 0.01
   scalePrecision: 0.01
+--- !u!114 &5179121395278557107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6970888086019410702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76451a4ed7c14c44a06f665027c756f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7181222826791716720
 GameObject:
   m_ObjectHideFlags: 0
@@ -14404,6 +14417,7 @@ GameObject:
   - component: {fileID: 507542341739161041}
   - component: {fileID: 7927209296642230787}
   - component: {fileID: -8857014192924794062}
+  - component: {fileID: 6521589859060538674}
   m_Layer: 0
   m_Name: PlayerObject 6
   m_TagString: Player
@@ -14622,6 +14636,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newMusic: {fileID: 8300000, guid: 82450098156a54996be276cb2da1c501, type: 3}
   originalMusic: {fileID: 8300000, guid: 082cda3f93a1741c581ce4ea3c20675b, type: 3}
+--- !u!114 &6521589859060538674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8193104744546685154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76451a4ed7c14c44a06f665027c756f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8203182053903038109
 GameObject:
   m_ObjectHideFlags: 0

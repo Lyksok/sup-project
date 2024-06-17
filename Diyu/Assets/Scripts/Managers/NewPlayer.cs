@@ -466,7 +466,6 @@ public class NewPlayer : Entity
             //Debug.Log("Stopping");
             
             playerRigidbody.velocity = Vector3.zero;
-            Debug.Log("is not running");
             animator.SetBool("isRunning", false);
         }
         else
@@ -475,7 +474,6 @@ public class NewPlayer : Entity
             
             playerRigidbody.MovePosition(position + moveBy.normalized * ((movementSpeed * Time.fixedDeltaTime) * moveSpeed));
             animator.SetBool("isRunning", true);
-            Debug.Log("run");
         }
     }
     
