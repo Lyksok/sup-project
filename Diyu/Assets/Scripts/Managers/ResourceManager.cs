@@ -178,19 +178,17 @@ namespace Managers
             {
                 lootRank = loop.lootRank;
             }
-            
+
+            lootRank = 0;
             if (lootRank == 0)
             {
                 int luck = RandomNumberGenerator.GetInt32(0, 100);
-                if (luck < 40)
+                if (luck < 10)
                 {
                     Rarities rarities;
-                    int rarity = RandomNumberGenerator.GetInt32(0, 100);
+                    int rarity = RandomNumberGenerator.GetInt32(0, 300);
                     switch (rarity)
                     {
-                        case <5:
-                            rarities = Rarities.LEGENDARY;
-                            break;
                         case <15:
                             rarities = Rarities.EPIC;
                             break;
@@ -209,12 +207,9 @@ namespace Managers
                 } else if (luck > 80)
                 {
                     Rarities rarities;
-                    int rarity = RandomNumberGenerator.GetInt32(0, 100);
+                    int rarity = RandomNumberGenerator.GetInt32(0, 300);
                     switch (rarity)
                     {
-                        case <5:
-                            rarities = Rarities.LEGENDARY;
-                            break;
                         case <15:
                             rarities = Rarities.EPIC;
                             break;
@@ -233,12 +228,9 @@ namespace Managers
                 else
                 {
                     Rarities rarities;
-                    int rarity = RandomNumberGenerator.GetInt32(0, 100);
+                    int rarity = RandomNumberGenerator.GetInt32(0, 300);
                     switch (rarity)
                     {
-                        case <5:
-                            rarities = Rarities.LEGENDARY;
-                            break;
                         case <15:
                             rarities = Rarities.EPIC;
                             break;
@@ -497,7 +489,7 @@ namespace Managers
                 case 5:
                     return new AbilityArrowRain_5(rarity,target);
                 case 6:
-                    return new AbilityShockwave_6(rarity,target);
+                    return new AbilityThunder_10(rarity,target);
                 case 7:
                     return new AbilityVolley_7(rarity,target);
                 case 8:
@@ -509,9 +501,9 @@ namespace Managers
                 case 11:
                     return new AbilityWildfire_11(rarity,target);
                 case 12:
-                    return new AbilityGravity_12(rarity,target);
+                    return new AbilityThunder_10(rarity,target);
                 case 13:
-                    return new AbilityIceVolley_13(rarity,target);
+                    return new AbilityThunder_10(rarity,target);
                 case 14:
                     return new AbilityBigFireball_14(rarity,target);
                 default:
@@ -584,7 +576,7 @@ namespace Managers
                 case 5:
                     return "Arrow Rain";
                 case 6:
-                    return "Shockwave";
+                    return "Thunder";
                 case 7:
                     return "Fire Volley";
                 case 8:
@@ -596,9 +588,9 @@ namespace Managers
                 case 11:
                     return "Wildfire";
                 case 12:
-                    return "Gravity";
+                    return "Thunder";
                 case 13:
-                    return "Ice Volley";
+                    return "Thunder";
                 case 14:
                     return "Big Fireball";
                 default:

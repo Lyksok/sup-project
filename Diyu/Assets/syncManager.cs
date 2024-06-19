@@ -36,9 +36,9 @@ public class syncManager : NetworkBehaviour
                 go.GetComponent<AbilityOrb>().UpdateInfo();
                 break;
             case 1:
-                go = Instantiate(resourceManager.lootList[1],pos,Quaternion.identity);
-                go.GetComponent<WeaponOrb>()._rarity = rarities;
-                go.GetComponent<WeaponOrb>().UpdateInfo();
+                go = Instantiate(resourceManager.lootList[0],pos,Quaternion.identity);
+                go.GetComponent<AbilityOrb>()._rarity = rarities;
+                go.GetComponent<AbilityOrb>().UpdateInfo();
                 break;
             default:
                 go = Instantiate(resourceManager.lootList[2],pos,Quaternion.identity);
