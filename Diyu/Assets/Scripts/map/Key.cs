@@ -13,26 +13,14 @@ public class Key : MonoBehaviour
         bouton = this.gameObject;
         
     }
-
-    // Update is called once per frame
-    private void OnTriggerStay(Collider other)
+    
+    private void OnTriggerEnter(Collider other)
     {
         NewPlayer pb = other.GetComponent<NewPlayer>();
         if (pb != null)
         {
             pb.Keys ++;
-            Destroy(gameObject);
+            Destroy(bouton);
         }
     }
 }
-/*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == gameObject)
-            {
-                if()
-                Debug.Log("boutton !");
-            } 
-        }
-        */

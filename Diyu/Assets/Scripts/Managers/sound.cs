@@ -1,34 +1,38 @@
+using System.Transactions;
 using UnityEngine;
 
 public class sound : MonoBehaviour
 {
     public AudioClip newMusic;
     public AudioClip originalMusic;
-    private AudioSource audioSource;
+    private AudioSource _audioSource;
     void Start()
     {
-        audioSource = FindObjectOfType<AudioSource>();
-        if (audioSource == null)
+        _audioSource = FindObjectOfType<AudioSource>();
+        if (_audioSource == null)
         {
             Debug.LogError("Aucun AudioSource trouvé dans la scène.");
         }
+
+        _audioSource.clip = originalMusic;
+        _audioSource.Play();
     }
 
     void OnTriggerEnter(Collider other)
     {
-            if (audioSource != null && newMusic != null)
+            if (_audioSource != null && newMusic != null)
             {
-                audioSource.clip = newMusic;
-                audioSource.Play();
+                _audioSource.clip = newMusic;
+                _audioSource.Play();
             }
     }
 
     void OnTriggerExit(Collider other)
     {
-            if (audioSource != null && originalMusic != null)
+            if (_audioSource != null && originalMusic != null)
             {
-                audioSource.clip = originalMusic;
-                audioSource.Play();
+                _audioSource.clip = originalMusic;
+                _audioSource.Play();
             }
     }
 }
