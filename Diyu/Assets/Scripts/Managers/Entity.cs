@@ -25,6 +25,7 @@ namespace Entities
         public Ability classPassive;
 
         public GameObject anchor;
+        public Animator animator;
     
         [Header("Buffs")] public List<Buff> buffList;
     
@@ -149,12 +150,15 @@ namespace Entities
             if (Input.GetKey(key))
             {
                 ability.SetupEffect();
+                
                 isCasting = true;
+                animator.SetBool("isCasting", isCasting);
             }
             if (Input.GetKeyUp(key))
             {
                 ability.ActiveEffect();
                 isCasting = false;
+                animator.SetBool("isCasting", isCasting);
             }
             ability.PassiveEffect();
         }
@@ -170,10 +174,12 @@ namespace Entities
             {
                 weapon.CmdAttack();
                 isAttacking = true;
+                animator.SetBool("isAttacking", isAttacking);
             }
             else
             {
                 isAttacking = false;
+                animator.SetBool("isAttacking", isAttacking);
             }
         }
 
