@@ -639,6 +639,7 @@ MonoBehaviour:
   heal: {fileID: 0}
   primaryWeaponAttackKey: 323
   anchor: {fileID: 0}
+  animator: {fileID: 0}
   health: 30
   maxHealth: 0
   attackDamage: 0
@@ -664,7 +665,7 @@ MonoBehaviour:
   shootCD: 1
   timeBetweenShots: 0
   eyeTransform: {fileID: 4013629792826185625}
-  Greenkey: {fileID: 5750424093614981986, guid: 101a0768f56a14b65a8d09fb6f339b7e,
+  Greenkey: {fileID: 4441857392704860318, guid: 6fa399c353c9a774aabb4433a16b2eac,
     type: 3}
   Spotted: 0
   AtSpawn: 1

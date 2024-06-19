@@ -27307,7 +27307,7 @@ GameObject:
   - component: {fileID: 604837460}
   - component: {fileID: 604837459}
   - component: {fileID: 604837462}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85339,7 +85339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1799188295}
   - component: {fileID: 1799188294}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
