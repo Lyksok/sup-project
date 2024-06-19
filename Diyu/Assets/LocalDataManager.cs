@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
+using Mirror;
 using TMPro;
 using UnityEngine;
 
@@ -39,6 +40,7 @@ public class LocalDataManager : MonoBehaviour
     {
         characterCards.ForEach(charCard => charCard.IsSelected = false);
         card.IsSelected = true;
+        NetworkManager.singleton.playerPrefab = card.prefab;
     }
 
     private void Start()
