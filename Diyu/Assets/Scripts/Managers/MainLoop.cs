@@ -177,7 +177,7 @@ public class MainLoop : NetworkBehaviour
                                 deadCount++;
                         }
                 }
-                if (deadCount >= 3)
+                if (deadCount >= 1)
                 {
                         foreach (var player in players)
                         {
