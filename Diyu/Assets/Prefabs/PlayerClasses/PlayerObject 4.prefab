@@ -14939,6 +14939,7 @@ MonoBehaviour:
   heal: {fileID: 1527686382323640006, guid: 28b05e12bb4b49e42bdf2677a0a4b4a9, type: 3}
   primaryWeaponAttackKey: 323
   anchor: {fileID: 4646592180277275865}
+  animator: {fileID: 1301203004261791650}
   health: 20
   maxHealth: 100
   attackDamage: 10

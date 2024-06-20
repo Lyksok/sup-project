@@ -1,3 +1,4 @@
+using System;
 using System.Transactions;
 using UnityEngine;
 
@@ -20,20 +21,28 @@ public class sound : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        NewPlayer pb = other.GetComponentInParent<NewPlayer>();
+        if (pb.CompareTag("Player"))
+        {
             if (_audioSource != null && newMusic != null)
             {
                 _audioSource.clip = newMusic;
                 _audioSource.Play();
             }
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
+        NewPlayer pb = other.GetComponentInParent<NewPlayer>();
+        if (pb.CompareTag("Player"))
+        {
             if (_audioSource != null && originalMusic != null)
             {
                 _audioSource.clip = originalMusic;
                 _audioSource.Play();
             }
+        }
     }
 }
 

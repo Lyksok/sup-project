@@ -27412,8 +27412,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb91b8be46b049adb07d0677e0f5338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newMusic: {fileID: 8300000, guid: 082cda3f93a1741c581ce4ea3c20675b, type: 3}
-  originalMusic: {fileID: 8300000, guid: 6a21a3b0362cf4bb9b673ac1dbc3a995, type: 3}
+  newMusic: {fileID: 8300000, guid: 6a21a3b0362cf4bb9b673ac1dbc3a995, type: 3}
+  originalMusic: {fileID: 8300000, guid: 082cda3f93a1741c581ce4ea3c20675b, type: 3}
 --- !u!1001 &606770363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85356,7 +85356,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6a21a3b0362cf4bb9b673ac1dbc3a995, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 082cda3f93a1741c581ce4ea3c20675b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
