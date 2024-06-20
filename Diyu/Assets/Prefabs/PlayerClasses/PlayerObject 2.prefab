@@ -14417,6 +14417,7 @@ MonoBehaviour:
   heal: {fileID: 1527686382323640006, guid: 28b05e12bb4b49e42bdf2677a0a4b4a9, type: 3}
   primaryWeaponAttackKey: 323
   anchor: {fileID: 4646592180277275865}
+  animator: {fileID: 852970744986182461}
   health: 20
   maxHealth: 100
   attackDamage: 10
@@ -16810,6 +16811,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: guerrier idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 53577e04437996f438f316fe797b2b7b,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

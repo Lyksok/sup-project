@@ -14484,6 +14484,7 @@ MonoBehaviour:
   heal: {fileID: 1527686382323640006, guid: 28b05e12bb4b49e42bdf2677a0a4b4a9, type: 3}
   primaryWeaponAttackKey: 323
   anchor: {fileID: 4646592180277275865}
+  animator: {fileID: 1804191044803978740}
   health: 20
   maxHealth: 100
   attackDamage: 10
@@ -16826,6 +16827,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 3d1c070bb397be04391bc356042826c5, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 233b32584ee18ac4288e90bb48ddf863,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
